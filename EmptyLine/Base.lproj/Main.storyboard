@@ -17,7 +17,7 @@
                     <view key="view" contentMode="scaleToFill" id="vfd-Cm-tcj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.20850745130000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="Pnt-GO-zav"/>
                     </view>
                     <navigationItem key="navigationItem" id="LMI-46-j6m"/>
@@ -33,7 +33,7 @@
                     <view key="view" contentMode="scaleToFill" id="9FN-nB-fLn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.087917054669999994" green="0.80273576120000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="Fr1-YW-RUv"/>
                     </view>
                     <navigationItem key="navigationItem" id="LQ6-eW-bTh"/>
@@ -120,7 +120,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="c9x-ID-rX8">
             <objects>
-                <tabBarController id="sS8-Og-e4H" customClass="MainTabBarController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainPageTabBarController" id="sS8-Og-e4H" customClass="MainTabBarController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="34h-NX-j8M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

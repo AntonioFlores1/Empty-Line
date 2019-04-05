@@ -12,7 +12,7 @@ class CreditCardInfoSetupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+self.view.backgroundColor = .purple
         // Do any additional setup after loading the view.
     }
     
