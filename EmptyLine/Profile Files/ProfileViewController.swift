@@ -12,11 +12,13 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueforRaymond))
         // Do any additional setup after loading the view.
     }
     
-
+    @objc func segueforRaymond(){
+navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
+    }
     /*
     // MARK: - Navigation
 
