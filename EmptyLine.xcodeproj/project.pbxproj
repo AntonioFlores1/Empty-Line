@@ -37,6 +37,9 @@
 		55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EBF2257B770003FA4F8 /* PaymentView.swift */; };
 		55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EC12257B78C003FA4F8 /* PaymentTableViewCell.swift */; };
 		55EB5EC52257B7B8003FA4F8 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EC42257B7B8003FA4F8 /* ItemView.swift */; };
+		55EB5EC92257BDC9003FA4F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EC82257BDC9003FA4F8 /* LoginView.swift */; };
+		55EB5ECB2257BDD9003FA4F8 /* CreditCarview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECA2257BDD9003FA4F8 /* CreditCarview.swift */; };
+		55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */; };
 		B677F30E6696B59ED11F7BF8 /* Pods_EmptyLine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +78,9 @@
 		55EB5EBF2257B770003FA4F8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		55EB5EC12257B78C003FA4F8 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		55EB5EC42257B7B8003FA4F8 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		55EB5EC82257BDC9003FA4F8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		55EB5ECA2257BDD9003FA4F8 /* CreditCarview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCarview.swift; sourceTree = "<group>"; };
+		55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		D58957E71BBB8075EE6E0CD9 /* Pods-EmptyLine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.debug.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E9522569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift */,
+				55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */,
 			);
 			path = CreditCardInfo;
 			sourceTree = "<group>";
@@ -243,7 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				55EB5EA92256A4D4003FA4F8 /* LoginViewController.swift */,
+				55EB5ECA2257BDD9003FA4F8 /* CreditCarview.swift */,
 				55EB5EAB2256A4FA003FA4F8 /* CreateUserViewController.swift */,
+				55EB5EC82257BDC9003FA4F8 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -422,6 +431,8 @@
 				55EB5E9D22569EA9003FA4F8 /* MainTabBarController.swift in Sources */,
 				55EB5EC52257B7B8003FA4F8 /* ItemView.swift in Sources */,
 				55EB5E9A22569D30003FA4F8 /* ItemDetailViewController.swift in Sources */,
+				55EB5EC92257BDC9003FA4F8 /* LoginView.swift in Sources */,
+				55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */,
 				55EB5EA22256A0C2003FA4F8 /* AuthService.swift in Sources */,
 				55EB5EA62256A110003FA4F8 /* StorageKey.swift in Sources */,
 				55EB5E9622569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift in Sources */,
@@ -429,6 +440,7 @@
 				55EB5E8D22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift in Sources */,
 				55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */,
 				55EB5EA42256A0F1003FA4F8 /* User.swift in Sources */,
+				55EB5ECB2257BDD9003FA4F8 /* CreditCarview.swift in Sources */,
 				55EB5EAC2256A4FA003FA4F8 /* CreateUserViewController.swift in Sources */,
 				55EB5EA82256A161003FA4F8 /* UserCollection.swift in Sources */,
 				55EB5E9422569CEC003FA4F8 /* ShoppingListViewController.swift in Sources */,
