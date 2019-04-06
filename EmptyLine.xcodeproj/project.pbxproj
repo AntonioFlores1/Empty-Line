@@ -28,6 +28,18 @@
 		55EB5EA82256A161003FA4F8 /* UserCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EA72256A161003FA4F8 /* UserCollection.swift */; };
 		55EB5EAA2256A4D4003FA4F8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EA92256A4D4003FA4F8 /* LoginViewController.swift */; };
 		55EB5EAC2256A4FA003FA4F8 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EAB2256A4FA003FA4F8 /* CreateUserViewController.swift */; };
+		55EB5EAF2257B5D8003FA4F8 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EAE2257B5D8003FA4F8 /* QRView.swift */; };
+		55EB5EB22257B622003FA4F8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EB12257B622003FA4F8 /* ProfileView.swift */; };
+		55EB5EB52257B672003FA4F8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EB42257B672003FA4F8 /* SettingsView.swift */; };
+		55EB5EB72257B699003FA4F8 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EB62257B699003FA4F8 /* SettingsTableViewCell.swift */; };
+		55EB5EBA2257B6E0003FA4F8 /* ShoppingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EB92257B6E0003FA4F8 /* ShoppingTableViewCell.swift */; };
+		55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EBB2257B6FF003FA4F8 /* ShoppingView.swift */; };
+		55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EBF2257B770003FA4F8 /* PaymentView.swift */; };
+		55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EC12257B78C003FA4F8 /* PaymentTableViewCell.swift */; };
+		55EB5EC52257B7B8003FA4F8 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EC42257B7B8003FA4F8 /* ItemView.swift */; };
+		55EB5EC92257BDC9003FA4F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5EC82257BDC9003FA4F8 /* LoginView.swift */; };
+		55EB5ECB2257BDD9003FA4F8 /* CreditCarview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECA2257BDD9003FA4F8 /* CreditCarview.swift */; };
+		55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */; };
 		B677F30E6696B59ED11F7BF8 /* Pods_EmptyLine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +69,18 @@
 		55EB5EA72256A161003FA4F8 /* UserCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollection.swift; sourceTree = "<group>"; };
 		55EB5EA92256A4D4003FA4F8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55EB5EAB2256A4FA003FA4F8 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
+		55EB5EAE2257B5D8003FA4F8 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
+		55EB5EB12257B622003FA4F8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		55EB5EB42257B672003FA4F8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		55EB5EB62257B699003FA4F8 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		55EB5EB92257B6E0003FA4F8 /* ShoppingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingTableViewCell.swift; sourceTree = "<group>"; };
+		55EB5EBB2257B6FF003FA4F8 /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
+		55EB5EBF2257B770003FA4F8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		55EB5EC12257B78C003FA4F8 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
+		55EB5EC42257B7B8003FA4F8 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		55EB5EC82257BDC9003FA4F8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		55EB5ECA2257BDD9003FA4F8 /* CreditCarview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCarview.swift; sourceTree = "<group>"; };
+		55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		D58957E71BBB8075EE6E0CD9 /* Pods-EmptyLine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.debug.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E7422553D3A003FA4F8 /* EmptyLine */,
+				55EB5EC72257B7EB003FA4F8 /* SupportingFiles */,
 				55EB5E7322553D3A003FA4F8 /* Products */,
 				F7F6F90035BF409A531176C0 /* Pods */,
 				0E0F9EDFDACE91121C197A9B /* Frameworks */,
@@ -101,12 +126,10 @@
 		55EB5E7422553D3A003FA4F8 /* EmptyLine */ = {
 			isa = PBXGroup;
 			children = (
-				55EB5E7522553D3A003FA4F8 /* AppDelegate.swift */,
 				55EB5E9E2256A047003FA4F8 /* FireBase Files */,
 				55EB5E8B22569C61003FA4F8 /* ViewController */,
+				55EB5E9B22569DCB003FA4F8 /* TabBar */,
 				55EB5E8E22569CB2003FA4F8 /* StoryBoard */,
-				55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */,
-				55EB5E7E22553D3F003FA4F8 /* LaunchScreen.storyboard */,
 				55EB5E8722553FEE003FA4F8 /* GoogleService-Info.plist */,
 				55EB5E8122553D3F003FA4F8 /* Info.plist */,
 			);
@@ -116,16 +139,14 @@
 		55EB5E8B22569C61003FA4F8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				55EB5E9B22569DCB003FA4F8 /* TabBar */,
-				55EB5E8C22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift */,
-				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
-				55EB5E9122569CDE003FA4F8 /* SettingsViewController.swift */,
-				55EB5E9322569CEC003FA4F8 /* ShoppingListViewController.swift */,
-				55EB5E9522569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift */,
-				55EB5E9722569D1B003FA4F8 /* PaymentViewController.swift */,
-				55EB5E9922569D30003FA4F8 /* ItemDetailViewController.swift */,
-				55EB5EA92256A4D4003FA4F8 /* LoginViewController.swift */,
-				55EB5EAB2256A4FA003FA4F8 /* CreateUserViewController.swift */,
+				55EB5EC62257B7C7003FA4F8 /* Login */,
+				55EB5EAD2257B58C003FA4F8 /* QRCode and Barcode */,
+				55EB5EB02257B5DF003FA4F8 /* Profile Files */,
+				55EB5EB32257B641003FA4F8 /* Settings */,
+				55EB5EB82257B6A0003FA4F8 /* Shopping  */,
+				55EB5EBD2257B724003FA4F8 /* CreditCardInfo */,
+				55EB5EBE2257B740003FA4F8 /* Payment */,
+				55EB5EC32257B794003FA4F8 /* ItemDescription */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -157,6 +178,94 @@
 				55EB5EA72256A161003FA4F8 /* UserCollection.swift */,
 			);
 			name = "FireBase Files";
+			sourceTree = "<group>";
+		};
+		55EB5EAD2257B58C003FA4F8 /* QRCode and Barcode */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E8C22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift */,
+				55EB5EAE2257B5D8003FA4F8 /* QRView.swift */,
+			);
+			path = "QRCode and Barcode";
+			sourceTree = "<group>";
+		};
+		55EB5EB02257B5DF003FA4F8 /* Profile Files */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
+				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
+			);
+			path = "Profile Files";
+			sourceTree = "<group>";
+		};
+		55EB5EB32257B641003FA4F8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E9122569CDE003FA4F8 /* SettingsViewController.swift */,
+				55EB5EB42257B672003FA4F8 /* SettingsView.swift */,
+				55EB5EB62257B699003FA4F8 /* SettingsTableViewCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		55EB5EB82257B6A0003FA4F8 /* Shopping  */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E9322569CEC003FA4F8 /* ShoppingListViewController.swift */,
+				55EB5EB92257B6E0003FA4F8 /* ShoppingTableViewCell.swift */,
+				55EB5EBB2257B6FF003FA4F8 /* ShoppingView.swift */,
+			);
+			path = "Shopping ";
+			sourceTree = "<group>";
+		};
+		55EB5EBD2257B724003FA4F8 /* CreditCardInfo */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E9522569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift */,
+				55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */,
+			);
+			path = CreditCardInfo;
+			sourceTree = "<group>";
+		};
+		55EB5EBE2257B740003FA4F8 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E9722569D1B003FA4F8 /* PaymentViewController.swift */,
+				55EB5EBF2257B770003FA4F8 /* PaymentView.swift */,
+				55EB5EC12257B78C003FA4F8 /* PaymentTableViewCell.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		55EB5EC32257B794003FA4F8 /* ItemDescription */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E9922569D30003FA4F8 /* ItemDetailViewController.swift */,
+				55EB5EC42257B7B8003FA4F8 /* ItemView.swift */,
+			);
+			path = ItemDescription;
+			sourceTree = "<group>";
+		};
+		55EB5EC62257B7C7003FA4F8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5EA92256A4D4003FA4F8 /* LoginViewController.swift */,
+				55EB5ECA2257BDD9003FA4F8 /* CreditCarview.swift */,
+				55EB5EAB2256A4FA003FA4F8 /* CreateUserViewController.swift */,
+				55EB5EC82257BDC9003FA4F8 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		55EB5EC72257B7EB003FA4F8 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5E7522553D3A003FA4F8 /* AppDelegate.swift */,
+				55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */,
+				55EB5E7E22553D3F003FA4F8 /* LaunchScreen.storyboard */,
+			);
+			name = SupportingFiles;
+			path = EmptyLine;
 			sourceTree = "<group>";
 		};
 		F7F6F90035BF409A531176C0 /* Pods */ = {
@@ -313,21 +422,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EB5E9822569D1B003FA4F8 /* PaymentViewController.swift in Sources */,
+				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
 				55EB5EA02256A08F003FA4F8 /* DBService.swift in Sources */,
+				55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */,
 				55EB5E9022569CD0003FA4F8 /* ProfileViewController.swift in Sources */,
 				55EB5EAA2256A4D4003FA4F8 /* LoginViewController.swift in Sources */,
+				55EB5EAF2257B5D8003FA4F8 /* QRView.swift in Sources */,
 				55EB5E9D22569EA9003FA4F8 /* MainTabBarController.swift in Sources */,
+				55EB5EC52257B7B8003FA4F8 /* ItemView.swift in Sources */,
 				55EB5E9A22569D30003FA4F8 /* ItemDetailViewController.swift in Sources */,
+				55EB5EC92257BDC9003FA4F8 /* LoginView.swift in Sources */,
+				55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */,
 				55EB5EA22256A0C2003FA4F8 /* AuthService.swift in Sources */,
 				55EB5EA62256A110003FA4F8 /* StorageKey.swift in Sources */,
 				55EB5E9622569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift in Sources */,
+				55EB5EB22257B622003FA4F8 /* ProfileView.swift in Sources */,
 				55EB5E8D22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift in Sources */,
+				55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */,
 				55EB5EA42256A0F1003FA4F8 /* User.swift in Sources */,
+				55EB5ECB2257BDD9003FA4F8 /* CreditCarview.swift in Sources */,
 				55EB5EAC2256A4FA003FA4F8 /* CreateUserViewController.swift in Sources */,
 				55EB5EA82256A161003FA4F8 /* UserCollection.swift in Sources */,
 				55EB5E9422569CEC003FA4F8 /* ShoppingListViewController.swift in Sources */,
 				55EB5E7622553D3A003FA4F8 /* AppDelegate.swift in Sources */,
 				55EB5E9222569CDE003FA4F8 /* SettingsViewController.swift in Sources */,
+				55EB5EB72257B699003FA4F8 /* SettingsTableViewCell.swift in Sources */,
+				55EB5EBA2257B6E0003FA4F8 /* ShoppingTableViewCell.swift in Sources */,
+				55EB5EB52257B672003FA4F8 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,13 +596,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RFPRDQU6MN;
+				DEVELOPMENT_TEAM = H6HD3SW977;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine";
+				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-jose.EmptyLine112233";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -494,13 +616,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RFPRDQU6MN;
+				DEVELOPMENT_TEAM = H6HD3SW977;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine";
+				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-jose.EmptyLine112233";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
