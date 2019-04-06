@@ -188,6 +188,7 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="ScanCardButtonPressed:" destination="Ubs-be-Ivk" eventType="touchUpInside" id="DKF-KA-Byw"/>
+                                                        <segue destination="tDg-Xl-VPb" kind="show" id="fpO-bl-kck"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -492,6 +493,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wg2-2R-Gm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5666.3999999999996" y="-731.78410794602701"/>
+        </scene>
+        <!--Scan Card View Controller-->
+        <scene sceneID="0oC-Cm-vX0">
+            <objects>
+                <viewController id="tDg-Xl-VPb" customClass="ScanCardViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cc7-Mi-lv4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q2Q-gu-03G">
+                                <rect key="frame" x="0.0" y="64" width="375" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="Hl7-5R-zeM"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1po-QD-gLd">
+                                <rect key="frame" x="50" y="584" width="275" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="C9M-h4-mPw"/>
+                                </constraints>
+                                <state key="normal" title="Add Card">
+                                    <color key="titleColor" red="1" green="0.038159635970000001" blue="0.084221236909999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="AddCardButtonPressed:" destination="tDg-Xl-VPb" eventType="touchUpInside" id="Gvv-nZ-ek1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1po-QD-gLd" firstAttribute="top" secondItem="Q2Q-gu-03G" secondAttribute="bottom" constant="20" id="AXy-zj-rIY"/>
+                            <constraint firstItem="7fc-Km-wUM" firstAttribute="trailing" secondItem="Q2Q-gu-03G" secondAttribute="trailing" id="Gmx-eR-JUg"/>
+                            <constraint firstItem="1po-QD-gLd" firstAttribute="leading" secondItem="7fc-Km-wUM" secondAttribute="leading" constant="50" id="MAf-Xb-G6Y"/>
+                            <constraint firstItem="7fc-Km-wUM" firstAttribute="trailing" secondItem="1po-QD-gLd" secondAttribute="trailing" constant="50" id="Vsb-eG-2cT"/>
+                            <constraint firstItem="Q2Q-gu-03G" firstAttribute="leading" secondItem="7fc-Km-wUM" secondAttribute="leading" id="gXS-Rs-rH7"/>
+                            <constraint firstItem="Q2Q-gu-03G" firstAttribute="top" secondItem="7fc-Km-wUM" secondAttribute="top" id="qhj-2b-iti"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7fc-Km-wUM"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardImageView" destination="Q2Q-gu-03G" id="iHB-dq-CDl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxB-Xp-EEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6410.3999999999996" y="-725.48725637181417"/>
         </scene>
         <!--Item Detail View Controller-->
         <scene sceneID="LpO-c6-myA">

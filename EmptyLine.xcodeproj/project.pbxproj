@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0410266A225858D10076A454 /* ScanCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102669225858D10076A454 /* ScanCardViewController.swift */; };
 		55EB5E7622553D3A003FA4F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5E7522553D3A003FA4F8 /* AppDelegate.swift */; };
 		55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5E7922553D3A003FA4F8 /* Main.storyboard */; };
 		55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04102669225858D10076A454 /* ScanCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCardViewController.swift; sourceTree = "<group>"; };
 		0B5EFF0F95C77403AFCA7F87 /* Pods-EmptyLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.release.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.release.xcconfig"; sourceTree = "<group>"; };
 		20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmptyLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EB5E7222553D3A003FA4F8 /* EmptyLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmptyLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E9522569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift */,
+				04102669225858D10076A454 /* ScanCardViewController.swift */,
 				55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */,
 			);
 			path = CreditCardInfo;
@@ -425,6 +428,7 @@
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
 				55EB5EA02256A08F003FA4F8 /* DBService.swift in Sources */,
 				55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */,
+				0410266A225858D10076A454 /* ScanCardViewController.swift in Sources */,
 				55EB5E9022569CD0003FA4F8 /* ProfileViewController.swift in Sources */,
 				55EB5EAA2256A4D4003FA4F8 /* LoginViewController.swift in Sources */,
 				55EB5EAF2257B5D8003FA4F8 /* QRView.swift in Sources */,
