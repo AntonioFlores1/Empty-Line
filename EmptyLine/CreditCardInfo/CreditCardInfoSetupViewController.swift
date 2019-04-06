@@ -8,23 +8,33 @@
 
 import UIKit
 
-class CreditCardInfoSetupViewController: UIViewController {
-
+class CreditCardInfoSetupViewController: UITableViewController {
+    @IBOutlet weak var CardTypeLabel: UILabel!
+    @IBOutlet weak var CardOptionsLabel: UILabel!
+    @IBOutlet weak var PayPalLabel: UILabel!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    
+    @IBOutlet weak var streetNameTextField: UITextField!
+    
+    @IBOutlet weak var cityNameTextField: UITextField!
+    
+    @IBOutlet weak var stateNameTextField: UITextField!
+    
+    @IBOutlet weak var zipCodeTextField: UITextField!
+    
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 self.view.backgroundColor = .purple
-        // Do any additional setup after loading the view.
+       
+    }
+    
+    @IBAction func ScanCardButtonPressed(_ sender: UIButton) {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
