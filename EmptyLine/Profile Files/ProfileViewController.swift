@@ -112,7 +112,7 @@ class ProfileViewController: UIViewController {
     
     }
     @objc func settingButtonPress() {
-        
+    
     }
     
     private func showImagePickerController() {
@@ -123,7 +123,7 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
     }
     @objc func segueToSetting() {
-        if settingButton == .setting {
+        if settingButton == .setting { ////==
         navigationController?.pushViewController(SettingsViewController(), animated: true)
         }
     }
