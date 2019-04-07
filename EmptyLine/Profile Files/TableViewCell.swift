@@ -10,15 +10,51 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    lazy var  historyLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        //        label.textAlignment = .center
+        //        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+    
+    lazy var historyImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "placeImage")
+        return image
+    }()
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+        setUpViewConstraints()
     }
-
+    
+    private func commonInit() {
+        setUpViewConstraints()
+    }
+    
+    func setUpViewConstraints() {
+        addSubview(historyLabel)
+//        addSubview(historyImage)
+        historyLabelConstraints()
+//        historyImageConstraints()
+    }
+    
+    func historyLabelConstraints() {
+        historyLabel.translatesAutoresizingMaskIntoConstraints = false
+        historyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        historyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        historyLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+    }
+//    func historyImageConstraints() {
+//        historyImage.translatesAutoresizingMaskIntoConstraints = false
+//        historyImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+//        historyImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+//        historyImage.trailingAnchor.constraint(equalTo: historyLabel.leadingAnchor, constant: 11).isActive = true
+//    }
 }

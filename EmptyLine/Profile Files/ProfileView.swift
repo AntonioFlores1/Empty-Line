@@ -40,7 +40,7 @@ class ProfileView: UIView {
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["History", "Social", "Setting"])
+        let control = UISegmentedControl(items: ["History", "Setting"])
         control.autoSetDimension(.height, toSize: 32.0)
         control.selectedSegmentIndex = 0
         control.layer.borderColor = UIColor.gray.cgColor
