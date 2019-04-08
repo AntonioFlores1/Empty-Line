@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreditCarview: UIView {
+class CreateUserView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

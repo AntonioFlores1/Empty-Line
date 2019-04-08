@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginView: UIView {
-    
+    var authservice = AppDelegate.authservice
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
