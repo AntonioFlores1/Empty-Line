@@ -20,19 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
+       // window?.makeKeyAndVisible()
 
-        //if let _ = AppDelegate.authservice.getCurrentUser() {
+       if let _ = AppDelegate.authservice.getCurrentUser() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
             window?.rootViewController = mainPageTabBarController
-//        } else {
-//            let storyboard = UIStoryboard(name: "login", bundle: nil)
-//            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//            window?.rootViewController = UINavigationController(rootViewController: loginViewController)
-//        }
-//        window?.makeKeyAndVisible()
-        
+        } else {
+            let storyboard = UIStoryboard(name: "login", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+        }
+        window?.makeKeyAndVisible()
+    
         
         
         return true

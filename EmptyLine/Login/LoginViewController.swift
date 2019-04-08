@@ -14,27 +14,23 @@ enum AccountLoginState {
     case existingAccount
 }
 
-class LoginViewController: UITabBarController {
-    private var emailTextField: UITextField!
-    private var passwordTextField: UITextField!
-    private var loginButton: UIButton!
-    private var createAccountButton: UIButton!
+class LoginViewController: UIViewController {
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createNewAccountButton: UIButton!
+    
     private var authservice = AppDelegate.authservice
     private var accountLoginState = AccountLoginState.newAccount
-    var loginView: LoginView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = .white
         authservice.authserviceExistingAccountDelegate = self
-        setupView()
     }
     
-    func setupView() {
-        let mainView = LoginView(frame: self.view.frame)
-        self.loginView = mainView
-        self.view.addSubview(loginView)
-        }
+
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let email = emailTextField.text,
             !email.isEmpty,
@@ -45,10 +41,15 @@ class LoginViewController: UITabBarController {
         }
         authservice.signInExistingAccount(email: email, password: password)
     }
+    @IBAction func createNewAccountButtonPressed(_ sender: UIButton) {
+            print("it's working")
+    }
 }
+    
+
 extension LoginViewController: AuthServiceExistingAccountDelegate {
     func didRecieveErrorSigningToExistingAccount(_ authservice: AuthService, error: Error) {
-//        showAlert(title: "Signin Error", message: error.localizedDescription)
+        showAlert(title: "Signin Error", message: error.localizedDescription)
     }
     
     func didSignInToExistingAccount(_ authservice: AuthService, user: User) {
