@@ -9,7 +9,8 @@
 import UIKit
 
 class LoginView: UIView {
-    
+    private var authservice = AppDelegate.authservice
+    private var accountLoginState = AccountLoginState.newAccount
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -73,7 +74,7 @@ class LoginView: UIView {
         return passwordTextField
     }()
     
-    @IBAction func loginButtonPressed(_ sender: UIButton) {
+    @objc func loginButtonPressed(_ sender: UIButton) {
         guard let email = emailTextField.text,
             !email.isEmpty,
             let password = passwordTextField.text,

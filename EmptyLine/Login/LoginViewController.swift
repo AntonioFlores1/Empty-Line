@@ -35,16 +35,16 @@ class LoginViewController: UITabBarController {
         self.loginView = mainView
         self.view.addSubview(loginView)
         }
-    @IBAction func loginButtonPressed(_ sender: UIButton) {
-        guard let email = emailTextField.text,
-            !email.isEmpty,
-            let password = passwordTextField.text,
-            !password.isEmpty
-            else {
-                return
-        }
-        authservice.signInExistingAccount(email: email, password: password)
-    }
+//    @IBAction func loginButtonPressed(_ sender: UIButton) {
+//        guard let email = emailTextField.text,
+//            !email.isEmpty,
+//            let password = passwordTextField.text,
+//            !password.isEmpty
+//            else {
+//                return
+//        }
+//        authservice.signInExistingAccount(email: email, password: password)
+//    }
 }
 extension LoginViewController: AuthServiceExistingAccountDelegate {
     func didRecieveErrorSigningToExistingAccount(_ authservice: AuthService, error: Error) {
