@@ -14,24 +14,24 @@ import Kingfisher
 enum ImageToEdit {
     case profileImage
 }
-enum SwitchButton {
-    case history
-    case setting
-}
 
 class ProfileViewController: UIViewController {
-    var newArray = ["Whole foods - $200",
-                    "Macy's - $150",
-                    "Pharmacy -  $23",
-                    "American Express Centurion Lounge - $45",
-                    "MTA - $10",
-                    "Yoga Studio - $18",]
-
+    var newArray = ["Monday - 02/10/2019",
+                    "Tuesday - 02/20/2019",
+                    "Wednesday - 03/5/2019",
+                    "Thursday - 03/15/2019",
+                    "Friday - 03/25/2019",
+                    "Saturday - 04/01/2019",]
+    
+    var array = ["Monday",
+                    "Tuesday",
+                    "Wednesday ",
+                    "Thursday"]
     
     private var profileView = ProfileView()
     private var settingImage: ImageToEdit?
-    private var settingButton: SwitchButton?
     private var selectedImage: UIImage?
+
     
     static var authservice = AppDelegate.authservice
     
@@ -52,20 +52,28 @@ class ProfileViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let table = UITableView()
+        table.estimatedRowHeight = 50
+        table.rowHeight = UITableView.automaticDimension
         return table
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(profileView)
+        view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.delegate = self
         tableViewconstriant()
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueforRaymond))
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
-        profileView.editButton.addTarget(self, action: #selector(editButtonPressw), for: .touchUpInside)
-        profileView.editButton.addTarget(self, action: #selector(historyButtonPress), for: .touchUpInside)
-        profileView.editButton.addTarget(self, action: #selector(settingButtonPress), for: .touchUpInside)
+        profileView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
+    }
+    
+    
+    @objc func segmentedControlPress(_ sender: UISegmentedControl) {
+        self.tableView.reloadData()
     }
     
     @objc func editButtonPressw() {
@@ -108,13 +116,6 @@ class ProfileViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    @objc func historyButtonPress() {
-    
-    }
-    @objc func settingButtonPress() {
-    
-    }
-    
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
     }
@@ -123,9 +124,8 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
     }
     @objc func segueToSetting() {
-        if settingButton == .setting { ////==
-        navigationController?.pushViewController(SettingsViewController(), animated: true)
-        }
+//        navigationController?.pushViewController(SettingsViewController(), animated: true)
+        
     }
     
     func tableViewconstriant() {
@@ -138,19 +138,34 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if settingButton == .history {
-        return newArray.count
-        } else {
+        switch profileView.segmentedControl.selectedSegmentIndex {
+        case 0:
             return newArray.count
+        case 1:
+            return array.count
+        default:
+            break
         }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let info = userInfo[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
-        cell.historyLabel.text = "\(newArray[indexPath.row])"
+            switch profileView.segmentedControl.selectedSegmentIndex {
+            case 0:
+                cell.historyLabel.text = newArray[indexPath.row]
+            case 1:
+               cell.historyLabel.text = array[indexPath.row]
+            default:
+                break
+        }
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 

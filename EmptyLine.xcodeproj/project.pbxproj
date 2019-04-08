@@ -197,6 +197,7 @@
 				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
 				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
 				6706786722597FFF005D33FE /* TableViewCell.swift */,
+				55EB5EB62257B699003FA4F8 /* SettingsTableViewCell.swift */,
 			);
 			path = "Profile Files";
 			sourceTree = "<group>";
@@ -206,7 +207,6 @@
 			children = (
 				55EB5E9122569CDE003FA4F8 /* SettingsViewController.swift */,
 				55EB5EB42257B672003FA4F8 /* SettingsView.swift */,
-				55EB5EB62257B699003FA4F8 /* SettingsTableViewCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
