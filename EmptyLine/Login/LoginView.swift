@@ -19,6 +19,7 @@ class LoginView: UIView {
         setupEmailTextField()
         setupPasswordTextField()
         setupLoginButton()
+        setupCreateAccountButton()
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -46,7 +47,7 @@ class LoginView: UIView {
         loginButton.setTitle("Please Log In", for: .normal)
         loginButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 18)!
         loginButton.backgroundColor = UIColor.blue.withAlphaComponent(0.6)
-//        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         return loginButton
     }()
     
@@ -71,6 +72,17 @@ class LoginView: UIView {
         passwordTextField.font = UIFont.systemFont(ofSize: 17)
         return passwordTextField
     }()
+    
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        guard let email = emailTextField.text,
+            !email.isEmpty,
+            let password = passwordTextField.text,
+            !password.isEmpty
+            else {
+                return
+        }
+        authservice.signInExistingAccount(email: email, password: password)
+    }
     
     private func setupEmailTextField() {
         addSubview(emailTextField)
@@ -99,9 +111,9 @@ class LoginView: UIView {
     private func setupCreateAccountButton() {
         addSubview(createAccountButton)
         createAccountButton.translatesAutoresizingMaskIntoConstraints = false
-        createAccountButton.topAnchor.constraint(equalTo: loginButton.topAnchor, constant: 200).isActive = true
+        createAccountButton.topAnchor.constraint(equalTo: loginButton.topAnchor, constant: 150).isActive = true
         createAccountButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         createAccountButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        createAccountButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        createAccountButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }

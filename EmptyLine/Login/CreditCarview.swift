@@ -37,7 +37,7 @@ class CreditCarview: UIView {
         loginButton.setTitle("Please Log In", for: .normal)
         loginButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 18)!
         loginButton.backgroundColor = UIColor.blue.withAlphaComponent(0.6)
-        //        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+//        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         return loginButton
     }()
     
