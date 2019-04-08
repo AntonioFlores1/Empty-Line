@@ -10,9 +10,11 @@ import UIKit
 
 class QRNBarCodeCodeViewController: UIViewController {
 
+    var QRcodeView = QRView()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.addSubview(QRcodeView)
+        self.view.backgroundColor = .blue
         // Do any additional setup after loading the view.
     }
     

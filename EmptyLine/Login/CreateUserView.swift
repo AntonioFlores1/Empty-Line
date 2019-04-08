@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreditCarview: UIView {
+class CreateUserView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
