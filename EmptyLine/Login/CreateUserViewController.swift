@@ -8,23 +8,48 @@
 
 import UIKit
 
-class CreateUserViewController: UITabBarController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+class CreateUserViewController: UIViewController {
+    private var authservice = AppDelegate.authservice
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
+        authservice.authserviceCreateNewAccountDelegate = self
+        
     }
-    */
+    @IBAction func createAccountButtonPressed(_ sender: UIButton) {
+        guard let username = usernameTextField.text,
+            !username.isEmpty,
+            let email = emailTextField.text,
+            !email.isEmpty,
+            let password = passwordTextField.text,
+            !password.isEmpty
+            else {
+                return
+        }
+        authservice.createNewAccount(username: username, email: email, password: password)
+    }
+    
+   
+  
 
+}
+extension CreateUserViewController: AuthServiceCreateNewAccountDelegate {
+    func didCreateNewAccount(_ authservice: AuthService, user: CCUser) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+        mainTabBarController.modalTransitionStyle = .crossDissolve
+        mainTabBarController.modalPresentationStyle = .overFullScreen
+        present(mainTabBarController, animated: true)
+    }
+    
+    func didRecieveErrorCreatingAccount(_ authservice: AuthService, error: Error) {
+        showAlert(title: "Account Creation Error", message: error.localizedDescription)
+    }
+    
 }
