@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let _ = AppDelegate.authservice.getCurrentUser() {
+       // window?.makeKeyAndVisible()
+
+       if let _ = AppDelegate.authservice.getCurrentUser() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
             window?.rootViewController = mainPageTabBarController
@@ -30,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = UINavigationController(rootViewController: loginViewController)
         }
         window?.makeKeyAndVisible()
-        
+    
         
         
         return true
