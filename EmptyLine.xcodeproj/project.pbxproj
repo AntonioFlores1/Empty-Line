@@ -12,6 +12,8 @@
 		04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */; };
 		04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102695225C2FF90076A454 /* CardInfoTableViewCell.swift */; };
 		04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */; };
+		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
+		04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8A2225D4BDA00007BCB /* productFile.json */; };
 		55EB5E7622553D3A003FA4F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5E7522553D3A003FA4F8 /* AppDelegate.swift */; };
 		55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5E7922553D3A003FA4F8 /* Main.storyboard */; };
 		55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 		04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingNameTableViewCell.swift; sourceTree = "<group>"; };
 		04102695225C2FF90076A454 /* CardInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingAddressInfoTableViewCell.swift; sourceTree = "<group>"; };
+		04D5F89F225D3FDC00007BCB /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		04D5F8A2225D4BDA00007BCB /* productFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = productFile.json; sourceTree = "<group>"; };
 		0B5EFF0F95C77403AFCA7F87 /* Pods-EmptyLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.release.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.release.xcconfig"; sourceTree = "<group>"; };
 		20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmptyLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EB5E7222553D3A003FA4F8 /* EmptyLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmptyLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +192,7 @@
 			children = (
 				55EB5E9F2256A08F003FA4F8 /* DBService.swift */,
 				55EB5EA12256A0C2003FA4F8 /* AuthService.swift */,
+				04D5F89F225D3FDC00007BCB /* ProductModel.swift */,
 				55EB5EA32256A0F1003FA4F8 /* User.swift */,
 				55EB5EA52256A110003FA4F8 /* StorageKey.swift */,
 				55EB5EA72256A161003FA4F8 /* UserCollection.swift */,
@@ -283,6 +288,7 @@
 			children = (
 				55EB5E7522553D3A003FA4F8 /* AppDelegate.swift */,
 				55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */,
+				04D5F8A2225D4BDA00007BCB /* productFile.json */,
 				55EB5E7E22553D3F003FA4F8 /* LaunchScreen.storyboard */,
 			);
 			name = SupportingFiles;
@@ -367,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EB5E8022553D3F003FA4F8 /* LaunchScreen.storyboard in Resources */,
+				04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */,
 				55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */,
 				55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */,
 				55EB5E8A22569C2D003FA4F8 /* login.storyboard in Resources */,
@@ -465,6 +472,7 @@
 				55EB5EC52257B7B8003FA4F8 /* ItemView.swift in Sources */,
 				6706786822597FFF005D33FE /* TableViewCell.swift in Sources */,
 				55EB5E9A22569D30003FA4F8 /* ItemDetailViewController.swift in Sources */,
+				04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */,
 				55EB5EC92257BDC9003FA4F8 /* LoginView.swift in Sources */,
 				55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */,
 				55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */,
