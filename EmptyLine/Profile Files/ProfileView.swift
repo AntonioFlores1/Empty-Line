@@ -15,15 +15,21 @@ class ProfileView: UIView {
         var imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.image = UIImage(named: "placeImage")
-        imageView.autoSetDimensions(to: CGSize(width: 128.0, height: 128.0))
+        imageView.autoSetDimensions(to: CGSize(width: 130.0, height: 130.0))
         imageView.layer.borderWidth = 3.0
         imageView.layer.borderColor = UIColor.green.cgColor
         imageView.layer.cornerRadius = 64.0
         imageView.clipsToBounds = true
         return imageView
     }()
+    
+    lazy var defaultCamera: UIImageView = {
+        let placeCamera = UIImageView()
+        placeCamera.image = UIImage(named: "camera")
+        return placeCamera
+    }()
 
-    lazy var nameLabel: UILabel = {
+    lazy var usernameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "User Name"
@@ -57,9 +63,10 @@ class ProfileView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         addSubview(profileImageView)
-        addSubview(nameLabel)
+        addSubview(usernameLabel)
         bringSubviewToFront(profileImageView)
         addSubview(segmentedControl)
+        addSubview(defaultCamera)
         backgroundColor = .white
         setupConstraints()
         setnameLabelConstraints()
@@ -71,19 +78,22 @@ class ProfileView: UIView {
     
     func setupConstraints() {
         profileImageView.autoAlignAxis(toSuperviewAxis: .vertical)
-        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 70.0)
+        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 90.0)
 
         segmentedControl.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         segmentedControl.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
-        segmentedControl.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 16.0)
+        segmentedControl.autoPinEdge(.top, to: .bottom, of: usernameLabel, withOffset: 16.0)
+        
+        defaultCamera.autoAlignAxis(toSuperviewAxis: .vertical)
+        defaultCamera.autoPinEdge(toSuperviewEdge: .top, withInset: 170.0)
     }
     func setnameLabelConstraints() {
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 25).isActive = true
-        nameLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+        usernameLabel.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 25).isActive = true
+        usernameLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        usernameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        usernameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+        usernameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        usernameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
 }
