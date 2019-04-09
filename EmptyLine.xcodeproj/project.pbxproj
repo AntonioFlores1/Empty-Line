@@ -47,6 +47,9 @@
 		55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */; };
 		6706786822597FFF005D33FE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706786722597FFF005D33FE /* TableViewCell.swift */; };
 		67C2CC70225C21FC0091FB37 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */; };
+		67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC71225D1B900091FB37 /* StorageInfo.swift */; };
+		67C2CC74225D1DF90091FB37 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC73225D1DF90091FB37 /* Storage.swift */; };
+		67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC75225D2BAE0091FB37 /* Constants.swift */; };
 		B677F30E6696B59ED11F7BF8 /* Pods_EmptyLine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +98,9 @@
 		55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlerts.swift; sourceTree = "<group>"; };
 		6706786722597FFF005D33FE /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		67C2CC71225D1B900091FB37 /* StorageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfo.swift; sourceTree = "<group>"; };
+		67C2CC73225D1DF90091FB37 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		67C2CC75225D2BAE0091FB37 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D58957E71BBB8075EE6E0CD9 /* Pods-EmptyLine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.debug.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +197,9 @@
 				55EB5EA32256A0F1003FA4F8 /* User.swift */,
 				55EB5EA52256A110003FA4F8 /* StorageKey.swift */,
 				55EB5EA72256A161003FA4F8 /* UserCollection.swift */,
+				67C2CC71225D1B900091FB37 /* StorageInfo.swift */,
+				67C2CC73225D1DF90091FB37 /* Storage.swift */,
+				67C2CC75225D2BAE0091FB37 /* Constants.swift */,
 			);
 			name = "FireBase Files";
 			sourceTree = "<group>";
@@ -453,12 +462,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EB5E9822569D1B003FA4F8 /* PaymentViewController.swift in Sources */,
+				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
 				55EB5EA02256A08F003FA4F8 /* DBService.swift in Sources */,
 				55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */,
 				0410266A225858D10076A454 /* ScanCardViewController.swift in Sources */,
 				55EB5E9022569CD0003FA4F8 /* ProfileViewController.swift in Sources */,
 				55EB5EAA2256A4D4003FA4F8 /* LoginViewController.swift in Sources */,
+				67C2CC74225D1DF90091FB37 /* Storage.swift in Sources */,
 				67C2CC70225C21FC0091FB37 /* SettingTableViewCell.swift in Sources */,
 				55EB5EAF2257B5D8003FA4F8 /* QRView.swift in Sources */,
 				55EB5E9D22569EA9003FA4F8 /* MainTabBarController.swift in Sources */,
@@ -469,6 +480,7 @@
 				55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */,
 				55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */,
 				55EB5EA22256A0C2003FA4F8 /* AuthService.swift in Sources */,
+				67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */,
 				55EB5EA62256A110003FA4F8 /* StorageKey.swift in Sources */,
 				55EB5E9622569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift in Sources */,
 				04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */,

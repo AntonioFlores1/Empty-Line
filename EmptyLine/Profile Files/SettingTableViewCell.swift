@@ -13,17 +13,20 @@ class SettingTableViewCell: UITableViewCell {
     lazy var  namelLabel: UILabel = {
         let name = UILabel()
         name.textColor = .black
+//        name.text = "Name"
         return name
     }()
     
     lazy var  emailLabel: UILabel = {
         let email = UILabel()
         email.textColor = .black
+//        email.text = "email"
         return email
     }()
     
     lazy var  passwordLabel: UILabel = {
         let pass = UILabel()
+//        pass.text = "password"
         pass.textColor = .black
         return pass
     }()
