@@ -14,5 +14,6 @@ target 'EmptyLine' do
   pod 'Toucan'
   pod "QRCode"
   pod 'BarcodeScanner'
+  pod 'PureLayout'
 
 end
