@@ -127,9 +127,6 @@ class ProfileViewController: UIViewController {
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
     }
-//    private func showImagePickerController() {
-//        present(imagePicker,animated: true,completion:  nil)
-//    }
 //        let cv = CreditCardInfoSetupViewController()
 //      navigationController?.pushViewController(cv, animated: true)
 //    }
