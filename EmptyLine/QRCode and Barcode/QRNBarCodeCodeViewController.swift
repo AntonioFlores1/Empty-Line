@@ -7,26 +7,58 @@
 //
 
 import UIKit
+import AVFoundation
 
-class QRNBarCodeCodeViewController: UIViewController {
-
+class QRNBarCodeCodeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate{
+    
+    var video = AVCaptureVideoPreviewLayer()
     var QRcodeView = QRView()
+    
+//    lazy var tableView: UITableView = {
+//        var table = UITableView()
+//        table.allowsMultipleSelection = true
+//
+//     return table
+//    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(QRcodeView)
+//        self.view.addSubview(QRcodeView)
         self.view.backgroundColor = .blue
-        // Do any additional setup after loading the view.
-    }
+//        let session = AVCaptureSession()
+//        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+//        do {
+//            let input = try AVCaptureDeviceInput(device: captureDevice!)
+//            session.addInput(input)
+//        }catch {
+//          print("Error")
+//        }
+//
+//        let outPut = AVCaptureMetadataOutput()
+//        session.addOutput(outPut)
+//        outPut.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+//        outPut.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+//
+//        video = AVCaptureVideoPreviewLayer(session: session)
+//        video.frame = view.layer.bounds
+//        view.layer.addSublayer(video)
+//        session.startRunning()
+        
+        
+            }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+//        if metadataObjects != nil && metadataObjects.count != nil {
+//            if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
+//                if object.type == AVMetadataObject.ObjectType.qr {
+//                    print("I work")
+//                }
+//            }
+//        }
+//    }
+    
+    
+    
+   
 
 }
