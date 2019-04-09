@@ -483,10 +483,7 @@
 				55EB5E7622553D3A003FA4F8 /* AppDelegate.swift in Sources */,
 				04102692225BAF540076A454 /* CardTypeTableViewCell.swift in Sources */,
 				55EB5E9222569CDE003FA4F8 /* SettingsViewController.swift in Sources */,
-
-				55EB5EB72257B699003FA4F8 /* SettingsTableViewCell.swift in Sources */,
 				04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */,
-
 				55EB5EBA2257B6E0003FA4F8 /* ShoppingTableViewCell.swift in Sources */,
 				55EB5EB52257B672003FA4F8 /* SettingsView.swift in Sources */,
 				04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */,
@@ -637,7 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H6HD3SW977;
+				DEVELOPMENT_TEAM = L2ZBQQ329G;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -657,7 +654,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H6HD3SW977;
+				DEVELOPMENT_TEAM = L2ZBQQ329G;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (

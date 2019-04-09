@@ -42,7 +42,7 @@ class CreateUserViewController: UIViewController {
 extension CreateUserViewController: AuthServiceCreateNewAccountDelegate {
     func didCreateNewAccount(_ authservice: AuthService, user: CCUser) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+        let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
         mainTabBarController.modalTransitionStyle = .crossDissolve
         mainTabBarController.modalPresentationStyle = .overFullScreen
         present(mainTabBarController, animated: true)
