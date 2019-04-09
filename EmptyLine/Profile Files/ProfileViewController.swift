@@ -32,6 +32,7 @@ class ProfileViewController: UIViewController {
     private var profileView = ProfileView()
     private var settingImage: ImageToEdit?
     private var selectedImage: UIImage?
+    public var profileImage: UIImage!
 
     
     private let authservice = AppDelegate.authservice
@@ -71,7 +72,7 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         segueToRaymod()
-        fetchUserProfileImage()
+        setupStore()
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +87,7 @@ class ProfileViewController: UIViewController {
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
-            }
+    }
    
     
     func fetchUser() {
@@ -98,35 +99,53 @@ class ProfileViewController: UIViewController {
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
-                self?.profileView.usernameLabel.text = "@" + ccuser.displayName
-//                self.userHistoryCCUser = [ccuser]
+                self?.profileView.usernameLabel.text = "@" + user.displayName!
+                self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
                 self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
             }
         }
     }
-    func fetchUserProfileImage() {
-        guard let imageData = selectedImage?.jpegData(compressionQuality: 1.0),
-            let userAuth = authservice.getCurrentUser() else {
-                self.showAlert(title: "Error saving user image", message: "A photo is Required")
-                return
-        }
+    func setUserProfileImage(selectedImage: UIImage) {
+        guard let imageData = selectedImage.jpegData(compressionQuality: 1.0),
+            let userAuth = authservice.getCurrentUser(),
+            let _ = profileView.profileImageView.image else { return }
+        
         StorageService.postImage(imageData: imageData, imageName: Constants.ProfileImagePath + userAuth.uid) { [weak self](error, url) in
             if let error = error {
-                self?.showAlert(title: "Error saving profile image", message: error.localizedDescription)
-            } else if let url = url {
+                print(error.localizedDescription)
+            } else if let imageUrl = url {
                 let request = userAuth.createProfileChangeRequest()
-                    request.photoURL = url
+                request.photoURL = URL(string: imageUrl.absoluteString)
                 request.commitChanges(completion: { (error) in
                     if let error = error {
                         self?.showAlert(title: "Error Saving Account Info", message: error.localizedDescription)
                     }
                 })
+                DBService.firestoreDB.collection(UsersCollectionKeys.CollectionKey)
+                    .document(userAuth.uid)
+                    .updateData([UsersCollectionKeys.PhotoURLKey: imageUrl.absoluteString],
+                                completion: {( error) in
+                                    if let error = error {
+                                        self?.showAlert(title: "Error Saving photo Info", message: error.localizedDescription)
+                                    }
+                    })
+                self?.dismiss(animated: true)
+            }
+        }
+    }
+    
+    private func setupStore(){
+        let store = StorageInfo.init(qrcode: "name", storageID: "bbb", street: "eee", city: "www", zipCode: "wwww", state: "sss", name: "ssss", isCupon: true, cuponAmaunt: "ssss", itemBarcode: "beans")
+        DBService.createStorage(storage: store) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error", message: error.localizedDescription)
             }
         }
     }
     
      @objc private func handleTap(gestureRecognizer: UITapGestureRecognizer) {
+        self.fetchUser()
         print("Tap")
         settingImage = .profileImage
         let alertController = UIAlertController(title: "Edit Profile", message: nil, preferredStyle: .actionSheet)
@@ -140,7 +159,6 @@ class ProfileViewController: UIViewController {
             self.showImagePickerController()
             self.profileView.defaultCamera.isHidden = true
         }
-      
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
         })
@@ -149,9 +167,7 @@ class ProfileViewController: UIViewController {
         alertController.addAction(cancel)
         alertController.addAction(photoLibrary)
         present(alertController, animated: true, completion: nil)
-
     }
-    
 
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
@@ -213,7 +229,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-//            infocell.emailLabel.text = information.email
+            
             return infocell
         default:
             return UITableViewCell()
@@ -240,6 +256,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         if settingImage == .profileImage {
             selectedImage = resizeImage.image
             profileView.profileImageView.image = resizeImage.image
+            guard let processedImage = resizeImage.image else { return }
+            setUserProfileImage(selectedImage: processedImage)
+            fetchUser()
         } else {
             print("No Image was selected for the profile")
         }
