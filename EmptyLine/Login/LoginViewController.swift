@@ -54,7 +54,7 @@ extension LoginViewController: AuthServiceExistingAccountDelegate {
     
     func didSignInToExistingAccount(_ authservice: AuthService, user: User) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+        let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
         mainTabBarController.modalTransitionStyle = .crossDissolve
         mainTabBarController.modalPresentationStyle = .overFullScreen
         present(mainTabBarController, animated: true)
