@@ -66,11 +66,18 @@ class ProfileViewController: UIViewController {
         tableViewconstriant()
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueforRaymond))
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
         profileView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
+        segueToRaymod()
     }
     
+    private func segueToRaymod(){
+         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
+    }
+    
+    @objc private func segueToSetting(){
+        let cv = CreditCardInfoSetupViewController()
+        navigationController?.pushViewController(cv, animated: true)
+            }
     
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
@@ -105,7 +112,6 @@ class ProfileViewController: UIViewController {
             textFieldAlert.addAction(change)
             textFieldAlert.addAction(cancel)
             self.present(textFieldAlert, animated: true, completion: nil)
-            //=====--
         }
         let cancel = UIAlertAction(title: "cancel", style: .cancel) { (action) in
         }
@@ -118,10 +124,6 @@ class ProfileViewController: UIViewController {
     
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
-    }     
-        let cv = CreditCardInfoSetupViewController()
-navigationController?.pushViewController(cv, animated: true)
-
     }
     
     func tableViewconstriant() {
@@ -132,7 +134,10 @@ navigationController?.pushViewController(cv, animated: true)
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
-}
+
+    }
+    
+
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
