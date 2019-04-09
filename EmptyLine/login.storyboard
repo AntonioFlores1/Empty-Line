@@ -19,9 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPl-92-hpN">
-                                <rect key="frame" x="188" y="464" width="38" height="30"/>
+                                <rect key="frame" x="141" y="464" width="132" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="29"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" red="0.34155808450000003" green="0.8742731735" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="vAV-ZQ-YAO" eventType="touchUpInside" id="lgY-X4-iPD"/>
                                 </connections>
@@ -34,8 +39,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inJ-xh-VXk">
-                                <rect key="frame" x="141" y="565" width="132" height="30"/>
+                                <rect key="frame" x="113" y="568" width="201" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.27844987900000001" blue="0.58697806990000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="24"/>
+                                <color key="tintColor" red="0.1245155126" green="0.33333334329999997" blue="0.097790301359999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="CreateNewAccount"/>
                                 <connections>
                                     <action selector="createNewAccountButtonPressed:" destination="vAV-ZQ-YAO" eventType="touchUpInside" id="0z3-P8-ZID"/>
@@ -64,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQW-DP-qZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832.79999999999995" y="122.78860569715144"/>
+            <point key="canvasLocation" x="831.88405797101461" y="122.54464285714285"/>
         </scene>
         <!--Create User View Controller-->
         <scene sceneID="ZnZ-sa-lUc">
