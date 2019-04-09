@@ -140,8 +140,8 @@ class ProfileViewController: UIViewController {
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
     }
-    
-  
+
+      
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -152,9 +152,7 @@ class ProfileViewController: UIViewController {
 
     }
 
-    }
-   
- 
+}
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch profileView.segmentedControl.selectedSegmentIndex {
