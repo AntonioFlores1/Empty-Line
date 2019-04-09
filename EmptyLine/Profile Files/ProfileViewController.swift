@@ -182,17 +182,23 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
-            switch profileView.segmentedControl.selectedSegmentIndex {
-                case 0:
-                    cell.historyLabel.text = newArray[indexPath.row]
-                case 1:
-                    cell.historyImage.isHidden = true
-                default:
-                    break
-                }
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
+            if profileView.segmentedControl.selectedSegmentIndex == 0 {
+                cell.historyLabel.text = newArray[indexPath.row]
+            } else {
+                cell.historyImage.isHidden = true
+                cell.historyLabel.isHidden = true
+            }
             return cell
+        case 1:
+            guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
+            return infocell
+        default:
+            return UITableViewCell()
         }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
