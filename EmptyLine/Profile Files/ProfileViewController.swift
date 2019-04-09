@@ -35,8 +35,7 @@ class ProfileViewController: UIViewController {
 
     
     private let authservice = AppDelegate.authservice
-    public var username: CCUser!
-    private var userHistoryInfo = [CCUser]() {
+    private var userHistoryCCUser = [CCUser]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -46,7 +45,7 @@ class ProfileViewController: UIViewController {
     
     lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         return imagePicker
     }()
     
@@ -60,9 +59,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(profileView)
-        //view.addSubview(tableView)
-        tableView.dataSource = self// as! UITableViewDataSource
-        tableView.delegate = self //as! UITableViewDelegate
+        view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
         tableViewconstriant()
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         profileView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
@@ -72,6 +71,7 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         segueToRaymod()
+        fetchUserProfileImage()
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -94,14 +94,34 @@ class ProfileViewController: UIViewController {
             print("no logged user")
             return
         }
-        DBService.fetchUser(userId: user.uid) { (error, ccuser) in
+        DBService.fetchUser(userId: user.uid) {[weak self] (error, ccuser) in
             if let error = error {
-                self.showAlert(title: "Error fetching user", message: error.localizedDescription)
+                self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
-                self.profileView.usernameLabel.text = ccuser.fullName
-                self.username = ccuser
+                self?.profileView.usernameLabel.text = "@" + ccuser.displayName
+//                self.userHistoryCCUser = [ccuser]
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
-                self.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
+                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
+            }
+        }
+    }
+    func fetchUserProfileImage() {
+        guard let imageData = selectedImage?.jpegData(compressionQuality: 1.0),
+            let userAuth = authservice.getCurrentUser() else {
+                self.showAlert(title: "Error saving user image", message: "A photo is Required")
+                return
+        }
+        StorageService.postImage(imageData: imageData, imageName: Constants.ProfileImagePath + userAuth.uid) { [weak self](error, url) in
+            if let error = error {
+                self?.showAlert(title: "Error saving profile image", message: error.localizedDescription)
+            } else if let url = url {
+                let request = userAuth.createProfileChangeRequest()
+                    request.photoURL = url
+                request.commitChanges(completion: { (error) in
+                    if let error = error {
+                        self?.showAlert(title: "Error Saving Account Info", message: error.localizedDescription)
+                    }
+                })
             }
         }
     }
@@ -141,7 +161,6 @@ class ProfileViewController: UIViewController {
         present(imagePicker,animated: true,completion:  nil)
     }
 
-      
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,10 +168,9 @@ class ProfileViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-
     }
-
 }
+
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch profileView.segmentedControl.selectedSegmentIndex {
@@ -182,6 +200,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let information = userHistoryCCUser[indexPath.row]
         switch indexPath.section {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
@@ -194,6 +213,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
+//            infocell.emailLabel.text = information.email
             return infocell
         default:
             return UITableViewCell()
