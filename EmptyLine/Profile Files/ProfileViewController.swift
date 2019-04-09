@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
     
     lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
+        imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
         return imagePicker
     }()
     
@@ -60,9 +60,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(profileView)
-        view.addSubview(tableView)
-        tableView.dataSource = self
-        tableView.delegate = self
+        //view.addSubview(tableView)
+        tableView.dataSource = self// as! UITableViewDataSource
+        tableView.delegate = self //as! UITableViewDelegate
         tableViewconstriant()
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "settinCell")
@@ -77,6 +77,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(true)
         fetchUser()
     }
+    
     func fetchUser() {
         guard let user = authservice.getCurrentUser() else {
             print("no logged user")
@@ -118,22 +119,20 @@ class ProfileViewController: UIViewController {
 
     }
     
-<<<<<<< HEAD
+
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
     }
     
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
-=======
-    private func showImagePickerController() {
-        present(imagePicker,animated: true,completion:  nil)
-    }     
-        let cv = CreditCardInfoSetupViewController()
-navigationController?.pushViewController(cv, animated: true)
-
->>>>>>> 27e8bb348dccae71c75748df4ab1ce3eb9e998c6
     }
+//    private func showImagePickerController() {
+//        present(imagePicker,animated: true,completion:  nil)
+//    }
+//        let cv = CreditCardInfoSetupViewController()
+//      navigationController?.pushViewController(cv, animated: true)
+//    }
     
   
     func tableViewconstriant() {
@@ -143,9 +142,10 @@ navigationController?.pushViewController(cv, animated: true)
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-    }
-}
+        }
 
+    }
+//}
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch profileView.segmentedControl.selectedSegmentIndex {
@@ -211,5 +211,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             print("No Image was selected for the profile")
         }
         dismiss(animated: true, completion: nil)
+        }
     }
-}
+
