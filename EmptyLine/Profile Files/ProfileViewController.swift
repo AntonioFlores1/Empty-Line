@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
                     "Tuesday - 02/20/2019",
                     "Wednesday - 03/5/2019",]
     
-    var array = ["Name", "Email", "Password", "SingOut"]
+    var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     
     var tapGRec = UITapGestureRecognizer()
     private var profileView = ProfileView()
@@ -71,11 +71,8 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
-//        signOutPressed(self)
     }
-    func signOutPressed(_ sender: Any) {
-        authservice.signOutAccount()
-    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
@@ -142,64 +139,43 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let title = array[section]
-//        return title
         switch profileView.segmentedControl.selectedSegmentIndex {
-        case 0:
-            return ""
-        case 1:
-            return array[section]
-            if (section == 0) {
+            case 0:
                 return ""
+            case 1:
+                return sections[section]
+            default:
+                break
             }
-            if section == 1 {
-                return ""
-            }
-            if section == 2 {
-                return ""
-            }
-        default:
-            break
-        }
         return ""
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return array.count
+        return sections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch profileView.segmentedControl.selectedSegmentIndex {
-        case 0:
-            return newArray.count
-        case 1:
-            if (section == 0) {
-                return 1
+            case 0:
+                return newArray.count
+            case 1:
+                if (section == 0) {
+                    return 1 }; if section == 1 { return 1 }; if section == 2 { return 1 }; if section == 3 { return 1 }
+            default:
+                break
             }
-            if section == 1 {
-                return 2
-            }
-            if section == 2 {
-                return 1
-            }
-        default:
-            break
-        }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
-        switch profileView.segmentedControl.selectedSegmentIndex {
-        case 0:
-            cell.historyLabel.text = newArray[indexPath.row]
-        case 1:
-            cell.emailLabel.text = newA[indexPath.row]
-            cell.historyImage.isHidden = true
-            cell.historyLabel.isHidden = true
-        default:
-            break
-        }
-        return cell
+            switch profileView.segmentedControl.selectedSegmentIndex {
+                case 0:
+                    cell.historyLabel.text = newArray[indexPath.row]
+                case 1:
+                    cell.historyImage.isHidden = true
+                default:
+                    break
+                }
+            return cell
         }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

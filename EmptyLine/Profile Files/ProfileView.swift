@@ -15,7 +15,7 @@ class ProfileView: UIView {
         var imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.image = UIImage(named: "placeImage")
-        imageView.autoSetDimensions(to: CGSize(width: 128.0, height: 128.0))
+        imageView.autoSetDimensions(to: CGSize(width: 130.0, height: 130.0))
         imageView.layer.borderWidth = 3.0
         imageView.layer.borderColor = UIColor.green.cgColor
         imageView.layer.cornerRadius = 64.0

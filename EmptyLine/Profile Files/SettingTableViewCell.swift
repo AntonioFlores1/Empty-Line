@@ -28,6 +28,11 @@ class SettingTableViewCell: UITableViewCell {
         return pass
     }()
     
+    lazy var signOut: UIButton = {
+        let out = UIButton()
+        return out
+    }()
+
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -68,5 +73,11 @@ class SettingTableViewCell: UITableViewCell {
         passwordLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
         passwordLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+    }
+    func sigOutonstraints() {
+        signOut.translatesAutoresizingMaskIntoConstraints = false
+        signOut.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        signOut.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        signOut.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
     }
 }
