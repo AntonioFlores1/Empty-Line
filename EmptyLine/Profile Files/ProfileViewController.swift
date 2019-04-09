@@ -65,18 +65,29 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self //as! UITableViewDelegate
         tableViewconstriant()
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "settinCell")
         profileView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "settinCell")
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
+        segueToRaymod()
     }
-    
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
     }
+    
+    private func segueToRaymod(){
+         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
+    }
+    
+    @objc private func segueToSetting(){
+        let cv = CreditCardInfoSetupViewController()
+        navigationController?.pushViewController(cv, animated: true)
+            }
+   
     
     func fetchUser() {
         guard let user = authservice.getCurrentUser() else {
@@ -109,9 +120,11 @@ class ProfileViewController: UIViewController {
             self.showImagePickerController()
             self.profileView.defaultCamera.isHidden = true
         }
+      
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
         })
+
         alertController.addAction(camera)
         alertController.addAction(cancel)
         alertController.addAction(photoLibrary)
@@ -127,9 +140,6 @@ class ProfileViewController: UIViewController {
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
     }
-//        let cv = CreditCardInfoSetupViewController()
-//      navigationController?.pushViewController(cv, animated: true)
-//    }
     
   
     func tableViewconstriant() {
@@ -139,10 +149,12 @@ class ProfileViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        }
 
     }
-//}
+
+    }
+   
+ 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch profileView.segmentedControl.selectedSegmentIndex {
