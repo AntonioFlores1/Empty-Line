@@ -118,12 +118,21 @@ class ProfileViewController: UIViewController {
 
     }
     
+<<<<<<< HEAD
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
     }
     
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
+=======
+    private func showImagePickerController() {
+        present(imagePicker,animated: true,completion:  nil)
+    }     
+        let cv = CreditCardInfoSetupViewController()
+navigationController?.pushViewController(cv, animated: true)
+
+>>>>>>> 27e8bb348dccae71c75748df4ab1ce3eb9e998c6
     }
     
   
