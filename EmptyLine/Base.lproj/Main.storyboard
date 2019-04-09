@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="1532" y="-455.62218890554726"/>
         </scene>
-        <!--Credit Card Info Setup View Controller-->
+        <!--Card Information-->
         <scene sceneID="4tR-ZU-KCj">
             <objects>
                 <viewController id="7rN-Yo-0pe" customClass="CreditCardInfoSetupViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,10 +52,57 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="I1S-Zr-GB9"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Card Information" id="B3l-e6-ndf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hva-O2-udn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3283" y="-751"/>
+            <point key="canvasLocation" x="3758" y="-752"/>
+        </scene>
+        <!--Scan Card View Controller-->
+        <scene sceneID="0oC-Cm-vX0">
+            <objects>
+                <viewController id="tDg-Xl-VPb" customClass="ScanCardViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cc7-Mi-lv4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q2Q-gu-03G">
+                                <rect key="frame" x="0.0" y="20" width="375" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="Hl7-5R-zeM"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1po-QD-gLd">
+                                <rect key="frame" x="50" y="540" width="275" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="C9M-h4-mPw"/>
+                                </constraints>
+                                <state key="normal" title="Add Card">
+                                    <color key="titleColor" red="1" green="0.038159635970000001" blue="0.084221236909999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="AddCardButtonPressed:" destination="tDg-Xl-VPb" eventType="touchUpInside" id="Gvv-nZ-ek1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1po-QD-gLd" firstAttribute="top" secondItem="Q2Q-gu-03G" secondAttribute="bottom" constant="20" id="AXy-zj-rIY"/>
+                            <constraint firstItem="7fc-Km-wUM" firstAttribute="trailing" secondItem="Q2Q-gu-03G" secondAttribute="trailing" id="Gmx-eR-JUg"/>
+                            <constraint firstItem="1po-QD-gLd" firstAttribute="leading" secondItem="7fc-Km-wUM" secondAttribute="leading" constant="50" id="MAf-Xb-G6Y"/>
+                            <constraint firstItem="7fc-Km-wUM" firstAttribute="trailing" secondItem="1po-QD-gLd" secondAttribute="trailing" constant="50" id="Vsb-eG-2cT"/>
+                            <constraint firstItem="Q2Q-gu-03G" firstAttribute="leading" secondItem="7fc-Km-wUM" secondAttribute="leading" id="gXS-Rs-rH7"/>
+                            <constraint firstItem="Q2Q-gu-03G" firstAttribute="top" secondItem="7fc-Km-wUM" secondAttribute="top" id="qhj-2b-iti"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7fc-Km-wUM"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardImageView" destination="Q2Q-gu-03G" id="iHB-dq-CDl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxB-Xp-EEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6410.3999999999996" y="-725.48725637181417"/>
         </scene>
         <!--Item Detail View Controller-->
         <scene sceneID="LpO-c6-myA">
@@ -172,6 +219,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F2k-GG-L6z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="592.79999999999995" y="208.24587706146929"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="j3Q-J6-E4D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kDp-sn-55s" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3By-mJ-Vva">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7rN-Yo-0pe" kind="relationship" relationship="rootViewController" id="JHS-fh-D1n"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H0n-GB-Ifs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2927" y="-752"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="evT-DL-cPB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1LR-I6-Pff" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dt6-DD-hQC">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SX2-A3-tJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4727.1999999999998" y="-731.78410794602701"/>
         </scene>
     </scenes>
 </document>

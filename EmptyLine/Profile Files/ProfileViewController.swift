@@ -118,14 +118,10 @@ class ProfileViewController: UIViewController {
     
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
-    }
-    
-    @objc func segueforRaymond(){
-        navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
-    }
-    @objc func segueToSetting() {
-//        navigationController?.pushViewController(SettingsViewController(), animated: true)
-        
+    }     
+        let cv = CreditCardInfoSetupViewController()
+navigationController?.pushViewController(cv, animated: true)
+
     }
     
     func tableViewconstriant() {
