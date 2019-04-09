@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "placeholder-image-2.png",
       "filename" : "placeholder.png",
       "scale" : "1x"
     },
