@@ -17,9 +17,11 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func segueforRaymond(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let creditCardInfoSetupVC = storyboard.instantiateViewController(withIdentifier: "CreditCardInfoSetupViewController")
-navigationController?.pushViewController(creditCardInfoSetupVC, animated: true)
+        //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let creditCardInfoSetupVC = storyboard.instantiateViewController(withIdentifier: "CreditCardInfoSetupViewController")
+        
+        let cv = CreditCardInfoSetupViewController()
+navigationController?.pushViewController(cv, animated: true)
     }
     /*
     // MARK: - Navigation
