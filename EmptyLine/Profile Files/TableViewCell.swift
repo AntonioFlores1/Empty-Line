@@ -24,30 +24,7 @@ class TableViewCell: UITableViewCell {
         return image
     }()
     
-//    lazy var  namelLabel: UILabel = {
-//        let name = UILabel()
-//        name.textColor = .black
-//        return name
-//    }()
-//
-//    lazy var  emailLabel: UILabel = {
-//        let email = UILabel()
-//        email.textColor = .black
-//        return email
-//    }()
-//
-//    lazy var  passwordLabel: UILabel = {
-//        let pass = UILabel()
-//        pass.textColor = .black
-//        return pass
-//    }()
-    
-//    lazy var signOut: UIButton = {
-//        let out = UIButton()
-//        return out
-//    }()
 
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -65,15 +42,8 @@ class TableViewCell: UITableViewCell {
     func setUpViewConstraints() {
         addSubview(historyLabel)
         addSubview(historyImage)
-//        addSubview(emailLabel)
-//        addSubview(namelLabel)
-//        addSubview(passwordLabel)
-//        addSubview(signOut)
         historyLabelConstraints()
         historyImageConstraints()
-//        emailConstraints()
-//        nameLabelConstraints()
-//        passwordLabelConstraints()
     }
     
     func historyLabelConstraints() {
@@ -91,28 +61,4 @@ class TableViewCell: UITableViewCell {
         historyImage.widthAnchor.constraint(equalToConstant: 50).isActive = true
         historyImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
-//    func emailConstraints() {
-//        emailLabel.translatesAutoresizingMaskIntoConstraints = false
-//        emailLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-//        emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-//        emailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-//    }
-//    func nameLabelConstraints() {
-//        namelLabel.translatesAutoresizingMaskIntoConstraints = false
-//        namelLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-//        namelLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-//        namelLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-//    }
-//    func passwordLabelConstraints() {
-//        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-//        passwordLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-//        passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-//        passwordLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-//    }
-//    func sigOutonstraints() {
-//        signOut.translatesAutoresizingMaskIntoConstraints = false
-//        signOut.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-//        signOut.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-//        signOut.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-//    }
 }
