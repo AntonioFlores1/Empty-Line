@@ -234,6 +234,7 @@
 				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
 				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
 				6706786722597FFF005D33FE /* TableViewCell.swift */,
+				67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */,
 			);
 			path = "Profile Files";
 			sourceTree = "<group>";
@@ -242,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E9122569CDE003FA4F8 /* SettingsViewController.swift */,
-				67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */,
 				55EB5EB42257B672003FA4F8 /* SettingsView.swift */,
 			);
 			path = Settings;

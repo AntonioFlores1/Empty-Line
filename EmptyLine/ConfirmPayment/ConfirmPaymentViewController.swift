@@ -5,7 +5,7 @@
 //  Created by Jose Alarcon Chacon on 4/10/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
-
+import Foundation
 import UIKit
 
 class ConfirmPaymentViewController: UIViewController {
@@ -20,11 +20,8 @@ class ConfirmPaymentViewController: UIViewController {
         view.backgroundColor = .white
         self.view.addSubview(confirmView)
         settingButton()
-        confirmView.confirmPaymentTableView.reloadData()
-        confirmView.confirmPaymentTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
         confirmView.confirmPaymentTableView.delegate = self
         confirmView.confirmPaymentTableView.dataSource = self
-        confirmView.confirmPaymentTableView.register(ConfirmPaymentTableViewCell.self, forCellReuseIdentifier: "cell")
     }
     private func settingButton() {
         setButton = SetRoundedButton(frame: CGRect(x: 10, y: 10, width: 150, height: 35))
@@ -48,15 +45,29 @@ class ConfirmPaymentViewController: UIViewController {
 }
 
 extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch(section) {
+        case 0:
+            if (section == 0) { return 4 }
+        default: fatalError("Unknown number of sections")
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
+        guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch(section) {
+        case 0: return "Card"
+        default: fatalError("Unknown section")
+        }
     }
 }
