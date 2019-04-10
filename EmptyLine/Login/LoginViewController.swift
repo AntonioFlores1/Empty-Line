@@ -28,6 +28,7 @@ class LoginViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .white
         authservice.authserviceExistingAccountDelegate = self
+        self.hideKeyboard()
     }
     
 
@@ -58,5 +59,21 @@ extension LoginViewController: AuthServiceExistingAccountDelegate {
         mainTabBarController.modalTransitionStyle = .crossDissolve
         mainTabBarController.modalPresentationStyle = .overFullScreen
         present(mainTabBarController, animated: true)
+    }
+}
+extension LoginViewController {
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(LoginViewController.dismissKeyboard))
+        
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
     }
 }
