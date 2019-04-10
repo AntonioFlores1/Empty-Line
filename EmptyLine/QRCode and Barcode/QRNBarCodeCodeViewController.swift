@@ -8,72 +8,118 @@
 
 import UIKit
 import AVFoundation
+import Firebase
 
-class QRNBarCodeCodeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate{
+class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate{
+ 
+    @IBOutlet weak var imageView: UIImageView!
     
-//    var video = AVCaptureVideoPreviewLayer()
-//    var QRcodeView = QRView()
-//
-////    lazy var tableView: UITableView = {
-////        var table = UITableView()
-////        table.allowsMultipleSelection = true
-////
-////     return table
-////    }()
-//
-//    lazy var imageQR: UIImageView = {
-//        var image = UIImageView()
-//        image.image = UIImage(named: "c4ee97a3-1c5f-4e27-912c-48b30dff9c3d")
-//        return image
-//    }()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        constraints()
-////        self.view.addSubview(QRcodeView)
-//        self.view.backgroundColor = .blue
-//        let session = AVCaptureSession()
-//        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-//        do {
-//            let input = try AVCaptureDeviceInput(device: captureDevice!)
-//            session.addInput(input)
-//        }catch {
-//          print("Error")
-//        }
-//
-//        let outPut = AVCaptureMetadataOutput()
-//        session.addOutput(outPut)
-//        outPut.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-//        outPut.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-//
-//        video = AVCaptureVideoPreviewLayer(session: session)
-//        video.frame = view.layer.bounds
-//        view.layer.addSublayer(video)
-//        //view.bringSubviewToFront(<#T##view: UIView##UIView#>)
-//        session.startRunning()
-//
-//
-//            }
-//
-//    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-//        if metadataObjects != nil && metadataObjects.count != nil {
-//            if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
-//                if object.type == AVMetadataObject.ObjectType.qr {
-//                    print("I work")
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    func constraints(){
-//        self.view.addSubview(imageQR)
-//        imageQR.translatesAutoresizingMaskIntoConstraints = false
-//        imageQR.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 140.0).isActive = true
-//        imageQR.heightAnchor.constraint(equalTo: view.heightAnchor, constant: 140.0).isActive = true
-//        imageQR.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        imageQR.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//    }
-   
-
+    @IBOutlet weak var barCodeRawValueLabel: UILabel!
+    
+    let session = AVCaptureSession()
+    
+    lazy var vision = Vision.vision()
+    
+    var barcodeDetector :VisionBarcodeDetector?
+    
+    
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        startLiveVideo()
+        
+        self.barcodeDetector = vision.barcodeDetector()
+        
+        //constraints()
+        
+    }
+    
+    
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        
+        
+        if let barcodeDetector = self.barcodeDetector {
+            
+            
+            
+            let visionImage = VisionImage(buffer: sampleBuffer)
+            
+            
+            
+            barcodeDetector.detect(in: visionImage) { (barcodes, error) in
+                
+                
+                
+                if let error = error {
+                    
+                    print(error.localizedDescription)
+                    
+                    return
+                    
+                }
+                
+                
+                
+                for barcode in barcodes! {
+                    
+                    print(barcode.rawValue!)
+                    
+                    self.barCodeRawValueLabel.text = barcode.rawValue!
+                    
+                }
+                
+            }
+            
+            
+            
+        }
+        
+    }
+    
+    
+    
+    private func startLiveVideo() {
+        
+        
+        
+        session.sessionPreset = AVCaptureSession.Preset.photo
+        
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        
+        
+        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
+        
+        let deviceOutput = AVCaptureVideoDataOutput()
+        
+        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+        
+        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
+        
+        session.addInput(deviceInput)
+        
+        session.addOutput(deviceOutput)
+        
+        
+        
+        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
+        
+        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 100)
+        
+        imageLayer.videoGravity = .resizeAspectFill
+        
+        imageView.layer.addSublayer(imageLayer)
+        
+        
+        
+        session.startRunning()
+        
+    }
+    
+    
+    
 }
