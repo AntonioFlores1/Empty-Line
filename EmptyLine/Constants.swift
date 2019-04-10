@@ -10,4 +10,5 @@ import Foundation
 
 struct Constants {
     static let ProfileImagePath = "profileImages/" // profileImages/{userId}
+    static let defaultCurrency = "usd"
 }

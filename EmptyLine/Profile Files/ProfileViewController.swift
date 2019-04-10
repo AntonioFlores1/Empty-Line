@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         segueToRaymod()
-        setupStore()
+//        setupStore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,14 +120,14 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    private func setupStore(){
-        let store = StorageInfo.init(qrcode: "name", storageID: "bbb", street: "eee", city: "www", zipCode: "wwww", state: "sss", name: "ssss", isCupon: true, cuponAmaunt: "ssss", itemBarcode: "beans")
-        DBService.createStorage(storage: store) { (error) in
-            if let error = error {
-                self.showAlert(title: "Error", message: error.localizedDescription)
-            }
-        }
-    }
+//    private func setupStore(){
+//        let store = StorageInfo.init(qrcode: "name", storageID: "bbb", street: "eee", city: "www", zipCode: "wwww", state: "sss", name: "ssss", isCupon: true, cuponAmaunt: "ssss", itemBarcode: "beans")
+//        DBService.createStorage(storage: store) { (error) in
+//            if let error = error {
+//                self.showAlert(title: "Error", message: error.localizedDescription)
+//            }
+//        }
+//    }
     
      @objc private func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         self.fetchUser()
@@ -222,7 +222,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
-                    infocell.namelLabel.text = user.displayName
+                    infocell.namelLabel.text = user.displayName!
                 }
                 if indexPath.section == 1 {
                    infocell.emailLabel.text = user.email!
@@ -234,7 +234,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                    infocell.addCaed.text = "Add Card"
                 }
                 if indexPath.section == 4 {
-                    infocell.signOut.text = "Sing Out"
+                    infocell.signOut.text = "Sign Out"
                 }
             } else {
                 infocell.emailLabel.isHidden = true
@@ -259,6 +259,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                     let change = UIAlertAction(title: "Change", style: .default, handler: { (action) in
                         let textField = changeName.textFields?[0]
                         self.profileView.usernameLabel.text = textField?.text!
+                        if let path = tableView.indexPathForSelectedRow {
+                        let cell = tableView.cellForRow(at: path) as! SettingTableViewCell
+                            cell.namelLabel.text = textField?.text!
+                        }
                         // need to reload tableView
                     })
                     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in })
@@ -277,7 +281,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.section == 3 {
                 let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
                 let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
-                    self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
+//                    self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
+                    self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
                     self.dismiss(animated: true)
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
