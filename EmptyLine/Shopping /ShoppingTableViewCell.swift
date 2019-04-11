@@ -9,6 +9,7 @@
 import UIKit
 
 class ShoppingTableViewCell: UITableViewCell {
+    
 
     lazy var shoppingListImage: UIImageView = {
         let image = UIImageView()
