@@ -10,10 +10,10 @@ target 'EmptyLine' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'Firebase/MLVision'
+  pod 'Firebase/MLVisionBarcodeModel'
   pod 'Kingfisher'
   pod 'Toucan'
-  pod "QRCode"
-  pod 'BarcodeScanner'
   pod 'PureLayout'
 
 end

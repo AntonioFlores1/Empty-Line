@@ -46,7 +46,7 @@ playground.xcworkspace
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
-# Pods/
+ Pods/
 
 # Carthage
 #
@@ -67,4 +67,6 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
+pod 'Firebase/MLVision'
+pod 'Firebase/MLVisionBarcodeModel'
 .DS_Store

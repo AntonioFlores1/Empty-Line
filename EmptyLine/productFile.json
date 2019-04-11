@@ -1,0 +1,193 @@
+{
+    "code": "OK",
+    "offset": 0,
+    "results_count": 1,
+    "results": [
+        {
+            "size": "128 GB",
+            "gtins": [
+                "00881314577279",
+                "00683405611042"
+            ],
+            "sem3_id": "2TZt72zgk4EqYAgsgG2A6S",
+            "color": "Gold",
+            "cat_id": "9359",
+            "width": "77.72",
+            "length": "157.99",
+            "height": "7.11",
+            "price_currency": "USD",
+            "variation_id": "3Syp3aH8noK0w64aOQUuAa",
+            "brand": "Apple",
+            "upc": "881314577279",
+            "model": "IPHONE 6 PLUS",
+            "created_at": 1413446724,
+            "name": "Apple iPhone 6 Plus Unlocked Cellphone, 128GB, G",
+            "mpn": "MG9T2CL_A",
+            "messages": [],
+            "variation_secondaryids": [
+                "0ltPCGhq1GCQUuMggeEiII",
+                "17EvMZvudUmwGq4eUAIYuQ",
+                "0Hi6DDRtymsW8cyIy6Isc8"
+            ],
+            "geo": [
+                "usa"
+            ],
+            "manufacturer": "Apple",
+            "ean": "0683405611042",
+            "updated_at": 1552502618,
+            "images": [
+                "http://sem3-idn.s3-website-us-east-1.amazonaws.com/d23e026cf1abd68b9b5eb368dfadd07f,0.jpg"
+            ],
+            "weight": "172365.10",
+            "sitedetails": [
+                {
+                    "name": "amazon.com",
+                    "sku": "B00NQGOOT8",
+                    "latestoffers": [
+                        {
+                            "price": "1060.00",
+                            "lastrecorded_at": 1545706800,
+                            "shipping": "549",
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1502559000,
+                            "id": "1ng2lmjrBwU6G0MEiKAOGE",
+                            "condition": "new",
+                            "availability": "Available",
+                            "seller": "ROYAL TOP SELLERS"
+                        },
+                        {
+                            "price": "399.99",
+                            "lastrecorded_at": 1545706800,
+                            "shipping": "699",
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1536956200,
+                            "id": "54vXDKbwueikgaogOQQgW6",
+                            "condition": "refurbished",
+                            "availability": "Available",
+                            "seller": "INTERWEB Computer Solutions Inc."
+                        },
+                        {
+                            "price": "888.88",
+                            "lastrecorded_at": 1545706800,
+                            "shipping": "549",
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1543545100,
+                            "id": "1P72jDuFiWcOemwqqQQ8OI",
+                            "condition": "new",
+                            "availability": "Available",
+                            "seller": "Dream-TechElectronics"
+                        }
+                    ],
+                    "url": "https://www.amazon.com/dp/B00NQGOOT8?ie=UTF8&keywords=Cell+Phones+%26+Accessories%7CCell+Phones%7CUnlocked+Cell+Phones",
+                    "recentoffers_count": 0
+                },
+                {
+                    "recentoffers_count": 0,
+                    "sku": "271864399",
+                    "name": "rakuten.com",
+                    "url": "http://www.rakuten.com/prod/271864399.html",
+                    "latestoffers": [
+                        {
+                            "price": "439.99",
+                            "lastrecorded_at": 1485661500,
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1485347200,
+                            "id": "2m3r9rQ8vgoyaekq64iOcu",
+                            "condition": "Refurbished",
+                            "availability": "Available",
+                            "seller": "Breed"
+                        },
+                        {
+                            "price": "449.99",
+                            "lastrecorded_at": 1485114800,
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1484386500,
+                            "id": "2sYVyrfb3YgoeMQU2ye2ke",
+                            "condition": "Refurbished",
+                            "availability": "Available",
+                            "seller": "Breed"
+                        },
+                        {
+                            "price": "459.99",
+                            "lastrecorded_at": 1483266200,
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1480739500,
+                            "id": "7DP9rhcx6GGwyGqIU8oOqW",
+                            "condition": "Refurbished",
+                            "availability": "Available",
+                            "seller": "Breed"
+                        }
+                    ]
+                },
+                {
+                    "name": "bestbuy.com",
+                    "sku": "9359565",
+                    "latestoffers": [
+                        {
+                            "price": "1199.99",
+                            "lastrecorded_at": 1437193300,
+                            "isactive": 0,
+                            "currency": "USD",
+                            "firstrecorded_at": 1433168500,
+                            "id": "7QWwObkvdAwgQCcSIqekOm",
+                            "condition": "New",
+                            "availability": "Available",
+                            "seller": "BestBuy"
+                        },
+                        {
+                            "price": "1099.99",
+                            "firstrecorded_at": 1431872500,
+                            "id": "7R0E3jht4aOGEOqaa0GYK6",
+                            "seller": "BestBuy",
+                            "lastrecorded_at": 1431872500,
+                            "currency": "USD",
+                            "condition": "New",
+                            "isactive": 0
+                        }
+                    ],
+                    "url": "http://www.bestbuy.com/site/apple-iphone-6-plus-128gb-unlocked-gold/9359565.p",
+                    "recentoffers_count": 0
+                },
+                {
+                    "sku": "15630196_16144183",
+                    "name": "samsclub.com",
+                    "url": "https://www.samsclub.com/prod15630196.ip",
+                    "latestoffers": [],
+                    "recentoffers_count": 0
+                },
+                {
+                    "name": "newegg.com",
+                    "sku": "9SIAAKT4FE3464",
+                    "recentoffers_count": 0,
+                    "latestoffers": [],
+                    "url": "http://www.newegg.com/Product/Product.aspx?Item=9SIAAKT4FE3464"
+                },
+                {
+                    "recentoffers_count": 0,
+                    "sku": "9SIAAKT4FE3501",
+                    "name": "newegg.com",
+                    "url": "http://www.newegg.com/Product/Product.aspx?Item=9SIAAKT4FE3501",
+                    "latestoffers": []
+                }
+            ],
+            "description": "Display",
+            "features": {
+                "Item model number": "6 Plus",
+                "blob": "2G - GSM 850 / 900 / 1800 / 1900, 3G - HSDPA 850 / 900 / 1700 / 1900 / 2100, 4G - LTE 700 / 800 / 850 / 900 / 1700 / 1800 / 1900 / 2100 / 2600; 5.5\" LED-backlit IPS LCD Multi-Touchscreen Shatter proof glass, oleophobic coating; iOS 8, Dual-Core 1.4 GHz Cyclone (ARM v8-based) Processor, Chipset - Apple A8, PowerVR GX6650 (hexa-core graphics) Graphics; 8 Megapixel Camera (3264 x 2448 pixels) w/ Autofocus, Dual-LED (Dual tone) Flash + Front-Facing 1.2 Megapixel Camera, 720p, burst, HDR; Internal Memory - 128GB, 1GB RAM; Unlocked cell phones are compatible with GSM carriers like AT&T and T-Mobile as well as with GSM SIM cards (e.g. H20, Straight Talk, and select prepaid carriers). Unlocked cell phones will not work with CDMA Carriers like Sprint, Verizon, Boost or Virgin.",
+                "Shipping Weight": "1.05 pounds",
+                "Batteries": "1 Lithium ion batteries required.",
+                "Item Weight": "6.1 ounces"
+            },
+            "images_total": 1,
+            "category": "Unlocked Phones"
+        }
+    ],
+    "total_results_count": 1
+}
+
