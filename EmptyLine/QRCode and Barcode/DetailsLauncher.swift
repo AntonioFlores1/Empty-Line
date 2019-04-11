@@ -41,11 +41,11 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
             
             window.addSubview(blackView)
             
-            window.addSubview(collectionView)
+            //window.addSubview(collectionView)
             
             let height: CGFloat = 200
             let y = window.frame.height - height
-            collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
+           // collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
             blackView.frame = window.frame
             blackView.alpha = 0
