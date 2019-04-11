@@ -47,16 +47,17 @@ final class AuthService {
                 })
                 
                 // create user (reviewer) on firestore database
-                let user = CCUser.init(userId: authDataResult.user.uid, displayName: username, email: authDataResult.user.email!, photoURL: nil, joinedDate: "1", balance:0.0, bio: nil, firstName: "", lastName: "")
-//                print("we about to make a mf user")
-                DBService.createNDUser(user: user, completion: { (error) in
+                
+                let appUser = CCUser.init(userId: authDataResult.user.uid, userName: "", email: authDataResult.user.email!, photoURL: nil, firstName: "", lastName: "", password: "", cardNumber: "", cardCVV: "", expiringMonth: "", expiringDay: "", expiringYear: "", streetAddress: "", cityName: "", stateName: "", zipCode: "")
+                
+                DBService.createNDUser(user: appUser, completion: { (error) in
                     print("this is the completion of creating a user")
                     if let error = error {
                         print("this is the error shit")
                         self.authserviceCreateNewAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)
                     } else {
                         print("sup bro")
-                        self.authserviceCreateNewAccountDelegate?.didCreateNewAccount(self, user: user)
+                        self.authserviceCreateNewAccountDelegate?.didCreateNewAccount(self, user: appUser)
                     }
                 })
             }

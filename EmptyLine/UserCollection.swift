@@ -11,29 +11,45 @@ import Foundation
 struct UsersCollectionKeys {
     static let CollectionKey = "users"
     static let UserIdKey = "userId"
-    static let DisplayNameKey = "displayName"
+    static let userNameKey = "userName"
     static let EmailKey = "email"
     static let PhotoURLKey = "photoURL"
-    static let JoinedDateKey = "joinedDate"
-    static let BalanceKey = "balance"
-    static let BioKey = "bio"
     static let FirstNameKey = "firstName"
     static let LastNameKey = "lastName"
+    static let fullNameKey = "fullName"
+    static let passwordKey = "password"
+    static let cardNumberKey = "cardNumber"
+    static let cardCVVKey = "cardCVV"
+    static let expiringMonthKey = "expiringMonth"
+    static let expiringDayKey = "expiringDay"
+    static let expiringYearKey = "expiringYear"
+    static let streetAddressKey = "streetAddress"
+    static let cityNameKey = "cityName"
+    static let stateNameKey = "stateName"
+    static let zipCodeKey = "zipCode"
 }
 
 extension DBService {
     static public func createNDUser(user: CCUser, completion: @escaping (Error?) -> Void) {
         firestoreDB.collection(UsersCollectionKeys.CollectionKey)
             .document(user.userId)
-            .setData([ UsersCollectionKeys.DisplayNameKey : user.displayName,
+            .setData([ UsersCollectionKeys.UserIdKey      : user.userId,
+                       UsersCollectionKeys.userNameKey: user.userName,
                        UsersCollectionKeys.EmailKey       : user.email,
                        UsersCollectionKeys.PhotoURLKey    : user.photoURL ?? "",
-                       UsersCollectionKeys.JoinedDateKey  : user.joinedDate,
-                       UsersCollectionKeys.BalanceKey     : user.balance,
-                       UsersCollectionKeys.BioKey         : user.bio ?? "",
                        UsersCollectionKeys.FirstNameKey   : user.firstName ?? "",
                        UsersCollectionKeys.LastNameKey    : user.lastName ?? "",
-                       UsersCollectionKeys.UserIdKey      : user.userId
+                       UsersCollectionKeys.fullNameKey: user.fullName,
+                       UsersCollectionKeys.passwordKey: user.password,
+                       UsersCollectionKeys.cardNumberKey: user.cardNumber,
+                       UsersCollectionKeys.cardCVVKey: user.cardCVV,
+                       UsersCollectionKeys.expiringMonthKey: user.expiringMonth,
+                       UsersCollectionKeys.expiringDayKey: user.expiringDay,
+                       UsersCollectionKeys.expiringYearKey: user.expiringYear,
+                       UsersCollectionKeys.streetAddressKey: user.streetAddress,
+                       UsersCollectionKeys.cityNameKey: user.cityName,
+                       UsersCollectionKeys.stateNameKey: user.stateName,
+                       UsersCollectionKeys.zipCodeKey: user.zipCode
             ]) { (error) in
                 if let error = error {
                     completion(error)
