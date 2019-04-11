@@ -31,7 +31,13 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+//        startLiveVideo()
+        
+
         startLiveVideo()
+
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done , target: self, action: #selector(segue))
     }
@@ -109,6 +115,7 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
         session.startRunning()
         
     }
+
     
     
     
