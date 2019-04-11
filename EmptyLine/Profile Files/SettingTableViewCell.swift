@@ -77,6 +77,7 @@ class SettingTableViewCell: UITableViewCell {
         passwordLabelConstraints()
         addCardConstraints()
         signOutConstraints()
+       
         
     }
     func emailConstraints() {

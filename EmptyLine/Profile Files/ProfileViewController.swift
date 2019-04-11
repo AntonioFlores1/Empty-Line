@@ -52,6 +52,7 @@ class ProfileViewController: UIViewController {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         profileView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "settinCell")
+        
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
@@ -163,7 +164,6 @@ class ProfileViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-
     }
     @objc func signoutButtonPress() {
         print("Was press")

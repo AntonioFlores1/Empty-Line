@@ -14,7 +14,8 @@ class ConfirmPaymentViewController: UIViewController {
     private var activityView:UIActivityIndicatorView!
     private var setButton: SetRoundedButton!
     var sections = ["Card"]
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Payment Method"
@@ -46,7 +47,14 @@ class ConfirmPaymentViewController: UIViewController {
     @objc func firstCB() {
         print("First Card")
     }
-    @objc func secondCB() {
+    @objc func switchStateDidChange(_ sender: UISwitch) {
+        print("First")
+        if (sender.isOn == true){
+            print("UISwitch state is now ON")
+        }
+        else{
+            print("UISwitch state is now Off")
+        }
         print("First")
     }
 }
@@ -66,8 +74,8 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
-                cell.secondCardButton.tag = indexPath.row
-                cell.secondCardButton.addTarget(self, action: #selector(secondCB), for: .touchUpInside)
+        cell.switchOnOff.tag = indexPath.row
+        cell.switchOnOff.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,4 +88,3 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
         }
     }
 }
-
