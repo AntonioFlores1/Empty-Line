@@ -143,7 +143,7 @@ class ProfileViewController: UIViewController {
         alertController.addAction(camera)
         alertController.addAction(cancel)
         alertController.addAction(photoLibrary)
-        present(alertController, animated: true, completion: nil
+        present(alertController, animated: true, completion: nil)
         
     }
     
