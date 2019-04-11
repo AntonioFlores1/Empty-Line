@@ -56,6 +56,8 @@
 		67F55548225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55547225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift */; };
 		67F5554A225E87EA00F67C94 /* ConfirmPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55549225E87EA00F67C94 /* ConfirmPaymentView.swift */; };
 		67F5554C225E94D500F67C94 /* SetRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F5554B225E94D500F67C94 /* SetRoundButton.swift */; };
+		7557E38C225F8686009E2938 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7557E38B225F8686009E2938 /* DetailCell.swift */; };
+
 		75B0DB6D225D1A4A00F075DD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0DB6C225D1A4A00F075DD /* Item.swift */; };
 		75B0DB6F225D1DFD00F075DD /* ItemCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0DB6E225D1DFD00F075DD /* ItemCollection.swift */; };
 		75B0DB71225E803D00F075DD /* DetailsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0DB70225E803D00F075DD /* DetailsLauncher.swift */; };
@@ -116,6 +118,7 @@
 		67F55547225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentTableViewCell.swift; sourceTree = "<group>"; };
 		67F55549225E87EA00F67C94 /* ConfirmPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentView.swift; sourceTree = "<group>"; };
 		67F5554B225E94D500F67C94 /* SetRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRoundButton.swift; sourceTree = "<group>"; };
+		7557E38B225F8686009E2938 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		75B0DB6C225D1A4A00F075DD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		75B0DB6E225D1DFD00F075DD /* ItemCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollection.swift; sourceTree = "<group>"; };
 		75B0DB70225E803D00F075DD /* DetailsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsLauncher.swift; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 				55EB5E8C22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift */,
 				55EB5EAE2257B5D8003FA4F8 /* QRView.swift */,
 				75B0DB70225E803D00F075DD /* DetailsLauncher.swift */,
+				7557E38B225F8686009E2938 /* DetailCell.swift */,
 			);
 			path = "QRCode and Barcode";
 			sourceTree = "<group>";
@@ -431,14 +435,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EmptyLine/Pods-EmptyLine-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BarcodeScanner/BarcodeScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -449,14 +453,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BarcodeScanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -501,6 +505,7 @@
 				67F5554A225E87EA00F67C94 /* ConfirmPaymentView.swift in Sources */,
 				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
+				7557E38C225F8686009E2938 /* DetailCell.swift in Sources */,
 				55EB5EA02256A08F003FA4F8 /* DBService.swift in Sources */,
 				67F55545225E81D700F67C94 /* ConfirmPaymentViewController.swift in Sources */,
 				55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */,
@@ -690,7 +695,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+
+				DEVELOPMENT_TEAM = RFPRDQU6MN;		
 				INFOPLIST_FILE = EmptyLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -710,7 +716,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = RFPRDQU6MN;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (

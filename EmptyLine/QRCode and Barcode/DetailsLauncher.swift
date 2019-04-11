@@ -7,7 +7,19 @@
 //
 
 import UIKit
-class DetailsLauncher: NSObject {
+class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        return cell
+    }
+    
+    
+    let cellID = "DetailsCell"
     
     let blackView = UIView()
     
@@ -46,6 +58,18 @@ class DetailsLauncher: NSObject {
                 
             }, completion: nil)
         }
+    
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return 3
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+            return cell
+        }
+    
+    
+    
     }
     
     @objc func handleDismiss() {
@@ -60,7 +84,9 @@ class DetailsLauncher: NSObject {
     
     override init() {
         super.init()
-        //start doing something here maybe....
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
 }
