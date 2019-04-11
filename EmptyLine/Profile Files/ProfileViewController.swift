@@ -18,6 +18,7 @@ enum ImageToEdit {
 class ProfileViewController: UIViewController {
     var newArray = ["Monday - 02/10/2019", "Tuesday - 02/20/2019","Wednesday - 03/5/2019",
                     "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
+  
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     
     private var settinTableCell = SettingTableViewCell()
@@ -28,7 +29,6 @@ class ProfileViewController: UIViewController {
     private var selectedImage: UIImage?
     public var profileImage: UIImage!
     public var userSetting: CCUser!
-    
     lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController {
         table.rowHeight = UITableView.automaticDimension
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(profileView)
@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         segueToRaymod()
-//        setupStore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,14 +65,13 @@ class ProfileViewController: UIViewController {
     }
     
     private func segueToRaymod(){
-         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
     }
     
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
-   
     func fetchUser() {
         guard let user = authservice.getCurrentUser() else {
             print("no logged user")
@@ -119,15 +117,8 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
-//    private func setupStore(){
-//        let store = StorageInfo.init(qrcode: "name", storageID: "bbb", street: "eee", city: "www", zipCode: "wwww", state: "sss", name: "ssss", isCupon: true, cuponAmaunt: "ssss", itemBarcode: "beans")
-//        DBService.createStorage(storage: store) { (error) in
-//            if let error = error {
-//                self.showAlert(title: "Error", message: error.localizedDescription)
-//            }
-//        }
-//    }
+
+
     
      @objc private func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         self.fetchUser()
@@ -144,15 +135,18 @@ class ProfileViewController: UIViewController {
             self.showImagePickerController()
             self.profileView.defaultCamera.isHidden = true
         }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
         })
-
+        
         alertController.addAction(camera)
         alertController.addAction(cancel)
         alertController.addAction(photoLibrary)
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil
+        
     }
+    
 
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
@@ -169,6 +163,7 @@ class ProfileViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+
     }
     @objc func signoutButtonPress() {
         print("Was press")
@@ -178,13 +173,13 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch profileView.segmentedControl.selectedSegmentIndex {
-            case 0:
-                return ""
-            case 1:
-                return sections[section]
-            default:
-                break
-            }
+        case 0:
+            return ""
+        case 1:
+            return sections[section]
+        default:
+            break
+        }
         return ""
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -204,6 +199,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
         return 1
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
