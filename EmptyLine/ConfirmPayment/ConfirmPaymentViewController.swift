@@ -13,6 +13,7 @@ class ConfirmPaymentViewController: UIViewController {
     private var confirmView = ConfirmPaymentView()
     private var activityView:UIActivityIndicatorView!
     private var setButton: SetRoundedButton!
+    var sections = ["Card"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,12 @@ class ConfirmPaymentViewController: UIViewController {
         activityView.startAnimating()
         print("Pay successfuly")
     }
+    @objc func firstCB() {
+        print("First Card")
+    }
+    @objc func secondCB() {
+        print("First")
+    }
 }
 
 extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelegate {
@@ -59,11 +66,16 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
+        cell.firstCardButton.tag = indexPath.row
+        cell.firstCardButton.addTarget(self, action: #selector(firstCB), for: .touchUpInside)
+        cell.secondCardButton.tag = indexPath.row
+        cell.secondCardButton.addTarget(self, action: #selector(secondCB), for: .touchUpInside)
+
         return cell
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 60
+        }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
         case 0: return "Card"
@@ -71,3 +83,4 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
         }
     }
 }
+

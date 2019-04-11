@@ -46,7 +46,7 @@ class ConfirmPaymentView: UIView {
         totalAmount.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
         totalAmount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
         totalAmount.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
-        totalAmount.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        totalAmount.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     func cpTableViewConstraint() {
         confirmPaymentTableView.translatesAutoresizingMaskIntoConstraints = false

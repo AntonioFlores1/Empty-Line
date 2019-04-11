@@ -11,10 +11,13 @@ import Kingfisher
 
 class ShoppingListViewController: UIViewController {
    
-    private var shoppingListTableView: UITableView = UITableView()
+    private var shoppingListTableView: UITableView = {
+        let tv = UITableView()
+        return tv
+    }()
+    private var shoppingView = ShoppingView()
     private let authservice = AppDelegate.authservice
     private var barButtonItem = UIBarButtonItem()
-//    private var secondbarButtonItem = UIBarButtonItem()
     var animals : [String] = ["Dogs","Cats","Mice"]
     let price : [String] = ["$5","$12","$30"]
     var shoppingImage = UIImage()
