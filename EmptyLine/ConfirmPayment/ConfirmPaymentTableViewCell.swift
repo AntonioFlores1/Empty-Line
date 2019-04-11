@@ -9,13 +9,6 @@
 import UIKit
 
 class ConfirmPaymentTableViewCell: UITableViewCell {
-
-    lazy var firstCardButton: UIButton = {
-        let firstCB = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        firstCB.backgroundColor = .green
-        firstCB.setTitle("Test Button", for: .normal)
-        return firstCB
-    }()
     
     lazy var secondCardButton: UIButton = {
         let secondCb = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
@@ -37,24 +30,16 @@ class ConfirmPaymentTableViewCell: UITableViewCell {
         setUpConstraints()
     }
     private func setUpConstraints() {
-        addSubview(firstCardButton)
         addSubview(secondCardButton)
-        setFirstCardB()
+        
         setSecondCB()
     }
     
-    func setFirstCardB() {
-        firstCardButton.translatesAutoresizingMaskIntoConstraints = false
-        firstCardButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        firstCardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-        firstCardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -300).isActive = true
-        firstCardButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-    }
     func setSecondCB() {
         secondCardButton.translatesAutoresizingMaskIntoConstraints = false
         secondCardButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        secondCardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-        secondCardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -300).isActive = true
+        secondCardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 300).isActive = true
+        secondCardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
         secondCardButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
     }
     

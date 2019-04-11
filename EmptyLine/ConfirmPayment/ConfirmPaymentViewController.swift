@@ -58,7 +58,7 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
         case 0:
-            if (section == 0) { return 4 }
+            if (section == 0) { return 1 }
         default: fatalError("Unknown number of sections")
         }
         return 0
@@ -66,11 +66,8 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
-        cell.firstCardButton.tag = indexPath.row
-        cell.firstCardButton.addTarget(self, action: #selector(firstCB), for: .touchUpInside)
-        cell.secondCardButton.tag = indexPath.row
-        cell.secondCardButton.addTarget(self, action: #selector(secondCB), for: .touchUpInside)
-
+                cell.secondCardButton.tag = indexPath.row
+                cell.secondCardButton.addTarget(self, action: #selector(secondCB), for: .touchUpInside)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
