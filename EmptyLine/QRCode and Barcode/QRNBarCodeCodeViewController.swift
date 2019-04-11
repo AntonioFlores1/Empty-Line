@@ -16,6 +16,8 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
     
     @IBOutlet weak var barCodeRawValueLabel: UILabel!
     
+    var barcodeNumber = ""
+    
     let session = AVCaptureSession()
     
     lazy var vision = Vision.vision()
@@ -36,6 +38,11 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
         
     }
     
+    func segueOnlyIf(){
+        if barcodeNumber.count < 3 {
+            navigationController?.popToViewController(ItemDetailViewController(), animated: true)
+        }
+    }
     
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -68,7 +75,8 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
                     
                     print(barcode.rawValue!)
                     
-                    self.barCodeRawValueLabel.text = barcode.rawValue!
+                    self.barcodeNumber.append(barcode.rawValue!)
+                   // self.barCodeRawValueLabel.text = barcode.rawValue!
                     
                 }
                 
