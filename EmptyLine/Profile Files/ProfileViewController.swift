@@ -32,9 +32,6 @@ class ProfileViewController: UIViewController {
     private var profileView = ProfileView()
     private var settingImage: ImageToEdit?
     private var selectedImage: UIImage?
-    
-    private var myProducts: itemProduct!
-    
     private let authservice = AppDelegate.authservice
     public var username: CCUser!
     private var userHistoryInfo = [CCUser]() {
