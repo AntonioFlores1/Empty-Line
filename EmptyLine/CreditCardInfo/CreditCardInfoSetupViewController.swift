@@ -18,7 +18,7 @@ class CreditCardInfoSetupViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .purple
+        self.view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
         view.addSubview(creditCardView)
         creditCardView.creditCardCredentialsTableView.delegate = self
         creditCardView.creditCardCredentialsTableView.dataSource = self

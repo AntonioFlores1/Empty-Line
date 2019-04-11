@@ -14,6 +14,8 @@
 		04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */; };
 		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
 		04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8A2225D4BDA00007BCB /* productFile.json */; };
+		04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */; };
+		04D5F8C9225FC48700007BCB /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8C8225FC48700007BCB /* ProductDetailViewController.swift */; };
 		55EB5E7622553D3A003FA4F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5E7522553D3A003FA4F8 /* AppDelegate.swift */; };
 		55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5E7922553D3A003FA4F8 /* Main.storyboard */; };
 		55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */; };
@@ -71,6 +73,8 @@
 		04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingAddressInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04D5F89F225D3FDC00007BCB /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		04D5F8A2225D4BDA00007BCB /* productFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = productFile.json; sourceTree = "<group>"; };
+		04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
+		04D5F8C8225FC48700007BCB /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		0B5EFF0F95C77403AFCA7F87 /* Pods-EmptyLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.release.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.release.xcconfig"; sourceTree = "<group>"; };
 		20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmptyLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EB5E7222553D3A003FA4F8 /* EmptyLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmptyLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +140,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D5F8C4225FC42900007BCB /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */,
+				04D5F8C8225FC48700007BCB /* ProductDetailViewController.swift */,
+			);
+			name = Product;
+			sourceTree = "<group>";
+		};
 		0E0F9EDFDACE91121C197A9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +179,7 @@
 		55EB5E7422553D3A003FA4F8 /* EmptyLine */ = {
 			isa = PBXGroup;
 			children = (
+				04D5F8C4225FC42900007BCB /* Product */,
 				55EB5E9E2256A047003FA4F8 /* FireBase Files */,
 				55EB5E8B22569C61003FA4F8 /* ViewController */,
 				55EB5E9B22569DCB003FA4F8 /* TabBar */,
@@ -505,6 +519,7 @@
 				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
 				7557E38C225F8686009E2938 /* DetailCell.swift in Sources */,
+				04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */,
 				55EB5EA02256A08F003FA4F8 /* DBService.swift in Sources */,
 				67F55545225E81D700F67C94 /* ConfirmPaymentViewController.swift in Sources */,
 				55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */,
@@ -536,6 +551,7 @@
 				55EB5ECB2257BDD9003FA4F8 /* CreateUserView.swift in Sources */,
 				55EB5EAC2256A4FA003FA4F8 /* CreateUserViewController.swift in Sources */,
 				55EB5EA82256A161003FA4F8 /* UserCollection.swift in Sources */,
+				04D5F8C9225FC48700007BCB /* ProductDetailViewController.swift in Sources */,
 				55EB5E9422569CEC003FA4F8 /* ShoppingListViewController.swift in Sources */,
 				67F5554C225E94D500F67C94 /* SetRoundButton.swift in Sources */,
 				75B0DB6D225D1A4A00F075DD /* Item.swift in Sources */,
@@ -694,14 +710,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = H6HD3SW977;
+
+
+
 				INFOPLIST_FILE = EmptyLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine";
+				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine11";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -714,14 +734,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = H6HD3SW977;
+
+
 				INFOPLIST_FILE = EmptyLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine";
+				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine11";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

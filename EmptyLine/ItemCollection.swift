@@ -19,6 +19,8 @@ struct ItemCollectionKeys {
     static let CouponKey = "coupon"
     static let ItemIDKey = "itemID"
 }
+
+
 extension DBService {
     static public func createNDItem(item: Item, completion: @escaping (Error?) -> Void) {
         firestoreDB.collection(ItemCollectionKeys.CollectionKey)
@@ -39,4 +41,6 @@ extension DBService {
                 }
         }
     }
+    
+   
 }

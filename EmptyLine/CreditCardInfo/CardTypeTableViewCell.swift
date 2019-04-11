@@ -13,7 +13,7 @@ class CardTypeTableViewCell: UITableViewCell {
     public lazy var cardTypeLabel: UILabel = {
         let cardType = UILabel()
         cardType.text = "Credit/Debit Card"
-        cardType.font = UIFont.boldSystemFont(ofSize: 35)
+        cardType.font = UIFont.systemFont(ofSize: 22)
         cardType.translatesAutoresizingMaskIntoConstraints = false
         return cardType
     }()
@@ -21,8 +21,8 @@ class CardTypeTableViewCell: UITableViewCell {
     public lazy var cardOptionsLabel: UILabel = {
         let cardOptions = UILabel()
         cardOptions.text = "Visa, MasterCard, Discover, American Express"
-        cardOptions.font = UIFont.boldSystemFont(ofSize: 16)
         cardOptions.numberOfLines = 0
+        cardOptions.font = UIFont.systemFont(ofSize: 16)
         
         return cardOptions
     }()
@@ -30,14 +30,14 @@ class CardTypeTableViewCell: UITableViewCell {
     public lazy var payPalLabel: UILabel = {
         let payPalLabel = UILabel()
         payPalLabel.text = "PayPal"
-        payPalLabel.font = UIFont.boldSystemFont(ofSize: 22)
+       payPalLabel.font = UIFont.systemFont(ofSize: 16)
         return payPalLabel
     }()
     
     public lazy var noneLabel: UILabel = {
         let noneLabel = UILabel()
         noneLabel.text = "None"
-        noneLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        noneLabel.font = UIFont.systemFont(ofSize: 16)
         return noneLabel
     }()
 
@@ -67,7 +67,7 @@ class CardTypeTableViewCell: UITableViewCell {
         addSubview(cardTypeLabel)
         NSLayoutConstraint.activate([
             cardTypeLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            cardTypeLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            cardTypeLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11),
             cardTypeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             cardTypeLabel.heightAnchor.constraint(equalToConstant: 30)
             ])
@@ -77,7 +77,7 @@ class CardTypeTableViewCell: UITableViewCell {
         addSubview(cardOptionsLabel)
         cardOptionsLabel.translatesAutoresizingMaskIntoConstraints = false
         cardOptionsLabel.topAnchor.constraint(equalTo: cardTypeLabel.bottomAnchor, constant: 10).isActive = true
-        cardOptionsLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        cardOptionsLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
         cardOptionsLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         cardOptionsLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
     }
@@ -86,7 +86,7 @@ class CardTypeTableViewCell: UITableViewCell {
         addSubview(payPalLabel)
         payPalLabel.translatesAutoresizingMaskIntoConstraints = false
         payPalLabel.topAnchor.constraint(equalTo: cardOptionsLabel.bottomAnchor, constant: 10).isActive = true
-        payPalLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        payPalLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
         payPalLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         payPalLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
@@ -95,7 +95,7 @@ class CardTypeTableViewCell: UITableViewCell {
         addSubview(noneLabel)
         noneLabel.translatesAutoresizingMaskIntoConstraints = false
         noneLabel.topAnchor.constraint(equalTo: payPalLabel.bottomAnchor, constant: 10).isActive = true
-        noneLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        noneLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
         noneLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         noneLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
