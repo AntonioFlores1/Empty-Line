@@ -33,16 +33,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     var productDetailsView = ProductDetailsView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-<<<<<<< HEAD
-//        startLiveVideo()
-        
-
-//        startLiveVideo()
-
-=======
         startLiveVideo()
->>>>>>> 45cd21ae3c68bf3e3f49bd657cf1e713f25ca87b
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
@@ -143,37 +134,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
-<<<<<<< HEAD
-//    private func startLiveVideo() {
-//        session.sessionPreset = AVCaptureSession.Preset.photo
-//
-//        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-//
-//        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-//
-//        let deviceOutput = AVCaptureVideoDataOutput()
-//
-//        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-//
-//        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-//
-//        session.addInput(deviceInput)
-//
-//        session.addOutput(deviceOutput)
-//
-//        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-//
-//        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 100)
-//
-//        imageLayer.videoGravity = .resizeAspectFill
-//
-//        imageView.layer.addSublayer(imageLayer)
-//
-//        session.startRunning()
-//
-//    }
-
-=======
     
     
     
@@ -237,7 +197,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
->>>>>>> 45cd21ae3c68bf3e3f49bd657cf1e713f25ca87b
     
     
     
