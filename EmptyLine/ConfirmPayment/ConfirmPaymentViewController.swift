@@ -15,6 +15,14 @@ class ConfirmPaymentViewController: UIViewController {
     private var setButton: SetRoundedButton!
     var sections = ["Card"]
     
+//    private var arrayOfCards = ["500235", "406742", "6011", "337941"]
+//    private var visaCard = ["406742"]
+//    private var discover = ["6011"]
+//    private var americanExpress = ["337941"]
+
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +82,12 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
+        cell.contentView.backgroundColor = UIColor.clear
+        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+        cell.layer.masksToBounds = false
+        cell.layer.cornerRadius = 1.0
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.shadowOpacity = 0.5
         cell.switchOnOff.tag = indexPath.row
         cell.switchOnOff.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
         return cell
