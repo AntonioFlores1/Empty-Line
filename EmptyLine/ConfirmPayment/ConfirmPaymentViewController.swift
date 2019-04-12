@@ -83,9 +83,9 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
         cell.contentView.backgroundColor = UIColor.clear
-        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [2.0, 2.0, 2.0, 2.0])
+        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
-        cell.layer.cornerRadius = 3.0
+        cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
         cell.switchOnOff.tag = indexPath.row

@@ -8,24 +8,17 @@
 
 import UIKit
 import PureLayout
-//import PlaygroundSupport
-//class Responder: NSObject {
-//    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-//        UIView.animate(withDuration: 0.3) {
-//            segmentedControl.frame.origin.x = (UISegmentedControl.frame.width / CGFloat(UISegmentedControl.numberOfSegments)) * CGFloat(segmentedControl.selectedSegmentIndex)
-//        }
-//    }
-//}
+
 
 class ProfileView: UIView {
     lazy var profileImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.image = UIImage(named: "placeImage")
-        imageView.autoSetDimensions(to: CGSize(width: 130.0, height: 130.0))
-        imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor.green.cgColor
-        imageView.layer.cornerRadius = 64.0
+        imageView.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.layer.cornerRadius = 48.0
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -105,7 +98,7 @@ class ProfileView: UIView {
     
     func setupConstraints() {
         profileImageView.autoAlignAxis(toSuperviewAxis: .vertical)
-        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 90.0)
+        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 80.0)
 
         segmentedControl.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         segmentedControl.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)

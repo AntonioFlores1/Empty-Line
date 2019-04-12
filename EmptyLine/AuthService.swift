@@ -45,9 +45,7 @@ final class AuthService {
                         return
                     }
                 })
-                
-                // create user (reviewer) on firestore database
-                
+                                
                 let appUser = CCUser.init(userId: authDataResult.user.uid, userName: "", email: authDataResult.user.email!, photoURL: nil, firstName: "", lastName: "", password: "", cardNumber: "", cardCVV: "", expiringMonth: "", expiringDay: "", expiringYear: "", streetAddress: "", cityName: "", stateName: "", zipCode: "")
                 
                 DBService.createNDUser(user: appUser, completion: { (error) in

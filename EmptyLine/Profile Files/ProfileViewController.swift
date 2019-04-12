@@ -52,7 +52,6 @@ class ProfileViewController: UIViewController {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         profileView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "settinCell")
-        
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
@@ -207,9 +206,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
             cell.contentView.backgroundColor = UIColor.clear
-            cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [2.0, 2.0, 2.0, 2.0])
+            cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
             cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 3.0
+            cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
 
