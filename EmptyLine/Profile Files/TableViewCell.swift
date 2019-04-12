@@ -48,9 +48,10 @@ class TableViewCell: UITableViewCell {
     
     func historyLabelConstraints() {
         historyLabel.translatesAutoresizingMaskIntoConstraints = false
-        historyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        historyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         historyLabel.leadingAnchor.constraint(equalTo: historyImage.trailingAnchor, constant: 10).isActive = true
         historyLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        historyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
     }
     func historyImageConstraints() {
         historyImage.translatesAutoresizingMaskIntoConstraints = false

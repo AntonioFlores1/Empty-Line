@@ -8,9 +8,16 @@
 
 import UIKit
 import PureLayout
+//import PlaygroundSupport
+//class Responder: NSObject {
+//    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+//        UIView.animate(withDuration: 0.3) {
+//            segmentedControl.frame.origin.x = (UISegmentedControl.frame.width / CGFloat(UISegmentedControl.numberOfSegments)) * CGFloat(segmentedControl.selectedSegmentIndex)
+//        }
+//    }
+//}
 
 class ProfileView: UIView {
-
     lazy var profileImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.backgroundColor = .black
@@ -38,13 +45,33 @@ class ProfileView: UIView {
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["History","Setting"])
-        control.autoSetDimension(.height, toSize: 32.0)
-        control.selectedSegmentIndex = 0
-        control.layer.borderColor = UIColor.gray.cgColor
-        control.tintColor = .gray
-        return control
+        let segControl = UISegmentedControl()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
+         view.backgroundColor = .white
+        segControl.autoSetDimension(.height, toSize: 32.0)
+        segControl.insertSegment(withTitle: "History", at: 0, animated: true)
+        segControl.insertSegment(withTitle: "Setting", at: 1, animated: true)
+        segControl.selectedSegmentIndex = 0
+        view.addSubview(segControl)
+        segControl.translatesAutoresizingMaskIntoConstraints = false
+        segControl.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        segControl.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        segControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        segControl.backgroundColor = .clear
+        segControl.tintColor = .clear
+        segControl.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
+            ], for: .normal)
+        
+        segControl.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
+            NSAttributedString.Key.foregroundColor: UIColor.orange
+            ], for: .selected)
+        return segControl
     }()
+
+
     
     lazy var editButton: UIButton = {
         let button = UIButton()
@@ -97,3 +124,6 @@ class ProfileView: UIView {
         usernameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
 }
+
+
+
