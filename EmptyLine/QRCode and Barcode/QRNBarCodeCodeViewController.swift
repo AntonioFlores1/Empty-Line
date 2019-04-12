@@ -36,7 +36,7 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
 //        startLiveVideo()
         
 
-        startLiveVideo()
+//        startLiveVideo()
 
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done , target: self, action: #selector(segue))
@@ -87,34 +87,34 @@ class QRNBarCodeCodeViewController: UIViewController,AVCaptureVideoDataOutputSam
     
     
     
-    private func startLiveVideo() {
-        session.sessionPreset = AVCaptureSession.Preset.photo
-        
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-
-        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-        
-        let deviceOutput = AVCaptureVideoDataOutput()
-        
-        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-        
-        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-        
-        session.addInput(deviceInput)
-        
-        session.addOutput(deviceOutput)
-        
-        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-        
-        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 100)
-        
-        imageLayer.videoGravity = .resizeAspectFill
-        
-        imageView.layer.addSublayer(imageLayer)
-        
-        session.startRunning()
-        
-    }
+//    private func startLiveVideo() {
+//        session.sessionPreset = AVCaptureSession.Preset.photo
+//
+//        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+//
+//        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
+//
+//        let deviceOutput = AVCaptureVideoDataOutput()
+//
+//        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+//
+//        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
+//
+//        session.addInput(deviceInput)
+//
+//        session.addOutput(deviceOutput)
+//
+//        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
+//
+//        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 100)
+//
+//        imageLayer.videoGravity = .resizeAspectFill
+//
+//        imageView.layer.addSublayer(imageLayer)
+//
+//        session.startRunning()
+//
+//    }
 
     
     
