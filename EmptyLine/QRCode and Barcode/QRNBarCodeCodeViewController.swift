@@ -34,7 +34,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         startLiveVideo()
+
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
@@ -135,6 +137,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
+
     
     
     
@@ -198,6 +201,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
+
     
     
     
