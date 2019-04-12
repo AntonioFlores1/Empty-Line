@@ -17,12 +17,8 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
         return cell
     }
-    
-    
     let cellID = "DetailsCell"
-    
     let blackView = UIView()
-    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -32,17 +28,11 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     
     func showSettings() {
         //show menu
-        
         if let window = UIApplication.shared.keyWindow {
-            
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
-            
             window.addSubview(blackView)
-            
             //window.addSubview(collectionView)
-            
             let height: CGFloat = 200
             let y = window.frame.height - height
            // collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
@@ -62,16 +52,11 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return 3
         }
-        
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
             return cell
         }
-    
-    
-    
     }
-    
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
             self.blackView.alpha = 0
@@ -81,14 +66,10 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
             }
         }
     }
-    
     override init() {
         super.init()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(DetailCell.self, forCellWithReuseIdentifier: cellID)
     }
-    
 }

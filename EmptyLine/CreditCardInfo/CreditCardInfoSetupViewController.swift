@@ -35,7 +35,6 @@ class CreditCardInfoSetupViewController: UITableViewController {
     @objc private func barButtonPressed(){
         // Save updates to fire base
         barButtonItem.isEnabled = false
-        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
