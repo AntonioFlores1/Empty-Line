@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController {
   
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
+    let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
+    let card = [UIImage(named: "addcard")]
     
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
@@ -170,18 +172,16 @@ class ProfileViewController: UIViewController {
     @objc func signoutButtonPress() {
         print("Was press")
     }
+    @objc func changeNameButton() {
+        print(">>>//????")
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 18))
-//        self.tableView.sectionHeaderHeight = 70
-//        return view
-//    }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return "TITLE"
+            return ""
         case 1:
             return account[section]
         default:
@@ -238,19 +238,31 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
+            infocell.contentView.backgroundColor = UIColor.clear
+            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+            infocell.layer.masksToBounds = false
+            infocell.layer.cornerRadius = 1.0
+            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
+            infocell.layer.shadowOpacity = 0.5
+
+            
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
                     if indexPath.row == 0 {
-                        infocell.namelLabel.text = user.displayName!
+                        infocell.namelLabel.text = user.displayName!;
+                        infocell.proImage.image = profileIcon[indexPath.row]
                     } else if indexPath.row == 1 {
-                        infocell.emailLabel.text = user.email!;
+                        infocell.emailLabel.text = user.email!
+                        infocell.proImage.image = profileIcon[indexPath.row]
                     } else {
                         infocell.passwordLabel.text = "............."
+                        infocell.proImage.image = profileIcon[indexPath.row]
                     }
                 }
                 if indexPath.section == 1{
                     if indexPath.row == 0 {
                         infocell.addCaed.text = "Add Card"
+                        infocell.cardImage.image = card[indexPath.row]
                     } else {
                         infocell.signOut.text = " SignOut"
                     }
@@ -314,7 +326,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 present(alertController, animated: true, completion: nil)
                 }
             }
-            if indexPath.section == 4 {
+            if indexPath.section == 1 {
+                if indexPath.row == 1 {
                  let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
@@ -325,6 +338,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 alertController.addAction(ok)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
+                }
               }
             default:
                 break

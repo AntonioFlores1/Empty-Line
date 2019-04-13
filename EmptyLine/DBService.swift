@@ -24,5 +24,17 @@ final class DBService {
     static public var generateDocumentId: String {
         return firestoreDB.collection(UsersCollectionKeys.CollectionKey).document().documentID
     }
+    static public func getProducts(productBarcode: String, completion: @escaping(Error?, Item?) -> Void){
+        DBService.firestoreDB.collection(ItemCollectionKeys.CollectionKey).whereField(ItemCollectionKeys.BarcodeKey, isEqualTo: productBarcode).getDocuments { (snapShot, error) in
+            if let error = error {
+                completion(error, nil)
+            } else {
+                if let snapShot = snapShot?.documents.first {
+                    let item = Item(dict: snapShot.data())
+                    completion(nil, item)
+                }
+            }
+        }
+    }
 }
 

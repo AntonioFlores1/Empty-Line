@@ -34,31 +34,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpT-sf-fnW">
-                                <rect key="frame" x="0.0" y="597" width="375" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6i3-Lj-b3F">
-                                <rect key="frame" x="0.0" y="64" width="375" height="533"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Fr1-YW-RUv" firstAttribute="trailing" secondItem="6i3-Lj-b3F" secondAttribute="trailing" id="50L-oE-2SJ"/>
-                            <constraint firstItem="YpT-sf-fnW" firstAttribute="leading" secondItem="Fr1-YW-RUv" secondAttribute="leading" id="91h-Cr-Eu0"/>
-                            <constraint firstItem="Fr1-YW-RUv" firstAttribute="trailing" secondItem="YpT-sf-fnW" secondAttribute="trailing" id="Fu0-us-Zuv"/>
                             <constraint firstItem="6i3-Lj-b3F" firstAttribute="leading" secondItem="Fr1-YW-RUv" secondAttribute="leading" id="Iss-QQ-o6e"/>
-                            <constraint firstItem="Fr1-YW-RUv" firstAttribute="bottom" secondItem="YpT-sf-fnW" secondAttribute="bottom" id="bwH-i2-Sxq"/>
-                            <constraint firstItem="YpT-sf-fnW" firstAttribute="top" secondItem="6i3-Lj-b3F" secondAttribute="bottom" id="nt6-FJ-3Jw"/>
+                            <constraint firstItem="6i3-Lj-b3F" firstAttribute="bottom" secondItem="Fr1-YW-RUv" secondAttribute="bottom" id="Ujx-PU-i6n"/>
                             <constraint firstItem="6i3-Lj-b3F" firstAttribute="top" secondItem="Fr1-YW-RUv" secondAttribute="top" id="w6f-yE-jek"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fr1-YW-RUv"/>
                     </view>
                     <navigationItem key="navigationItem" id="LQ6-eW-bTh"/>
                     <connections>
-                        <outlet property="barCodeRawValueLabel" destination="YpT-sf-fnW" id="CI0-Oe-j5Y"/>
                         <outlet property="imageView" destination="6i3-Lj-b3F" id="uLd-u4-ykN"/>
                     </connections>
                 </viewController>
