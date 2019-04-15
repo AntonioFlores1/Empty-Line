@@ -40,8 +40,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     var detailsLauncher = DetailsLauncher()
-    
-    
         @objc func segue(){
         detailsLauncher.showSettings()
         detailsLauncher.barcodeNumber = bar
@@ -137,12 +135,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         
     
-    
-    
-    
 
-    
-    
     
     
     private func startLiveVideo() {
