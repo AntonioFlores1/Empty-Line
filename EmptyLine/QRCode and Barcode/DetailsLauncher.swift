@@ -88,16 +88,6 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
             
             
             
-            //productDetailsView.productPrice.text = "$100000"
-            
-            // productDetailsView.productName.text = products.name
-            
-            //productDetailsView.productDetails.text = products.description
-            
-            //productDetailsView.productPrice.text = "@" + String(products.price)
-            
-            
-            
             let height: CGFloat = 300
             
             let y = window.frame.height - height
