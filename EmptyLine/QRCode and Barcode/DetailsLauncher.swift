@@ -65,11 +65,13 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     private func addToShoppingCart(){
         productDetailsView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         print("KKKKKKKk")
+        
     }
     
     @objc private func addButtonPressed(){
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
+           
          
         }
     }
