@@ -39,6 +39,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         startLiveVideo()
         //setupView()
         addToShoppingCart()
+        dontAddToShoppingCart()
         fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
@@ -49,7 +50,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
         @objc func segue(){
             
-            setupView()
+            //setupView()
 //            fetchProduct(barCode: "06827465")
         //detailsLauncher.showSettings()
         //detailsLauncher.barcodeNumber = bar
@@ -69,6 +70,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 //                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
                     self.fetchProduct(barCode: self.bar)
+                    self.setupView()
                     //print(self.bar)
 
                 }
@@ -125,11 +127,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             let y = window.frame.height - height
             
             view.frame = window.frame
-            view.alpha = 0
+            //view.alpha = 0
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
-                self.view.alpha = 1
+                //self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
                 
             }, completion: nil)
@@ -175,7 +177,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
     }
     
+    private func dontAddToShoppingCart(){
+        productDetailView.deleteButton.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
+    }
     
+    @objc func dontAddMe(){
+        handleDismiss()
+    }
     
     @objc private func addButtonPressed(){
         if let item = products {
