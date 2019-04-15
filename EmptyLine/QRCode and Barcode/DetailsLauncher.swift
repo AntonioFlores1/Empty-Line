@@ -55,22 +55,19 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
                     self.productDetailsView.productPrice.text = "$" + String(product.price)
                     self.productDetailsView.productImage.kf.setImage(with: URL(string: product.image))
                 }
-                
             }
-            
         }
         
     }
     
     private func addToShoppingCart(){
         productDetailsView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        print("KKKKKKKk")
     }
     
     @objc private func addButtonPressed(){
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
-         
+         print("Add is working")
         }
     }
     
