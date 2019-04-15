@@ -29,12 +29,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     var barcodeDetector :VisionBarcodeDetector?
     var myView = DetailsLauncher()
     var productDetailsView = ProductDetailsView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         startLiveVideo()
-
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
@@ -60,34 +58,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 //                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
                     print(self.bar)
-//                    self.session.stopRunning()
-//
-                } //else if barcodes?.count == 0 {
-//
-//                                    self.bar = ""
-//                                    self.session.startRunning()
-//                                }
-
-//                                for barcode in barcodes! {
-//                           self.bar = barcode.rawValue!
-////                                self.barcodeNumber[0] = barcode.rawValue!
-//                                    print(self.bar)
-//
-                }
-                                    //                                  }  if self.barcodeNumber.count == 1 {
-//
-//                    self.navigationController?.pushViewController(ItemDetailViewController(), animated: true)
-//
-//                                        break
-//
-//                                    }
-//
-//                                }
-//
-//                                if barcodes!.count > 3 {
-//
-//                                    self.present(ItemDetailViewController(), animated: true, completion: nil)
-//
+                
                 }
 
         
@@ -145,7 +116,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
-    private func startLiveVideo() {
+     func startLiveVideo() {
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
@@ -160,9 +131,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-//
-//
-    
+}
+    }
 
 
 

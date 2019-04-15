@@ -200,7 +200,7 @@
         <scene sceneID="FRU-31-Xco">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CDO-Lp-WUN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Scan Item" id="ntG-U7-kWQ"/>
+                    <tabBarItem key="tabBarItem" title="Scan Item" image="QRCode" id="ntG-U7-kWQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dF7-VK-0yH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -219,7 +219,7 @@
         <scene sceneID="fHw-IF-c52">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OFW-s0-IdX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="BOk-2z-fKG"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="user" id="BOk-2z-fKG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OYP-co-uBj">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -268,4 +268,8 @@
             <point key="canvasLocation" x="4727.1999999999998" y="-731.78410794602701"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="QRCode" width="25" height="25"/>
+        <image name="user" width="25" height="25"/>
+    </resources>
 </document>
