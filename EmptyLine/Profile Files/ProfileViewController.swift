@@ -312,7 +312,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
                 let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
 //                    self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
-                    self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
+//                    self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
                     self.dismiss(animated: true)
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }

@@ -31,21 +31,13 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     let cellID = "DetailsCell"
-    
     let productDetailsView = ProductDetailsView()
-    
     let blackView = UIView()
- 
     let collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
-        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         cv.backgroundColor = UIColor.white
-        
         return cv
-        
     }()
     
     
@@ -61,6 +53,7 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
                     self.productDetailsView.productName.text = product.name
                     self.productDetailsView.productDetails.text = product.description
                     self.productDetailsView.productPrice.text = "$" + String(product.price)
+                    self.productDetailsView.productImage.kf.setImage(with: URL(string: product.image))
                 }
                 
             }
