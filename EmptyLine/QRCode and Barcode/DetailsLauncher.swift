@@ -68,6 +68,13 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         
     }
     
+    private func dontAddToShoppingCart(){
+        productDetailsView.deleteButton.addTarget(self, action: #selector(takeMeBack), for: .touchUpInside)
+    }
+    
+    @objc func takeMeBack(){
+        handleDismiss()
+    }
     @objc private func addButtonPressed(){
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
@@ -158,20 +165,20 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     
     
     @objc func handleDismiss() {
-        
         UIView.animate(withDuration: 0.5) {
             
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
                 
                 self.productDetailsView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailsView.frame.width, height: self.productDetailsView.frame.height)
+            
             }
         }
     }
     override init() {
         super.init()
         print("06827465")
-        fetchProducts(barCode:"04965802")
+        fetchProducts(barCode:"06827465")
         
         //setupDetailsView()
         collectionView.delegate = self
@@ -180,3 +187,5 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
 
     }
 }
+
+

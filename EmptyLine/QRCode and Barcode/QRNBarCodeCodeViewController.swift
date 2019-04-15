@@ -37,9 +37,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         super.viewDidLoad()
 
         startLiveVideo()
-        setupView()
+        //setupView()
         addToShoppingCart()
-        fetchProduct(barCode: "04965802")
+        dontAddToShoppingCart()
+        fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
@@ -49,9 +50,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
         @objc func segue(){
             
+            //setupView()
+//            fetchProduct(barCode: "06827465")
         //detailsLauncher.showSettings()
         //detailsLauncher.barcodeNumber = bar
         //print(detailsLauncher.barcodeNumber)
+
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -65,10 +69,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 if barcodes!.count == 1 {
 //                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
-                    print(self.bar)
-                
-                }
+                    self.fetchProduct(barCode: self.bar)
+                    self.setupView()
+                    //print(self.bar)
 
+                }
         
                 //                    self.bar = ""
                 
@@ -122,11 +127,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             let y = window.frame.height - height
             
             view.frame = window.frame
-            view.alpha = 0
+            //view.alpha = 0
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
-                self.view.alpha = 1
+                //self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
                 
             }, completion: nil)
@@ -139,7 +144,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         UIView.animate(withDuration: 0.5) {
             
-            self.view.alpha = 0
+            self.view.alpha = 1
             if let window = UIApplication.shared.keyWindow {
                 
                 self.productDetailView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
@@ -170,21 +175,28 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        
-        
+    }
+    
+    private func dontAddToShoppingCart(){
+        productDetailView.deleteButton.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
+    }
+    
+    @objc func dontAddMe(){
+        handleDismiss()
     }
     
     @objc private func addButtonPressed(){
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
-            showAlert(title: "Success", message: "Successfully added item to shopping cart") { (alert) in
-                self.navigationController?.present(ShoppingListViewController(), animated: true, completion: nil)
+            showAlert(title: item.name, message: "Successfully added item to shopping cart") { (alert) in
+                //self.navigationController?.present(ShoppingListViewController(), animated: true, completion: nil)
+                self.handleDismiss()
                 print("Item added")
             }
-           
+        }
             
         }
-    }
+    
     
     
     
@@ -205,16 +217,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         session.startRunning()
     }
 
-
-
-
-
-
-    
-    
-
-    
     
     
 }
-

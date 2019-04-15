@@ -16,8 +16,10 @@ enum ImageToEdit {
 }
 
 class ProfileViewController: UIViewController {
-    var newArray = ["Monday - 02/10/2019", "Tuesday - 02/20/2019","Wednesday - 03/5/2019",
-                    "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
+    var newArray = ["Monday - 04/15/19"]
+        
+//        ["Monday - 02/10/2019", "Tuesday - 02/20/2019","Wednesday - 03/5/2019",
+//                    "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
   
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
@@ -313,7 +315,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
                 let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
 //                    self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
-//                    self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
+                    self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
                     self.dismiss(animated: true)
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
