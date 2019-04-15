@@ -14,12 +14,17 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(productDetailView)
+        dismissButton()
      
     }
     func dismissButton() {
-    
+        productDetailView.deleteButton.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
     }
     
+    @objc private func dismissButtonPressed(){
+        dismiss(animated: true, completion: nil)
+    }
     
   
     
