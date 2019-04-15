@@ -34,6 +34,7 @@ class ShoppingListViewController: UIViewController {
         barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
+        shoppingListTableView.tableFooterView = UIView()
     }
     @objc func barButtonPressed() {
         print("Pay in on the way")
@@ -62,6 +63,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.shadowOpacity = 0.5
         return cell
     }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

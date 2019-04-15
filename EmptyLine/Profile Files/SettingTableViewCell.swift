@@ -52,6 +52,19 @@ class SettingTableViewCell: UITableViewCell {
         return out
     }()
     
+    lazy var proImage: UIImageView = {
+        var  image = UIImageView()
+        image = UIImageView(image: UIImage(named: "pro"))
+        return image
+    }()
+    
+    lazy var cardImage: UIImageView = {
+        var  image = UIImageView()
+        image = UIImageView(image: UIImage(named: "pro"))
+        return image
+    }()
+    
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -72,36 +85,39 @@ class SettingTableViewCell: UITableViewCell {
         addSubview(passwordLabel)
         addSubview(addCaed)
         addSubview(signOut)
+        addSubview(proImage)
+        addSubview(cardImage)
         emailConstraints()
         nameLabelConstraints()
         passwordLabelConstraints()
         addCardConstraints()
         signOutConstraints()
-       
-        
+        setAllSettingIcon()
+        setCardImage()
     }
+    
     func emailConstraints() {
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        emailLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        emailLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 22).isActive = true
+        emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
         emailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
     }
     func nameLabelConstraints() {
         namelLabel.translatesAutoresizingMaskIntoConstraints = false
         namelLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        namelLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        namelLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
         namelLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
     }
     func passwordLabelConstraints() {
         passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-        passwordLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        passwordLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
         passwordLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
     }
     func addCardConstraints() {
         addCaed.translatesAutoresizingMaskIntoConstraints = false
         addCaed.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        addCaed.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        addCaed.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
         addCaed.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
     }
     func signOutConstraints() {
@@ -109,5 +125,17 @@ class SettingTableViewCell: UITableViewCell {
         signOut.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         signOut.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
         signOut.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+    }
+    func setAllSettingIcon() {
+        proImage.translatesAutoresizingMaskIntoConstraints = false
+        proImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        proImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        proImage.trailingAnchor.constraint(equalTo: namelLabel.leadingAnchor, constant: -11).isActive = true
+    }
+    func setCardImage() {
+        cardImage.translatesAutoresizingMaskIntoConstraints = false
+        cardImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        cardImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        cardImage.trailingAnchor.constraint(equalTo: namelLabel.leadingAnchor, constant: -11).isActive = true
     }
 }
