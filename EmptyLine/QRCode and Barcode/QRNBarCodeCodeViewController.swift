@@ -37,9 +37,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         super.viewDidLoad()
 
         startLiveVideo()
-        setupView()
+        //setupView()
         addToShoppingCart()
-        fetchProduct(barCode: "04965802")
+        fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
@@ -49,6 +49,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
         @objc func segue(){
             
+            setupView()
+//            fetchProduct(barCode: "06827465")
         //detailsLauncher.showSettings()
         //detailsLauncher.barcodeNumber = bar
         //print(detailsLauncher.barcodeNumber)
@@ -66,10 +68,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 if barcodes!.count == 1 {
 //                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
-                    print(self.bar)
-                
-                }
+                    self.fetchProduct(barCode: self.bar)
+                    //print(self.bar)
 
+                }
         
                 //                    self.bar = ""
                 
@@ -140,7 +142,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         UIView.animate(withDuration: 0.5) {
             
-            self.view.alpha = 0
+            self.view.alpha = 1
             if let window = UIApplication.shared.keyWindow {
                 
                 self.productDetailView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
@@ -171,21 +173,22 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        
-        
     }
+    
+    
     
     @objc private func addButtonPressed(){
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
-            showAlert(title: "Success", message: "Successfully added item to shopping cart") { (alert) in
-                self.navigationController?.present(ShoppingListViewController(), animated: true, completion: nil)
+            showAlert(title: item.name, message: "Successfully added item to shopping cart") { (alert) in
+                //self.navigationController?.present(ShoppingListViewController(), animated: true, completion: nil)
+                self.handleDismiss()
                 print("Item added")
             }
-           
+        }
             
         }
-    }
+    
     
     
     
@@ -206,16 +209,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         session.startRunning()
     }
 
-
-
-
-
-
-    
-    
-
-    
     
     
 }
-
