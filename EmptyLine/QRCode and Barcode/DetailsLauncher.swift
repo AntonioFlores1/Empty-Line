@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseMLVision
 
 class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -66,6 +68,16 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         }
         
     }
+//    private func getProduct() {
+//        DBService.getProducts(productBarcode: products?.barcode ?? "") { (error, item) in
+//            if let error = error {
+//                print("Error Error")
+//            } else if let item = item {
+//                self.barcodeNumber = item.barcode
+//                print(self.barcodeNumber)
+//            }
+//        }
+//    }
 
     //    private func setupDetailsView(){
     
@@ -139,31 +151,19 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         UIView.animate(withDuration: 0.5) {
             
             self.blackView.alpha = 0
-            
-            
-            
             if let window = UIApplication.shared.keyWindow {
                 
                 self.productDetailsView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailsView.frame.width, height: self.productDetailsView.frame.height)
-                
             }
-            
         }
-        
     }
-    
-    
-    
     override init() {
         super.init()
         print("06827465")
-        fetchProducts(barCode:"06827465")
+        fetchProducts(barCode:"04965802")
+        
         //setupDetailsView()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
     }
-    
-    
-    
 }

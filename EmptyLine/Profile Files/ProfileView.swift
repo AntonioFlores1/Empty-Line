@@ -98,7 +98,7 @@ class ProfileView: UIView {
     
     func setupConstraints() {
         profileImageView.autoAlignAxis(toSuperviewAxis: .vertical)
-        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 80.0)
+        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 100.0)
 
         segmentedControl.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         segmentedControl.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
