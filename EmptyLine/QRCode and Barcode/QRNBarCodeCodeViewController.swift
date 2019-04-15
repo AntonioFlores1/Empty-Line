@@ -41,6 +41,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
         @objc func segue(){
         detailsLauncher.showSettings()
+        
         detailsLauncher.barcodeNumber = bar
         print(detailsLauncher.barcodeNumber)
     }
