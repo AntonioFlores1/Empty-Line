@@ -135,7 +135,4 @@ class ProductDetailsView: UIView {
         addToCartButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         
     }
-    
-    
-    
 }
