@@ -177,5 +177,6 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.delegate = self
         collectionView.dataSource = self
         addToShoppingCart()
+
     }
 }
