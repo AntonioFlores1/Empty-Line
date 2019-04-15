@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct Item {
+struct Item: Codable {
     let itemID: String
     let name: String
     let barcode: String
