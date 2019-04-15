@@ -66,6 +66,7 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
+
     }
     
     @objc private func segueToSetting(){

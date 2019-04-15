@@ -102,7 +102,7 @@ class ProductDetailsView: UIView {
         addSubview(productImage)
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.topAnchor.constraint(equalTo: productName.bottomAnchor, constant: 5).isActive = true
-        productImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        productImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         productImage.trailingAnchor.constraint(equalTo: productDetails.leadingAnchor, constant: -5).isActive = true
         productImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         

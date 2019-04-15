@@ -16,7 +16,4 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
      
     }
-    func dismissButton() {
-    
-    }
 }
