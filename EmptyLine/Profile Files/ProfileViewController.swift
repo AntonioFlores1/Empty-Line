@@ -59,7 +59,6 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
-        segueToRaymod()
         tableView.tableFooterView = UIView()
         
     }
@@ -67,10 +66,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-    }
-    
-    private func segueToRaymod(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Payment Ray", style: .done, target: self, action: #selector(segueToSetting))
     }
     
     @objc private func segueToSetting(){
