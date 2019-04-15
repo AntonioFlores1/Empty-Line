@@ -9,19 +9,17 @@
 import UIKit
 
 class ConfirmPaymentTableViewCell: UITableViewCell {
-
-    lazy var firstCardButton: UIButton = {
-        let firstCB = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        firstCB.backgroundColor = .green
-        firstCB.setTitle("Test Button", for: .normal)
-        return firstCB
+    
+    lazy var switchOnOff: UISwitch = {
+    let switchOnOff = UISwitch(frame:CGRect(x: 150, y: 150, width: 0, height: 0))
+    switchOnOff.setOn(false, animated: false)
+        return switchOnOff
     }()
     
-    lazy var secondCardButton: UIButton = {
-        let secondCb = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        secondCb.backgroundColor = .red
-        secondCb.setTitle("secod", for: .normal)
-        return secondCb
+    lazy var cardImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "card")
+        return image
     }()
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,25 +35,24 @@ class ConfirmPaymentTableViewCell: UITableViewCell {
         setUpConstraints()
     }
     private func setUpConstraints() {
-        addSubview(firstCardButton)
-        addSubview(secondCardButton)
-        setFirstCardB()
+        addSubview(switchOnOff)
+        addSubview(cardImage)
         setSecondCB()
+        cardImageConstraint()
     }
     
-    func setFirstCardB() {
-        firstCardButton.translatesAutoresizingMaskIntoConstraints = false
-        firstCardButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        firstCardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-        firstCardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -300).isActive = true
-        firstCardButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-    }
     func setSecondCB() {
-        secondCardButton.translatesAutoresizingMaskIntoConstraints = false
-        secondCardButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        secondCardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-        secondCardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -300).isActive = true
-        secondCardButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        switchOnOff.translatesAutoresizingMaskIntoConstraints = false
+        switchOnOff.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        switchOnOff.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 320).isActive = true
+        switchOnOff.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+        switchOnOff.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
-    
+    func cardImageConstraint() {
+        cardImage.translatesAutoresizingMaskIntoConstraints = false
+        cardImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        cardImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
+        cardImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -300).isActive = true
+        cardImage.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+    }
 }

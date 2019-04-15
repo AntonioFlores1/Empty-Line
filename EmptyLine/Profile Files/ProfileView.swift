@@ -9,16 +9,16 @@
 import UIKit
 import PureLayout
 
-class ProfileView: UIView {
 
+class ProfileView: UIView {
     lazy var profileImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.image = UIImage(named: "placeImage")
-        imageView.autoSetDimensions(to: CGSize(width: 130.0, height: 130.0))
-        imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor.green.cgColor
-        imageView.layer.cornerRadius = 64.0
+        imageView.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.layer.cornerRadius = 48.0
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -38,13 +38,33 @@ class ProfileView: UIView {
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["History","Setting"])
-        control.autoSetDimension(.height, toSize: 32.0)
-        control.selectedSegmentIndex = 0
-        control.layer.borderColor = UIColor.gray.cgColor
-        control.tintColor = .gray
-        return control
+        let segControl = UISegmentedControl()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
+         view.backgroundColor = .white
+        segControl.autoSetDimension(.height, toSize: 32.0)
+        segControl.insertSegment(withTitle: "History", at: 0, animated: true)
+        segControl.insertSegment(withTitle: "Setting", at: 1, animated: true)
+        segControl.selectedSegmentIndex = 0
+        view.addSubview(segControl)
+        segControl.translatesAutoresizingMaskIntoConstraints = false
+        segControl.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        segControl.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        segControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        segControl.backgroundColor = .clear
+        segControl.tintColor = .clear
+        segControl.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
+            ], for: .normal)
+        
+        segControl.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
+            NSAttributedString.Key.foregroundColor: UIColor.orange
+            ], for: .selected)
+        return segControl
     }()
+
+
     
     lazy var editButton: UIButton = {
         let button = UIButton()
@@ -78,7 +98,7 @@ class ProfileView: UIView {
     
     func setupConstraints() {
         profileImageView.autoAlignAxis(toSuperviewAxis: .vertical)
-        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 90.0)
+        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 100.0)
 
         segmentedControl.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         segmentedControl.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
@@ -97,3 +117,6 @@ class ProfileView: UIView {
         usernameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
 }
+
+
+

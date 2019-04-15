@@ -14,7 +14,16 @@ class ConfirmPaymentViewController: UIViewController {
     private var activityView:UIActivityIndicatorView!
     private var setButton: SetRoundedButton!
     var sections = ["Card"]
+    
+//    private var arrayOfCards = ["500235", "406742", "6011", "337941"]
+//    private var visaCard = ["406742"]
+//    private var discover = ["6011"]
+//    private var americanExpress = ["337941"]
 
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Payment Method"
@@ -23,6 +32,7 @@ class ConfirmPaymentViewController: UIViewController {
         settingButton()
         confirmView.confirmPaymentTableView.delegate = self
         confirmView.confirmPaymentTableView.dataSource = self
+        confirmView.confirmPaymentTableView.tableFooterView = UIView()
     }
     private func settingButton() {
         setButton = SetRoundedButton(frame: CGRect(x: 10, y: 10, width: 150, height: 35))
@@ -46,7 +56,14 @@ class ConfirmPaymentViewController: UIViewController {
     @objc func firstCB() {
         print("First Card")
     }
-    @objc func secondCB() {
+    @objc func switchStateDidChange(_ sender: UISwitch) {
+        print("First")
+        if (sender.isOn == true){
+            print("UISwitch state is now ON")
+        }
+        else{
+            print("UISwitch state is now Off")
+        }
         print("First")
     }
 }
@@ -58,7 +75,7 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
         case 0:
-            if (section == 0) { return 4 }
+            if (section == 0) { return 1 }
         default: fatalError("Unknown number of sections")
         }
         return 0
@@ -66,11 +83,14 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = confirmView.confirmPaymentTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConfirmPaymentTableViewCell else { return UITableViewCell()}
-        cell.firstCardButton.tag = indexPath.row
-        cell.firstCardButton.addTarget(self, action: #selector(firstCB), for: .touchUpInside)
-        cell.secondCardButton.tag = indexPath.row
-        cell.secondCardButton.addTarget(self, action: #selector(secondCB), for: .touchUpInside)
-
+        cell.contentView.backgroundColor = UIColor.clear
+        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+        cell.layer.masksToBounds = false
+        cell.layer.cornerRadius = 1.0
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.shadowOpacity = 0.5
+        cell.switchOnOff.tag = indexPath.row
+        cell.switchOnOff.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -83,4 +103,3 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
         }
     }
 }
-

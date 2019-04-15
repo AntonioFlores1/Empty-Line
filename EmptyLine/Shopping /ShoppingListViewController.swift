@@ -33,17 +33,13 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
         barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
-//        secondbarButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(secondBarButtonPressed))
-//        navigationItem.rightBarButtonItem = secondbarButtonItem
         self.view.addSubview(self.shoppingListTableView)
+        shoppingListTableView.tableFooterView = UIView()
     }
     @objc func barButtonPressed() {
         print("Pay in on the way")
         navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
     }
-//    @objc func secondBarButtonPressed() {
-//        
-//    }
 }
 
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -59,8 +55,15 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingLabelDetail.text = animals[indexPath.row]
         cell.priceLabel.text = price[indexPath.row]
         cell.shoppingListImage.image = UIImage(named: "placeholder")
+        cell.contentView.backgroundColor = UIColor.clear
+        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+        cell.layer.masksToBounds = false
+        cell.layer.cornerRadius = 1.0
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.shadowOpacity = 0.5
         return cell
     }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

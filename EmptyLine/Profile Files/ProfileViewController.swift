@@ -20,6 +20,9 @@ class ProfileViewController: UIViewController {
                     "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
   
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
+    var account = ["Account", "Payment"]
+    let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
+    let card = [UIImage(named: "addcard")]
     
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
@@ -57,6 +60,8 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         segueToRaymod()
+        tableView.tableFooterView = UIView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,10 +168,12 @@ class ProfileViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-
     }
     @objc func signoutButtonPress() {
         print("Was press")
+    }
+    @objc func changeNameButton() {
+        print(">>>//????")
     }
 }
 
@@ -176,14 +183,22 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case 0:
             return ""
         case 1:
-            return sections[section]
+            return account[section]
         default:
             break
         }
         return ""
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+         switch profileView.segmentedControl.selectedSegmentIndex {
+         case 0:
+            return 1
+         case 1:
+            return account.count
+         default:
+            break
+        }
+        return 0
     }
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -194,19 +209,26 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             }
             case 1:
                 if (section == 0) {
-                    return 1 }; if section == 1 { return 1 }; if section == 2 { return 1 }; if section == 3 { return 1 }; if section == 3 { return 1 }
+                    return 3 }; if section == 1 { return 2 }; if section == 2 { return 5 }//; if section == 3 { return 1 }; if section == 3 { return 1 }
             default:
                 break
             }
         return 1
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
-        if profileView.segmentedControl.selectedSegmentIndex == 0 {
+            cell.contentView.backgroundColor = UIColor.clear
+            cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+            cell.layer.masksToBounds = false
+            cell.layer.cornerRadius = 1.0
+            cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+            cell.layer.shadowOpacity = 0.5
+            
+            if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 cell.historyLabel.text = newArray[indexPath.row]
             } else {
                 cell.historyImage.isHidden = true
@@ -216,21 +238,34 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
+            infocell.contentView.backgroundColor = UIColor.clear
+            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+            infocell.layer.masksToBounds = false
+            infocell.layer.cornerRadius = 1.0
+            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
+            infocell.layer.shadowOpacity = 0.5
+
+            
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
-                    infocell.namelLabel.text = user.displayName!
+                    if indexPath.row == 0 {
+                        infocell.namelLabel.text = user.displayName!;
+                        infocell.proImage.image = profileIcon[indexPath.row]
+                    } else if indexPath.row == 1 {
+                        infocell.emailLabel.text = user.email!
+                        infocell.proImage.image = profileIcon[indexPath.row]
+                    } else {
+                        infocell.passwordLabel.text = "............."
+                        infocell.proImage.image = profileIcon[indexPath.row]
+                    }
                 }
-                if indexPath.section == 1 {
-                   infocell.emailLabel.text = user.email!
-                }
-                if indexPath.section == 2 {
-                    infocell.passwordLabel.text = "............."
-                }
-                if indexPath.section == 3 {
-                   infocell.addCaed.text = "Add Card"
-                }
-                if indexPath.section == 4 {
-                    infocell.signOut.text = "Sign Out"
+                if indexPath.section == 1{
+                    if indexPath.row == 0 {
+                        infocell.addCaed.text = "Add Card"
+                        infocell.cardImage.image = card[indexPath.row]
+                    } else {
+                        infocell.signOut.text = " SignOut"
+                    }
                 }
             } else {
                 infocell.emailLabel.isHidden = true
@@ -240,15 +275,17 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             return UITableViewCell()
         }
+        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 65
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 1:
             if indexPath.section == 0 {
+                if indexPath.row == 0 {
                 let alertController = UIAlertController(title: "Make changes", message: "Want to change your name?", preferredStyle: .actionSheet)
                 let continueOk = UIAlertAction(title: "Continue", style: .default) { (action) in
                     let changeName = UIAlertController(title: "Changing name", message: nil, preferredStyle: .alert)
@@ -273,8 +310,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 alertController.addAction(continueOk)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
+                }
             }
-            if indexPath.section == 3 {
+            if indexPath.section == 1 {
+                if indexPath.row == 0 {
                 let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
                 let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
 //                    self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
@@ -285,8 +324,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 alertController.addAction(continueToP)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
+                }
             }
-            if indexPath.section == 4 {
+            if indexPath.section == 1 {
+                if indexPath.row == 1 {
                  let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
@@ -297,11 +338,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 alertController.addAction(ok)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
+                }
               }
             default:
                 break
             }
         }
+
     }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

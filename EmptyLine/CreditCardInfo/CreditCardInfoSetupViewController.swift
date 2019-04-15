@@ -12,6 +12,7 @@ class CreditCardInfoSetupViewController: UITableViewController {
     
     var titles = ["PAYMENT METHOD", "BILLING NAME","CARD INFORMATION", "BILLING ADDRESS"]
     
+    
     var barButtonItem = UIBarButtonItem()
     
     let creditCardView = CreditCardView()
@@ -27,6 +28,7 @@ class CreditCardInfoSetupViewController: UITableViewController {
         }
     
     private func setupBarButtonItem(){
+        view.backgroundColor = .white
         navigationItem.title = "PAYMENT SETTINGS"
          barButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
@@ -35,7 +37,6 @@ class CreditCardInfoSetupViewController: UITableViewController {
     @objc private func barButtonPressed(){
         // Save updates to fire base
         barButtonItem.isEnabled = false
-        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,6 +77,7 @@ class CreditCardInfoSetupViewController: UITableViewController {
         case 2:
             guard let cardInfoCell = creditCardView.creditCardCredentialsTableView.dequeueReusableCell(withIdentifier: "CardInfoCell", for: indexPath) as? CardInfoTableViewCell else {return UITableViewCell()}
             return cardInfoCell
+            
         
         case 3:
             guard let billingAddressCell = creditCardView.creditCardCredentialsTableView.dequeueReusableCell(withIdentifier: "BillingAddressCell", for: indexPath) as? BillingAddressInfoTableViewCell else {return UITableViewCell()}
