@@ -25,8 +25,4 @@ class ProductDetailViewController: UIViewController {
     @objc private func dismissButtonPressed(){
         dismiss(animated: true, completion: nil)
     }
-    
-  
-    
-    
 }
