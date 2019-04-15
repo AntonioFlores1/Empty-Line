@@ -9,10 +9,12 @@
 import UIKit
 
 class ProductDetailViewController: UIViewController {
+    
+    var productDetailView = ProductDetailsView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        
     }
     
 

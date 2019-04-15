@@ -39,7 +39,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     var detailsLauncher = DetailsLauncher()
     
-    
         @objc func segue(){
         detailsLauncher.showSettings()
         detailsLauncher.barcodeNumber = bar
@@ -94,8 +93,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 //                }
                 
             }
-            
-    
+        }
+        
+    }
 
 
         
@@ -107,9 +107,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         
         
-    
-    
-    
     
 
     
@@ -131,8 +128,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-}
-    }
+
+
 
 
 

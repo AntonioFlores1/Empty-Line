@@ -31,21 +31,13 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     let cellID = "DetailsCell"
-    
     let productDetailsView = ProductDetailsView()
-    
     let blackView = UIView()
- 
     let collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
-        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         cv.backgroundColor = UIColor.white
-        
         return cv
-        
     }()
     
     
@@ -61,6 +53,7 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
                     self.productDetailsView.productName.text = product.name
                     self.productDetailsView.productDetails.text = product.description
                     self.productDetailsView.productPrice.text = "$" + String(product.price)
+                    self.productDetailsView.productImage.kf.setImage(with: URL(string: product.image))
                 }
                 
             }
@@ -68,6 +61,22 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         }
         
     }
+    
+    private func addToShoppingCart(){
+        productDetailsView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        print("KKKKKKKk")
+    }
+    
+    @objc private func addButtonPressed(){
+        if let item = products {
+            ItemsDataManager.addToShoppingCart(item: item)
+         
+        }
+    }
+    
+    
+    
+    
 //    private func getProduct() {
 //        DBService.getProducts(productBarcode: products?.barcode ?? "") { (error, item) in
 //            if let error = error {
@@ -165,5 +174,6 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         //setupDetailsView()
         collectionView.delegate = self
         collectionView.dataSource = self
+        addToShoppingCart()
     }
 }
