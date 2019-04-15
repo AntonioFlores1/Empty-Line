@@ -11,6 +11,7 @@ import Firebase
 import FirebaseMLVision
 
 class ProductDetailViewController: UIViewController {
+
 //
 //    private var productDetailView = ProductDetailsView()
 //    private var products:Item?
@@ -105,6 +106,4 @@ class ProductDetailViewController: UIViewController {
 //        }
 //    }
   
-    
-    
 }
