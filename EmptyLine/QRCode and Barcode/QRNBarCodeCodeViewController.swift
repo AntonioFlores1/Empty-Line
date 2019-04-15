@@ -28,6 +28,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
     var myView = DetailsLauncher()
+
     var productDetailView = ProductDetailsView()
     private var products:Item?
     private var barCodeNumber: String!
@@ -40,14 +41,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         addToShoppingCart()
         fetchProduct(barCode: "04965802")
         
-
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
     
-    //var detailsLauncher = DetailsLauncher()
-    
-   // private var details = ProductDetailViewController()
+
     
         @objc func segue(){
             
@@ -68,34 +66,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 //                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
                     print(self.bar)
-//                    self.session.stopRunning()
-//
-                } //else if barcodes?.count == 0 {
-//
-//                                    self.bar = ""
-//                                    self.session.startRunning()
-//                                }
-
-//                                for barcode in barcodes! {
-//                           self.bar = barcode.rawValue!
-////                                self.barcodeNumber[0] = barcode.rawValue!
-//                                    print(self.bar)
-//
-                }
-                                    //                                  }  if self.barcodeNumber.count == 1 {
-//
-//                    self.navigationController?.pushViewController(ItemDetailViewController(), animated: true)
-//
-//                                        break
-//
-//                                    }
-//
-//                                }
-//
-//                                if barcodes!.count > 3 {
-//
-//                                    self.present(ItemDetailViewController(), animated: true, completion: nil)
-//
+                
                 }
 
         
@@ -131,8 +102,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 //                }
                 
             }
-            
-    
+        }
+        
+    }
 
 
         
@@ -215,7 +187,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     
-    private func startLiveVideo() {
+    
+    
+     func startLiveVideo() {
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
@@ -230,9 +204,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-//
-//
-    
+
+
 
 
 
