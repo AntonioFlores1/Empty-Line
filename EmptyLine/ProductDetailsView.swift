@@ -57,6 +57,7 @@ class ProductDetailsView: UIView {
         let addToCartButton = UIButton()
         addToCartButton.setImage(UIImage.init(named: "icons8-plus_math_filled"), for: .normal)
         addToCartButton.backgroundColor = .green
+        addToCartButton.addTarget(self, action: #selector(backout), for: .touchUpInside)
         return addToCartButton
 
     }()
@@ -135,4 +136,15 @@ class ProductDetailsView: UIView {
         addToCartButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         
     }
+    
+    
+    
+    @objc func backout(){
+        print("thing")
+        
+    }
+    
+    
+    
+ 
 }
