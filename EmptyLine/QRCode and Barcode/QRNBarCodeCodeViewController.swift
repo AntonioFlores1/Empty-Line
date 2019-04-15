@@ -14,26 +14,24 @@ class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     @IBOutlet weak var imageView: UIImageView!
 
-    //    @IBOutlet weak var barCodeRawValueLabel: UILabel!
+//        @IBOutlet weak var barCodeRawValueLabel: UILabel!
+        var barCodeRawValueLabel: UILabel!
   
     //    let notification = UIStackView()
 
     
     var barcodeNumber = ["InsertBarCodeHere"]
     
-    var bar = " "
+    var bar = ""
+    
     let session = AVCaptureSession()
-
     lazy var vision = Vision.vision()
-  
     var barcodeDetector :VisionBarcodeDetector?
-
     var myView = DetailsLauncher()
- 
     var productDetailsView = ProductDetailsView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
 
         startLiveVideo()
 
@@ -42,6 +40,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     var detailsLauncher = DetailsLauncher()
+    
+    
         @objc func segue(){
         detailsLauncher.showSettings()
         detailsLauncher.barcodeNumber = bar
@@ -49,46 +49,49 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
         if let barcodeDetector = self.barcodeDetector {
-            
             let visionImage = VisionImage(buffer: sampleBuffer)
-            
             barcodeDetector.detect(in: visionImage) { (barcodes, error) in
-                
                 if let error = error {
-                    
                     print(error.localizedDescription)
-                    
                     return
-                    
                 }
-                
-                //
-                
                 if barcodes!.count == 1 {
-                    
-                    //
-                    
-                    //                    barcodes?.first?.rawValue
-                    
+//                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
-                    
                     print(self.bar)
-                    
-                    //                     self.session.stopRunning()
-                    
+//                    self.session.stopRunning()
+//
                 } //else if barcodes?.count == 0 {
-                
+//
+//                                    self.bar = ""
+//                                    self.session.startRunning()
+//                                }
+
+//                                for barcode in barcodes! {
+//                           self.bar = barcode.rawValue!
+////                                self.barcodeNumber[0] = barcode.rawValue!
+//                                    print(self.bar)
+//
+                }
+                                    //                                  }  if self.barcodeNumber.count == 1 {
+//
+//                    self.navigationController?.pushViewController(ItemDetailViewController(), animated: true)
+//
+//                                        break
+//
+//                                    }
+//
+//                                }
+//
+//                                if barcodes!.count > 3 {
+//
+//                                    self.present(ItemDetailViewController(), animated: true, completion: nil)
+//
+                }
+
+        
                 //                    self.bar = ""
                 
                 //                    self.session.startRunning()
@@ -123,7 +126,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 
             }
             
-        }
+    
         
         
         
@@ -133,7 +136,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         
         
-    }
+    
     
     
     
@@ -197,8 +200,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         
     }
+//
+//
     
-    
+
+
+
+
     
     
 

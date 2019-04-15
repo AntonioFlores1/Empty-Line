@@ -32,6 +32,7 @@ class ConfirmPaymentViewController: UIViewController {
         settingButton()
         confirmView.confirmPaymentTableView.delegate = self
         confirmView.confirmPaymentTableView.dataSource = self
+        confirmView.confirmPaymentTableView.tableFooterView = UIView()
     }
     private func settingButton() {
         setButton = SetRoundedButton(frame: CGRect(x: 10, y: 10, width: 150, height: 35))
