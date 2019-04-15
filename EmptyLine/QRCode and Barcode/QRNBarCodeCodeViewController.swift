@@ -31,7 +31,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     var productDetailsView = ProductDetailsView()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        startLiveVideo()
+
+
+        startLiveVideo()
+
         self.barcodeDetector = vision.barcodeDetector()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
@@ -88,27 +91,127 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 //
                 }
 
+        
+                //                    self.bar = ""
+                
+                //                    self.session.startRunning()
+                
+                //                }
+                
+                //                print(barcodes?.count)
+                
+                //                for barcode in barcodes! {
+                
+                //   //        self.barCodeRawValueLabel.text = barcode.rawValue!
+                
+                //                self.barcodeNumber[0] = barcodes.rawValue!
+                
+                //            print("my var \(self.barcodeNumber.)")
+                
+                //                    if self.barcodeNumber.count == 1 {
+                
+                //    self.navigationController?.pushViewController(ItemDetailViewController(), animated: true)
+                
+                //                        break
+                
+                //                    }
+                
+                //                }
+                
+                //                if barcodes!.count > 3 {
+                
+                //                    self.present(ItemDetailViewController(), animated: true, completion: nil)
+                
+                //                }
+                
+            }
+            
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+
+    
+    
+    
+    
+    private func startLiveVideo() {
+        
+        session.sessionPreset = AVCaptureSession.Preset.photo
+        
+        
+        
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        
+        
+        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
+        
+        
+        
+        let deviceOutput = AVCaptureVideoDataOutput()
+        
+        
+        
+        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+        
+        
+        
+        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
+        
+        
+        
+        session.addInput(deviceInput)
+        
+        
+        
+        session.addOutput(deviceOutput)
+        
+        
+        
+        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
+        
+        
+        
+        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 200)
+        
+        
+        
+        imageLayer.videoGravity = .resizeAspectFill
+        
+        
+        
+        imageView.layer.addSublayer(imageLayer)
+        
+        
+        
+        session.startRunning()
+        
+        
+        
     }
 //
 //
     
 
 
-//    private func startLiveVideo() {
-//
-//        session.sessionPreset = AVCaptureSession.Preset.photo
-//        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-//        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-//        let deviceOutput = AVCaptureVideoDataOutput()
-//        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-//        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-//        session.addInput(deviceInput)
-//        session.addOutput(deviceOutput)
-//        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-//        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 200)
-//        imageLayer.videoGravity = .resizeAspectFill
-//        imageView.layer.addSublayer(imageLayer)
-//        session.startRunning()
-//    }
+
+
+    
+    
+
+    
+    
+    
 }
 
