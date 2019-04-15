@@ -18,7 +18,7 @@ class ConfirmPaymentTableViewCell: UITableViewCell {
     
     lazy var cardImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "card")
+        image.image = UIImage(named: "masterCard")
         return image
     }()
     
