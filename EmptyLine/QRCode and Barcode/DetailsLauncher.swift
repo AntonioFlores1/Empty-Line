@@ -61,6 +61,22 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         }
         
     }
+    
+    private func addToShoppingCart(){
+        productDetailsView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        print("KKKKKKKk")
+    }
+    
+    @objc private func addButtonPressed(){
+        if let item = products {
+            ItemsDataManager.addToShoppingCart(item: item)
+         
+        }
+    }
+    
+    
+    
+    
 //    private func getProduct() {
 //        DBService.getProducts(productBarcode: products?.barcode ?? "") { (error, item) in
 //            if let error = error {
@@ -158,5 +174,6 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         //setupDetailsView()
         collectionView.delegate = self
         collectionView.dataSource = self
+        addToShoppingCart()
     }
 }
