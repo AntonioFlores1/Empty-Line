@@ -15,15 +15,7 @@ class ConfirmPaymentViewController: UIViewController {
     private var setButton: SetRoundedButton!
     var sections = ["Card"]
     
-//    private var arrayOfCards = ["500235", "406742", "6011", "337941"]
-//    private var visaCard = ["406742"]
-//    private var discover = ["6011"]
-//    private var americanExpress = ["337941"]
 
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Payment Method"
@@ -89,6 +81,7 @@ extension ConfirmPaymentViewController: UITableViewDataSource, UITableViewDelega
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
+        cell.cardImage.image = UIImage(named: "masterCard")
         cell.switchOnOff.tag = indexPath.row
         cell.switchOnOff.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
         return cell
