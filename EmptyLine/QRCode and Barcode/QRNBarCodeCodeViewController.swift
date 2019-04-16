@@ -27,8 +27,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-    var myView = DetailsLauncher()
-
+   
     var productDetailView = ProductDetailsView()
     private var products:Item?
     private var barCodeNumber: String!
@@ -189,7 +188,21 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
             showAlert(title: item.name, message: "Successfully added item to shopping cart") { (alert) in
-                //self.navigationController?.present(ShoppingListViewController(), animated: true, completion: nil)
+               
+                let alertController = UIAlertController(title: "Done", message: "Check out or continue shopping", preferredStyle: .alert)
+                
+                let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
+                    self.dismiss(animated: true, completion: nil)
+                })
+                
+                let checkOut = UIAlertAction(title: "Check Out", style: .default, handler: { (alert) in
+                    self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
+                })
+                
+                alertController.addAction(continueShopping)
+                alertController.addAction(checkOut)
+                self.present(alertController, animated: true)
+                
                 self.handleDismiss()
                 print("Item added")
             }
