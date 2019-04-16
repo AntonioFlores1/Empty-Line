@@ -71,7 +71,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                     self.bar = (barcodes?.first?.rawValue)!
                     self.fetchProduct(barCode: self.bar)
                     self.setupView()
-                    //print(self.bar)
+                    print(self.bar)
 
                 }
         
@@ -115,38 +115,26 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         
         
     public func setupView(){
-        
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
-            
-            
             let height: CGFloat = 300
-            
             let y = window.frame.height - height
-            
             view.frame = window.frame
             //view.alpha = 0
-            
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                
                 //self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
-                
             }, completion: nil)
-            
         }
     }
     
     
     @objc func handleDismiss() {
-        
         UIView.animate(withDuration: 0.5) {
-            
             self.view.alpha = 1
             if let window = UIApplication.shared.keyWindow {
-                
                 self.productDetailView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }
         }
@@ -161,7 +149,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 if let product = product {
                     self.products = product
                     dump(self.products)
-                    
                     self.productDetailView.productName.text = product.name
                     self.productDetailView.productDetails.text = product.description
                     self.productDetailView.productPrice.text = "$" + String(product.price)
@@ -194,8 +181,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 print("Item added")
             }
         }
-            
-        }
+    }
     
     
     
