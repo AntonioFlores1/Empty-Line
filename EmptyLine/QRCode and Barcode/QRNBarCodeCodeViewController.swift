@@ -197,8 +197,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
             })
             
-            alertController.addAction(continueShopping)
             alertController.addAction(checkOut)
+            alertController.addAction(continueShopping)
             self.present(alertController, animated: true)
             self.handleDismiss()
             print("Item added")
