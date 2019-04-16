@@ -281,6 +281,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
+        case 0:
+            if indexPath.section == indexPath.row {
+            navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+            }
+            
         case 1:
             if indexPath.section == 0 {
                 if indexPath.row == 0 {

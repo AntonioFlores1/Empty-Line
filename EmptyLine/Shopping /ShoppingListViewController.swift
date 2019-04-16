@@ -74,9 +74,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.image = UIImage(named: "placeholder")
         
-//        cell.shoppingLabelDetail.text = animals[indexPath.row]
-//        cell.priceLabel.text = price[indexPath.row]
-//
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
@@ -94,6 +91,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
             self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+            ItemsDataManager.deleteFromShoppingCart(index: indexPath.row)
         }
     }
 }
