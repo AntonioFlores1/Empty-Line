@@ -57,9 +57,7 @@ class ProductDetailsView: UIView {
         let addToCartButton = UIButton()
         addToCartButton.setImage(UIImage.init(named: "icons8-plus_math_filled"), for: .normal)
         addToCartButton.backgroundColor = .green
-        addToCartButton.addTarget(self, action: #selector(backout), for: .touchUpInside)
         return addToCartButton
-
     }()
     
     override init(frame: CGRect) {
@@ -139,12 +137,4 @@ class ProductDetailsView: UIView {
     
     
     
-    @objc func backout(){
-        print("thing")
-        
-    }
-    
-    
-    
- 
 }
