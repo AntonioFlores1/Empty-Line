@@ -66,6 +66,13 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
         
     }
     
+    private func dontAddToShoppingCart(){
+        productDetailsView.deleteButton.addTarget(self, action: #selector(takeMeBack), for: .touchUpInside)
+    }
+    
+    @objc func takeMeBack(){
+        handleDismiss()
+    }
     @objc private func addButtonPressed(){
         if let item = products {
             ItemsDataManager.addToShoppingCart(item: item)
