@@ -8,20 +8,33 @@
 
 import UIKit
 import Kingfisher
+import Firebase
+
 
 class ShoppingListViewController: UIViewController {
-   
+    var itemsPriceTotal: Double = 0.0 {
+        didSet {
+            shoppingView.titleLabel.text  = "Total Amount : \(itemsPriceTotal)"
+          
+        }
+    }
+    
+    private var shoppingView = ShoppingView()
+    private var listener: ListenerRegistration!
+    private let authservice = AppDelegate.authservice
+    private var barButtonItem = UIBarButtonItem()
+    var shoppingImage = UIImage()
+    
     private var shoppingListTableView: UITableView = {
         let tv = UITableView()
         return tv
     }()
-    private var shoppingView = ShoppingView()
-    private let authservice = AppDelegate.authservice
-    private var barButtonItem = UIBarButtonItem()
-    var animals : [String] = ["Dogs","Cats","Mice"]
-    let price : [String] = ["$5","$12","$30"]
-    var shoppingImage = UIImage()
-    
+    private lazy var refresh: UIRefreshControl = {
+        let refC = UIRefreshControl()
+        shoppingListTableView.refreshControl = refC
+        refC.addTarget(self, action: #selector(fetchShoppingCartItems), for: .valueChanged)
+        return refC
+    }()
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
@@ -29,29 +42,29 @@ class ShoppingListViewController: UIViewController {
             }
         }
     }
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(shoppingView)
         view.backgroundColor = .white
         navigationItem.title = "Checkout List"
         shoppingListTableView.reloadData()
         shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
         shoppingListTableView.delegate      =   self
         shoppingListTableView.dataSource    =   self
+        fetchShoppingCartItems()
+        self.itemsPriceTotal = ItemsDataManager.totalAmount()
         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
         barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
-        shoppingListTableView.tableFooterView = UIView()
-        fetchShoppingCartItems()
+        shoppingListTableView.tableFooterView = shoppingView
     }
     
-    
-    private func fetchShoppingCartItems(){
+    @objc private func fetchShoppingCartItems(){
         shoppingCart = ItemsDataManager.fetchShoppingCart()
+        refresh.beginRefreshing()
     }
-    
-    
     @objc func barButtonPressed() {
         print("Pay in on the way")
         navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
@@ -72,7 +85,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         let itemInCart = shoppingCart[indexPath.row]
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
-        cell.shoppingListImage.image = UIImage(named: "placeholder")
+        cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
+        refresh.endRefreshing()
         
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
@@ -82,7 +96,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.shadowOpacity = 0.5
         return cell
     }
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -92,6 +105,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             self.shoppingCart.remove(at: indexPath.row)
             self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ItemsDataManager.deleteFromShoppingCart(index: indexPath.row)
+            self.itemsPriceTotal = ItemsDataManager.totalAmount()
+          
         }
     }
 }
