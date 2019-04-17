@@ -38,6 +38,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        session.stopRunning()
+    }
+    
     var detailsLauncher = DetailsLauncher()
     
     
