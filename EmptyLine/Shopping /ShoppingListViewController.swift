@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import Firebase
+import Stripe
 
 
 class ShoppingListViewController: UIViewController {
@@ -66,9 +67,15 @@ class ShoppingListViewController: UIViewController {
         refresh.beginRefreshing()
     }
     @objc func barButtonPressed() {
-        print("Pay in on the way")
-        navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
+        //navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
+        
+        let addCardController = STPAddCardViewController()
+        addCardController.delegate = self
+        let navigationController = UINavigationController(rootViewController: addCardController)
+        present(navigationController, animated: true, completion: nil)
     }
+    
+   
 }
 
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -108,5 +115,17 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             self.itemsPriceTotal = ItemsDataManager.totalAmount()
           
         }
+    }
+}
+
+extension ShoppingListViewController: STPAddCardViewControllerDelegate {
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        dismiss(animated: true, completion: nil)
+        showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine")
+        shoppingCart.removeAll()
     }
 }
