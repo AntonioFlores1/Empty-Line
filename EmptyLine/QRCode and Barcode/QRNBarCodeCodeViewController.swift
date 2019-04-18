@@ -42,6 +42,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
+
     }
     
 
