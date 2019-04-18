@@ -42,7 +42,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
     
 
