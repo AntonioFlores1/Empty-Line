@@ -42,21 +42,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
-    }
-    
-
-    
-        @objc func segue(){
-            
-            //setupView()
-//            fetchProduct(barCode: "06827465")
-        //detailsLauncher.showSettings()
-        //detailsLauncher.barcodeNumber = bar
-        //print(detailsLauncher.barcodeNumber)
 
     }
     
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
             let visionImage = VisionImage(buffer: sampleBuffer)
@@ -121,7 +110,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             window.addSubview(productDetailView)
             
             
-            let height: CGFloat = 300
+            let height: CGFloat = 450
             
             let y = window.frame.height - height
             
