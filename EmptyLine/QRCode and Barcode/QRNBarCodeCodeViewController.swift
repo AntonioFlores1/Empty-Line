@@ -174,6 +174,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        
     }
     
     private func dontAddToShoppingCart(){
