@@ -10,11 +10,11 @@ import UIKit
 import AVFoundation
 import Firebase
 import WebKit
+import ZKCarousel
 
 class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDelegate {
     
-
     
     @IBOutlet weak var imageView: UIImageView!
     var panGesture = UIPanGestureRecognizer()
@@ -73,15 +73,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     override func viewWillDisappear(_ animated: Bool) {
         stopRecording()
     }
-    
-//    func urllink(url:String){
-//       idk.webView = WKWebView()
-//        idk.webView.navigationDelegate = self
-//        //let link = "http://l.ead.me/bb7Wej"
-//        let request = URLRequest(url: URL(string: url)!)
-//        idk.webView.load(request)
-//        idk.webView.allowsBackForwardNavigationGestures = true
-//    }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {

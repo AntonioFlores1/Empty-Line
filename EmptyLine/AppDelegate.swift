@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
        if let _ = AppDelegate.authservice.getCurrentUser() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
+            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "startMenu") as! StartMenuViewController
             window?.rootViewController = mainPageTabBarController
         
         window?.makeKeyAndVisible()
