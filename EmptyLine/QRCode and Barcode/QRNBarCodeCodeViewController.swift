@@ -40,17 +40,17 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        session.stopRunning()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        session.stopRunning()
+//    }
     
-    var detailsLauncher = DetailsLauncher()
+   // var detailsLauncher = DetailsLauncher()
     
     
         @objc func segue(){
-        detailsLauncher.showSettings()
-        detailsLauncher.barcodeNumber = bar
-        print(detailsLauncher.barcodeNumber)
+//        detailsLauncher.showSettings()
+//        detailsLauncher.barcodeNumber = bar
+//        print(detailsLauncher.barcodeNumber)
         //setupView()
         addToShoppingCart()
         dontAddToShoppingCart()
