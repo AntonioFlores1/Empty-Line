@@ -12,7 +12,14 @@ class HistoryDetailViewController: UIViewController {
     
      var newArray = ["Monday - 04/15/19","Monday - 04/15/19","Monday - 04/15/19","Monday - 04/15/19","Monday - 04/15/19","Monday - 04/15/19"]
     
-    
+    private var shoppingHistory = [Item](){
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+//                self.tableView.titleLabel.resignFirstResponder()
+            }
+        }
+    }
     
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -30,6 +37,7 @@ class HistoryDetailViewController: UIViewController {
         tableView.register(HistoryDetailTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableFooterView = UIView()
         tableViewconstriant()
+        tableView.reloadData()
     }
     func tableViewconstriant() {
         self.view.addSubview(tableView)
@@ -39,18 +47,23 @@ class HistoryDetailViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
+    @objc private func fetchShoppingCartItems(){
+        shoppingHistory = ItemsDataManager.fetchShoppingCart()
+//        refresh.beginRefreshing()
+    }
 }
 extension HistoryDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newArray.count
+        return shoppingHistory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? HistoryDetailTableViewCell else { return UITableViewCell()}
-        let itemInCart = newArray[indexPath.row]
-        cell.historyLabelDetail.text = itemInCart
-        cell.historypriceLabel.text = itemInCart
-        cell.historyshoppingListImage.image = UIImage(named: "placeholder")
+        let itemInCart = shoppingHistory[indexPath.row]
+        cell.historyLabelDetail.text = itemInCart.name
+        cell.historypriceLabel.text = "\(itemInCart.price)"
+//        cell.historyshoppingListImage.image = UIImage(named: "placeholder")
+        cell.historyshoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
         
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])

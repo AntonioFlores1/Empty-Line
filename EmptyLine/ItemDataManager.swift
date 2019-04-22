@@ -12,6 +12,8 @@ final class ItemsDataManager {
 private init() {}
 
 private static var filename = "item.plist"
+
+    static var total = 0.0
     static private var shoppingCartItems = [Item]() {
         didSet {
             total = 0.0
@@ -20,8 +22,6 @@ private static var filename = "item.plist"
             }
         }
     }
-static var total = 0.0
-
     
     static func saveItem(){
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename)
@@ -57,7 +57,7 @@ static var total = 0.0
         saveItem()
     }
     static func totalAmount() -> Double {
-        return self.total
+        return total
     }
     static func fetchShoppingCart() -> [Item] {
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename).path
