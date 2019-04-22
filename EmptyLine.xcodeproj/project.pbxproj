@@ -12,6 +12,8 @@
 		04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */; };
 		04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102695225C2FF90076A454 /* CardInfoTableViewCell.swift */; };
 		04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */; };
+		04141A1B226D27DC004B5C9A /* CreatedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */; };
+		04141A1D226D2838004B5C9A /* CreatedDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04141A1C226D2838004B5C9A /* CreatedDateManager.swift */; };
 		043D4C252264DC2500488C31 /* ItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D4C242264DC2500488C31 /* ItemDataManager.swift */; };
 		043D4C272264DE3A00488C31 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D4C262264DE3A00488C31 /* DataPersistenceManager.swift */; };
 		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
@@ -76,6 +78,8 @@
 		04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingNameTableViewCell.swift; sourceTree = "<group>"; };
 		04102695225C2FF90076A454 /* CardInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingAddressInfoTableViewCell.swift; sourceTree = "<group>"; };
+		04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedDateModel.swift; sourceTree = "<group>"; };
+		04141A1C226D2838004B5C9A /* CreatedDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedDateManager.swift; sourceTree = "<group>"; };
 		043D4C242264DC2500488C31 /* ItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataManager.swift; sourceTree = "<group>"; };
 		043D4C262264DE3A00488C31 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		04D5F89F225D3FDC00007BCB /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
+				04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */,
+				04141A1C226D2838004B5C9A /* CreatedDateManager.swift */,
 				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
 				6706786722597FFF005D33FE /* TableViewCell.swift */,
 				67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */,
@@ -558,6 +564,7 @@
 				55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */,
 				55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */,
 				679FD4432265585E0075D505 /* ShowReceiptView.swift in Sources */,
+				04141A1D226D2838004B5C9A /* CreatedDateManager.swift in Sources */,
 				55EB5EA22256A0C2003FA4F8 /* AuthService.swift in Sources */,
 				67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */,
 				75B0DB6F225D1DFD00F075DD /* ItemCollection.swift in Sources */,
@@ -570,6 +577,7 @@
 				55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */,
 				679FD43F22654CE50075D505 /* HistoryDetailViewController.swift in Sources */,
 				679FD44122654D9D0075D505 /* HistoryDetailTableViewCell.swift in Sources */,
+				04141A1B226D27DC004B5C9A /* CreatedDateModel.swift in Sources */,
 				55EB5EA42256A0F1003FA4F8 /* User.swift in Sources */,
 				55EB5ECB2257BDD9003FA4F8 /* CreateUserView.swift in Sources */,
 				55EB5EAC2256A4FA003FA4F8 /* CreateUserViewController.swift in Sources */,
