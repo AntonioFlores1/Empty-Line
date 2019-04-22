@@ -15,11 +15,9 @@ class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
-    var panGesture = UIPanGestureRecognizer()
-    var tap = UITapGestureRecognizer()
-
+    
     var webby = QRCodeWebSiteViewController()
-//        @IBOutlet weak var barCodeRawValueLabel: UILabel!
+    //        @IBOutlet weak var barCodeRawValueLabel: UILabel!
     var barCodeRawValueLabel: UILabel!
     
     var bar = ""
@@ -28,7 +26,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-   
+    
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
@@ -36,22 +34,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         startLiveVideo()
-        self.barcodeDetector = vision.barcodeDetector()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
-    }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        session.stopRunning()
-//    }
-    
-   // var detailsLauncher = DetailsLauncher()
-    
-    
-        @objc func segue(){
-//        detailsLauncher.showSettings()
-//        detailsLauncher.barcodeNumber = bar
-//        print(detailsLauncher.barcodeNumber)
-        //setupView()
         addToShoppingCart()
         dontAddToShoppingCart()
         byebyeWebSite()
@@ -59,22 +41,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         self.barcodeDetector = vision.barcodeDetector()
         navigationController?.isNavigationBarHidden = true
         let gradient = CAGradientLayer()
-//        gradient.frame = self.view.frame
-//        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
-//        self.view.layer.addSublayer(gradient)
-       // view.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        
-        tap = UITapGestureRecognizer(target: self, action: #selector(tapView))
-        productDetailView.isUserInteractionEnabled = true
-        self.view.isUserInteractionEnabled = true
-        self.view.addGestureRecognizer(tap)
-        tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
-        self.view.isUserInteractionEnabled = true
-        productDetailView.addGestureRecognizer(tap)
-        
+        //        gradient.frame = self.view.frame
+        //        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
+        //        self.view.layer.addSublayer(gradient)
+        // view.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     }
     
-
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
             let visionImage = VisionImage(buffer: sampleBuffer)
@@ -109,7 +82,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     public func QRCodeSetView(){
-       
+        
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
@@ -128,7 +101,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-
+    
     private func byebyeWebSite(){
         print("i work?")
         idk.exit.addTarget(self, action: #selector(byebye), for: .touchUpInside)
@@ -154,37 +127,23 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
-    @objc func tapView() {
-        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
-    }
-    @objc func tapViewDetail() {
-        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
-    }
-    
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
-            window.addSubview(productDetailView)            
+            window.addSubview(productDetailView)
             
-            let height: CGFloat = 150
+            let height: CGFloat = 450
             
             let y = window.frame.height - height
             view.frame = window.frame
-           // view.alpha = 0
+            // view.alpha = 0
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.alpha = 1
-            
-            view.frame = window.frame //curveEaseOut
-            //view.alpha = 0
-            
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {
-                //self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
-         }
+        }
     }
-}
     
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
@@ -212,7 +171,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                     self.productDetailView.productName.text = product.name
                     self.productDetailView.productDetails.text = product.description
                     self.productDetailView.productPrice.text = "$" + String(product.price)
-                    self.productDetailView.productNutritionDetails.text = product.ingredients
                     self.productDetailView.productImage.kf.setImage(with: URL(string: product.image))
                 }
             }
@@ -236,19 +194,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     @objc private func addButtonPressed(){
-        
-       // let savingDate = Date()
-        //let isoDateFormatter = ISO8601DateFormatter()
-        //let timestamp = isoDateFormatter.string(from: savingDate)
-        
-        //let createdDate = ItemSavedDate.init(createdDate: timestamp)
-        //savedDate.add(newDate: createdDate)
-        
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
-        savedDate.add(newDate: itemSavedDate)
-        
         if let item = products {
-            ItemsDataManager.addToShoppingCart(item: item, savedDate: "\(itemSavedDate.createdDate).plist")
+            ItemsDataManager.addToShoppingCart(item: item, savedDate: String)
             let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
             
             let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
@@ -276,7 +223,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
-     func startLiveVideo() {
+    func startLiveVideo() {
         
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
@@ -292,15 +239,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-//
-//
     
-
-
-
-
-    
-    
-
     
 }
