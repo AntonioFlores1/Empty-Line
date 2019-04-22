@@ -221,14 +221,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     @objc private func addButtonPressed(){
-        
-       // let savingDate = Date()
-        //let isoDateFormatter = ISO8601DateFormatter()
-        //let timestamp = isoDateFormatter.string(from: savingDate)
-        
-        //let createdDate = ItemSavedDate.init(createdDate: timestamp)
-        //savedDate.add(newDate: createdDate)
-        
         let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
         savedDate.add(newDate: itemSavedDate)
         
