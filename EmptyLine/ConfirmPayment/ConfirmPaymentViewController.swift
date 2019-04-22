@@ -11,6 +11,7 @@ import UIKit
 class ConfirmPaymentViewController: UIViewController {
     
     private var confirmView = ConfirmPaymentView()
+    private var showReceiptView = ShowReceiptView()
     private var activityView:UIActivityIndicatorView!
     private var setButton: SetRoundedButton!
     var sections = ["Card"]
@@ -25,6 +26,7 @@ class ConfirmPaymentViewController: UIViewController {
         confirmView.confirmPaymentTableView.delegate = self
         confirmView.confirmPaymentTableView.dataSource = self
         confirmView.confirmPaymentTableView.tableFooterView = UIView()
+
     }
     private func settingButton() {
         setButton = SetRoundedButton(frame: CGRect(x: 10, y: 10, width: 150, height: 35))
@@ -45,6 +47,8 @@ class ConfirmPaymentViewController: UIViewController {
         activityView.startAnimating()
         print("Pay successfuly")
     }
+    
+    
     @objc func firstCB() {
         print("First Card")
     }

@@ -40,8 +40,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         self.barcodeDetector = vision.barcodeDetector()
         navigationController?.isNavigationBarHidden = true
     }
-
     
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
             let visionImage = VisionImage(buffer: sampleBuffer)
@@ -120,6 +120,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
             let height: CGFloat = 300
+            
+            
+            let height: CGFloat = 450
+            
             let y = window.frame.height - height
             view.frame = window.frame
            // view.alpha = 0
@@ -166,6 +170,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        
     }
     
     private func dontAddToShoppingCart(){
@@ -226,3 +231,4 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
 }
+

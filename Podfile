@@ -15,6 +15,8 @@ target 'EmptyLine' do
   pod 'Kingfisher'
   pod 'Toucan'
   pod 'PureLayout'
+  pod 'Stripe'
+  pod 'Alamofire'
 
 
 end
