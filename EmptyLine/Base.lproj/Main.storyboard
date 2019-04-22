@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -143,10 +143,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="70t-50-ifh"/>
                     </view>
+                    <navigationItem key="navigationItem" id="zEK-zp-fNe"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-xm-XCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2177" y="1176"/>
+            <point key="canvasLocation" x="1532" y="1083"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Cab-Hg-a8b">
@@ -176,7 +177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="diY-SS-fjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3268" y="702"/>
+            <point key="canvasLocation" x="4207.1999999999998" y="701.19940029985014"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="c9x-ID-rX8">
@@ -190,6 +191,7 @@
                     <connections>
                         <segue destination="CDO-Lp-WUN" kind="relationship" relationship="viewControllers" id="gwN-zH-i5X"/>
                         <segue destination="OFW-s0-IdX" kind="relationship" relationship="viewControllers" id="TRz-nA-w2X"/>
+                        <segue destination="mll-w7-R9n" kind="relationship" relationship="viewControllers" id="jZ5-ue-7Zq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF9-NH-0zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -200,7 +202,7 @@
         <scene sceneID="FRU-31-Xco">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CDO-Lp-WUN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Scan Item" id="ntG-U7-kWQ"/>
+                    <tabBarItem key="tabBarItem" title="Scan Item" image="QRCode" id="ntG-U7-kWQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dF7-VK-0yH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -219,7 +221,7 @@
         <scene sceneID="fHw-IF-c52">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OFW-s0-IdX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="BOk-2z-fKG"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="user" id="BOk-2z-fKG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OYP-co-uBj">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -267,5 +269,29 @@
             </objects>
             <point key="canvasLocation" x="4727.1999999999998" y="-731.78410794602701"/>
         </scene>
+        <!--Shopping Cart-->
+        <scene sceneID="mL2-RV-skA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mll-w7-R9n" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shopping Cart" image="icons8-shopping_cart" id="iCg-wD-UBm"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HvG-0c-sh1">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eMx-cc-BS9" kind="relationship" relationship="rootViewController" id="VoC-2Y-KeG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RbZ-OM-l7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="458" y="1059"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="QRCode" width="18.75" height="18.75"/>
+        <image name="icons8-shopping_cart" width="25" height="25"/>
+        <image name="user" width="18.75" height="18.75"/>
+    </resources>
 </document>

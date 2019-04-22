@@ -27,11 +27,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-    var myView = DetailsLauncher()
-    var productDetailsView = ProductDetailsView()
+   
+    var productDetailView = ProductDetailsView()
+    private var products:Item?
+    private var barCodeNumber: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         startLiveVideo()
         self.barcodeDetector = vision.barcodeDetector()
@@ -49,8 +51,16 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         detailsLauncher.showSettings()
         detailsLauncher.barcodeNumber = bar
         print(detailsLauncher.barcodeNumber)
+        //setupView()
+        addToShoppingCart()
+        dontAddToShoppingCart()
+        fetchProduct(barCode: bar)
+        
+        self.barcodeDetector = vision.barcodeDetector()
+
     }
     
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
             let visionImage = VisionImage(buffer: sampleBuffer)
@@ -62,37 +72,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 if barcodes!.count == 1 {
 //                    barcodes?.first?.rawValue
                     self.bar = (barcodes?.first?.rawValue)!
-                    print(self.bar)
-//                    self.session.stopRunning()
-//
-                } //else if barcodes?.count == 0 {
-//
-//                                    self.bar = ""
-//                                    self.session.startRunning()
-//                                }
+                    self.fetchProduct(barCode: self.bar)
+                    self.setupView()
+                    //print(self.bar)
 
-//                                for barcode in barcodes! {
-//                           self.bar = barcode.rawValue!
-////                                self.barcodeNumber[0] = barcode.rawValue!
-//                                    print(self.bar)
-//
                 }
-                                    //                                  }  if self.barcodeNumber.count == 1 {
-//
-//                    self.navigationController?.pushViewController(ItemDetailViewController(), animated: true)
-//
-//                                        break
-//
-//                                    }
-//
-//                                }
-//
-//                                if barcodes!.count > 3 {
-//
-//                                    self.present(ItemDetailViewController(), animated: true, completion: nil)
-//
-                }
-
         
                 //                    self.bar = ""
                 
@@ -126,28 +110,112 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 //                }
                 
             }
+        }
+        
+    }
+
+
+        
+        
+    public func setupView(){
+        
+        if let window = UIApplication.shared.keyWindow {
+            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            window.addSubview(productDetailView)
             
+            
+            let height: CGFloat = 450
+            
+            let y = window.frame.height - height
+            
+            view.frame = window.frame
+            //view.alpha = 0
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                //self.view.alpha = 1
+                self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
+                
+            }, completion: nil)
+            
+        }
+    }
     
-
-
+    
+    @objc func handleDismiss() {
+        
+        UIView.animate(withDuration: 0.5) {
+            
+            self.view.alpha = 1
+            if let window = UIApplication.shared.keyWindow {
+                
+                self.productDetailView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
+            }
+        }
+    }
+    
+    
+    private func fetchProduct(barCode: String){
+        DBService.getProducts(productBarcode: barCode) { (error, product) in
+            if let error = error {
+                self.showAlert(title: "Error fetching product information", message: error.localizedDescription)
+            } else {
+                if let product = product {
+                    self.products = product
+                    dump(self.products)
+                    
+                    self.productDetailView.productName.text = product.name
+                    self.productDetailView.productDetails.text = product.description
+                    self.productDetailView.productPrice.text = "$" + String(product.price)
+                    self.productDetailView.productImage.kf.setImage(with: URL(string: product.image))
+                }
+            }
+        }
+    }
         
         
+    
+    private func addToShoppingCart(){
+        productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
-        
-        
-        
-        
-        
-        
+    }
+    
+    private func dontAddToShoppingCart(){
+        productDetailView.deleteButton.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
+    }
+    
+    @objc func dontAddMe(){
+        handleDismiss()
+    }
+    
+    @objc private func addButtonPressed(){
+        if let item = products {
+            ItemsDataManager.addToShoppingCart(item: item)
+            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
+            
+            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
+                self.dismiss(animated: true, completion: nil)
+            })
+            
+            let checkOut = UIAlertAction(title: "Check Out", style: .default, handler: { (alert) in
+                self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
+            })
+            
+            alertController.addAction(checkOut)
+            alertController.addAction(continueShopping)
+            self.present(alertController, animated: true)
+            self.handleDismiss()
+            print("Item added")
+        }
+            
+        }
     
     
     
     
     
-    
-    
-    
-    private func startLiveVideo() {
+     func startLiveVideo() {
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
@@ -171,8 +239,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 
     
     
-    
+
     
     
 }
-

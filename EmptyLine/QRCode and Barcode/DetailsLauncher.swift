@@ -31,21 +31,13 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     let cellID = "DetailsCell"
-    
     let productDetailsView = ProductDetailsView()
-    
     let blackView = UIView()
- 
     let collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
-        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         cv.backgroundColor = UIColor.white
-        
         return cv
-        
     }()
     
     
@@ -61,13 +53,38 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
                     self.productDetailsView.productName.text = product.name
                     self.productDetailsView.productDetails.text = product.description
                     self.productDetailsView.productPrice.text = "$" + String(product.price)
+                    self.productDetailsView.productImage.kf.setImage(with: URL(string: product.image))
                 }
-                
             }
-            
         }
         
     }
+    
+    private func addToShoppingCart(){
+        productDetailsView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        print("KKKKKKKk")
+        
+    }
+    
+    private func dontAddToShoppingCart(){
+        productDetailsView.deleteButton.addTarget(self, action: #selector(takeMeBack), for: .touchUpInside)
+    }
+    
+    @objc func takeMeBack(){
+        handleDismiss()
+    }
+    @objc private func addButtonPressed(){
+        if let item = products {
+            ItemsDataManager.addToShoppingCart(item: item)
+         print("Add is working")
+           
+         
+        }
+    }
+    
+    
+    
+    
 //    private func getProduct() {
 //        DBService.getProducts(productBarcode: products?.barcode ?? "") { (error, item) in
 //            if let error = error {
@@ -147,23 +164,27 @@ class DetailsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataS
     
     
     @objc func handleDismiss() {
-        
         UIView.animate(withDuration: 0.5) {
             
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
                 
                 self.productDetailsView.frame = CGRect(x: 0, y: window.frame.height, width: self.productDetailsView.frame.width, height: self.productDetailsView.frame.height)
+            
             }
         }
     }
     override init() {
         super.init()
         print("06827465")
-        fetchProducts(barCode:"04965802")
+        fetchProducts(barCode:"06827465")
         
         //setupDetailsView()
         collectionView.delegate = self
         collectionView.dataSource = self
+        addToShoppingCart()
+
     }
 }
+
+
