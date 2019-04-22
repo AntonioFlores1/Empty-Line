@@ -12,6 +12,8 @@
 		04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */; };
 		04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102695225C2FF90076A454 /* CardInfoTableViewCell.swift */; };
 		04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */; };
+		04141A1B226D27DC004B5C9A /* CreatedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */; };
+		04141A1D226D2838004B5C9A /* CreatedDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04141A1C226D2838004B5C9A /* CreatedDateManager.swift */; };
 		043D4C252264DC2500488C31 /* ItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D4C242264DC2500488C31 /* ItemDataManager.swift */; };
 		043D4C272264DE3A00488C31 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D4C262264DE3A00488C31 /* DataPersistenceManager.swift */; };
 		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
@@ -55,6 +57,9 @@
 		55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */; };
 		55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */; };
 		6706786822597FFF005D33FE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706786722597FFF005D33FE /* TableViewCell.swift */; };
+		6764235022692A5100C30EA5 /* DetailOfItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */; };
+		6764235222692B9F00C30EA5 /* ItemDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */; };
+		6764235422692C5200C30EA5 /* ScanItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764235322692C5200C30EA5 /* ScanItemView.swift */; };
 		679FD43F22654CE50075D505 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FD43E22654CE50075D505 /* HistoryDetailViewController.swift */; };
 		679FD44122654D9D0075D505 /* HistoryDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FD44022654D9D0075D505 /* HistoryDetailTableViewCell.swift */; };
 		679FD4432265585E0075D505 /* ShowReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FD4422265585E0075D505 /* ShowReceiptView.swift */; };
@@ -77,6 +82,8 @@
 		04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingNameTableViewCell.swift; sourceTree = "<group>"; };
 		04102695225C2FF90076A454 /* CardInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04102697225C3B930076A454 /* BillingAddressInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingAddressInfoTableViewCell.swift; sourceTree = "<group>"; };
+		04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedDateModel.swift; sourceTree = "<group>"; };
+		04141A1C226D2838004B5C9A /* CreatedDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedDateManager.swift; sourceTree = "<group>"; };
 		043D4C242264DC2500488C31 /* ItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataManager.swift; sourceTree = "<group>"; };
 		043D4C262264DE3A00488C31 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		04D5F89F225D3FDC00007BCB /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
@@ -124,6 +131,9 @@
 		55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlerts.swift; sourceTree = "<group>"; };
 		6706786722597FFF005D33FE /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOfItemViewController.swift; sourceTree = "<group>"; };
+		6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailTableViewCell.swift; sourceTree = "<group>"; };
+		6764235322692C5200C30EA5 /* ScanItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanItemView.swift; sourceTree = "<group>"; };
 		679FD43E22654CE50075D505 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
 		679FD44022654D9D0075D505 /* HistoryDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailTableViewCell.swift; sourceTree = "<group>"; };
 		679FD4422265585E0075D505 /* ShowReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReceiptView.swift; sourceTree = "<group>"; };
@@ -263,6 +273,9 @@
 				55CE1E842269097300D3ECFA /* MyWebby.swift */,
 				55CE1E6222677E7500D3ECFA /* WebSitewebView.swift */,
 				55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */,
+				6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */,
+				6764235322692C5200C30EA5 /* ScanItemView.swift */,
+				6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */,
 				55EB5EAE2257B5D8003FA4F8 /* QRView.swift */,
 			);
 			path = "QRCode and Barcode";
@@ -272,6 +285,8 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
+				04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */,
+				04141A1C226D2838004B5C9A /* CreatedDateManager.swift */,
 				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
 				6706786722597FFF005D33FE /* TableViewCell.swift */,
 				67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */,
@@ -540,6 +555,7 @@
 				043D4C252264DC2500488C31 /* ItemDataManager.swift in Sources */,
 				55CE1E6122677E0500D3ECFA /* QRCodeWebSiteViewController.swift in Sources */,
 				55CE1E852269097300D3ECFA /* MyWebby.swift in Sources */,
+				6764235022692A5100C30EA5 /* DetailOfItemViewController.swift in Sources */,
 				67F5554A225E87EA00F67C94 /* ConfirmPaymentView.swift in Sources */,
 				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
@@ -562,6 +578,7 @@
 				55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */,
 				55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */,
 				679FD4432265585E0075D505 /* ShowReceiptView.swift in Sources */,
+				04141A1D226D2838004B5C9A /* CreatedDateManager.swift in Sources */,
 				55EB5EA22256A0C2003FA4F8 /* AuthService.swift in Sources */,
 				67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */,
 				75B0DB6F225D1DFD00F075DD /* ItemCollection.swift in Sources */,
@@ -576,6 +593,7 @@
 				55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */,
 				679FD43F22654CE50075D505 /* HistoryDetailViewController.swift in Sources */,
 				679FD44122654D9D0075D505 /* HistoryDetailTableViewCell.swift in Sources */,
+				04141A1B226D27DC004B5C9A /* CreatedDateModel.swift in Sources */,
 				55EB5EA42256A0F1003FA4F8 /* User.swift in Sources */,
 				55EB5ECB2257BDD9003FA4F8 /* CreateUserView.swift in Sources */,
 				55EB5EAC2256A4FA003FA4F8 /* CreateUserViewController.swift in Sources */,
@@ -587,10 +605,12 @@
 				04102692225BAF540076A454 /* CardTypeTableViewCell.swift in Sources */,
 				55EB5E9222569CDE003FA4F8 /* SettingsViewController.swift in Sources */,
 				04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */,
+				6764235422692C5200C30EA5 /* ScanItemView.swift in Sources */,
 				55EB5EBA2257B6E0003FA4F8 /* ShoppingTableViewCell.swift in Sources */,
 				55EB5EB52257B672003FA4F8 /* SettingsView.swift in Sources */,
 				043D4C272264DE3A00488C31 /* DataPersistenceManager.swift in Sources */,
 				04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */,
+				6764235222692B9F00C30EA5 /* ItemDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,7 +761,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFPRDQU6MN;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -763,7 +783,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFPRDQU6MN;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

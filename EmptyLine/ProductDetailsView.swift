@@ -10,7 +10,7 @@ import UIKit
 import PureLayout
 
 class ProductDetailsView: UIView {
-
+    
     public lazy var productName: UILabel = {
         
         let productName = UILabel()
@@ -23,17 +23,23 @@ class ProductDetailsView: UIView {
     
     public lazy var productDetails: UITextView = {
         let productDetails = UITextView()
+        productDetails.textAlignment = .center
         productDetails.text = "Product details goes here"
         productDetails.isEditable = false
         productDetails.isSelectable = false
+        productDetails.layer.cornerRadius = 05.0
+        productDetails.clipsToBounds = true
         return productDetails
     }()
     
     public lazy var productNutritionDetails: UITextView = {
         let productNutrition = UITextView()
+        productNutrition.textAlignment = .center
         productNutrition.text = "Product nutrition goes here"
         productNutrition.isEditable = false
         productNutrition.isSelectable = false
+        productNutrition.layer.cornerRadius = 05.0
+        productNutrition.clipsToBounds = true
         return productNutrition
     }()
     
@@ -54,17 +60,17 @@ class ProductDetailsView: UIView {
         
     }()
     /*
-    
- */
+     
+     */
     
     
     public lazy var deleteButton: UIButton = {
         let deleteButton = UIButton()
         deleteButton.backgroundColor = .black
-        deleteButton.autoSetDimensions(to: CGSize(width: 100.0, height: 80.0))
+        deleteButton.autoSetDimensions(to: CGSize(width: 60.0, height: 70.0))
         deleteButton.layer.borderWidth = 1.0
         deleteButton.layer.borderColor = UIColor.gray.cgColor
-        deleteButton.layer.cornerRadius = 38.0
+        deleteButton.layer.cornerRadius = 30.0
         deleteButton.clipsToBounds = true
         deleteButton.setImage(UIImage.init(named: "icons8-delete_sign_filled"), for: .normal)
         deleteButton.backgroundColor = .red
@@ -74,10 +80,10 @@ class ProductDetailsView: UIView {
     public lazy var addToCartButton: UIButton = {
         let addToCartButton = UIButton()
         addToCartButton.backgroundColor = .black
-        addToCartButton.autoSetDimensions(to: CGSize(width: 100.0, height: 80.0))
+        addToCartButton.autoSetDimensions(to: CGSize(width: 60.0, height: 70.0))
         addToCartButton.layer.borderWidth = 1.0
         addToCartButton.layer.borderColor = UIColor.gray.cgColor
-        addToCartButton.layer.cornerRadius = 38.0
+        addToCartButton.layer.cornerRadius = 30.0
         addToCartButton.setImage(UIImage.init(named: "icons8-plus_math_filled"), for: .normal)
         addToCartButton.backgroundColor = .green
         return addToCartButton
@@ -95,7 +101,7 @@ class ProductDetailsView: UIView {
     private func commonInit(){
         setConstrains()
     }
-
+    
     private func setConstrains(){
         setNameConstrains()
         setDetails()
@@ -115,18 +121,18 @@ class ProductDetailsView: UIView {
     private func setDetails(){
         addSubview(productDetails)
         productDetails.translatesAutoresizingMaskIntoConstraints = false
-        productDetails.topAnchor.constraint(equalTo: productName.bottomAnchor, constant: 10).isActive = true
-        productDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120).isActive = true
-        productDetails.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-        productDetails.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        productDetails.topAnchor.constraint(equalTo: productName.bottomAnchor, constant: 7).isActive = true
+        productDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 106).isActive = true
+        productDetails.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        productDetails.heightAnchor.constraint(equalToConstant: 108).isActive = true
     }
     
     private func productNutrition() {
         addSubview(productNutritionDetails)
         productNutritionDetails.translatesAutoresizingMaskIntoConstraints = false
-        productNutritionDetails.topAnchor.constraint(equalTo: productDetails.bottomAnchor, constant: 5).isActive = true
-        productNutritionDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        productNutritionDetails.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        productNutritionDetails.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 4).isActive = true
+        productNutritionDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        productNutritionDetails.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         productNutritionDetails.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
@@ -135,10 +141,10 @@ class ProductDetailsView: UIView {
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.topAnchor.constraint(equalTo: productName.bottomAnchor, constant: 10).isActive = true
         productImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        productImage.trailingAnchor.constraint(equalTo: productDetails.leadingAnchor, constant: -5).isActive = true
+        productImage.trailingAnchor.constraint(equalTo: productDetails.leadingAnchor, constant: -4).isActive = true
         productImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
-
+    
     private func setPrice(){
         addSubview(productPrice)
         productPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -146,7 +152,7 @@ class ProductDetailsView: UIView {
         productPrice.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         productPrice.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 10).isActive = true
     }
-   
+    
     private func setDelete(){
         addSubview(deleteButton)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
@@ -156,7 +162,7 @@ class ProductDetailsView: UIView {
         deleteButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 50).isActive = true
         deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -250).isActive = true
     }
-
+    
     private func setAddToCart(){
         addSubview(addToCartButton)
         addToCartButton.translatesAutoresizingMaskIntoConstraints = false
