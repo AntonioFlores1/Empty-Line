@@ -157,19 +157,14 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             
             let y = window.frame.height - height
             view.frame = window.frame
-           // view.alpha = 0
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.view.alpha = 1
-            
-            view.frame = window.frame //curveEaseOut
-            //view.alpha = 0
-            
+
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {
-                //self.view.alpha = 1
+            self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
         }
     }
+    
     
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
@@ -221,11 +216,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     @objc private func addButtonPressed(){
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
-        savedDate.add(newDate: itemSavedDate)
-        
         if let item = products {
-            ItemsDataManager.addToShoppingCart(item: item, savedDate: "\(itemSavedDate.createdDate).plist")
+        
+            ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            
             let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
             
             let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
@@ -272,4 +266,5 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 
     
 }
+
 
