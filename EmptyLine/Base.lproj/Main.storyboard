@@ -26,22 +26,6 @@
             </objects>
             <point key="canvasLocation" x="1532" y="208.24587706146929"/>
         </scene>
-        <!--Code Web Site View Controller-->
-        <scene sceneID="twU-sM-aL8">
-            <objects>
-                <viewController id="DV8-q3-Rcp" customClass="QRCodeWebSiteViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sH5-ZL-sF2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="wlE-om-qgY"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="gfJ-iw-KrJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="abh-ny-YwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2436" y="-1269.7151424287856"/>
-        </scene>
         <!--Bar Code Code View Controller-->
         <scene sceneID="n8k-xW-bbE">
             <objects>
@@ -55,6 +39,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Fr1-YW-RUv" firstAttribute="trailing" secondItem="6i3-Lj-b3F" secondAttribute="trailing" id="50L-oE-2SJ"/>
                             <constraint firstItem="6i3-Lj-b3F" firstAttribute="leading" secondItem="Fr1-YW-RUv" secondAttribute="leading" id="Iss-QQ-o6e"/>
@@ -152,6 +137,7 @@
         <!--Shopping List View Controller-->
         <scene sceneID="4Ph-Bj-BL8">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-xm-XCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="eMx-cc-BS9" customClass="ShoppingListViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7gR-MF-sfU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -161,7 +147,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="zEK-zp-fNe"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-xm-XCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1532" y="1083"/>
         </scene>
@@ -208,7 +193,6 @@
                         <segue destination="CDO-Lp-WUN" kind="relationship" relationship="viewControllers" id="gwN-zH-i5X"/>
                         <segue destination="OFW-s0-IdX" kind="relationship" relationship="viewControllers" id="TRz-nA-w2X"/>
                         <segue destination="mll-w7-R9n" kind="relationship" relationship="viewControllers" id="jZ5-ue-7Zq"/>
-                        <segue destination="mrH-YX-wDi" kind="relationship" relationship="viewControllers" id="9Jx-uI-l9N"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF9-NH-0zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -219,7 +203,9 @@
         <scene sceneID="FRU-31-Xco">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CDO-Lp-WUN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Scan Item" image="QRCode" id="ntG-U7-kWQ"/>
+                    <tabBarItem key="tabBarItem" title="Scan Item" image="QRCode" id="ntG-U7-kWQ">
+                        <color key="badgeColor" red="0.60020681779999996" green="0.0" blue="0.070189203069999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dF7-VK-0yH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -289,6 +275,7 @@
         <!--Shopping Cart-->
         <scene sceneID="mL2-RV-skA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RbZ-OM-l7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mll-w7-R9n" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shopping Cart" image="icons8-shopping_cart" id="iCg-wD-UBm"/>
                     <toolbarItems/>
@@ -301,28 +288,8 @@
                         <segue destination="eMx-cc-BS9" kind="relationship" relationship="rootViewController" id="VoC-2Y-KeG"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RbZ-OM-l7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="458" y="1059"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="mkE-6Z-JSk">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrH-YX-wDi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="00p-Vj-Ky7"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ibj-Kn-zNG">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="DV8-q3-Rcp" kind="relationship" relationship="rootViewController" id="xtz-22-3D0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S79-z5-Jou" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1496.8" y="-1269.7151424287856"/>
         </scene>
     </scenes>
     <resources>

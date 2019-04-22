@@ -39,6 +39,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
         navigationController?.isNavigationBarHidden = true
+        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.frame
+//        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
+//        self.view.layer.addSublayer(gradient)
+       // view.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     }
     
 
@@ -68,9 +73,15 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    
+    func backGroundColor(){
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
+        self.view.layer.addSublayer(gradient)
+    }
     
     public func QRCodeSetView(){
+       
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
@@ -79,6 +90,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             let y = window.frame.height - height
             view.frame = window.frame
             //view.alpha = 0
+            
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //self.view.alpha = 1
                 self.idk.frame = CGRect(x: 0, y: y, width:
@@ -118,9 +130,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
-            window.addSubview(productDetailView)
-            let height: CGFloat = 300
-            
+            window.addSubview(productDetailView)            
             
             let height: CGFloat = 450
             
@@ -213,6 +223,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
      func startLiveVideo() {
+        
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
@@ -222,13 +233,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         session.addInput(deviceInput)
         session.addOutput(deviceOutput)
         let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 200)
+        imageLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.size.width + 100, height: self.imageView.frame.size.height + 250)
         imageLayer.videoGravity = .resizeAspectFill
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
 
-    
     
 }
 
