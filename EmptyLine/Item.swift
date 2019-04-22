@@ -17,8 +17,20 @@ struct Item: Codable {
     let price: Double
     let isCoupon: Bool
     let coupon: Double
+    let date:Date
     
-    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String) {
+    var createdAt: String {
+        let isoDateFormatter =  ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [ .withFullDate,
+                                           .withFullTime,
+                                           .withInternetDateTime,
+                                           .withTimeZone,
+                                           .withDashSeparatorInDate]
+        let savedDate = isoDateFormatter.string(from: date)
+        return savedDate
+    }
+    
+    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, date: Date) {
         self.itemID = itemID
         self.name = name
         self.barcode = barcode
@@ -28,6 +40,8 @@ struct Item: Codable {
         self.price = price
         self.isCoupon = isCoupon
         self.coupon = coupon
+        //self.createdAt = createdAt
+        self.date = date
     }
     
     init(dict: [String: Any]) {
@@ -40,7 +54,8 @@ struct Item: Codable {
         self.isCoupon = dict[ItemCollectionKeys.IsCouponKey] as? Bool ?? false
         self.coupon = dict[ItemCollectionKeys.CouponKey] as? Double ?? 0.0
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
-        
+        self.date = dict[ItemCollectionKeys.createdAt] as? Date ?? Date()
+        //self.createdAt = dict[ItemCollectionKeys.createdAt] as? String ?? ""
     }
     
 }
