@@ -161,14 +161,15 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.alpha = 1
             
-            view.frame = window.frame //curveEaseOut
+            self.view.frame = window.frame //curveEaseOut
             //view.alpha = 0
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {
                 //self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
-        }
+        })
+    }
     }
     
     @objc func handleDismiss() {
