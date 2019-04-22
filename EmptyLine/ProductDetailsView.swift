@@ -104,7 +104,6 @@ class ProductDetailsView: UIView {
         productImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         productImage.trailingAnchor.constraint(equalTo: productDetails.leadingAnchor, constant: -5).isActive = true
         productImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
     }
 
     private func setPrice(){
@@ -113,17 +112,14 @@ class ProductDetailsView: UIView {
         productPrice.topAnchor.constraint(equalTo: productDetails.bottomAnchor, constant: 5).isActive = true
         productPrice.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         productPrice.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 10).isActive = true
-  
     }
    
     private func setDelete(){
-        
         addSubview(deleteButton)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.topAnchor.constraint(equalTo: productPrice.bottomAnchor, constant: 10).isActive = true
         deleteButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -200).isActive = true
-        
     }
 
     private func setAddToCart(){

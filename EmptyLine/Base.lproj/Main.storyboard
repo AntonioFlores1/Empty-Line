@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,6 +25,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5e-6Q-8EI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1532" y="208.24587706146929"/>
+        </scene>
+        <!--Code Web Site View Controller-->
+        <scene sceneID="twU-sM-aL8">
+            <objects>
+                <viewController id="DV8-q3-Rcp" customClass="QRCodeWebSiteViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sH5-ZL-sF2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wlE-om-qgY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gfJ-iw-KrJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="abh-ny-YwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2436" y="-1269.7151424287856"/>
         </scene>
         <!--Bar Code Code View Controller-->
         <scene sceneID="n8k-xW-bbE">
@@ -70,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hva-O2-udn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="-752"/>
+            <point key="canvasLocation" x="4696.8000000000002" y="-752.47376311844084"/>
         </scene>
         <!--Scan Card View Controller-->
         <scene sceneID="0oC-Cm-vX0">
@@ -116,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xxB-Xp-EEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6410.3999999999996" y="-725.48725637181417"/>
+            <point key="canvasLocation" x="7349.6000000000004" y="-725.48725637181417"/>
         </scene>
         <!--Item Detail View Controller-->
         <scene sceneID="LpO-c6-myA">
@@ -192,6 +208,7 @@
                         <segue destination="CDO-Lp-WUN" kind="relationship" relationship="viewControllers" id="gwN-zH-i5X"/>
                         <segue destination="OFW-s0-IdX" kind="relationship" relationship="viewControllers" id="TRz-nA-w2X"/>
                         <segue destination="mll-w7-R9n" kind="relationship" relationship="viewControllers" id="jZ5-ue-7Zq"/>
+                        <segue destination="mrH-YX-wDi" kind="relationship" relationship="viewControllers" id="9Jx-uI-l9N"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF9-NH-0zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -252,7 +269,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H0n-GB-Ifs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2927" y="-752"/>
+            <point key="canvasLocation" x="3864.8000000000002" y="-752.47376311844084"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="evT-DL-cPB">
@@ -267,7 +284,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SX2-A3-tJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4727.1999999999998" y="-731.78410794602701"/>
+            <point key="canvasLocation" x="5666.3999999999996" y="-731.78410794602701"/>
         </scene>
         <!--Shopping Cart-->
         <scene sceneID="mL2-RV-skA">
@@ -288,10 +305,29 @@
             </objects>
             <point key="canvasLocation" x="458" y="1059"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="mkE-6Z-JSk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrH-YX-wDi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="00p-Vj-Ky7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ibj-Kn-zNG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DV8-q3-Rcp" kind="relationship" relationship="rootViewController" id="xtz-22-3D0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S79-z5-Jou" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1496.8" y="-1269.7151424287856"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="QRCode" width="18.75" height="18.75"/>
+        <image name="QRCode" width="25" height="25"/>
         <image name="icons8-shopping_cart" width="25" height="25"/>
-        <image name="user" width="18.75" height="18.75"/>
+        <image name="user" width="25" height="25"/>
     </resources>
 </document>

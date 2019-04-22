@@ -94,6 +94,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
             self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+            ItemsDataManager.deleteFromShoppingCart(index: indexPath.row)
         }
     }
 }

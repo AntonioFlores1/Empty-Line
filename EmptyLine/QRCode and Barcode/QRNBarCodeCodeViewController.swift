@@ -15,47 +15,32 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
 
+    var webby = QRCodeWebSiteViewController()
 //        @IBOutlet weak var barCodeRawValueLabel: UILabel!
-        var barCodeRawValueLabel: UILabel!
-  
-    //    let notification = UIStackView()
-
-    var barcodeNumber = ["InsertBarCodeHere"]
+    var barCodeRawValueLabel: UILabel!
     
     var bar = ""
+    var website = ""
     
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
    
+    var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
-    private var barCodeNumber: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         startLiveVideo()
-        //setupView()
         addToShoppingCart()
         dontAddToShoppingCart()
+        byebyeWebSite()
         fetchProduct(barCode: bar)
-        
         self.barcodeDetector = vision.barcodeDetector()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Product Info", style: .done, target: self, action: #selector(segue))
+        navigationController?.isNavigationBarHidden = true
     }
-    
 
-    
-        @objc func segue(){
-            
-            //setupView()
-//            fetchProduct(barCode: "06827465")
-        //detailsLauncher.showSettings()
-        //detailsLauncher.barcodeNumber = bar
-        //print(detailsLauncher.barcodeNumber)
-
-    }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
@@ -66,53 +51,69 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                     return
                 }
                 if barcodes!.count == 1 {
-//                    barcodes?.first?.rawValue
-                    self.bar = (barcodes?.first?.rawValue)!
-                    self.fetchProduct(barCode: self.bar)
-                    self.setupView()
-                    print(self.bar)
-
+                    if (barcodes?.first?.rawValue!.contains("https"))! || (barcodes?.first?.rawValue!.contains("http"))! {
+                        self.website = (barcodes?.first?.rawValue)!
+                        self.QRCodeSetView()
+                        print("i is here \(self.website)")
+                    } else {
+                        if (barcodes?.first?.rawValue!.count)! > 3 {
+                            self.bar = (barcodes?.first?.rawValue)!
+                            self.fetchProduct(barCode: self.bar)
+                            self.setupView()
+                            print("i is in second part \(self.bar)")
+                        }
+                    }
                 }
-        
-                //                    self.bar = ""
-                
-                //                    self.session.startRunning()
-                
-                //                }
-                
-                //                print(barcodes?.count)
-                
-                //                for barcode in barcodes! {
-                
-                //   //        self.barCodeRawValueLabel.text = barcode.rawValue!
-                
-                //                self.barcodeNumber[0] = barcodes.rawValue!
-                
-                //            print("my var \(self.barcodeNumber.)")
-                
-                //                    if self.barcodeNumber.count == 1 {
-                
-                //    self.navigationController?.pushViewController(ItemDetailViewController(), animated: true)
-                
-                //                        break
-                
-                //                    }
-                
-                //                }
-                
-                //                if barcodes!.count > 3 {
-                
-                //                    self.present(ItemDetailViewController(), animated: true, completion: nil)
-                //                }
-                
             }
         }
-        
     }
+    
+    
+    
+    public func QRCodeSetView(){
+        if let window = UIApplication.shared.keyWindow {
+            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
+            window.addSubview(idk)
+            let height: CGFloat = 820
+            let y = window.frame.height - height
+            view.frame = window.frame
+            //view.alpha = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                //self.view.alpha = 1
+                self.idk.frame = CGRect(x: 0, y: y, width:
+                    self.idk.frame.width, height:
+                    self.idk.frame.height)
+            }, completion: nil)
+        }
+    }
+    
 
-
-        
-        
+    private func byebyeWebSite(){
+        print("i work?")
+        idk.exit.addTarget(self, action: #selector(byebye), for: .touchUpInside)
+    }
+    
+    @objc func byebye() {
+        byeee()
+    }
+    
+    @objc func byeee(){
+        UIView.animate(withDuration: 0.5) {
+            self.view.alpha = 1
+            if let window = UIApplication.shared.keyWindow {
+                self.idk.frame = CGRect(x: 0, y: window.frame.height, width: self.idk.frame.width, height: self.idk.frame.height)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -121,14 +122,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             let height: CGFloat = 300
             let y = window.frame.height - height
             view.frame = window.frame
-            //view.alpha = 0
+           // view.alpha = 0
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //self.view.alpha = 1
+                self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
         }
     }
-    
     
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
@@ -138,6 +138,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         }
     }
+    
+    
+    
+    
+    
     
     
     private func fetchProduct(barCode: String){
@@ -156,8 +161,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         }
     }
-        
-        
+    
+    
     
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
@@ -170,6 +175,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     @objc func dontAddMe(){
         handleDismiss()
     }
+    
     
     @objc private func addButtonPressed(){
         if let item = products {
@@ -191,6 +197,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             print("Item added")
         }
     }
+    
+    
+    
+    
+    
     
     
     
