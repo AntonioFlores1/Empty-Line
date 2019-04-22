@@ -216,11 +216,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     @objc private func addButtonPressed(){
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
-        savedDate.add(newDate: itemSavedDate)
-        
         if let item = products {
-            ItemsDataManager.addToShoppingCart(item: item, savedDate: "\(itemSavedDate.createdDate).plist")
+        
+            ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            
             let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
             
             let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
