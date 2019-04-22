@@ -35,6 +35,22 @@ class ShoppingTableViewCell: UITableViewCell {
         return price
     }()
     
+    lazy var addItemButton: UIButton = {
+        let addItem = UIButton()
+        addItem.addTarget(self, action: #selector(addItemTo), for: .touchUpInside)
+        addItem.setImage(UIImage(named: "add"), for: .normal)
+        return addItem
+    }()
+    
+    lazy var labelUpdate: UILabel = {
+        let update = UILabel()
+//        update.backgroundColor = .black
+        update.text = "1"
+        return update
+    }()
+    @objc func addItemTo() {
+        print("Added !!!!!!!!!!")
+    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -53,9 +69,13 @@ class ShoppingTableViewCell: UITableViewCell {
         addSubview(shoppingListImage)
         addSubview(shoppingLabelDetail)
         addSubview(priceLabel)
+        addSubview(addItemButton)
+        addSubview(labelUpdate)
         shoppingListImageConstraints()
         shoppingListLabelConstraints()
         priceLabelConstraints()
+        addItemButtonConstrain()
+        labelUpdateConstrain()
     }
     func shoppingListImageConstraints() {
         shoppingListImage.translatesAutoresizingMaskIntoConstraints = false
@@ -77,5 +97,19 @@ class ShoppingTableViewCell: UITableViewCell {
         priceLabel.topAnchor.constraint(equalTo: shoppingLabelDetail.bottomAnchor, constant: 5).isActive = true
         priceLabel.leadingAnchor.constraint(equalTo: shoppingListImage.trailingAnchor, constant: 20).isActive = true
         priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+    }
+    func addItemButtonConstrain() {
+        addItemButton.translatesAutoresizingMaskIntoConstraints = false
+        addItemButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        addItemButton.leadingAnchor.constraint(equalTo: shoppingListImage.trailingAnchor, constant: 270).isActive = true
+        addItemButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        addItemButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+    }
+    func labelUpdateConstrain() {
+        labelUpdate.translatesAutoresizingMaskIntoConstraints = false
+        labelUpdate.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        labelUpdate.leadingAnchor.constraint(equalTo: shoppingListImage.trailingAnchor, constant: 275).isActive = true
+        labelUpdate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        labelUpdate.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
 }

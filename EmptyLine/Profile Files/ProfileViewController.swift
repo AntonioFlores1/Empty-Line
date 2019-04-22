@@ -11,20 +11,15 @@ import PureLayout
 import Toucan
 import Kingfisher
 
+
 enum ImageToEdit {
     case profileImage
 }
 
 class ProfileViewController: UIViewController {
     var newArray = ["Monday - 04/15/19"]
-//    var newArray = [Item]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
-        
+
+    
 //        ["Monday - 02/10/2019", "Tuesday - 02/20/2019","Wednesday - 03/5/2019",
 //                    "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
   
@@ -32,7 +27,6 @@ class ProfileViewController: UIViewController {
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
-    
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -69,7 +63,6 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         tableView.tableFooterView = UIView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +75,7 @@ class ProfileViewController: UIViewController {
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
+    
     func fetchUser() {
         guard let user = authservice.getCurrentUser() else {
             print("no logged user")
@@ -235,8 +229,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 cell.historyLabel.text = newArray[indexPath.row]
-//                let historyDetail = newArray[indexPath.row]
-//                cell.historyLabel.text = historyDetail.name
             } else {
                 cell.historyImage.isHidden = true
                 cell.historyLabel.isHidden = true
