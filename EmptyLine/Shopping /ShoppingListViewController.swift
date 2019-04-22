@@ -13,13 +13,17 @@ import Stripe
 
 
 class ShoppingListViewController: UIViewController {
+    static var total = 0.0
     var itemsPriceTotal: Double = 0.0 {
         didSet {
             shoppingView.titleLabel.text  = "Total Amount : \(itemsPriceTotal)"
           
         }
     }
-    
+
+
+    var productDetailView = ProductDetailsView()
+    public var items: Item!
     private var shoppingView = ShoppingView()
     private var listener: ListenerRegistration!
     private let authservice = AppDelegate.authservice
@@ -40,8 +44,9 @@ class ShoppingListViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.shoppingListTableView.reloadData()
-            }
+                self.shoppingView.titleLabel.resignFirstResponder()
         }
+      }
     }
    
     override func viewDidLoad() {
@@ -60,6 +65,7 @@ class ShoppingListViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
+        fecthShoppingHistory()
     }
     
     @objc private func fetchShoppingCartItems(){
@@ -116,6 +122,32 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
           
         }
     }
+    private func fetchProduct(shoppingItems: String) {
+        DBService.getProducts(productBarcode: shoppingItems) { (error, items) in
+            if let error = error {
+                self.showAlert(title: "Error fetching product information", message: error.localizedDescription)
+            } else if let items = items {
+                self.items = items
+                self.productDetailView.productName.text = items.name
+                self.productDetailView.productDetails.text = items.description
+                self.productDetailView.productPrice.text = "$" + String(items.price)
+                self.productDetailView.productNutritionDetails.text = items.ingredients
+                self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+                self.fecthShoppingHistory()
+            }
+        }
+    }
+    func fecthShoppingHistory() {
+        if let purches = items {
+            ItemsDataManager.addToShoppingCart(item: purches)
+            self.productDetailView.productName.text = items.name
+            self.productDetailView.productDetails.text = items.description
+            self.productDetailView.productPrice.text = "$" + String(items.price)
+            self.productDetailView.productNutritionDetails.text = items.ingredients
+            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+//            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+        }
+    }
 }
 
 extension ShoppingListViewController: STPAddCardViewControllerDelegate {
@@ -127,5 +159,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine")
         shoppingCart.removeAll()
+        itemsPriceTotal = 0.0
+        fecthShoppingHistory()
     }
 }

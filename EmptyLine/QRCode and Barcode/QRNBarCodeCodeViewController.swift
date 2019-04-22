@@ -10,10 +10,15 @@ import UIKit
 import AVFoundation
 import Firebase
 
+
 class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
+
+    
     @IBOutlet weak var imageView: UIImageView!
+    var panGesture = UIPanGestureRecognizer()
+    var tap = UITapGestureRecognizer()
 
 //        @IBOutlet weak var barCodeRawValueLabel: UILabel!
         var barCodeRawValueLabel: UILabel!
@@ -57,7 +62,15 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         fetchProduct(barCode: bar)
         
         self.barcodeDetector = vision.barcodeDetector()
-
+        
+        tap = UITapGestureRecognizer(target: self, action: #selector(tapView))
+        productDetailView.isUserInteractionEnabled = true
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(tap)
+        tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
+        self.view.isUserInteractionEnabled = true
+        productDetailView.addGestureRecognizer(tap)
+        
     }
     
 
@@ -113,10 +126,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
     }
-
-
-        
-        
+    @objc func tapView() {
+        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
+    }
+    @objc func tapViewDetail() {
+        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
+    }
+    
     public func setupView(){
         
         if let window = UIApplication.shared.keyWindow {
@@ -125,20 +141,18 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             window.addSubview(productDetailView)
             
             
-            let height: CGFloat = 450
+            let height: CGFloat = 150
             
             let y = window.frame.height - height
             
-            view.frame = window.frame
+            view.frame = window.frame //curveEaseOut
             //view.alpha = 0
             
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {
                 //self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
                 
             }, completion: nil)
-            
         }
     }
     
@@ -168,6 +182,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                     self.productDetailView.productName.text = product.name
                     self.productDetailView.productDetails.text = product.description
                     self.productDetailView.productPrice.text = "$" + String(product.price)
+                    self.productDetailView.productNutritionDetails.text = product.ingredients
                     self.productDetailView.productImage.kf.setImage(with: URL(string: product.image))
                 }
             }
