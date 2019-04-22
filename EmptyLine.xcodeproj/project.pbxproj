@@ -51,6 +51,9 @@
 		55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */; };
 		55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */; };
 		6706786822597FFF005D33FE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706786722597FFF005D33FE /* TableViewCell.swift */; };
+		6764235022692A5100C30EA5 /* DetailOfItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */; };
+		6764235222692B9F00C30EA5 /* ItemDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */; };
+		6764235422692C5200C30EA5 /* ScanItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764235322692C5200C30EA5 /* ScanItemView.swift */; };
 		679FD43F22654CE50075D505 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FD43E22654CE50075D505 /* HistoryDetailViewController.swift */; };
 		679FD44122654D9D0075D505 /* HistoryDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FD44022654D9D0075D505 /* HistoryDetailTableViewCell.swift */; };
 		679FD4432265585E0075D505 /* ShowReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FD4422265585E0075D505 /* ShowReceiptView.swift */; };
@@ -116,6 +119,9 @@
 		55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlerts.swift; sourceTree = "<group>"; };
 		6706786722597FFF005D33FE /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOfItemViewController.swift; sourceTree = "<group>"; };
+		6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailTableViewCell.swift; sourceTree = "<group>"; };
+		6764235322692C5200C30EA5 /* ScanItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanItemView.swift; sourceTree = "<group>"; };
 		679FD43E22654CE50075D505 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
 		679FD44022654D9D0075D505 /* HistoryDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailTableViewCell.swift; sourceTree = "<group>"; };
 		679FD4422265585E0075D505 /* ShowReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReceiptView.swift; sourceTree = "<group>"; };
@@ -251,6 +257,9 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E8C22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift */,
+				6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */,
+				6764235322692C5200C30EA5 /* ScanItemView.swift */,
+				6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */,
 				55EB5EAE2257B5D8003FA4F8 /* QRView.swift */,
 			);
 			path = "QRCode and Barcode";
@@ -526,6 +535,7 @@
 			files = (
 				55EB5E9822569D1B003FA4F8 /* PaymentViewController.swift in Sources */,
 				043D4C252264DC2500488C31 /* ItemDataManager.swift in Sources */,
+				6764235022692A5100C30EA5 /* DetailOfItemViewController.swift in Sources */,
 				67F5554A225E87EA00F67C94 /* ConfirmPaymentView.swift in Sources */,
 				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
@@ -571,10 +581,12 @@
 				04102692225BAF540076A454 /* CardTypeTableViewCell.swift in Sources */,
 				55EB5E9222569CDE003FA4F8 /* SettingsViewController.swift in Sources */,
 				04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */,
+				6764235422692C5200C30EA5 /* ScanItemView.swift in Sources */,
 				55EB5EBA2257B6E0003FA4F8 /* ShoppingTableViewCell.swift in Sources */,
 				55EB5EB52257B672003FA4F8 /* SettingsView.swift in Sources */,
 				043D4C272264DE3A00488C31 /* DataPersistenceManager.swift in Sources */,
 				04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */,
+				6764235222692B9F00C30EA5 /* ItemDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,14 +735,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 697KD42Z5Z;
+				DEVELOPMENT_TEAM = H6HD3SW977;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-jose.EmptyLine";
+				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -745,14 +757,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 697KD42Z5Z;
+				DEVELOPMENT_TEAM = H6HD3SW977;
 				INFOPLIST_FILE = EmptyLine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-jose.EmptyLine";
+				PRODUCT_BUNDLE_IDENTIFIER = "Antonio-Flores.EmptyLine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
