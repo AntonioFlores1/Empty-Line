@@ -137,6 +137,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
     }
+    
     func fecthShoppingHistory() {
         if let purches = items {
             //wewItemsDataManager.addToShoppingCart(item: purches, savedDate: )
@@ -158,16 +159,20 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 ////            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
 //        }
 //    }
+            
+        }
+    }
     
     private func createShoppingHistory(){
         for item in shoppingCart {
             let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-            savedDate.add(newDate: shoppedItem)
+//            savedDate.add(newDate: shoppedItem)
             ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-            ShoppingHistoryItemsDataManager.saveItem()
+           // ShoppingHistoryItemsDataManager.saveItem()
         }
     }
 }
+
 
 extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
@@ -176,9 +181,14 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
-        createShoppingHistory()
-        showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine")
-        shoppingCart.removeAll()
-        itemsPriceTotal = 0.0
+        showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine") { (alert) in
+            self.createShoppingHistory()
+            self.shoppingCart.removeAll()
+        }
+        
+//        createShoppingHistory()
+//        showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine")
+//        shoppingCart.removeAll()
+//        itemsPriceTotal = 0.0
     }
 }

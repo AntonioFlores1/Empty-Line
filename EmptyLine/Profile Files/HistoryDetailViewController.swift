@@ -48,7 +48,7 @@ class HistoryDetailViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
     @objc private func fetchShoppingCartItems(){
-        shoppingHistory = ShoppingHistoryItemsDataManager.fetchShoppingCart()
+        //shoppingHistory = ShoppingHistoryItemsDataManager.fetchShoppingCart()
 //        refresh.beginRefreshing()
     }
 }

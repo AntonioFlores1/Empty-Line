@@ -22,18 +22,23 @@ class ProfileViewController: UIViewController {
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
     
-    private var itemsByDate = [ItemSavedDate]() {
-        
-        didSet {
-             allItemsBoughtInDay.removeAll()
-            for day in itemsByDate {
-        allItemsBoughtInDay.append(ShoppingHistoryItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
-        }
-             tableView.reloadData()
-    }
-    }
+//    private var itemsByDate = [ItemSavedDate]() {
+//
+//        didSet {
+//             allItemsBoughtInDay.removeAll()
+//            for day in itemsByDate {
+//        allItemsBoughtInDay.append(ShoppingHistoryItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
+//        }
+//             tableView.reloadData()
+//    }
+//    }
     
-    private var allItemsBoughtInDay: [[Item]] = []
+    private var allItemsBoughtInDay: [[Item]] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+        
+    }
     
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
@@ -75,10 +80,25 @@ class ProfileViewController: UIViewController {
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         
+        print(DataPersistenceManager.documentsDirectory())
+        
     }
     
     private func fetchItemsByDate(){
-        itemsByDate = savedDate.fetchDates()
+//        itemsByDate = savedDate.fetchDates()
+        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart()
+        var currentDate = allItems.first?.createdAt
+        var dateItems = [Item]()
+        for item in allItems {
+            if currentDate == item.createdAt {
+                dateItems.append(item)
+            } else {
+                allItemsBoughtInDay.append(dateItems)
+                dateItems = [item]
+            }
+        }
+        allItemsBoughtInDay.append(dateItems)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -192,10 +212,10 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard !itemsByDate.isEmpty else { return "" }
+        guard !allItemsBoughtInDay.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return itemsByDate[section].createdDate
+            return allItemsBoughtInDay[section].first?.createdAt
         case 1:
             return account[section]
         default:

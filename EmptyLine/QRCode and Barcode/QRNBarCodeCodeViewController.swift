@@ -183,9 +183,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
-        })
+        }
     }
-    }
+    
     
     
     @objc func handleDismiss() {
@@ -239,7 +239,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     @objc private func addButtonPressed(){
         if let item = products {
-        
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             
             let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
