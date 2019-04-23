@@ -146,6 +146,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             self.productDetailView.productPrice.text = "$" + String(items.price)
             self.productDetailView.productNutritionDetails.text = items.ingredients
             self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+        }
+    }
 //            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
 //    func fecthShoppingHistory() {
 //        if let purches = items {

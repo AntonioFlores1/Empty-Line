@@ -37,6 +37,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nav = UINavigationBar.appearance()
+        nav.backgroundColor = .blue
         startLiveVideo()
         addToShoppingCart()
         dontAddToShoppingCart()
@@ -45,6 +47,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         self.barcodeDetector = vision.barcodeDetector()
         navigationController?.isNavigationBarHidden = true
         let gradient = CAGradientLayer()
+        //nav.barTintColor = .blue
 //        gradient.frame = self.view.frame
 //        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
 //        self.view.layer.addSublayer(gradient)
@@ -183,8 +186,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
-        })
-    }
+        }
     }
     
     
