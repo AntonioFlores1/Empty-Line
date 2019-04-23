@@ -13,11 +13,11 @@ import Stripe
 
 
 class ShoppingListViewController: UIViewController {
+    
     static var total = 0.0
     var itemsPriceTotal: Double = 0.0 {
         didSet {
             shoppingView.titleLabel.text  = "Total Amount : \(itemsPriceTotal)"
-            
         }
     }
 
@@ -100,6 +100,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
+        
+        
         refresh.endRefreshing()
         
         cell.contentView.backgroundColor = UIColor.clear
@@ -110,6 +112,11 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.shadowOpacity = 0.5
         return cell
     }
+    
+//   @objc func addItem() {
+////        print("hgjkahghkshgjhakhgskh")
+//
+//    }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
