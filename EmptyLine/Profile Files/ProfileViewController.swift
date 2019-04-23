@@ -11,43 +11,32 @@ import PureLayout
 import Toucan
 import Kingfisher
 
+
 enum ImageToEdit {
     case profileImage
 }
 
 class ProfileViewController: UIViewController {
-    var newArray = ["Monday - 04/15/19"]
-//    var newArray = [Item]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
-        
-//        ["Monday - 02/10/2019", "Tuesday - 02/20/2019","Wednesday - 03/5/2019",
-//                    "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
-  
+
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
+
     
     private var itemsByDate = [ItemSavedDate]() {
         
         didSet {
              allItemsBoughtInDay.removeAll()
             for day in itemsByDate {
-        allItemsBoughtInDay.append(ItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
+        allItemsBoughtInDay.append(ShoppingHistoryItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
         }
              tableView.reloadData()
     }
     }
     
     private var allItemsBoughtInDay: [[Item]] = []
-    
-    
-  
+
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -87,7 +76,7 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        
+
     }
     
     private func fetchItemsByDate(){
@@ -103,6 +92,7 @@ class ProfileViewController: UIViewController {
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
+    
     func fetchUser() {
         guard let user = authservice.getCurrentUser() else {
             print("no logged user")
@@ -257,6 +247,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.5
             
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
+
                 let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {

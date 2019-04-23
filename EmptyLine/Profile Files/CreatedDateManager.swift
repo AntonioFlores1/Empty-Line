@@ -11,7 +11,7 @@ import Foundation
 final class savedDate {
     private init() {}
     
-    private static let filename = "CreatedDate.plist"
+    private static let filename = "createdDate.plist"
     private static var dates = [ItemSavedDate]()
     
     static public func fetchDates() -> [ItemSavedDate]{
@@ -19,11 +19,13 @@ final class savedDate {
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path) {
                 do {
-                    dates = try PropertyListDecoder().decode([ItemSavedDate].self, from: data)
-                }catch {
-                    print("data property list is empty")
+                  dates = try PropertyListDecoder().decode([ItemSavedDate].self, from: data)
+                } catch {
+                    print("No data")
                 }
-                 print("No item was bought on this date ")
+            } else {
+                
+                print("No data on this filepath")
             }
         } else {
            print("\(filename) does not exist")
@@ -43,10 +45,8 @@ final class savedDate {
     }
     
     static public func add(newDate: ItemSavedDate) {
-        if (dates.filter{$0.createdDate == newDate.createdDate}).isEmpty {
             dates.append(newDate)
             save()
-        }
     }
     
     
