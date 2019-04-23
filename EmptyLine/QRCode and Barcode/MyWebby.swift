@@ -13,6 +13,8 @@ class MyWebby: UIView, WKNavigationDelegate {
 
     var webView: WKWebView!
 
+    //var linky: String!
+    
     lazy var exit: UIButton = {
         let button = UIButton()
         button.backgroundColor = .red
@@ -27,12 +29,23 @@ class MyWebby: UIView, WKNavigationDelegate {
         webView = WKWebView()
         webView.navigationDelegate = self
         
-        let link = "http://l.ead.me/bb6yQc"
+        let link = "http://l.ead.me/bb7Wej"
         let request = URLRequest(url: URL(string: link)!)
-        webView.load(request)
+            webView.load(request)
         webView.allowsBackForwardNavigationGestures = true
         con()
     }
+    
+//    func urllink(url:String){
+//        webView = WKWebView()
+//        webView.navigationDelegate = self
+//        
+//        let link = "http://l.ead.me/bb7Wej"
+//        let request = URLRequest(url: URL(string: "http://l.ead.me/bb7Wej)!)
+//        webView.load(request)
+//        webView.allowsBackForwardNavigationGestures = true
+//    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
