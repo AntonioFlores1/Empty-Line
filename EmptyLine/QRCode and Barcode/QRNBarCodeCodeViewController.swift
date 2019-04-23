@@ -188,6 +188,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             }, completion: nil)
         }
     }
+
     
     
     @objc func handleDismiss() {
@@ -286,8 +287,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-
-    
 }
 
 
