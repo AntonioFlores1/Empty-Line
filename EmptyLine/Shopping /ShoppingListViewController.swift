@@ -59,18 +59,18 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate      =   self
         shoppingListTableView.dataSource    =   self
         fetchShoppingCartItems()
-        self.itemsPriceTotal = ItemsDataManager.totalAmount()
+        self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
         barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
-        fecthShoppingHistory()
+       // fecthShoppingHistory()
     }
     
     @objc private func fetchShoppingCartItems(){
-        shoppingCart = ItemsDataManager.fetchShoppingCart()
-        refresh.beginRefreshing()
+        shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
+            refresh.beginRefreshing()
     }
     @objc func barButtonPressed() {
         //navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
@@ -117,8 +117,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
             self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
-            ItemsDataManager.deleteFromShoppingCart(index: indexPath.row)
-            self.itemsPriceTotal = ItemsDataManager.totalAmount()
+            ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
+            self.itemsPriceTotal = ShoppingCartDataManager.total
           
         }
     }
@@ -133,7 +133,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
                 self.productDetailView.productPrice.text = "$" + String(items.price)
                 self.productDetailView.productNutritionDetails.text = items.ingredients
                 self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-                self.fecthShoppingHistory()
+               // self.fecthShoppingHistory()
             }
         }
     }
@@ -147,6 +147,24 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             self.productDetailView.productNutritionDetails.text = items.ingredients
             self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
 //            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+//    func fecthShoppingHistory() {
+//        if let purches = items {
+//           // ItemsDataManager.addToShoppingCart(item: purches)
+//            self.productDetailView.productName.text = items.name
+//            self.productDetailView.productDetails.text = items.description
+//            self.productDetailView.productPrice.text = "$" + String(items.price)
+//            self.productDetailView.productNutritionDetails.text = items.ingredients
+//            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+////            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+//        }
+//    }
+    
+    private func createShoppingHistory(){
+        for item in shoppingCart {
+            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+            savedDate.add(newDate: shoppedItem)
+            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+            ShoppingHistoryItemsDataManager.saveItem()
         }
     }
 }
@@ -158,9 +176,9 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
+        createShoppingHistory()
         showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine")
         shoppingCart.removeAll()
         itemsPriceTotal = 0.0
-        fecthShoppingHistory()
     }
 }
