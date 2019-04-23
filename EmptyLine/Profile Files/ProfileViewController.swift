@@ -17,16 +17,26 @@ enum ImageToEdit {
 }
 
 class ProfileViewController: UIViewController {
-    var newArray = ["Monday - 04/15/19"]
 
-    
-//        ["Monday - 02/10/2019", "Tuesday - 02/20/2019","Wednesday - 03/5/2019",
-//                    "Thursday - 03/15/2019", "Friday - 03/25/2019", "Saturday - 04/01/2019",]
-  
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
+
+    
+    private var itemsByDate = [ItemSavedDate]() {
+        
+        didSet {
+             allItemsBoughtInDay.removeAll()
+            for day in itemsByDate {
+        allItemsBoughtInDay.append(ShoppingHistoryItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
+        }
+             tableView.reloadData()
+    }
+    }
+    
+    private var allItemsBoughtInDay: [[Item]] = []
+
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -40,6 +50,8 @@ class ProfileViewController: UIViewController {
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         return imagePicker
     }()
+    
+    
     
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -63,12 +75,17 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         tableView.tableFooterView = UIView()
+        fetchItemsByDate()
+
     }
     
+    private func fetchItemsByDate(){
+        itemsByDate = savedDate.fetchDates()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-
+        fetchItemsByDate()
     }
     
     @objc private func segueToSetting(){
@@ -178,9 +195,10 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard !itemsByDate.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return ""
+            return itemsByDate[section].createdDate
         case 1:
             return account[section]
         default:
@@ -201,10 +219,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard !allItemsBoughtInDay.isEmpty else { return 0 }
         switch profileView.segmentedControl.selectedSegmentIndex {
             case 0:
                 if section == 0 {
-                return newArray.count
+                return allItemsBoughtInDay[section].count
             }
             case 1:
                 if (section == 0) {
@@ -228,7 +247,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.5
             
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
-                cell.historyLabel.text = newArray[indexPath.row]
+
+                let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
+                cell.historyLabel.text = day.name
             } else {
                 cell.historyImage.isHidden = true
                 cell.historyLabel.isHidden = true

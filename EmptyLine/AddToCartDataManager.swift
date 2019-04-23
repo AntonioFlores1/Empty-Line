@@ -1,18 +1,20 @@
 //
-//  ItemDataManager.swift
+//  AddToCartDataManager.swift
 //  EmptyLine
 //
-//  Created by Donkemezuo Raymond Tariladou on 4/15/19.
+//  Created by Donkemezuo Raymond Tariladou on 4/22/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
 
 import Foundation
 
-final class ItemsDataManager {
-private init() {}
 
-private static var filename = "item.plist"
-
+final class ShoppingCartDataManager {
+    private init() {}
+    
+    private static var filename = "shoppingCart.plist"
+    
+    
     static var total = 0.0
     static private var shoppingCartItems = [Item]() {
         didSet {
@@ -23,7 +25,8 @@ private static var filename = "item.plist"
         }
     }
     
-    static func saveItem(){
+    static func saveShoppingItems(){
+        
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename)
         do {
             let data = try PropertyListEncoder().encode(shoppingCartItems)
@@ -31,37 +34,38 @@ private static var filename = "item.plist"
         }catch {
             print("property list encoding error: \(error)")
         }
-    }
-
-    static public func addToShoppingCart(item: Item) {
-        shoppingCartItems.append(item)
-        saveItem()
+        
     }
     
-    static public func deleteFromShoppingCart(index: Int) {
-        shoppingCartItems.remove(at: index)
-        saveItem()
+    static func addItemToCart(shoppingItem: Item) {
+        shoppingCartItems.append(shoppingItem)
+        saveShoppingItems()
     }
-    static func totalAmount() -> Double {
-        return total
-    }
+    
     static func fetchShoppingCart() -> [Item] {
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename).path
         if FileManager.default.fileExists(atPath: path) {
-            if let data = FileManager.default.contents(atPath: path){
+            if let data = FileManager.default.contents(atPath: path) {
                 do {
                     shoppingCartItems = try PropertyListDecoder().decode([Item].self, from: data)
                 }catch {
-                    print("Error: decoding error \(error.localizedDescription)")
+                    print("Property list decoding error: \(error)")
                 }
             } else {
-                print("Error: File content is empty")
+                print("No data exist on this \(path) file path")
             }
         } else {
-            print("Error: Filepath does not exist")
+            print("File \(filename) does not exist")
         }
         return shoppingCartItems
     }
     
-
+    static func deleteItemFromShoppingCart(index: Int) {
+        shoppingCartItems.remove(at: index)
+        saveShoppingItems()
+    }
+    
+    
+    
+    
 }

@@ -17,7 +17,7 @@ class ShoppingListViewController: UIViewController {
     var itemsPriceTotal: Double = 0.0 {
         didSet {
             shoppingView.titleLabel.text  = "Total Amount : \(itemsPriceTotal)"
-          
+            
         }
     }
 
@@ -59,17 +59,19 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate      =   self
         shoppingListTableView.dataSource    =   self
         fetchShoppingCartItems()
-        self.itemsPriceTotal = ItemsDataManager.totalAmount()
+        self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
         barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
+       // fecthShoppingHistory()
+
     }
     
     @objc private func fetchShoppingCartItems(){
-        shoppingCart = ItemsDataManager.fetchShoppingCart()
-        refresh.beginRefreshing()
+        shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
+            refresh.beginRefreshing()
     }
     @objc func barButtonPressed() {
         //navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
@@ -116,12 +118,36 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
             self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
-            ItemsDataManager.deleteFromShoppingCart(index: indexPath.row)
-            self.itemsPriceTotal = ItemsDataManager.totalAmount()
+            ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
+            self.itemsPriceTotal = ShoppingCartDataManager.total
           
         }
     }
 
+    private func fetchProduct(shoppingItems: String) {
+        DBService.getProducts(productBarcode: shoppingItems) { (error, items) in
+            if let error = error {
+                self.showAlert(title: "Error fetching product information", message: error.localizedDescription)
+            } else if let items = items {
+                self.items = items
+                self.productDetailView.productName.text = items.name
+                self.productDetailView.productDetails.text = items.description
+                self.productDetailView.productPrice.text = "$" + String(items.price)
+                self.productDetailView.productNutritionDetails.text = items.ingredients
+                self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+               // self.fecthShoppingHistory()
+            }
+        }
+    }
+    
+    private func createShoppingHistory(){
+        for item in shoppingCart {
+            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+            savedDate.add(newDate: shoppedItem)
+            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+            ShoppingHistoryItemsDataManager.saveItem()
+        }
+    }
 }
 
 extension ShoppingListViewController: STPAddCardViewControllerDelegate {
@@ -135,5 +161,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         itemsPriceTotal = 0.0
         shoppingCart.removeAll()
         barButtonItem.isEnabled = false
+        createShoppingHistory()
+
     }
 }
