@@ -183,9 +183,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
-        })
+        }
     }
-    }
+
     
     
     @objc func handleDismiss() {
@@ -284,8 +284,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-
-    
 }
 
 
