@@ -15,7 +15,7 @@ class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
-    
+    var panGesture = UIPanGestureRecognizer()
     var webby = QRCodeWebSiteViewController()
     //        @IBOutlet weak var barCodeRawValueLabel: UILabel!
     var barCodeRawValueLabel: UILabel!
@@ -41,10 +41,34 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         self.barcodeDetector = vision.barcodeDetector()
         navigationController?.isNavigationBarHidden = true
         let gradient = CAGradientLayer()
+//        panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureHandler(_:)))
+//        productDetailView.isUserInteractionEnabled = true
+//        productDetailView.addGestureRecognizer(panGesture)
+
+//        panGesture = UIPanGestureRecognizer(target: self, action: #selector(dr))
         //        gradient.frame = self.view.frame
         //        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
         //        self.view.layer.addSublayer(gradient)
         // view.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+    }
+    
+    func stopRecording() {
+        session.stopRunning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        session.startRunning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        stopRecording()
+    }
+    
+    @objc func panGestureHandler(_ recognizer: UIPanGestureRecognizer){
+        self.view.bringSubviewToFront(productDetailView)
+        let translation = recognizer.translation(in: self.view)
+        imageView.center = CGPoint(x: productDetailView.center.x + translation.x, y: productDetailView.center.y + translation.y)
+        recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
     
     
@@ -87,12 +111,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
             window.addSubview(idk)
-            let height: CGFloat = 820
+            let height: CGFloat = 600
             let y = window.frame.height - height
             view.frame = window.frame
             //view.alpha = 0
             
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.75, options: .curveEaseOut, animations: {
                 //self.view.alpha = 1
                 self.idk.frame = CGRect(x: 0, y: y, width:
                     self.idk.frame.width, height:
@@ -133,7 +157,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
             
-            let height: CGFloat = 450
+            let height: CGFloat = 700
             
             let y = window.frame.height - height
             view.frame = window.frame
@@ -142,6 +166,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                 self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
             }, completion: nil)
+            
         }
     }
     
@@ -194,8 +219,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     @objc private func addButtonPressed(){
+        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
+        savedDate.add(newDate: itemSavedDate)
+
         if let item = products {
-            ItemsDataManager.addToShoppingCart(item: item, savedDate: String)
+            ItemsDataManager.addToShoppingCart(item: item, savedDate: "\(itemSavedDate.createdDate).plist")
             let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
             
             let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
