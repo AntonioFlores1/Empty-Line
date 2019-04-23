@@ -9,10 +9,10 @@
 import UIKit
 import AVFoundation
 import Firebase
-
+import WebKit
 
 class QRNBarCodeCodeViewController:
-UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
+UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDelegate {
     
 
     
@@ -57,9 +57,28 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
         self.view.isUserInteractionEnabled = true
         productDetailView.addGestureRecognizer(tap)
-        
     }
     
+    func stopRecording() {
+        session.stopRunning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        session.startRunning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        stopRecording()
+    }
+    
+//    func urllink(url:String){
+//       idk.webView = WKWebView()
+//        idk.webView.navigationDelegate = self
+//        //let link = "http://l.ead.me/bb7Wej"
+//        let request = URLRequest(url: URL(string: url)!)
+//        idk.webView.load(request)
+//        idk.webView.allowsBackForwardNavigationGestures = true
+//    }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
@@ -74,6 +93,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
                         self.website = (barcodes?.first?.rawValue)!
                         self.QRCodeSetView()
                         print("i is here \(self.website)")
+                        
+                        //self.urllink(url: self.website)
                     } else {
                         if (barcodes?.first?.rawValue!.count)! > 3 {
                             self.bar = (barcodes?.first?.rawValue)!
@@ -105,6 +126,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             view.frame = window.frame
             //view.alpha = 0
             
+            
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //self.view.alpha = 1
                 self.idk.frame = CGRect(x: 0, y: y, width:
@@ -116,7 +138,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
 
     private func byebyeWebSite(){
-        print("i work?")
         idk.exit.addTarget(self, action: #selector(byebye), for: .touchUpInside)
     }
     
@@ -255,7 +276,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
      func startLiveVideo() {
-        
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)

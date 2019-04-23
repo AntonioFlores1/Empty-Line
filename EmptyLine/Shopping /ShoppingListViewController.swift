@@ -139,7 +139,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     }
     func fecthShoppingHistory() {
         if let purches = items {
-            ItemsDataManager.addToShoppingCart(item: purches, savedDate: <#String#>)
+            //wewItemsDataManager.addToShoppingCart(item: purches, savedDate: )
            // ItemsDataManager.addToShoppingCart(item: purches)
             self.productDetailView.productName.text = items.name
             self.productDetailView.productDetails.text = items.description
