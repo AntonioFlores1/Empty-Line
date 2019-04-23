@@ -137,6 +137,16 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
     }
+    func fecthShoppingHistory() {
+        if let purches = items {
+            //wewItemsDataManager.addToShoppingCart(item: purches, savedDate: )
+           // ItemsDataManager.addToShoppingCart(item: purches)
+            self.productDetailView.productName.text = items.name
+            self.productDetailView.productDetails.text = items.description
+            self.productDetailView.productPrice.text = "$" + String(items.price)
+            self.productDetailView.productNutritionDetails.text = items.ingredients
+            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+//            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
 //    func fecthShoppingHistory() {
 //        if let purches = items {
 //           // ItemsDataManager.addToShoppingCart(item: purches)
