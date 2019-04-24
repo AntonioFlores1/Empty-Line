@@ -64,8 +64,4 @@ final class ShoppingCartDataManager {
         shoppingCartItems.remove(at: index)
         saveShoppingItems()
     }
-    
-    
-    
-    
 }

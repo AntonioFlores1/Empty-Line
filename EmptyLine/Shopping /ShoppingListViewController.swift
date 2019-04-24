@@ -21,7 +21,6 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
-
     var productDetailView = ProductDetailsView()
     public var items: Item!
     private var shoppingView = ShoppingView()
@@ -54,7 +53,6 @@ class ShoppingListViewController: UIViewController {
         view.addSubview(shoppingView)
         view.backgroundColor = .white
         navigationItem.title = "Checkout List"
-        shoppingListTableView.reloadData()
         shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
         shoppingListTableView.delegate      =   self
         shoppingListTableView.dataSource    =   self
@@ -65,10 +63,11 @@ class ShoppingListViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
-       // fecthShoppingHistory()
-
+        shoppingListTableView.reloadData()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        shoppingListTableView.reloadData()
+    }
     @objc private func fetchShoppingCartItems(){
         shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
             refresh.beginRefreshing()
@@ -100,10 +99,12 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
-        
-        
+        itemsPriceTotal = itemInCart.price // new
+        itemsPriceTotal = ShoppingCartDataManager.total
+        cell.addItemStepper.tag = indexPath.row
+        cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
+//        self.shoppingListTableView.reloadData()
         refresh.endRefreshing()
-        
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
@@ -112,11 +113,31 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.shadowOpacity = 0.5
         return cell
     }
-    
-//   @objc func addItem() {
-////        print("hgjkahghkshgjhakhgskh")
-//
-//    }
+    @objc private func changeStepperValue(_ stepper: UIStepper) {
+        let item = shoppingCart[stepper.tag]
+        var total = 0
+        if stepper.value == 1.0{
+            itemsPriceTotal = itemsPriceTotal + item.price
+            total = total + 1
+        } else if stepper.value == -1.0 {
+            itemsPriceTotal = itemsPriceTotal - item.price
+            total = total - 1
+        }
+        let indexPath = IndexPath(row: stepper.tag, section: 0  )
+        guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
+        cell.labelUpdate.text = total.description
+        stepper.value = 0
+        
+        
+        print(item.price)
+        print(itemsPriceTotal )
+//        if stepper.value == Double(shoppingView.titleLabel.text ?? "" ) {
+//            shoppingView.titleLabel.text  = "Total Amount : \(stepper.value - 1)"
+//        } else if stepper.value != Double(shoppingView.titleLabel.text ?? "" + shoppingView.titleLabel.text!) {
+//            shoppingView.titleLabel.text  = "Total Amount : \(stepper.value + 1)"
+//        }
+    }
+   
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -142,15 +163,12 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
                 self.productDetailView.productPrice.text = "$" + String(items.price)
                 self.productDetailView.productNutritionDetails.text = items.ingredients
                 self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-               // self.fecthShoppingHistory()
             }
         }
     }
     
     func fecthShoppingHistory() {
         if let purches = items {
-            //wewItemsDataManager.addToShoppingCart(item: purches, savedDate: )
-           // ItemsDataManager.addToShoppingCart(item: purches)
             self.productDetailView.productName.text = items.name
             self.productDetailView.productDetails.text = items.description
             self.productDetailView.productPrice.text = "$" + String(items.price)
@@ -178,6 +196,9 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
             ShoppingHistoryItemsDataManager.saveItem()
         }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
 }
 
