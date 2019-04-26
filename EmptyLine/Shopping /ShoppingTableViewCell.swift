@@ -52,7 +52,7 @@ class ShoppingTableViewCell: UITableViewCell {
     }()
     @objc func addItemTo(_ sender: UIStepper) {
         var total = 0
-        if addItemStepper.value == 2.0 {
+        if addItemStepper.value == 2.0{
             total += 1
         } else if addItemStepper.value == 0 {
             total -= 1
