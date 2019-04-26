@@ -14,10 +14,11 @@ import Stripe
 
 class ShoppingListViewController: UIViewController {
     
-    static var total = 0.0
+    var total = 0.0
+    var totalItems = 1
     var itemsPriceTotal: Double = 0.0 {
         didSet {
-            shoppingView.titleLabel.text  = "Total Amount : \(itemsPriceTotal)"
+            shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
 
@@ -28,6 +29,7 @@ class ShoppingListViewController: UIViewController {
     private let authservice = AppDelegate.authservice
     private var barButtonItem = UIBarButtonItem()
     var shoppingImage = UIImage()
+    var stepperTags = [Int]()
     
     private var shoppingListTableView: UITableView = {
         let tv = UITableView()
@@ -74,14 +76,12 @@ class ShoppingListViewController: UIViewController {
     }
     @objc func barButtonPressed() {
         //navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
-        
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
         let navigationController = UINavigationController(rootViewController: addCardController)
         present(navigationController, animated: true, completion: nil)
     }
-    
-   
+
 }
 
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,6 +102,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
         cell.addItemStepper.tag = indexPath.row
+        stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
 //        self.shoppingListTableView.reloadData()
         refresh.endRefreshing()
@@ -111,31 +112,33 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
+        
+    
         return cell
     }
+
     @objc private func changeStepperValue(_ stepper: UIStepper) {
         let item = shoppingCart[stepper.tag]
-        var total = 0
-        if stepper.value == 1.0{
-            itemsPriceTotal = itemsPriceTotal + item.price
-            total = total + 1
-        } else if stepper.value == -1.0 {
-            itemsPriceTotal = itemsPriceTotal - item.price
-            total = total - 1
-        }
-        let indexPath = IndexPath(row: stepper.tag, section: 0  )
-        guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
-        cell.labelUpdate.text = total.description
-        stepper.value = 0
-        
+            if stepper.value == 1.0 || stepper.value == 0.0 {
+                print(stepper.value)
+                itemsPriceTotal = itemsPriceTotal + item.price
+                    totalItems += 1
+                    stepper.value = 0
+                } else if stepper.value == -1.0 {
+                    if totalItems <= 1{
+                        totalItems = 1
+                    } else {
+                        itemsPriceTotal = itemsPriceTotal - item.price
+                        totalItems -= 1
+                        stepper.value = 0
+                    }
+                }
+                let indexPath = IndexPath(row: stepper.tag, section: 0  )
+                guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
+                cell.labelUpdate.text = totalItems.description
         
         print(item.price)
         print(itemsPriceTotal )
-//        if stepper.value == Double(shoppingView.titleLabel.text ?? "" ) {
-//            shoppingView.titleLabel.text  = "Total Amount : \(stepper.value - 1)"
-//        } else if stepper.value != Double(shoppingView.titleLabel.text ?? "" + shoppingView.titleLabel.text!) {
-//            shoppingView.titleLabel.text  = "Total Amount : \(stepper.value + 1)"
-//        }
     }
    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -209,11 +212,12 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
-        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was success", message: "Thank you for shopping with zipLine")
+        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was success. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine.")
         itemsPriceTotal = 0.0
         shoppingCart.removeAll()
+        ShoppingCartDataManager.deleteItemFromShoppingCart(index: shoppingCart.count)
         barButtonItem.isEnabled = false
         createShoppingHistory()
-
+        refresh.endRefreshing()
     }
 }
