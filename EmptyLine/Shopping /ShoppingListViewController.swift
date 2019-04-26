@@ -81,7 +81,6 @@ class ShoppingListViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: addCardController)
         present(navigationController, animated: true, completion: nil)
     }
-
 }
 
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -112,8 +111,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
-        
-    
         return cell
     }
 
@@ -124,6 +121,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
                 itemsPriceTotal = itemsPriceTotal + item.price
                     totalItems += 1
                     stepper.value = 0
+                
                 } else if stepper.value == -1.0 {
                     if totalItems <= 1{
                         totalItems = 1
@@ -140,6 +138,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         print(item.price)
         print(itemsPriceTotal )
     }
+        
    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

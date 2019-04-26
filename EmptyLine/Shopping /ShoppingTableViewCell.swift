@@ -57,6 +57,7 @@ class ShoppingTableViewCell: UITableViewCell {
         } else if addItemStepper.value == 0 {
             total -= 1
         }
+        
         addItemStepper.value = 0
         labelUpdate.text = total.description
     }
