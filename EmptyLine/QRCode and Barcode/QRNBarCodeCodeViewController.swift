@@ -185,6 +185,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             }, completion: nil)
         }
     }
+
     
     
     
@@ -283,8 +284,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
-
-    
 }
 
 

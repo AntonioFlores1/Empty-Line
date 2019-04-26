@@ -11,16 +11,18 @@ import PureLayout
 import Toucan
 import Kingfisher
 
+
 enum ImageToEdit {
     case profileImage
 }
 
 class ProfileViewController: UIViewController {
-    
+
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
+
     
 //    private var itemsByDate = [ItemSavedDate]() {
 //
@@ -39,7 +41,7 @@ class ProfileViewController: UIViewController {
         }
         
     }
-    
+
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -78,10 +80,7 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         tableView.tableFooterView = UIView()
-        fetchItemsByDate()
-        
-        print(DataPersistenceManager.documentsDirectory())
-        
+        fetchItemsByDate()        
     }
     
     private func fetchItemsByDate(){
@@ -110,6 +109,7 @@ class ProfileViewController: UIViewController {
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
+    
     func fetchUser() {
         guard let user = authservice.getCurrentUser() else {
             print("no logged user")
@@ -264,6 +264,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.5
             
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
+
                 let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {

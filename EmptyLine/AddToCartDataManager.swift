@@ -16,6 +16,7 @@ final class ShoppingCartDataManager {
     
     
     static var total = 0.0
+    
     static private var shoppingCartItems = [Item]() {
         didSet {
             total = 0.0
@@ -23,6 +24,10 @@ final class ShoppingCartDataManager {
                 self.total += item.price
             }
         }
+    }
+    
+    static func totalAmount() -> Double {
+        return total
     }
     
     static func saveShoppingItems(){
@@ -64,6 +69,9 @@ final class ShoppingCartDataManager {
         shoppingCartItems.remove(at: index)
         saveShoppingItems()
     }
+    
+   
+
     
     
     

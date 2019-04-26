@@ -7,9 +7,12 @@
 //
 
 import UIKit
+//protocol AddItemCellDelegate: AnyObject{
+//    func addItemTo()
+//}
 
 class ShoppingTableViewCell: UITableViewCell {
-    
+//    weak var delegate: AddItemCellDelegate?
 
     lazy var shoppingListImage: UIImageView = {
         let image = UIImageView()
@@ -35,6 +38,26 @@ class ShoppingTableViewCell: UITableViewCell {
         return price
     }()
     
+    lazy var addItemStepper: UIStepper = {
+        var customStepper = UIStepper.init(frame: CGRect(x: 150,y: 150,width: 100,height: 100))
+        customStepper.wraps = true
+        customStepper.autorepeat = true
+        customStepper.minimumValue = 1.0
+        customStepper.maximumValue = 10
+        customStepper.addTarget(self, action: #selector(addItemTo), for: .valueChanged)
+        return customStepper
+    }()
+    
+    lazy var labelUpdate: UILabel = {
+        let update = UILabel()
+        update.text = "1"
+        return update
+    }()
+    @objc func addItemTo() {
+        print("Item added")
+        labelUpdate.text = "\(Int(addItemStepper.value))"
+        
+    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -53,9 +76,13 @@ class ShoppingTableViewCell: UITableViewCell {
         addSubview(shoppingListImage)
         addSubview(shoppingLabelDetail)
         addSubview(priceLabel)
+        addSubview(addItemStepper)
+        addSubview(labelUpdate)
         shoppingListImageConstraints()
         shoppingListLabelConstraints()
         priceLabelConstraints()
+        addItemButtonConstrain()
+        labelUpdateConstrain()
     }
     func shoppingListImageConstraints() {
         shoppingListImage.translatesAutoresizingMaskIntoConstraints = false
@@ -77,5 +104,19 @@ class ShoppingTableViewCell: UITableViewCell {
         priceLabel.topAnchor.constraint(equalTo: shoppingLabelDetail.bottomAnchor, constant: 5).isActive = true
         priceLabel.leadingAnchor.constraint(equalTo: shoppingListImage.trailingAnchor, constant: 20).isActive = true
         priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+    }
+    func addItemButtonConstrain() {
+        addItemStepper.translatesAutoresizingMaskIntoConstraints = false
+        addItemStepper.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        addItemStepper.leadingAnchor.constraint(equalTo: shoppingListImage.trailingAnchor, constant: 200).isActive = true
+        addItemStepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
+        addItemStepper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+    }
+    func labelUpdateConstrain() {
+        labelUpdate.translatesAutoresizingMaskIntoConstraints = false
+        labelUpdate.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        labelUpdate.leadingAnchor.constraint(equalTo: shoppingListImage.trailingAnchor, constant: 270).isActive = true
+        labelUpdate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        labelUpdate.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
 }
