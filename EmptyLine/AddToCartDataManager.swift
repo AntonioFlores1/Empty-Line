@@ -69,6 +69,7 @@ final class ShoppingCartDataManager {
         shoppingCartItems.remove(at: index)
         saveShoppingItems()
     }
+<<<<<<< HEAD
     
    
 
@@ -76,4 +77,6 @@ final class ShoppingCartDataManager {
     
     
     
+=======
+>>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
 }

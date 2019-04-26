@@ -13,7 +13,7 @@ import UIKit
 
 class ShoppingTableViewCell: UITableViewCell {
 //    weak var delegate: AddItemCellDelegate?
-
+    
     lazy var shoppingListImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "placeholder")
@@ -40,11 +40,8 @@ class ShoppingTableViewCell: UITableViewCell {
     
     lazy var addItemStepper: UIStepper = {
         var customStepper = UIStepper.init(frame: CGRect(x: 150,y: 150,width: 100,height: 100))
-        customStepper.wraps = true
-        customStepper.autorepeat = true
-        customStepper.minimumValue = 1.0
-        customStepper.maximumValue = 10
-        customStepper.addTarget(self, action: #selector(addItemTo), for: .valueChanged)
+        customStepper.minimumValue = -1
+        customStepper.maximumValue = 1
         return customStepper
     }()
     
@@ -53,10 +50,16 @@ class ShoppingTableViewCell: UITableViewCell {
         update.text = "1"
         return update
     }()
-    @objc func addItemTo() {
-        print("Item added")
-        labelUpdate.text = "\(Int(addItemStepper.value))"
+    @objc func addItemTo(_ sender: UIStepper) {
+        var total = 0
+        if addItemStepper.value == 2.0{
+            total += 1
+        } else if addItemStepper.value == 0 {
+            total -= 1
+        }
         
+        addItemStepper.value = 0
+        labelUpdate.text = total.description
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -14,23 +14,33 @@ import Stripe
 
 class ShoppingListViewController: UIViewController {
     
+<<<<<<< HEAD
      var total = 0.0
+=======
+    var total = 0.0
+    var totalItems = 1
+>>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
     var itemsPriceTotal: Double = 0.0 {
         didSet {
-            shoppingView.titleLabel.text  = "Total Amount : \(itemsPriceTotal)"
+            shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
     
+<<<<<<< HEAD
     var prices = [Double]()
 
+=======
+>>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
 
     var productDetailView = ProductDetailsView()
     public var items: Item!
+
     private var shoppingView = ShoppingView()
     private var listener: ListenerRegistration!
     private let authservice = AppDelegate.authservice
     private var barButtonItem = UIBarButtonItem()
     var shoppingImage = UIImage()
+    var stepperTags = [Int]()
     
     private var shoppingListTableView: UITableView = {
         let tv = UITableView()
@@ -64,7 +74,6 @@ class ShoppingListViewController: UIViewController {
         view.addSubview(shoppingView)
         view.backgroundColor = .white
         navigationItem.title = "Checkout List"
-        shoppingListTableView.reloadData()
         shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
         shoppingListTableView.delegate      =   self
         shoppingListTableView.dataSource    =   self
@@ -75,6 +84,7 @@ class ShoppingListViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
+<<<<<<< HEAD
         shoppingView.titleLabel.text = "Total: \(prices.reduce(0, {$0 + $1}))"
        //fecthShoppingHistory()
 
@@ -85,20 +95,24 @@ class ShoppingListViewController: UIViewController {
         fetchShoppingCartItems()
     }
     
+=======
+        shoppingListTableView.reloadData()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        shoppingListTableView.reloadData()
+    }
+>>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
     @objc private func fetchShoppingCartItems(){
         shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
            refresh.beginRefreshing()
     }
     @objc func barButtonPressed() {
         //navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
-        
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
         let navigationController = UINavigationController(rootViewController: addCardController)
         present(navigationController, animated: true, completion: nil)
     }
-    
-   
 }
 
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -116,10 +130,13 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
-        
-        
+        itemsPriceTotal = itemInCart.price // new
+        itemsPriceTotal = ShoppingCartDataManager.total
+        cell.addItemStepper.tag = indexPath.row
+        stepperTags.append(cell.addItemStepper.tag)
+        cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
+//        self.shoppingListTableView.reloadData()
         refresh.endRefreshing()
-        
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
@@ -129,10 +146,31 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-//   @objc func addItem() {
-////        print("hgjkahghkshgjhakhgskh")
-//
-//    }
+    @objc private func changeStepperValue(_ stepper: UIStepper) {
+        let item = shoppingCart[stepper.tag]
+    
+            if stepper.value == 1.0 || stepper.value == 0.0 {
+                print(stepper.value)
+                itemsPriceTotal = itemsPriceTotal + item.price
+                    totalItems += 1
+                    stepper.value = 0
+                } else if stepper.value == -1.0 {
+                    if totalItems <= 1{
+                        totalItems = 1
+                    } else {
+                        itemsPriceTotal = itemsPriceTotal - item.price
+                        totalItems -= 1
+                        stepper.value = 0
+                    }
+                }
+        let indexPath = IndexPath(row: stepper.tag, section: 0  )
+        guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
+        cell.labelUpdate.text = totalItems.description
+        print(item.price)
+        print(itemsPriceTotal )
+    }
+    
+   
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -147,6 +185,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
 
+<<<<<<< HEAD
 //    private func fetchProduct(shoppingItems: String) {
 //        DBService.getProducts(productBarcode: shoppingItems) { (error, items) in
 //            if let error = error {
@@ -174,6 +213,32 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 //            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
 //        }
 //    }
+=======
+    private func fetchProduct(shoppingItems: String) {
+        DBService.getProducts(productBarcode: shoppingItems) { (error, items) in
+            if let error = error {
+                self.showAlert(title: "Error fetching product information", message: error.localizedDescription)
+            } else if let items = items {
+                self.items = items
+                self.productDetailView.productName.text = items.name
+                self.productDetailView.productDetails.text = items.description
+                self.productDetailView.productPrice.text = "$" + String(items.price)
+                self.productDetailView.productNutritionDetails.text = items.ingredients
+                self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+            }
+        }
+    }
+    
+    func fecthShoppingHistory() {
+        if let purches = items {
+            self.productDetailView.productName.text = items.name
+            self.productDetailView.productDetails.text = items.description
+            self.productDetailView.productPrice.text = "$" + String(items.price)
+            self.productDetailView.productNutritionDetails.text = items.ingredients
+            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
+        }
+    }
+>>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
 //            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
 //    func fecthShoppingHistory() {
 //        if let purches = items {
@@ -198,6 +263,9 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
            // ShoppingHistoryItemsDataManager.saveItem()
         }
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
 }
 
 
@@ -208,6 +276,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
+<<<<<<< HEAD
 
         showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine") { (alert) in
             self.createShoppingHistory()
@@ -217,5 +286,14 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
 
 
 
+=======
+        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was success. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine.")
+        itemsPriceTotal = 0.0
+        shoppingCart.removeAll()
+        ShoppingCartDataManager.deleteItemFromShoppingCart(index: shoppingCart.count)
+        barButtonItem.isEnabled = false
+        createShoppingHistory()
+        refresh.endRefreshing()
+>>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
     }
 }
