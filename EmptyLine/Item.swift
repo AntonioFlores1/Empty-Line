@@ -18,6 +18,7 @@ struct Item: Codable {
     let isCoupon: Bool
     let coupon: Double
     let date:Date
+    // quantity
     
     var createdAt: String {
        let formatter = DateFormatter()
