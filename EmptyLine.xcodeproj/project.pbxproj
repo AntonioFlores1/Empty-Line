@@ -24,6 +24,7 @@
 		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
 		04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8A2225D4BDA00007BCB /* productFile.json */; };
 		04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */; };
+		559EA9FC2270F62800027D1D /* StartMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EA9FB2270F62800027D1D /* StartMenuViewController.swift */; };
 		55CE1E6122677E0500D3ECFA /* QRCodeWebSiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */; };
 		55CE1E6322677E7500D3ECFA /* WebSitewebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE1E6222677E7500D3ECFA /* WebSitewebView.swift */; };
 		55CE1E832269065900D3ECFA /* websiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE1E822269065900D3ECFA /* websiteView.swift */; };
@@ -103,6 +104,7 @@
 		04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		0B5EFF0F95C77403AFCA7F87 /* Pods-EmptyLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.release.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.release.xcconfig"; sourceTree = "<group>"; };
 		20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmptyLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		559EA9FB2270F62800027D1D /* StartMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuViewController.swift; sourceTree = "<group>"; };
 		55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWebSiteViewController.swift; sourceTree = "<group>"; };
 		55CE1E6222677E7500D3ECFA /* WebSitewebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSitewebView.swift; sourceTree = "<group>"; };
 		55CE1E822269065900D3ECFA /* websiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = websiteView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				6764235322692C5200C30EA5 /* ScanItemView.swift */,
 				6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */,
 				55EB5EAE2257B5D8003FA4F8 /* QRView.swift */,
+				559EA9FB2270F62800027D1D /* StartMenuViewController.swift */,
 			);
 			path = "QRCode and Barcode";
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
+				"${BUILT_PRODUCTS_DIR}/ZKCarousel/ZKCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -533,6 +537,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -574,6 +579,7 @@
 			files = (
 				55EB5E9822569D1B003FA4F8 /* PaymentViewController.swift in Sources */,
 				043D4C252264DC2500488C31 /* ShoppingHistoryItemsDataManager.swift in Sources */,
+				559EA9FC2270F62800027D1D /* StartMenuViewController.swift in Sources */,
 				55CE1E6122677E0500D3ECFA /* QRCodeWebSiteViewController.swift in Sources */,
 				55CE1E852269097300D3ECFA /* MyWebby.swift in Sources */,
 				0404FE492273696600C70083 /* ReceiptTableViewCell.swift in Sources */,
