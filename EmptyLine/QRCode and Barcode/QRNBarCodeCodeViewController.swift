@@ -176,6 +176,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 
     
     
+    
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
             self.view.alpha = 1
