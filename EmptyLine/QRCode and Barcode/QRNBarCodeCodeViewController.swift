@@ -20,7 +20,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var webby = QRCodeWebSiteViewController()
     //        @IBOutlet weak var barCodeRawValueLabel: UILabel!
     var barCodeRawValueLabel: UILabel!
-    
+    var tap = UITapGestureRecognizer()
     var bar = ""
     var website = ""
     
@@ -146,7 +146,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                 self.idk.frame = CGRect(x: 0, y: y, width:
                     self.idk.frame.width, height:
                     self.idk.frame.height)
-            };, completion: nil)
+            }, completion: nil)
         }
     }
     
@@ -169,27 +169,28 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         }
     }
     
-    
-    
-    
-    
-    
+        @objc func tapView() {
+        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
+    }
+    @objc func tapViewDetail() {
+        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
+    }
     
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
-            
-            let height: CGFloat = 700
-            
+            let height: CGFloat = 150
             let y = window.frame.height - height
             view.frame = window.frame
-            self.view.alpha = 1
+            // view.alpha = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {
+                self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
-        };, completion: nil)
+            }, completion: nil)
         }
-    
+    }
     
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
