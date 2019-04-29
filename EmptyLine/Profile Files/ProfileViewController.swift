@@ -308,7 +308,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             if indexPath.section == indexPath.row {
-            navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+            //navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
             }
             
         case 1:

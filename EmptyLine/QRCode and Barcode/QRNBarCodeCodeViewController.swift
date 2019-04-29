@@ -14,8 +14,6 @@ import WebKit
 class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDelegate {
     
-
-    
     @IBOutlet weak var imageView: UIImageView!
     var panGesture = UIPanGestureRecognizer()
     var tap = UITapGestureRecognizer()
@@ -220,6 +218,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     @objc private func addButtonPressed(){
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            showAlert(title: "Success", message: "Item added to shopping cart")
 //            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
 //
 //            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
