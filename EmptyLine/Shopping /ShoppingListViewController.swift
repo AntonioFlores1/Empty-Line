@@ -118,18 +118,23 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
+
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
         refresh.endRefreshing()
+
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
+        
+        itemsPriceTotal += itemInCart.price
+        
         return cell
     }
    
