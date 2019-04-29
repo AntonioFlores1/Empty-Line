@@ -11,6 +11,7 @@
 		0404FE47227367A900C70083 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE46227367A900C70083 /* ReceiptView.swift */; };
 		0404FE492273696600C70083 /* ReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE482273696600C70083 /* ReceiptTableViewCell.swift */; };
 		0404FE4B22774A6100C70083 /* ReceiptView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE4A22774A6100C70083 /* ReceiptView+Extension.swift */; };
+		0404FE4D22778CEC00C70083 /* ReceiptDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE4C22778CEC00C70083 /* ReceiptDataManager.swift */; };
 		0410266A225858D10076A454 /* ScanCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102669225858D10076A454 /* ScanCardViewController.swift */; };
 		04102692225BAF540076A454 /* CardTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102691225BAF540076A454 /* CardTypeTableViewCell.swift */; };
 		04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */; };
@@ -89,6 +90,7 @@
 		0404FE46227367A900C70083 /* ReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptView.swift; sourceTree = "<group>"; };
 		0404FE482273696600C70083 /* ReceiptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptTableViewCell.swift; sourceTree = "<group>"; };
 		0404FE4A22774A6100C70083 /* ReceiptView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptView+Extension.swift"; sourceTree = "<group>"; };
+		0404FE4C22778CEC00C70083 /* ReceiptDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDataManager.swift; sourceTree = "<group>"; };
 		04102669225858D10076A454 /* ScanCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCardViewController.swift; sourceTree = "<group>"; };
 		04102691225BAF540076A454 /* CardTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeTableViewCell.swift; sourceTree = "<group>"; };
 		04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingNameTableViewCell.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E8F22569CD0003FA4F8 /* ProfileViewController.swift */,
+				0404FE4C22778CEC00C70083 /* ReceiptDataManager.swift */,
 				04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */,
 				04141A1C226D2838004B5C9A /* CreatedDateManager.swift */,
 				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
@@ -616,6 +619,7 @@
 				75B0DB6F225D1DFD00F075DD /* ItemCollection.swift in Sources */,
 				55CE1E6322677E7500D3ECFA /* WebSitewebView.swift in Sources */,
 				55EB5EA62256A110003FA4F8 /* StorageKey.swift in Sources */,
+				0404FE4D22778CEC00C70083 /* ReceiptDataManager.swift in Sources */,
 				67F55548225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift in Sources */,
 				55EB5E9622569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift in Sources */,
 				04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */,
