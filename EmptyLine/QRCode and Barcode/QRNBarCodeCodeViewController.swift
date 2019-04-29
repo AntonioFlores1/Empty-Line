@@ -17,17 +17,15 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     @IBOutlet weak var imageView: UIImageView!
     var panGesture = UIPanGestureRecognizer()
+    var tap = UITapGestureRecognizer()
     var webby = QRCodeWebSiteViewController()
-    //        @IBOutlet weak var barCodeRawValueLabel: UILabel!
     var barCodeRawValueLabel: UILabel!
-    
     var bar = ""
     var website = ""
-    
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-    
+
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
@@ -133,7 +131,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     public func QRCodeSetView(){
-        
+
+
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
@@ -141,6 +140,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             let height: CGFloat = 600
             let y = window.frame.height - height
             view.frame = window.frame
+
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //self.view.alpha = 1
                 self.idk.frame = CGRect(x: 0, y: y, width:
@@ -169,26 +169,30 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         }
     }
     
-    
-    
-    
-    
-    
+
+    @objc func tapView() {
+        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
+    }
+    @objc func tapViewDetail() {
+        productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
+    }
+
     
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
-            
-            let height: CGFloat = 700
-            
+
+            let height: CGFloat = 150
+
             let y = window.frame.height - height
             view.frame = window.frame
             self.view.alpha = 1
                 self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
         };, completion: nil)
         }
+    
     
     
     @objc func handleDismiss() {
@@ -199,12 +203,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             }
         }
     }
-    
-    
-    
-    
-    
-    
     
     private func fetchProduct(barCode: String){
         DBService.getProducts(productBarcode: barCode) { (error, product) in
@@ -223,11 +221,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         }
     }
     
-    
-    
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        
     }
     
     private func dontAddToShoppingCart(){
@@ -244,37 +239,26 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         savedDate.add(newDate: itemSavedDate)
 
         if let item = products {
-        
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
-            
-            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
-            
-            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
-                self.dismiss(animated: true, completion: nil)
-            })
-            
-            let checkOut = UIAlertAction(title: "Check Out", style: .default, handler: { (alert) in
-                self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
-            })
-            
-            alertController.addAction(checkOut)
-            alertController.addAction(continueShopping)
-            self.present(alertController, animated: true)
+//            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
+//
+//            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
+//                self.dismiss(animated: true, completion: nil)
+//            })
+//
+//            let checkOut = UIAlertAction(title: "Check Out", style: .default, handler: { (alert) in
+//                self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
+//            })
+//
+//            alertController.addAction(checkOut)
+//            alertController.addAction(continueShopping)
+//            self.present(alertController, animated: true)
             self.handleDismiss()
             print("Item added")
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
+
      func startLiveVideo() {
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
