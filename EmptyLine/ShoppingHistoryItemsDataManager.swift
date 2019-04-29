@@ -38,6 +38,9 @@ private static var filename = "item.plist"
         shoppedItems = fetchShoppingCartBYDay(CreatedDate: savedDate)
         shoppedItems.append(item)
         saveDate(createdAt: savedDate)
+        shoppedItems.removeAll()
+        shoppedItems = fetchShoppingCart()
+        shoppedItems.append(item)
         saveItem()
         
     }
@@ -46,6 +49,7 @@ private static var filename = "item.plist"
         do {
             let data = try PropertyListEncoder().encode(shoppedItems)
             try data.write(to: path, options: Data.WritingOptions.atomic)
+            
         } catch {
             print("property list encoding error: \(error)")
         }
@@ -54,11 +58,12 @@ private static var filename = "item.plist"
     
     static public func deleteFromShoppingCart(index: Int) {
         shoppedItems.remove(at: index)
-        saveItem()
+      //  saveItem()
     }
     static func totalAmount() -> Double {
         return total
     }
+    
     static func fetchShoppingCart() -> [Item] {
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename).path
         if FileManager.default.fileExists(atPath: path) {
@@ -83,7 +88,9 @@ private static var filename = "item.plist"
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path){
                 do {
+                    print(shoppedItems)
                     shoppedItems = try PropertyListDecoder().decode([Item].self, from: data)
+                    print(shoppedItems)
                 }catch {
                     print("Error: decoding error \(error.localizedDescription)")
                 }

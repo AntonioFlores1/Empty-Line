@@ -49,7 +49,7 @@ extension DBService {
                        UsersCollectionKeys.streetAddressKey: user.streetAddress,
                        UsersCollectionKeys.cityNameKey: user.cityName,
                        UsersCollectionKeys.stateNameKey: user.stateName,
-                       UsersCollectionKeys.zipCodeKey: user.zipCode
+                       UsersCollectionKeys.zipCodeKey: user.zipCode,
             ]) { (error) in
                 if let error = error {
                     completion(error)
