@@ -64,9 +64,17 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
+        
         fetchUser()
+       
         tableView.tableFooterView = UIView()
-        fetchItemsByDate()        
+        fetchItemsByDate()
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
+        self.tableView.layer.addSublayer(gradient)
+        
     }
     
     private func fetchItemsByDate(){
@@ -181,7 +189,9 @@ class ProfileViewController: UIViewController {
     }
 
     func tableViewconstriant() {
+        
         self.view.addSubview(tableView)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
