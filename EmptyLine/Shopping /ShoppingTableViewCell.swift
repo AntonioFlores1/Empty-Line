@@ -7,12 +7,9 @@
 //
 
 import UIKit
-//protocol AddItemCellDelegate: AnyObject{
-//    func addItemTo()
-//}
+
 
 class ShoppingTableViewCell: UITableViewCell {
-//    weak var delegate: AddItemCellDelegate?
     
     lazy var shoppingListImage: UIImageView = {
         let image = UIImageView()
@@ -57,7 +54,7 @@ class ShoppingTableViewCell: UITableViewCell {
         } else if addItemStepper.value == 0 {
             total -= 1
         }
-        
+
         addItemStepper.value = 0
         labelUpdate.text = total.description
     }
