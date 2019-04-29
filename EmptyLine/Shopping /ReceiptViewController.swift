@@ -32,11 +32,12 @@ class ReceiptViewController: UIViewController {
         receiptView.itemsTableView.delegate = self
         receiptView.itemsTableView.dataSource = self
         fetchCheckOutItemsForReceipt()
-        setupBarButtonItem()
+        //setupBarButtonItem()
     }
     
     private func fetchCheckOutItemsForReceipt(){
-       checkedOutItems = ShoppingCartDataManager.fetchShoppingCart()
+      // checkedOutItems = ShoppingCartDataManager.fetchShoppingCart()
+        checkedOutItems = ReceiptDataManager.fetchCheckedOutItems()
         for item in checkedOutItems {
             totalCost += item.price
         }
