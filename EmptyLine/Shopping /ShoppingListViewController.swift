@@ -102,7 +102,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
         
         
-        refresh.endRefreshing()
+       // refresh.endRefreshing()
         
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
@@ -110,6 +110,9 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
+        
+        itemsPriceTotal += itemInCart.price
+        
         return cell
     }
     

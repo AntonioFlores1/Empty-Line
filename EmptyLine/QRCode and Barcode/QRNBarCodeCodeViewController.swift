@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Firebase
 import WebKit
+import ZKCarousel
 
 class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDelegate {
@@ -33,6 +34,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nav = UINavigationBar.appearance()
+        nav.backgroundColor = .blue
         startLiveVideo()
         addToShoppingCart()
         dontAddToShoppingCart()
@@ -50,6 +53,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         //        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
         //        self.view.layer.addSublayer(gradient)
         // view.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        //nav.barTintColor = .blue
 //        gradient.frame = self.view.frame
 //        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
 //        self.view.layer.addSublayer(gradient)
