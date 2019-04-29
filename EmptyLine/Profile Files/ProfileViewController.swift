@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
+        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -55,6 +56,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(profileView)
         view.addSubview(tableView)
+        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -69,12 +72,13 @@ class ProfileViewController: UIViewController {
        
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
         gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
         self.tableView.layer.addSublayer(gradient)
         
+        navigationController?.title = "Profile"
+        profileView.usernameLabel.textColor = .white 
     }
     
     private func fetchItemsByDate(){
@@ -222,7 +226,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
          switch profileView.segmentedControl.selectedSegmentIndex {
          case 0:
-            return 1
+            return allItemsBoughtInDay.count
          case 1:
             return account.count
          default:
@@ -318,7 +322,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             if indexPath.section == indexPath.row {
-            navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+            //navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
             }
             
         case 1:

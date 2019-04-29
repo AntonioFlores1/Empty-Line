@@ -177,6 +177,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
     }
     
+
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -185,7 +186,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 //            let height: CGFloat = 150
 
             let height: CGFloat = 150
-
+            
             let y = window.frame.height - height
             view.frame = window.frame
             // view.alpha = 0
@@ -195,6 +196,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             }, completion: nil)
         }
     }
+    
+    
     
     
     @objc func handleDismiss() {
@@ -242,6 +245,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            showAlert(title: "Success", message: "Item added to shopping cart")
 //            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
 //
 //            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
