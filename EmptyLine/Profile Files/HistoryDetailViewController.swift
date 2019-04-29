@@ -16,7 +16,6 @@ class HistoryDetailViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-//                self.tableView.titleLabel.resignFirstResponder()
             }
         }
     }

@@ -21,11 +21,10 @@ class ShoppingListViewController: UIViewController {
             shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
-    
 
     var productDetailView = ProductDetailsView()
+    private var product:NumberOfItem?
     public var items: Item!
-
     private var shoppingView = ShoppingView()
     private var listener: ListenerRegistration!
     private let authservice = AppDelegate.authservice
@@ -43,6 +42,8 @@ class ShoppingListViewController: UIViewController {
         refC.addTarget(self, action: #selector(fetchShoppingCartItems), for: .valueChanged)
         return refC
     }()
+    
+   
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
@@ -54,6 +55,7 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+   
         view.addSubview(shoppingView)
         view.backgroundColor = .white
         navigationItem.title = "Checkout List"
@@ -68,6 +70,7 @@ class ShoppingListViewController: UIViewController {
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
         shoppingListTableView.reloadData()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         shoppingListTableView.reloadData()
@@ -105,7 +108,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
-//        self.shoppingListTableView.reloadData()
         refresh.endRefreshing()
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
@@ -115,32 +117,62 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.shadowOpacity = 0.5
         return cell
     }
-    
+   
     @objc private func changeStepperValue(_ stepper: UIStepper) {
+        
         let item = shoppingCart[stepper.tag]
-    
-            if stepper.value == 1.0 || stepper.value == 0.0 {
-                print(stepper.value)
-                itemsPriceTotal = itemsPriceTotal + item.price
-                    totalItems += 1
-                    stepper.value = 0
-                } else if stepper.value == -1.0 {
-                    if totalItems <= 1{
-                        totalItems = 1
-                    } else {
-                        itemsPriceTotal = itemsPriceTotal - item.price
-                        totalItems -= 1
-                        stepper.value = 0
-                    }
-                }
+        if stepper.value == 1.0 || stepper.value == 0.0 {
+            print(stepper.value)
+            itemsPriceTotal = itemsPriceTotal + item.price
+            totalItems += 1
+            stepper.value = 0
+        } else if stepper.value == -1.0{
+            if totalItems <= 1 {
+               itemsPriceTotal = itemsPriceTotal - item.price
+               totalItems = 1
+            } else {
+                itemsPriceTotal = itemsPriceTotal - item.price
+                totalItems -= 1
+                stepper.value = 0
+            }
+        }
         let indexPath = IndexPath(row: stepper.tag, section: 0  )
         guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
         cell.labelUpdate.text = totalItems.description
         print(item.price)
-        print(itemsPriceTotal )
+        print(itemsPriceTotal)
+        
+        switch cell {
+        case cell:
+            if indexPath.row == 0 {
+                if stepper.value == 1.0{
+                    totalItems += 1
+                    stepper.value = 0
+                } else {
+                    totalItems -= 1
+                }
+            }
+        case cell:
+            if indexPath.row == 1{
+                if stepper.value == 1.0{
+                    totalItems += 1
+                } else {
+                    totalItems -= 1
+                }
+            }
+        case cell:
+            if indexPath.row == 2{
+                if stepper.value == 1.0{
+                    totalItems = +1
+                } else {
+                    totalItems -= 1
+                }
+            }        
+        default:
+            break
+        }
     }
     
-   
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
