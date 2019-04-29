@@ -23,23 +23,10 @@ class ProfileViewController: UIViewController {
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
 
-    
-//    private var itemsByDate = [ItemSavedDate]() {
-//
-//        didSet {
-//             allItemsBoughtInDay.removeAll()
-//            for day in itemsByDate {
-//        allItemsBoughtInDay.append(ShoppingHistoryItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
-//        }
-//             tableView.reloadData()
-//    }
-//    }
-    
     private var allItemsBoughtInDay: [[Item]] = [] {
         didSet {
             tableView.reloadData()
         }
-        
     }
 
     private var settinTableCell = SettingTableViewCell()
@@ -55,7 +42,6 @@ class ProfileViewController: UIViewController {
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         return imagePicker
     }()
-    
     
     
     lazy var tableView: UITableView = {
@@ -84,9 +70,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func fetchItemsByDate(){
-//        itemsByDate = savedDate.fetchDates()
         let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart()
-        var currentDate = allItems.first?.createdAt
+        let currentDate = allItems.first?.createdAt
         var dateItems = [Item]()
         for item in allItems {
             if currentDate == item.createdAt {
@@ -99,6 +84,7 @@ class ProfileViewController: UIViewController {
         allItemsBoughtInDay.append(dateItems)
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()

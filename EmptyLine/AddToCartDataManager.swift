@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 final class ShoppingCartDataManager {
     private init() {}
     
@@ -69,14 +68,8 @@ final class ShoppingCartDataManager {
         shoppingCartItems.remove(at: index)
         saveShoppingItems()
     }
-<<<<<<< HEAD
-    
-   
-
-    
-    
-    
-    
-=======
->>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
+    static func deleteAllItems(){
+        shoppingCartItems.removeAll()
+        saveShoppingItems()
+    }
 }

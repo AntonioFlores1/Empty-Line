@@ -14,23 +14,13 @@ import Stripe
 
 class ShoppingListViewController: UIViewController {
     
-<<<<<<< HEAD
-     var total = 0.0
-=======
     var total = 0.0
     var totalItems = 1
->>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
     var itemsPriceTotal: Double = 0.0 {
         didSet {
             shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
-    
-<<<<<<< HEAD
-    var prices = [Double]()
-
-=======
->>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
 
     var productDetailView = ProductDetailsView()
     public var items: Item!
@@ -59,12 +49,6 @@ class ShoppingListViewController: UIViewController {
             DispatchQueue.main.async {
                 self.shoppingListTableView.reloadData()
                 //self.shoppingView.titleLabel.resignFirstResponder()
-                for item in self.shoppingCart {
-                    
-                    self.prices.append(item.price)
-                    
-                    //self.shoppingView.titleLabel.text = "Total: \(self.total)"
-                }
         }
       }
     }
@@ -84,30 +68,31 @@ class ShoppingListViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
-<<<<<<< HEAD
-        shoppingView.titleLabel.text = "Total: \(prices.reduce(0, {$0 + $1}))"
-       //fecthShoppingHistory()
-
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
+        shoppingListTableView.reloadData()
     }
     
-=======
-        shoppingListTableView.reloadData()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        shoppingListTableView.reloadData()
-    }
->>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
+
     @objc private func fetchShoppingCartItems(){
         shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
            refresh.beginRefreshing()
     }
+    
+    
+    private func createShoppingHistory(){
+        for item in shoppingCart {
+            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+            savedDate.add(newDate: shoppedItem)
+            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+        }
+    }
+    
+    
     @objc func barButtonPressed() {
-        //navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
         let navigationController = UINavigationController(rootViewController: addCardController)
@@ -135,7 +120,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
-//        self.shoppingListTableView.reloadData()
         refresh.endRefreshing()
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
@@ -184,90 +168,11 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
           
         }
     }
-
-<<<<<<< HEAD
-//    private func fetchProduct(shoppingItems: String) {
-//        DBService.getProducts(productBarcode: shoppingItems) { (error, items) in
-//            if let error = error {
-//                self.showAlert(title: "Error fetching product information", message: error.localizedDescription)
-//            } else if let items = items {
-//                self.items = items
-//                self.productDetailView.productName.text = items.name
-//                self.productDetailView.productDetails.text = items.description
-//                self.productDetailView.productPrice.text = "$" + String(items.price)
-//                self.productDetailView.productNutritionDetails.text = items.ingredients
-//                self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-//               // self.fecthShoppingHistory()
-//            }
-//        }
-//    }
     
-//    func fecthShoppingHistory() {
-//        if let purches = items {
-//            //wewItemsDataManager.addToShoppingCart(item: purches, savedDate: )
-//           // ItemsDataManager.addToShoppingCart(item: purches)
-//            self.productDetailView.productName.text = items.name
-//            self.productDetailView.productDetails.text = items.description
-//            self.productDetailView.productPrice.text = "$" + String(items.price)
-//            self.productDetailView.productNutritionDetails.text = items.ingredients
-//            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-//        }
-//    }
-=======
-    private func fetchProduct(shoppingItems: String) {
-        DBService.getProducts(productBarcode: shoppingItems) { (error, items) in
-            if let error = error {
-                self.showAlert(title: "Error fetching product information", message: error.localizedDescription)
-            } else if let items = items {
-                self.items = items
-                self.productDetailView.productName.text = items.name
-                self.productDetailView.productDetails.text = items.description
-                self.productDetailView.productPrice.text = "$" + String(items.price)
-                self.productDetailView.productNutritionDetails.text = items.ingredients
-                self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-            }
-        }
-    }
-    
-    func fecthShoppingHistory() {
-        if let purches = items {
-            self.productDetailView.productName.text = items.name
-            self.productDetailView.productDetails.text = items.description
-            self.productDetailView.productPrice.text = "$" + String(items.price)
-            self.productDetailView.productNutritionDetails.text = items.ingredients
-            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-        }
-    }
->>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
-//            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
-//    func fecthShoppingHistory() {
-//        if let purches = items {
-//           // ItemsDataManager.addToShoppingCart(item: purches)
-//            self.productDetailView.productName.text = items.name
-//            self.productDetailView.productDetails.text = items.description
-//            self.productDetailView.productPrice.text = "$" + String(items.price)
-//            self.productDetailView.productNutritionDetails.text = items.ingredients
-//            self.productDetailView.productImage.kf.setImage(with: URL(string: items.image))
-////            self.navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
-//        }
-//    }
-            
-    
-
-    
-    private func createShoppingHistory(){
-        for item in shoppingCart {
-            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-//            savedDate.add(newDate: shoppedItem)
-            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-           // ShoppingHistoryItemsDataManager.saveItem()
-        }
-    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 100
     }
 }
-
 
 extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
@@ -276,24 +181,20 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
-<<<<<<< HEAD
-
-        showAlert(title: "Transaction success", message: "Thank you for shopping with zipLine") { (alert) in
-            self.createShoppingHistory()
-            self.shoppingCart.removeAll()
+        
+        //showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was success. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine.")
+        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was success. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
+            self.barButtonItem.isEnabled = false
+            self.createShoppingHistory()
+            //ShoppingCartDataManager.deleteAllItems()
+            self.shoppingCart.removeAll()
+            self.shoppingListTableView.reloadData()
+            self.refresh.endRefreshing()
+    self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
+
         }
-
-
-
-=======
-        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was success. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine.")
-        itemsPriceTotal = 0.0
-        shoppingCart.removeAll()
-        ShoppingCartDataManager.deleteItemFromShoppingCart(index: shoppingCart.count)
-        barButtonItem.isEnabled = false
-        createShoppingHistory()
-        refresh.endRefreshing()
->>>>>>> fdb1f9e978aab5eb14f40cff65dc3c6af60074fb
+        
     }
+    
 }
