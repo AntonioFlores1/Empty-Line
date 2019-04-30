@@ -21,6 +21,15 @@ class ShoppingListViewController: UIViewController {
             shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
+    
+    var date = Date()
+    var createdDate: String {  let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE d, MMMM yyyy"
+        let createdDate = formatter.string(from: date)
+        return createdDate
+        
+    }
+    
 
     var productDetailView = ProductDetailsView()
     private var product:NumberOfItem?
@@ -70,6 +79,7 @@ class ShoppingListViewController: UIViewController {
         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.tableFooterView = shoppingView
         shoppingListTableView.reloadData()
+        //ShoppingHistoryItemsDataManager.deleteAllItems()
 
     }
     
@@ -92,6 +102,7 @@ class ShoppingListViewController: UIViewController {
             savedDate.add(newDate: shoppedItem)
             ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
         }
+
     }
     
     
@@ -144,6 +155,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         if stepper.value == 1.0 || stepper.value == 0.0 {
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
+            ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             totalItems += 1
             stepper.value = 0
         } else if stepper.value == -1.0{
@@ -153,6 +165,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             } else {
                 itemsPriceTotal = itemsPriceTotal - item.price
                 totalItems -= 1
+                ShoppingCartDataManager.deleteItemFromShoppingCart(index: stepper.tag)
                 stepper.value = 0
             }
         }
@@ -228,6 +241,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             ShoppingCartDataManager.deleteAllItems()
             self.shoppingCart.removeAll()
             self.refresh.endRefreshing()
+   
     self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
 
         }

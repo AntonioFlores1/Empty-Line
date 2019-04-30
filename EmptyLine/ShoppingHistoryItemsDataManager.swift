@@ -51,6 +51,17 @@ private static var filename = "item.plist"
         }
     }
     
+    static public func saveShoppingCart(shoppedDate: String, allItems: [Item]){
+        
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: "\(shoppedDate).plist")
+        do {
+            let data = try PropertyListEncoder().encode(shoppedItems)
+            try data.write(to: path, options: Data.WritingOptions.atomic)
+        } catch {
+            print("Property list encoding error")
+        }
+    }
+    
     
     static public func deleteFromShoppingCart(index: Int) {
         shoppedItems.remove(at: index)

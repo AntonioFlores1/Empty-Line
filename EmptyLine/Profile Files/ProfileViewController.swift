@@ -70,7 +70,6 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        //navigationController?.title = "Profile"
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .white
     }
