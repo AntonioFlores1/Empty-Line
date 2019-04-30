@@ -95,7 +95,7 @@ private static var filename = "item.plist"
                     print("Error: decoding error \(error.localizedDescription)")
                 }
             } else {
-                print("Error: File content is empty")
+                print("Error: File content \(path) is empty")
             }
         } else {
             print("Error: Filepath does not exist")

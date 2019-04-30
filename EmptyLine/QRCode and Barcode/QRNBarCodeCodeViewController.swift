@@ -297,20 +297,23 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
     }
 
-    
-//    public func setupView(){
-//        if let window = UIApplication.shared.keyWindow {
-//            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-//            view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
-//            window.addSubview(productDetailView)
-//
-////            let y = window.frame.height - height
-//            view.frame = window.frame
-//            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {            self.view.alpha = 1
-//                self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
-//        },completion: nil)
-//    }
-//}
+
+    public func setupView(){
+        if let window = UIApplication.shared.keyWindow {
+            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            window.addSubview(productDetailView)
+
+
+            let y = window.frame.height - height
+            view.frame = window.frame
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {            self.view.alpha = 1
+                self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
+        },completion: nil)
+    }
+}
+
+
     
     
     @objc func handleDismiss() {
@@ -358,6 +361,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            showAlert(title: "Success", message: "Item added to shopping cart")
 //            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
 //
 //            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
