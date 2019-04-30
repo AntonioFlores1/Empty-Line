@@ -72,6 +72,7 @@ class ProfileViewController: UIViewController {
         fetchItemsByDate()
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .white
+        //ShoppingHistoryItemsDataManager.deleteAllItems()
     }
     
     private func fetchItemsByDate(){
@@ -255,8 +256,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.5
             
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
-
-                let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
+   let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {
                 cell.historyImage.isHidden = true
