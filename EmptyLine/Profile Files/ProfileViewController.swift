@@ -70,8 +70,9 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        navigationController?.title = "Profile"
-        profileView.usernameLabel.textColor = .white 
+        //navigationController?.title = "Profile"
+        navigationItem.title = "Profile"
+        profileView.usernameLabel.textColor = .white
     }
     
     private func fetchItemsByDate(){
@@ -82,7 +83,7 @@ class ProfileViewController: UIViewController {
             if currentDate == item.createdAt {
                 dateItems.append(item)
             } else {
-                allItemsBoughtInDay.append(dateItems)
+               // allItemsBoughtInDay.append(dateItems)
                 dateItems = [item]
             }
         }

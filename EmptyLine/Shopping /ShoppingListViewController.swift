@@ -133,7 +133,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
         
-        itemsPriceTotal += itemInCart.price
+        //itemsPriceTotal += itemInCart.price
         
         return cell
     }

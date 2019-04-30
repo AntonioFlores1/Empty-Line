@@ -16,10 +16,6 @@ private static var filename = "item.plist"
     static var total = 0.0
     static private var shoppedItems = [Item]() {
         didSet {
-//            total = 0.0
-//            for item in self.shoppedItems {
-//                self.total += item.price
-//            }
         }
     }
     
@@ -101,6 +97,11 @@ private static var filename = "item.plist"
             print("Error: Filepath does not exist")
         }
         return shoppedItems
+    }
+    
+    static func deleteAllItems(){
+        shoppedItems.removeAll()
+        saveItem()
     }
     
 }
