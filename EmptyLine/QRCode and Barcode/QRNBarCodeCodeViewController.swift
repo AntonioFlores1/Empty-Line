@@ -17,9 +17,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     @IBOutlet weak var imageView: UIImageView!
     var panGesture = UIPanGestureRecognizer()
-    var tap = UITapGestureRecognizer()
     var webby = QRCodeWebSiteViewController()
     var barCodeRawValueLabel: UILabel!
+    var tap = UITapGestureRecognizer()
     var bar = ""
     var website = ""
     let session = AVCaptureSession()
@@ -296,12 +296,17 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     @objc func tapViewDetail() {
         productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
     }
+    
 
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
+//            let height: CGFloat = 150
+
+            let height: CGFloat = 150
+            
 
 
             let y = window.frame.height - height
