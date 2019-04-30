@@ -64,7 +64,10 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+        self.view.layer.addSublayer(gradient)
         view.addSubview(shoppingView)
         view.backgroundColor = .white
         navigationItem.title = "Checkout List"
