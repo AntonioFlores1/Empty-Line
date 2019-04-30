@@ -20,6 +20,13 @@ class ShoppingView: UIView {
         
     }()
     
+    public lazy var payButton: UIButton = {
+        let payButton = UIButton()
+        payButton.setTitle("Pay", for: .normal)
+        payButton.layer.cornerRadius = 10.0
+        return payButton
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150))
         commonInit()
@@ -33,6 +40,19 @@ class ShoppingView: UIView {
     
     private func commonInit(){
     self.addSubview(titleLabel)
+        setConstrains()
+    }
+    
+    
+    private func setConstrains(){
+        
+        addSubview(payButton)
+        payButton.translatesAutoresizingMaskIntoConstraints = false
+        payButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100).isActive = true
+        payButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100).isActive = true
+        payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -100).isActive = true
+        payButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        payButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
     }
     
     

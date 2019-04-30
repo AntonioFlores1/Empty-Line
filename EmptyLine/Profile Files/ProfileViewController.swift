@@ -23,19 +23,11 @@ class ProfileViewController: UIViewController {
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
 
-    
-    private var itemsByDate = [ItemSavedDate]() {
-        
+    private var allItemsBoughtInDay: [[Item]] = [] {
         didSet {
-             allItemsBoughtInDay.removeAll()
-            for day in itemsByDate {
-        allItemsBoughtInDay.append(ShoppingHistoryItemsDataManager.fetchShoppingCartBYDay(CreatedDate: day.createdDate))
+            tableView.reloadData()
         }
-             tableView.reloadData()
     }
-    }
-    
-    private var allItemsBoughtInDay: [[Item]] = []
 
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
@@ -52,11 +44,11 @@ class ProfileViewController: UIViewController {
     }()
     
     
-    
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
+        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -64,6 +56,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(profileView)
         view.addSubview(tableView)
+        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -76,12 +70,26 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-
+        navigationController?.title = "Profile"
+        profileView.usernameLabel.textColor = .white 
     }
     
     private func fetchItemsByDate(){
-        itemsByDate = savedDate.fetchDates()
+        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart()
+        let currentDate = allItems.first?.createdAt
+        var dateItems = [Item]()
+        for item in allItems {
+            if currentDate == item.createdAt {
+                dateItems.append(item)
+            } else {
+                allItemsBoughtInDay.append(dateItems)
+                dateItems = [item]
+            }
+        }
+        allItemsBoughtInDay.append(dateItems)
+        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
@@ -195,10 +203,10 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard !itemsByDate.isEmpty else { return "" }
+        guard !allItemsBoughtInDay.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return itemsByDate[section].createdDate
+            return allItemsBoughtInDay[section].first?.createdAt
         case 1:
             return account[section]
         default:
@@ -209,7 +217,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
          switch profileView.segmentedControl.selectedSegmentIndex {
          case 0:
-            return 1
+            return allItemsBoughtInDay.count
          case 1:
             return account.count
          default:
@@ -305,7 +313,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             if indexPath.section == indexPath.row {
-            navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+            //navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
             }
             
         case 1:
