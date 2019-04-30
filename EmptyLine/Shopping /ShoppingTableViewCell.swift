@@ -63,7 +63,7 @@ class ShoppingTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: "shoppingListCell")
         commonInit()
         setUpViewConstraints()
     }

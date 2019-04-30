@@ -22,6 +22,9 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
+    private var list: ListenerRegistration?
+    private var setButton: RoundedButton!
+    private var activityView:UIActivityIndicatorView!
     var productDetailView = ProductDetailsView()
     private var product:NumberOfItem?
     public var items: Item!
@@ -32,14 +35,9 @@ class ShoppingListViewController: UIViewController {
     var shoppingImage = UIImage()
     var stepperTags = [Int]()
     
-    private var shoppingListTableView: UITableView = {
-        let tv = UITableView()
-        return tv
-    }()
-    
     private lazy var refresh: UIRefreshControl = {
         let refC = UIRefreshControl()
-        shoppingListTableView.refreshControl = refC
+        shoppingView.shoppingListTableView.refreshControl = refC
         refC.addTarget(self, action: #selector(fetchShoppingCartItems), for: .valueChanged)
         return refC
     }()
@@ -47,7 +45,8 @@ class ShoppingListViewController: UIViewController {
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
-                self.shoppingListTableView.reloadData()
+                self.shoppingView.shoppingListTableView.reloadData()
+                
                 //self.shoppingView.titleLabel.resignFirstResponder()
         }
       }
@@ -55,34 +54,57 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-   
         view.addSubview(shoppingView)
         view.backgroundColor = .white
+        setupViews()
         navigationItem.title = "Checkout List"
-        shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
-        shoppingListTableView.delegate      =   self
-        shoppingListTableView.dataSource    =   self
+//        shoppingView.shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
         fetchShoppingCartItems()
+        shoppingView.shoppingListTableView.dataSource    =   self
+        shoppingView.shoppingListTableView.delegate      =   self
+        view.addVerticalGradientLayer(topColor: prColor, bottomColor: seColor)
         self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
-        shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
-        barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
+        //barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(payButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
-        self.view.addSubview(self.shoppingListTableView)
-        shoppingListTableView.tableFooterView = shoppingView
-        shoppingListTableView.reloadData()
-
+//        shoppingView.shoppingListTableView.tableFooterView = shoppingView
+        shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
+        shoppingView.shoppingListTableView.reloadData()
+        checkOutButton()
     }
-    
-    
+ 
+    private func checkOutButton(){
+//        shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
+    }
+    @objc func payButtonPressed() {
+        print("pressed")
+    }
+    func payButtonConstraint() {
+        
+    }
+   
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
-        shoppingListTableView.reloadData()
+        shoppingView.shoppingListTableView.reloadData()
     }
     
 
     @objc private func fetchShoppingCartItems(){
         shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
            refresh.beginRefreshing()
+    }
+    
+    private func setupViews() {
+       setupShoppingView()
+    }
+    
+    private func setupShoppingView() {
+        shoppingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            shoppingView.topAnchor.constraint(equalTo: view.topAnchor),
+            shoppingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            shoppingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            shoppingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            ])
     }
     
     
@@ -95,7 +117,7 @@ class ShoppingListViewController: UIViewController {
     }
     
     
-    @objc func barButtonPressed() {
+    @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
         let navigationController = UINavigationController(rootViewController: addCardController)
@@ -112,7 +134,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell()}
+        
+        guard let cell = shoppingView.shoppingListTableView.dequeueReusableCell(withIdentifier: shoppingView.cell, for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell()}
         
         let itemInCart = shoppingCart[indexPath.row]
         cell.shoppingLabelDetail.text = itemInCart.name
@@ -132,11 +155,11 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
-        
-        itemsPriceTotal += itemInCart.price
-        
         return cell
     }
+}
+
+extension ShoppingListViewController{
    
     @objc private func changeStepperValue(_ stepper: UIStepper) {
         
@@ -157,7 +180,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
         let indexPath = IndexPath(row: stepper.tag, section: 0  )
-        guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
+        guard let cell = shoppingView.shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
         cell.labelUpdate.text = totalItems.description
         print(item.price)
         print(itemsPriceTotal)
@@ -200,7 +223,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         if editingStyle == .delete {
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
-            self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
             self.itemsPriceTotal = ShoppingCartDataManager.totalAmount()
           
@@ -228,7 +251,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             ShoppingCartDataManager.deleteAllItems()
             self.shoppingCart.removeAll()
             self.refresh.endRefreshing()
-    self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
+            self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
 
         }
     }
