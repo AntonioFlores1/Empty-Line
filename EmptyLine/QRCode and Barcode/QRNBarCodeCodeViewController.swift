@@ -298,19 +298,19 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
 
     
-    public func setupView(){
-        if let window = UIApplication.shared.keyWindow {
-            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
-            window.addSubview(productDetailView)
-
-            let y = window.frame.height - height
-            view.frame = window.frame
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {            self.view.alpha = 1
-                self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
-        },completion: nil)
-    }
-}
+//    public func setupView(){
+//        if let window = UIApplication.shared.keyWindow {
+//            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+//            view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
+//            window.addSubview(productDetailView)
+//
+////            let y = window.frame.height - height
+//            view.frame = window.frame
+//            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {            self.view.alpha = 1
+//                self.productDetailView.frame = CGRect(x: 0, y: y, width: self.productDetailView.frame.width, height: self.productDetailView.frame.height)
+//        },completion: nil)
+//    }
+//}
     
     
     @objc func handleDismiss() {
