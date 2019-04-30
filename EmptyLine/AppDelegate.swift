@@ -20,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//       if let _ = AppDelegate.authservice.getCurrentUser() {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "startMenu") as! StartMenuViewController
+//            window?.rootViewController = mainPageTabBarController
+//
+//        window?.makeKeyAndVisible()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         if let _ = AppDelegate.authservice.getCurrentUser() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

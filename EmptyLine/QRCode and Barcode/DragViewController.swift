@@ -1,20 +1,23 @@
 //
-//  MainTabBarController.swift
+//  DragViewController.swift
 //  EmptyLine
 //
-//  Created by Pursuit on 4/4/19.
+//  Created by Alfredo Barragan on 4/25/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
-
+class DragViewController: UIViewController {
+    
+    @IBOutlet weak var dragArea: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
-    
+
 
     /*
     // MARK: - Navigation

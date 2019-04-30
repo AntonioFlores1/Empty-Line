@@ -16,10 +16,6 @@ private static var filename = "item.plist"
     static var total = 0.0
     static private var shoppedItems = [Item]() {
         didSet {
-//            total = 0.0
-//            for item in self.shoppedItems {
-//                self.total += item.price
-//            }
         }
     }
     
@@ -52,6 +48,17 @@ private static var filename = "item.plist"
             
         } catch {
             print("property list encoding error: \(error)")
+        }
+    }
+    
+    static public func saveShoppingCart(shoppedDate: String, allItems: [Item]){
+        
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: "\(shoppedDate).plist")
+        do {
+            let data = try PropertyListEncoder().encode(shoppedItems)
+            try data.write(to: path, options: Data.WritingOptions.atomic)
+        } catch {
+            print("Property list encoding error")
         }
     }
     
@@ -101,6 +108,11 @@ private static var filename = "item.plist"
             print("Error: Filepath does not exist")
         }
         return shoppedItems
+    }
+    
+    static func deleteAllItems(){
+        shoppedItems.removeAll()
+        saveItem()
     }
     
 }

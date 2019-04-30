@@ -48,6 +48,13 @@ class ShoppingView: UIView {
     }()
 
     override init(frame: CGRect) {
+
+        super.init(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150))
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+        self.layer.addSublayer(gradient)
+
         super.init(frame: .zero)
         backgroundColor = .white
         commonInit()

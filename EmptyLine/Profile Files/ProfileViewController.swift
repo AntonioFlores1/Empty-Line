@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+       // table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -56,8 +56,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(profileView)
         view.addSubview(tableView)
-        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+      //  view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+       // profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -67,10 +67,19 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
+        
         fetchUser()
+       
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        navigationController?.title = "Profile"
+        navigationItem.title = "Profile"
+
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+////        gradient.startPoint = CGPoint(x: 0, y: 0)
+////gradient.endPoint = CGPoint(x: 0, y: 44 )
+//        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
+//            self.tableView.layer.addSublayer(gradient)
         profileView.usernameLabel.textColor = .white 
     }
     
@@ -82,7 +91,7 @@ class ProfileViewController: UIViewController {
             if currentDate == item.createdAt {
                 dateItems.append(item)
             } else {
-                allItemsBoughtInDay.append(dateItems)
+               // allItemsBoughtInDay.append(dateItems)
                 dateItems = [item]
             }
         }
@@ -186,7 +195,9 @@ class ProfileViewController: UIViewController {
     }
 
     func tableViewconstriant() {
+        
         self.view.addSubview(tableView)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true

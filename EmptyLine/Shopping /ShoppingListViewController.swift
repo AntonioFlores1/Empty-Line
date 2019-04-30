@@ -21,6 +21,15 @@ class ShoppingListViewController: UIViewController {
             shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
+    
+    var date = Date()
+    var createdDate: String {  let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE d, MMMM yyyy"
+        let createdDate = formatter.string(from: date)
+        return createdDate
+        
+    }
+    
 
     private var list: ListenerRegistration?
     private var activityView: UIActivityIndicatorView!
@@ -52,16 +61,26 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+        self.view.layer.addSublayer(gradient)
         view.addSubview(shoppingView)
         setupViews()
         navigationItem.title = "Checkout List"
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self
         shoppingView.shoppingListTableView.delegate      =   self
-        self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
+//         self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
+//         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
+//         self.view.addSubview(self.shoppingListTableView)
+        shoppingListTableView.reloadData()
+        //ShoppingHistoryItemsDataManager.deleteAllItems()
         shoppingView.shoppingListTableView.tableFooterView = UIView()
         shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
         shoppingView.shoppingListTableView.reloadData()
+
     }
  
     @objc func payButtonPressed() {
@@ -101,6 +120,7 @@ class ShoppingListViewController: UIViewController {
             savedDate.add(newDate: shoppedItem)
             ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
         }
+
     }
     
     
@@ -139,6 +159,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
+
         return cell
     }
 }
@@ -151,6 +172,7 @@ extension ShoppingListViewController{
         if stepper.value == 1.0 || stepper.value == 0.0 {
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
+            ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             totalItems += 1
             stepper.value = 0
         } else if stepper.value == -1.0{
@@ -160,6 +182,7 @@ extension ShoppingListViewController{
             } else {
                 itemsPriceTotal = itemsPriceTotal - item.price
                 totalItems -= 1
+                ShoppingCartDataManager.deleteItemFromShoppingCart(index: stepper.tag)
                 stepper.value = 0
             }
         }
@@ -235,7 +258,9 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             ShoppingCartDataManager.deleteAllItems()
             self.shoppingCart.removeAll()
             self.refresh.endRefreshing()
+   
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
+
 
         }
     }
