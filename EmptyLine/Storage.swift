@@ -32,7 +32,7 @@ extension DBService {
                        StorageCollectionKeys.StateKey: storage.state,
                        StorageCollectionKeys.StorageIDKey: storage.storageID,
                        StorageCollectionKeys.ZipCodeKey: storage.zipCode,
-                       StorageCollectionKeys.QRCodeKey: storage.qrcode
+                       StorageCollectionKeys.QRCodeKey: storage.qrcode,
             ]) { (error) in
                 if let error = error {
                     completion(error)
