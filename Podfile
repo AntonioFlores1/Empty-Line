@@ -18,6 +18,7 @@ target 'EmptyLine' do
   pod 'PureLayout'
   pod 'Stripe'
   pod 'Alamofire'
+  pod 'ZKCarousel'
 
 
 end
