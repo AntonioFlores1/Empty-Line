@@ -31,6 +31,8 @@ class ShoppingListViewController: UIViewController {
     }
     
 
+    private var list: ListenerRegistration?
+    private var activityView: UIActivityIndicatorView!
     var productDetailView = ProductDetailsView()
     private var product:NumberOfItem?
     public var items: Item!
@@ -41,14 +43,9 @@ class ShoppingListViewController: UIViewController {
     var shoppingImage = UIImage()
     var stepperTags = [Int]()
     
-    private var shoppingListTableView: UITableView = {
-        let tv = UITableView()
-        return tv
-    }()
-    
     private lazy var refresh: UIRefreshControl = {
         let refC = UIRefreshControl()
-        shoppingListTableView.refreshControl = refC
+        shoppingView.shoppingListTableView.refreshControl = refC
         refC.addTarget(self, action: #selector(fetchShoppingCartItems), for: .valueChanged)
         return refC
     }()
@@ -56,46 +53,64 @@ class ShoppingListViewController: UIViewController {
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
-                self.shoppingListTableView.reloadData()
-                //self.shoppingView.titleLabel.resignFirstResponder()
+                self.shoppingView.shoppingListTableView.reloadData()
+                self.shoppingView.titleLabel.resignFirstResponder()
         }
       }
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
         gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
         self.view.layer.addSublayer(gradient)
         view.addSubview(shoppingView)
-        view.backgroundColor = .white
+        setupViews()
         navigationItem.title = "Checkout List"
-        shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
-        shoppingListTableView.delegate      =   self
-        shoppingListTableView.dataSource    =   self
         fetchShoppingCartItems()
-        self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
-        shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
-        barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(barButtonPressed))
-        navigationItem.rightBarButtonItem = barButtonItem
-        self.view.addSubview(self.shoppingListTableView)
-        shoppingListTableView.tableFooterView = shoppingView
+        shoppingView.shoppingListTableView.dataSource    =   self
+        shoppingView.shoppingListTableView.delegate      =   self
+//         self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
+//         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
+//         self.view.addSubview(self.shoppingListTableView)
         shoppingListTableView.reloadData()
         //ShoppingHistoryItemsDataManager.deleteAllItems()
+        shoppingView.shoppingListTableView.tableFooterView = UIView()
+        shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
+        shoppingView.shoppingListTableView.reloadData()
 
     }
-    
-    
+ 
+    @objc func payButtonPressed() {
+        print("pressed")
+        payButtonPresse()
+    }
+   
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
-        shoppingListTableView.reloadData()
+        shoppingView.shoppingListTableView.reloadData()
     }
     
 
     @objc private func fetchShoppingCartItems(){
         shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
            refresh.beginRefreshing()
+    }
+    
+    private func setupViews() {
+       setupShoppingView()
+    }
+    
+    private func setupShoppingView() {
+        shoppingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            shoppingView.topAnchor.constraint(equalTo: view.topAnchor),
+            shoppingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            shoppingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            shoppingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            ])
     }
     
     
@@ -109,7 +124,7 @@ class ShoppingListViewController: UIViewController {
     }
     
     
-    @objc func barButtonPressed() {
+    @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
         let navigationController = UINavigationController(rootViewController: addCardController)
@@ -126,31 +141,30 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell()}
         
+        guard let cell = shoppingView.shoppingListTableView.dequeueReusableCell(withIdentifier: shoppingView.cell, for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell()}
         let itemInCart = shoppingCart[indexPath.row]
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
-
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
         refresh.endRefreshing()
-
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
-        
-        //itemsPriceTotal += itemInCart.price
-        
+
         return cell
     }
+}
+
+extension ShoppingListViewController{
    
     @objc private func changeStepperValue(_ stepper: UIStepper) {
         
@@ -173,7 +187,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
         let indexPath = IndexPath(row: stepper.tag, section: 0  )
-        guard let cell = shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
+        guard let cell = shoppingView.shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
         cell.labelUpdate.text = totalItems.description
         print(item.price)
         print(itemsPriceTotal)
@@ -216,7 +230,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         if editingStyle == .delete {
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
-            self.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
             self.itemsPriceTotal = ShoppingCartDataManager.totalAmount()
           
@@ -245,7 +259,8 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             self.shoppingCart.removeAll()
             self.refresh.endRefreshing()
    
-    self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
+            self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
+
 
         }
     }

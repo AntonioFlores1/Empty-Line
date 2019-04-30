@@ -30,7 +30,7 @@ class CreditCardInfoSetupViewController: UITableViewController {
     private func setupBarButtonItem(){
         view.backgroundColor = .white
         navigationItem.title = "PAYMENT SETTINGS"
-         barButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(barButtonPressed))
+        barButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(barButtonPressed))
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
