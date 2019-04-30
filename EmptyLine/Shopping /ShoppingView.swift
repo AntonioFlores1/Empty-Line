@@ -9,7 +9,6 @@
 import UIKit
 
 class ShoppingView: UIView {
-    
     let cell = "shoppingListCell"
     
     lazy var shoppingListTableView: UITableView = {
@@ -37,30 +36,26 @@ class ShoppingView: UIView {
     }()
    
     lazy var payButton: UIButton = {
-//        var payButton = UIButton(frame: CGRect(x: frame.size.width - 60, y: 0, width: 50, height: 50))
         var payButton = UIButton()
         payButton.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 0.7)
-        payButton.setTitle("Test Button", for: .normal)
-        payButton.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 0.7)
+        payButton.setTitle("pay", for: .normal)
         payButton.layer.cornerRadius = payButton.frame.size.width / 2
         payButton.layer.borderColor = UIColor.darkGray.cgColor
         payButton.layer.borderWidth = 1
         payButton.layer.cornerRadius = 20
-//        payButton.center.y = payButton.frame.size.height - 80
         payButton.translatesAutoresizingMaskIntoConstraints = false
         return payButton
     }()
 
     override init(frame: CGRect) {
-//        super.init(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150))
         super.init(frame: .zero)
+        backgroundColor = .white
         commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-        
     }
     
     private func commonInit(){
@@ -79,7 +74,7 @@ class ShoppingView: UIView {
             shoppingListTableView.topAnchor.constraint(equalTo: topAnchor),
             shoppingListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             shoppingListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
+            shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85) // 0.8
             ])
     }
     
@@ -90,14 +85,14 @@ class ShoppingView: UIView {
             countainerFooter.leadingAnchor.constraint(equalTo: leadingAnchor),
             countainerFooter.trailingAnchor.constraint(equalTo: trailingAnchor),
             countainerFooter.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            countainerFooter.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
+            countainerFooter.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15) // 0.2
         ])
     }
     
     private func setupTitleLabel() {
         countainerFooter.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: countainerFooter.topAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: countainerFooter.topAnchor, constant: 12), // 12
             titleLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 12)
             ])
     }

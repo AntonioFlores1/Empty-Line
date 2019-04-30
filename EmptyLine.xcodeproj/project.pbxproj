@@ -66,8 +66,6 @@
 		6706786822597FFF005D33FE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706786722597FFF005D33FE /* TableViewCell.swift */; };
 		671C17C122774D6300A8CD17 /* NumberOfItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C17C022774D6300A8CD17 /* NumberOfItem.swift */; };
 		671C17C322774FB300A8CD17 /* ItemCollectionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C17C222774FB300A8CD17 /* ItemCollectionKeys.swift */; };
-		671C17C52277CD8B00A8CD17 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C17C42277CD8B00A8CD17 /* RoundedButton.swift */; };
-		671C17C72277CFD100A8CD17 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C17C62277CFD100A8CD17 /* Extensions.swift */; };
 		6764235022692A5100C30EA5 /* DetailOfItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */; };
 		6764235222692B9F00C30EA5 /* ItemDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */; };
 		6764235422692C5200C30EA5 /* ScanItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764235322692C5200C30EA5 /* ScanItemView.swift */; };
@@ -151,8 +149,6 @@
 		6706786722597FFF005D33FE /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		671C17C022774D6300A8CD17 /* NumberOfItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfItem.swift; sourceTree = "<group>"; };
 		671C17C222774FB300A8CD17 /* ItemCollectionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionKeys.swift; sourceTree = "<group>"; };
-		671C17C42277CD8B00A8CD17 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		671C17C62277CFD100A8CD17 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6764234F22692A5100C30EA5 /* DetailOfItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOfItemViewController.swift; sourceTree = "<group>"; };
 		6764235122692B9F00C30EA5 /* ItemDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6764235322692C5200C30EA5 /* ScanItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanItemView.swift; sourceTree = "<group>"; };
@@ -336,7 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E9322569CEC003FA4F8 /* ShoppingListViewController.swift */,
-				671C17C42277CD8B00A8CD17 /* RoundedButton.swift */,
 				0404FE482273696600C70083 /* ReceiptTableViewCell.swift */,
 				0404FE442273678C00C70083 /* ReceiptViewController.swift */,
 				0404FE46227367A900C70083 /* ReceiptView.swift */,
@@ -407,7 +402,6 @@
 			isa = PBXGroup;
 			children = (
 				55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */,
-				671C17C62277CFD100A8CD17 /* Extensions.swift */,
 			);
 			path = "Show Alert";
 			sourceTree = "<group>";
@@ -597,7 +591,6 @@
 				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
 				04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */,
-				671C17C52277CD8B00A8CD17 /* RoundedButton.swift in Sources */,
 				55EB5EA02256A08F003FA4F8 /* DBService.swift in Sources */,
 				67F55545225E81D700F67C94 /* ConfirmPaymentViewController.swift in Sources */,
 				55EB5EBC2257B6FF003FA4F8 /* ShoppingView.swift in Sources */,
@@ -624,7 +617,6 @@
 				55EB5EA22256A0C2003FA4F8 /* AuthService.swift in Sources */,
 				67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */,
 				75B0DB6F225D1DFD00F075DD /* ItemCollection.swift in Sources */,
-				671C17C72277CFD100A8CD17 /* Extensions.swift in Sources */,
 				55CE1E6322677E7500D3ECFA /* WebSitewebView.swift in Sources */,
 				55EB5EA62256A110003FA4F8 /* StorageKey.swift in Sources */,
 				0404FE4D22778CEC00C70083 /* ReceiptDataManager.swift in Sources */,

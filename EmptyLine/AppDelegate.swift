@@ -10,10 +10,6 @@ import UIKit
 import Firebase
 import Stripe
 
-let prColor = UIColor(hue: 0.6361, saturation: 0.25, brightness: 0.51, alpha: 1.0)
-let seColor = UIColor(hue: 199/360, saturation: 18/100, brightness: 100/100, alpha: 1.0)
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

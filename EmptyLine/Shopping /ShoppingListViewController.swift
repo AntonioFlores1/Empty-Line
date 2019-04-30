@@ -23,8 +23,7 @@ class ShoppingListViewController: UIViewController {
     }
 
     private var list: ListenerRegistration?
-    private var setButton: RoundedButton!
-    private var activityView:UIActivityIndicatorView!
+    private var activityView: UIActivityIndicatorView!
     var productDetailView = ProductDetailsView()
     private var product:NumberOfItem?
     public var items: Item!
@@ -46,8 +45,7 @@ class ShoppingListViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.shoppingView.shoppingListTableView.reloadData()
-                
-                //self.shoppingView.titleLabel.resignFirstResponder()
+                self.shoppingView.titleLabel.resignFirstResponder()
         }
       }
     }
@@ -55,31 +53,20 @@ class ShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(shoppingView)
-        view.backgroundColor = .white
         setupViews()
         navigationItem.title = "Checkout List"
-//        shoppingView.shoppingListTableView = UITableView(frame: UIScreen.main.bounds, style: UITableView.Style.plain)
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self
         shoppingView.shoppingListTableView.delegate      =   self
-        view.addVerticalGradientLayer(topColor: prColor, bottomColor: seColor)
         self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
-        //barButtonItem = UIBarButtonItem(title: "Pay", style: .done, target: self, action: #selector(payButtonPressed))
-        navigationItem.rightBarButtonItem = barButtonItem
-//        shoppingView.shoppingListTableView.tableFooterView = shoppingView
+        shoppingView.shoppingListTableView.tableFooterView = UIView()
         shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
         shoppingView.shoppingListTableView.reloadData()
-        checkOutButton()
     }
  
-    private func checkOutButton(){
-//        shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
-    }
     @objc func payButtonPressed() {
         print("pressed")
-    }
-    func payButtonConstraint() {
-        
+        payButtonPresse()
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -136,19 +123,16 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = shoppingView.shoppingListTableView.dequeueReusableCell(withIdentifier: shoppingView.cell, for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell()}
-        
         let itemInCart = shoppingCart[indexPath.row]
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
-
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
         refresh.endRefreshing()
-
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
         cell.layer.masksToBounds = false
