@@ -72,14 +72,14 @@ class ProfileViewController: UIViewController {
        
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
+        navigationItem.title = "Profile"
+
 //        let gradient = CAGradientLayer()
 //        gradient.frame = self.view.bounds
 ////        gradient.startPoint = CGPoint(x: 0, y: 0)
 ////gradient.endPoint = CGPoint(x: 0, y: 44 )
 //        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
 //            self.tableView.layer.addSublayer(gradient)
-        
-        navigationController?.title = "Profile"
         profileView.usernameLabel.textColor = .white 
     }
     
@@ -91,7 +91,7 @@ class ProfileViewController: UIViewController {
             if currentDate == item.createdAt {
                 dateItems.append(item)
             } else {
-                allItemsBoughtInDay.append(dateItems)
+               // allItemsBoughtInDay.append(dateItems)
                 dateItems = [item]
             }
         }

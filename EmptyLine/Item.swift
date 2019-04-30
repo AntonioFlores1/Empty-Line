@@ -22,7 +22,7 @@ struct Item: Codable {
     
     var createdAt: String {
        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy MMMM EEEE"
+        formatter.dateFormat = "EEEE d, MMMM yyyy"
         let createdDate = formatter.string(from: date)
         
         return createdDate
