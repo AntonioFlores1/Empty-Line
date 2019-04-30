@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+       // table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -56,8 +56,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(profileView)
         view.addSubview(tableView)
-        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+      //  view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+       // profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -72,10 +72,12 @@ class ProfileViewController: UIViewController {
        
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        let gradient = CAGradientLayer()
-        gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
-        self.tableView.layer.addSublayer(gradient)
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+////        gradient.startPoint = CGPoint(x: 0, y: 0)
+////gradient.endPoint = CGPoint(x: 0, y: 44 )
+//        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
+//            self.tableView.layer.addSublayer(gradient)
         
         navigationController?.title = "Profile"
         profileView.usernameLabel.textColor = .white 
