@@ -72,15 +72,13 @@ class ShoppingListViewController: UIViewController {
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self
         shoppingView.shoppingListTableView.delegate      =   self
-//         self.itemsPriceTotal = ShoppingHistoryItemsDataManager.totalAmount()
-//         shoppingListTableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: "cell")
-//         self.view.addSubview(self.shoppingListTableView)
-        shoppingListTableView.reloadData()
-        //ShoppingHistoryItemsDataManager.deleteAllItems()
         shoppingView.shoppingListTableView.tableFooterView = UIView()
         shoppingView.payButton.addTarget(self, action: #selector(payButtonPressed), for: .touchUpInside)
         shoppingView.shoppingListTableView.reloadData()
-
+        activityView = UIActivityIndicatorView(style: .gray)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
+        activityView.center = shoppingView.payButton.center
+        view.addSubview(activityView)
     }
  
     @objc func payButtonPressed() {
@@ -92,7 +90,6 @@ class ShoppingListViewController: UIViewController {
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.reloadData()
     }
-    
 
     @objc private func fetchShoppingCartItems(){
         shoppingCart = ShoppingCartDataManager.fetchShoppingCart()
@@ -110,9 +107,8 @@ class ShoppingListViewController: UIViewController {
             shoppingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             shoppingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             shoppingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-            ])
+        ])
     }
-    
     
     private func createShoppingHistory(){
         for item in shoppingCart {
@@ -129,6 +125,7 @@ class ShoppingListViewController: UIViewController {
         addCardController.delegate = self
         let navigationController = UINavigationController(rootViewController: addCardController)
         present(navigationController, animated: true, completion: nil)
+        activityView.startAnimating()
     }
 }
 

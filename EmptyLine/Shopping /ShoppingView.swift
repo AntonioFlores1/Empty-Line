@@ -48,14 +48,12 @@ class ShoppingView: UIView {
     }()
 
     override init(frame: CGRect) {
-
         super.init(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150))
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
         self.layer.addSublayer(gradient)
-
-        super.init(frame: .zero)
+//        super.init(frame: .zero)
         backgroundColor = .white
         commonInit()
     }
@@ -82,7 +80,7 @@ class ShoppingView: UIView {
             shoppingListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             shoppingListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85) // 0.8
-            ])
+        ])
     }
     
     private func setupFooter() {
@@ -101,7 +99,7 @@ class ShoppingView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: countainerFooter.topAnchor, constant: 12), // 12
             titleLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 12)
-            ])
+        ])
     }
     
     private func setupPayButton(){
@@ -111,6 +109,5 @@ class ShoppingView: UIView {
             payButton.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 100),
             payButton.trailingAnchor.constraint(equalTo: countainerFooter.trailingAnchor, constant: -100)
         ])
-        
     }
 }
