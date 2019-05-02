@@ -137,7 +137,6 @@
         <!--Shopping List View Controller-->
         <scene sceneID="4Ph-Bj-BL8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-xm-XCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="eMx-cc-BS9" customClass="ShoppingListViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7gR-MF-sfU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -147,8 +146,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="zEK-zp-fNe"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-xm-XCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1532" y="1083"/>
+            <point key="canvasLocation" x="1532" y="905"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Cab-Hg-a8b">
@@ -180,6 +180,36 @@
             </objects>
             <point key="canvasLocation" x="4207.1999999999998" y="701.19940029985014"/>
         </scene>
+        <!--Start Menu View Controller-->
+        <scene sceneID="Kjw-er-B2n">
+            <objects>
+                <viewController storyboardIdentifier="startMenu" id="vYh-Ci-qnR" customClass="StartMenuViewController" customModule="EmptyLine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TfD-iD-oiA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2t-Wl-DFQ" customClass="ZKCarousel" customModule="ZKCarousel">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50505873189999995" green="0.42610739330000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="f3Y-Zd-cGA" firstAttribute="trailing" secondItem="K2t-Wl-DFQ" secondAttribute="trailing" id="5jv-fI-ux9"/>
+                            <constraint firstItem="K2t-Wl-DFQ" firstAttribute="leading" secondItem="f3Y-Zd-cGA" secondAttribute="leading" id="HWJ-RS-7HA"/>
+                            <constraint firstItem="f3Y-Zd-cGA" firstAttribute="bottom" secondItem="K2t-Wl-DFQ" secondAttribute="bottom" id="a9F-hn-ct1"/>
+                            <constraint firstItem="K2t-Wl-DFQ" firstAttribute="top" secondItem="f3Y-Zd-cGA" secondAttribute="top" id="eoE-bR-Gna"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="f3Y-Zd-cGA"/>
+                    </view>
+                    <connections>
+                        <outlet property="displayView" destination="K2t-Wl-DFQ" id="zBm-Qb-KUt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5zq-Q6-bxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1554.4000000000001" y="399.85007496251876"/>
+        </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="c9x-ID-rX8">
             <objects>
@@ -191,13 +221,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="CDO-Lp-WUN" kind="relationship" relationship="viewControllers" id="gwN-zH-i5X"/>
-                        <segue destination="OFW-s0-IdX" kind="relationship" relationship="viewControllers" id="TRz-nA-w2X"/>
-                        <segue destination="mll-w7-R9n" kind="relationship" relationship="viewControllers" id="jZ5-ue-7Zq"/>
+                        <segue destination="mll-w7-R9n" kind="relationship" relationship="viewControllers" id="sZO-TH-Q9Y"/>
+                        <segue destination="OFW-s0-IdX" kind="relationship" relationship="viewControllers" id="wwb-2p-Ffd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF9-NH-0zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-359" y="-123"/>
+            <point key="canvasLocation" x="-364" y="400"/>
         </scene>
         <!--Scan Item-->
         <scene sceneID="FRU-31-Xco">
@@ -275,7 +305,6 @@
         <!--Shopping Cart-->
         <scene sceneID="mL2-RV-skA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RbZ-OM-l7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mll-w7-R9n" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shopping Cart" image="icons8-shopping_cart" id="iCg-wD-UBm"/>
                     <toolbarItems/>
@@ -288,8 +317,9 @@
                         <segue destination="eMx-cc-BS9" kind="relationship" relationship="rootViewController" id="VoC-2Y-KeG"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RbZ-OM-l7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="458" y="1059"/>
+            <point key="canvasLocation" x="593" y="904"/>
         </scene>
     </scenes>
     <resources>

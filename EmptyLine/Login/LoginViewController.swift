@@ -30,7 +30,23 @@ class LoginViewController: UIViewController {
         authservice.authserviceExistingAccountDelegate = self
         self.hideKeyboard()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        emailTextField.center.x -= view.bounds.width
+        passwordTextField.center.x -= view.bounds.width
+        
+       UIView.animate(withDuration: 0.5, delay: 0.3, options: [],
+                    animations: {
+                    self.emailTextField.center.x += self.view.bounds.width
+        },
+                       completion: nil
+        )
+        UIView.animate(withDuration: 0.5, delay: 0.4, options: [],
+                       animations: {
+                        self.passwordTextField.center.x += self.view.bounds.width
+        },
+                       completion: nil
+        )
+    }
 
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let email = emailTextField.text,

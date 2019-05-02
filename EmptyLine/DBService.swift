@@ -36,5 +36,17 @@ final class DBService {
             }
         }
     }
+    static public func numberOfItems(numberOfItems: String, completion: @escaping(Error?, NumberOfItem?) -> Void){
+        DBService.firestoreDB.collection(ItemCollectionK.CollectionKey).whereField(ItemCollectionK.Barcode, isEqualTo: numberOfItems).getDocuments { (snapShot, error) in
+            if let error = error {
+                completion(error, nil)
+            } else {
+                if let snapShot = snapShot?.documents.first {
+                    let itemTo = NumberOfItem(dict: snapShot.data())
+                    completion(nil, itemTo)
+                }
+            }
+        }
+    }
 }
 

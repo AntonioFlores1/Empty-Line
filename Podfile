@@ -6,6 +6,7 @@ target 'EmptyLine' do
   use_frameworks!
 
 # Pods for FellowsCC
+  pod 'PullUpController'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
@@ -17,6 +18,7 @@ target 'EmptyLine' do
   pod 'PureLayout'
   pod 'Stripe'
   pod 'Alamofire'
+  pod 'ZKCarousel'
 
 
 end
