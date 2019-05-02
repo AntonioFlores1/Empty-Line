@@ -263,7 +263,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
 
-            if profileView.segmentedControl.selectedSegmentIndex == 0 {
+            if profileView.segmentedControl.selectedSegmentIndex == 1 {
    let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {
