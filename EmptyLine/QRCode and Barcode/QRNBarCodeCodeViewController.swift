@@ -298,6 +298,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
 
+
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -316,6 +317,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         },completion: nil)
     }
 }
+
 
     
     
