@@ -8,4 +8,20 @@ target 'EmptyLine' do
 # Pods for FellowsCC
 
 
+  pod 'PullUpController'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/MLVision'
+  pod 'Firebase/MLVisionBarcodeModel'
+  pod 'Kingfisher'
+  pod 'Toucan'
+  pod 'PureLayout'
+  pod 'Stripe'
+  pod 'Alamofire'
+  pod 'ZKCarousel'
+
+
+
 end
