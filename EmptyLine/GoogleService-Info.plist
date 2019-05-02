@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>428101912602-sc6blr10qgjp4eno8b72e4dtnp1so6fj.apps.googleusercontent.com</string>
+	<string>705792745964-pagtgojm0e232ukhs9g2nlj0equuit3e.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.428101912602-sc6blr10qgjp4eno8b72e4dtnp1so6fj</string>
+	<string>com.googleusercontent.apps.705792745964-pagtgojm0e232ukhs9g2nlj0equuit3e</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC2SQdT8Op8KSuUDvDSRpaRZG_Dlj8ivgg</string>
+	<string>AIzaSyBA4buEadgPinnC1ZznYKeKkinZgq9dTHY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>428101912602</string>
+	<string>705792745964</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Antonio-Flores.EmptyLine</string>
+	<string>org.pursuit.zipLine</string>
 	<key>PROJECT_ID</key>
-	<string>emptyline-66a31</string>
+	<string>zipline1-c42d9</string>
 	<key>STORAGE_BUCKET</key>
-	<string>emptyline-66a31.appspot.com</string>
+	<string>zipline1-c42d9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:428101912602:ios:3e77998eb9a49a3a</string>
+	<string>1:705792745964:ios:1c615648d350ef9a</string>
 	<key>DATABASE_URL</key>
-	<string>https://emptyline-66a31.firebaseio.com</string>
+	<string>https://zipline1-c42d9.firebaseio.com</string>
 </dict>
 </plist>
