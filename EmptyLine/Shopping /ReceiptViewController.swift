@@ -41,7 +41,7 @@ class ReceiptViewController: UIViewController {
         for item in checkedOutItems {
             totalCost += item.price
         }
-        receiptView.totalCostLabel.text = "Total: $\(totalCost)"
+        receiptView.totalCostLabel.text = "Total: $\(Float(totalCost))"
     }
     
     private func setupBarButtonItem(){

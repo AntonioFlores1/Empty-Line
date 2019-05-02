@@ -11,7 +11,6 @@ import PureLayout
 import Toucan
 import Kingfisher
 
-
 enum ImageToEdit {
     case profileImage
 }
@@ -67,9 +66,7 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
-        
         fetchUser()
-       
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         navigationItem.title = "Profile"
@@ -255,6 +252,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
@@ -264,7 +262,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
-            
+
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
    let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
@@ -276,12 +274,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-            infocell.contentView.backgroundColor = UIColor.clear
-            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
-            infocell.layer.masksToBounds = false
-            infocell.layer.cornerRadius = 1.0
-            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
-            infocell.layer.shadowOpacity = 0.5
+//            infocell.contentView.backgroundColor = UIColor.clear
+//            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+//            infocell.layer.masksToBounds = false
+//            infocell.layer.cornerRadius = 1.0
+//            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
+//            infocell.layer.shadowOpacity = 0.5
 
             
             if let user = authservice.getCurrentUser(){
