@@ -30,7 +30,7 @@ final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICol
         let control = UIPageControl()
         control.currentPage = 0
         control.hidesForSinglePage = true
-        control.pageIndicatorTintColor = .red
+        control.pageIndicatorTintColor = .lightGray
         control.currentPageIndicatorTintColor = UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
@@ -76,7 +76,7 @@ final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICol
         self.addSubview(pageControl)
         NSLayoutConstraint(item: pageControl, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 20).isActive = true
         NSLayoutConstraint(item: pageControl, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: -20).isActive = true
-        NSLayoutConstraint(item: pageControl, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.5, constant: -5).isActive = true
+        NSLayoutConstraint(item: pageControl, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -5).isActive = true
         NSLayoutConstraint(item: pageControl, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 25).isActive = true
         
         self.bringSubviewToFront(pageControl)
@@ -183,7 +183,7 @@ fileprivate class carouselCollectionViewCell: UICollectionViewCell {
     
     private var descriptionLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 40)
+        label.font = UIFont.systemFont(ofSize: 19)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0

@@ -23,7 +23,7 @@
 #import "FIRStorage_Private.h"
 #import "Public/FIRStorageReference.h"
 
-//#import <FirebaseAuthInterop/FIRAuthInterop.h>
+#import <FirebaseAuthInterop/FIRAuthInterop.h>
 #import <FirebaseCore/FIRAppInternal.h>
 #import <FirebaseCore/FIRComponentContainer.h>
 #import <FirebaseCore/FIROptions.h>

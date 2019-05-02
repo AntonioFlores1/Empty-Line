@@ -65,7 +65,7 @@ private static var filename = "item.plist"
     
     static public func deleteFromShoppingCart(index: Int) {
         shoppedItems.remove(at: index)
-      //  saveItem()
+      saveItem()
     }
     static func totalAmount() -> Double {
         return total
@@ -87,6 +87,26 @@ private static var filename = "item.plist"
             print("Error: Filepath does not exist")
         }
         return shoppedItems
+    }
+    
+    static func fetShoppingHistory(date: String) -> [Item] {
+        
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: date).path
+        if FileManager.default.fileExists(atPath: path) {
+            if let data = FileManager.default.contents(atPath: path){
+                do {
+                    shoppedItems = try PropertyListDecoder().decode([Item].self, from: data)
+                }catch {
+                    print("Error: decoding error \(error.localizedDescription)")
+                }
+            } else {
+                print("Error: File content is empty")
+            }
+        } else {
+            print("Error: Filepath does not exist")
+        }
+        return shoppedItems
+        
     }
     
 

@@ -70,14 +70,14 @@ class ProfileViewController: UIViewController {
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         navigationItem.title = "Profile"
-
+        profileView.usernameLabel.textColor = .white
+   
 //        let gradient = CAGradientLayer()
 //        gradient.frame = self.view.bounds
 ////        gradient.startPoint = CGPoint(x: 0, y: 0)
 ////gradient.endPoint = CGPoint(x: 0, y: 44 )
 //        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
 //            self.tableView.layer.addSublayer(gradient)
-        profileView.usernameLabel.textColor = .white 
     }
     
     private func fetchItemsByDate(){
@@ -262,10 +262,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
-            
-            if profileView.segmentedControl.selectedSegmentIndex == 1 {
 
-                let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
+            if profileView.segmentedControl.selectedSegmentIndex == 0 {
+   let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {
                 cell.historyImage.isHidden = true
