@@ -11,7 +11,6 @@ import PureLayout
 import Toucan
 import Kingfisher
 
-
 enum ImageToEdit {
     case profileImage
 }
@@ -276,12 +275,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-            infocell.contentView.backgroundColor = UIColor.clear
-            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
-            infocell.layer.masksToBounds = false
-            infocell.layer.cornerRadius = 1.0
-            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
-            infocell.layer.shadowOpacity = 0.5
+//            infocell.contentView.backgroundColor = UIColor.clear
+//            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
+//            infocell.layer.masksToBounds = false
+//            infocell.layer.cornerRadius = 1.0
+//            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
+//            infocell.layer.shadowOpacity = 0.5
 
             
             if let user = authservice.getCurrentUser(){
