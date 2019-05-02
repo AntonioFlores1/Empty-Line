@@ -20,6 +20,7 @@ class CreateUserViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
         authservice.authserviceCreateNewAccountDelegate = self
+        self.hideKeyboard()
         
     }
     @IBAction func createAccountButtonPressed(_ sender: UIButton) {
@@ -52,4 +53,20 @@ extension CreateUserViewController: AuthServiceCreateNewAccountDelegate {
         showAlert(title: "Account Creation Error", message: error.localizedDescription)
     }
     
+}
+extension CreateUserViewController {
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(CreateUserViewController.dismissKeyboard))
+        
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
 }
