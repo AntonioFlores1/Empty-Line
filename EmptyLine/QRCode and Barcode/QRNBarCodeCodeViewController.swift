@@ -379,7 +379,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc func dontAddMe(){
-        handleDismiss()
+    dragViewController.view.frame = CGRect(x: 0,
+                                               y: 900,
+                                               width: self.view.bounds.width,
+                                               height: dViewHeight)
     }
 
                         //Antonio Code Dont Touch//
@@ -429,15 +432,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     
     @objc private func addButtonPressed(){
-        continueInteractiveTransition()
-       self.blurView.effect = nil
-        self.session.startRunning()
-        dragViewController.addButton.isHidden = false
-        
         dragViewController.view.frame = CGRect(x: 0,
                                                y: 900,
                                                width: self.view.bounds.width,
                                                height: dViewHeight)
+        continueInteractiveTransition()
+       self.blurView.effect = nil
+        self.session.startRunning()
         let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
         savedDate.add(newDate: itemSavedDate)
         if let item = products {
