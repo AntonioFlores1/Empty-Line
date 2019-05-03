@@ -144,6 +144,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.2.1)
   - Kingfisher (5.4.0)
   - leveldb-library (1.20)
+  - lottie-ios (3.0.4)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -165,6 +166,7 @@ DEPENDENCIES:
   - Firebase/MLVisionBarcodeModel
   - Firebase/Storage
   - Kingfisher
+  - lottie-ios
   - PullUpController
   - PureLayout
   - Stripe
@@ -196,6 +198,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - nanopb
     - Protobuf
     - PullUpController
@@ -228,6 +231,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   Kingfisher: 9c8f2cc6710334e06f32ba2b45e77707d5e2f0c9
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   PullUpController: 5c8710cb686dca43d5850ae994debb7fdb824b75
@@ -236,10 +240,6 @@ SPEC CHECKSUMS:
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
   ZKCarousel: 2cb2a9bbfebfa50ff7e240ae061890cdc3ee3cd8
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 6524130bcbe9e2b4d53b44a959bde873a6b8ce5d
-=======
-PODFILE CHECKSUM: f7bb3277c1509804c79e43f9bab515a802025f37
->>>>>>> 5bf23eef621489dae415758251864142c2d48bb1
+PODFILE CHECKSUM: 9fe283c8837d3fb867bf4e360b955a92aecaf34e
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.0

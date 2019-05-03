@@ -21,7 +21,7 @@ target 'EmptyLine' do
   pod 'Stripe'
   pod 'Alamofire'
   pod 'ZKCarousel'
-
+  pod 'lottie-ios'
 
 
 end
