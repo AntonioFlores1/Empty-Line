@@ -83,7 +83,10 @@ class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = [UIColor.init(red: 28, green: 50, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor]
+        self.layer.addSublayer(gradient)
         addSubview(profileImageView)
         addSubview(usernameLabel)
         bringSubviewToFront(profileImageView)
@@ -92,10 +95,6 @@ class ProfileView: UIView {
         //backgroundColor = .white
         setupConstraints()
         setnameLabelConstraints()
-        let gradient = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = [UIColor.init(red: 28, green: 50, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor]
-        self.layer.addSublayer(gradient)
     }
     
     required init?(coder aDecoder: NSCoder) {
