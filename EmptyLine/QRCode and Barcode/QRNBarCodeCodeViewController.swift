@@ -346,7 +346,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     self.products = product
                     dump(self.products)
                     self.dragViewController.itemName.text = product.name
-                    //self.dragViewController. .text = product.description
+                    self.dragViewController.itemDescription.text = product.description
                     self.dragViewController.itemPrice.text = "$" + String(product.price)
                     self.dragViewController.itemImage.kf.setImage(with: URL(string: product.image))
                 }

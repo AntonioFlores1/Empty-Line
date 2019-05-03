@@ -27,6 +27,8 @@ class DragViewController: UIViewController {
     
     @IBOutlet weak var dontAdd: UIButton!
     
+    @IBOutlet weak var itemDescription: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -39,6 +41,7 @@ class DragViewController: UIViewController {
        // animationView.loopMode = .loop
        // animationView.realtimeAnimationProgress
         self.dontAddCartAnimation.addSubview(animationView)
+        animationView.play()
         print("dont add me pressed")
     }
     
@@ -47,8 +50,8 @@ class DragViewController: UIViewController {
          let animationView = AnimationView(name: "animation-w800-h600")
     animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
             animationView.contentMode = .scaleAspectFill
-        animationView.loopMode = .loop
-        animationView.realtimeAnimationProgress
+//        animationView.loopMode = .loop
+//        animationView.realtimeAnimationProgress
  self.addToCartAnimation.addSubview(animationView)
         animationView.play()
         print("add me pressed")
