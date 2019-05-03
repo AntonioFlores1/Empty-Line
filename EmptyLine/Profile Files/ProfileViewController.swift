@@ -53,8 +53,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(profileView)
-        view.addSubview(tableView)
+      view.addSubview(profileView)
+    view.addSubview(tableView)
+        fetchUser()
       //  view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
        // profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
@@ -66,11 +67,13 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
-        fetchUser()
+        //fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
+        //profileView.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0.1331038177, alpha: 1)
         navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .white
+         profileView.usernameLabel.textColor = .white
+        //tableView.tableHeaderView = profileView
    
 //        let gradient = CAGradientLayer()
 //        gradient.frame = self.view.bounds
@@ -117,6 +120,7 @@ class ProfileViewController: UIViewController {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
                 self?.profileView.usernameLabel.text = "@" + user.displayName!
+                print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
                 self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
@@ -264,8 +268,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.5
 
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
-   let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
-                cell.historyLabel.text = day.name
+   let day = "Yeee" //allItemsBoughtInDay[indexPath.section][indexPath.row]
+                cell.historyLabel.text = day
             } else {
                 cell.historyImage.isHidden = true
                 cell.historyLabel.isHidden = true
@@ -369,10 +373,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.section == 1 {
                 if indexPath.row == 1 {
                  let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
-                    let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
+                    let ok = UIAlertAction(title: "Log out", style: .default) { (action) in
                         self.authservice.signOutAccount()
-                        self.navigationController?.pushViewController(MainTabBarController(), animated: true)
-                        self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.pushViewController(LoginViewController(), animated: true)
+                        //self.dismiss(animated: true, completion: nil)
+                        
+                        print("Logged out")
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
                 alertController.addAction(ok)
