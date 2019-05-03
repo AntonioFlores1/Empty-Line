@@ -263,7 +263,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
 
-            if profileView.segmentedControl.selectedSegmentIndex == 0 {
+            if profileView.segmentedControl.selectedSegmentIndex == 1 {
    let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {
@@ -371,7 +371,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                  let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
-                        self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+                        self.navigationController?.pushViewController(LoginViewController(), animated: true)
                         self.dismiss(animated: true, completion: nil)
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
