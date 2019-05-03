@@ -10,6 +10,9 @@ import UIKit
 import PureLayout
 import Toucan
 import Kingfisher
+import Firebase
+
+
 
 enum ImageToEdit {
     case profileImage
@@ -66,18 +69,23 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
-        fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .white
-   
+        profileView.usernameLabel.textColor = .black
+
 //        let gradient = CAGradientLayer()
 //        gradient.frame = self.view.bounds
 ////        gradient.startPoint = CGPoint(x: 0, y: 0)
 ////gradient.endPoint = CGPoint(x: 0, y: 44 )
 //        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
 //            self.tableView.layer.addSublayer(gradient)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchUser()
+        fetchItemsByDate()
     }
     
     private func fetchItemsByDate(){
@@ -96,18 +104,12 @@ class ProfileViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        fetchUser()
-        fetchItemsByDate()
-    }
-    
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
     
-    func fetchUser() {
+    private func fetchUser() {
         guard let user = authservice.getCurrentUser()else {
             print("no logged user")
             return
@@ -119,7 +121,7 @@ class ProfileViewController: UIViewController {
                 self?.profileView.usernameLabel.text = "@" + user.displayName!
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
-                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
+                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl), placeholder: #imageLiteral(resourceName: "zipLineLogo.png"))
             }
         }
     }
@@ -134,7 +136,7 @@ class ProfileViewController: UIViewController {
                 print(error.localizedDescription)
             } else if let imageUrl = url {
                 let request = userAuth.createProfileChangeRequest()
-                request.photoURL = URL(string: imageUrl.absoluteString)
+                request.photoURL = imageUrl
                 request.commitChanges(completion: { (error) in
                     if let error = error {
                         self?.showAlert(title: "Error Saving Account Info", message: error.localizedDescription)
@@ -205,6 +207,8 @@ class ProfileViewController: UIViewController {
     @objc func changeNameButton() {
         print(">>>//????")
     }
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -275,13 +279,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-//            infocell.contentView.backgroundColor = UIColor.clear
-//            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
-//            infocell.layer.masksToBounds = false
-//            infocell.layer.cornerRadius = 1.0
-//            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
-//            infocell.layer.shadowOpacity = 0.5
-
             
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
@@ -369,13 +366,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             }
             if indexPath.section == 1 {
                 if indexPath.row == 1 {
-                 let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
+                 let alertController = UIAlertController(title: "SignOut", message: "Proceed to sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
                         self.navigationController?.pushViewController(LoginViewController(), animated: true)
                         self.dismiss(animated: true, completion: nil)
                 }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in
+                    }
                 alertController.addAction(ok)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
