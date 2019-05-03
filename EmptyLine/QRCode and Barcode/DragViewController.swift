@@ -54,7 +54,9 @@ class DragViewController: UIViewController {
 //        animationView.realtimeAnimationProgress
  self.addToCartAnimation.addSubview(animationView)
         animationView.play()
+        animationView.backgroundBehavior = .pauseAndRestore
         print("add me pressed")
+        
     }
 
 }
