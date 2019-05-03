@@ -70,7 +70,10 @@ class ProfileView: UIView {
         gradient.frame = self.bounds
         gradient.colors = [UIColor.init(red: 28, green: 50, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor]
         self.layer.addSublayer(gradient)
+
         bringSubviewToFront(profileImageView)
+
+
         addSubview(profileImageView)
         addSubview(usernameLabel)
         addSubview(defaultCamera)
