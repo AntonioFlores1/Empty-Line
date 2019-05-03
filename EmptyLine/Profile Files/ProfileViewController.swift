@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-       // table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+//        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -55,8 +55,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(profileView)
         view.addSubview(tableView)
-      //  view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-       // profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+//        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+//        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -108,11 +108,11 @@ class ProfileViewController: UIViewController {
     }
     
     func fetchUser() {
-        guard let user = authservice.getCurrentUser() else {
+        guard let user = authservice.getCurrentUser()else {
             print("no logged user")
             return
         }
-        DBService.fetchUser(userId: user.uid) {[weak self] (error, ccuser) in
+        DBService.fetchUser(userId: user.uid) { [weak self] (error, ccuser) in
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
@@ -192,9 +192,7 @@ class ProfileViewController: UIViewController {
     }
 
     func tableViewconstriant() {
-        
         self.view.addSubview(tableView)
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
@@ -256,6 +254,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
+
             cell.contentView.backgroundColor = UIColor.clear
             cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
             cell.layer.masksToBounds = false
@@ -263,8 +262,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
 
-            if profileView.segmentedControl.selectedSegmentIndex == 0 {
-   let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
+            if profileView.segmentedControl.selectedSegmentIndex == 1 {
+            let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
                 cell.historyLabel.text = day.name
             } else {
                 cell.historyImage.isHidden = true
