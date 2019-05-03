@@ -34,27 +34,29 @@ class DragViewController: UIViewController {
     }
 
     @IBAction func dontAddButton(_ sender: Any) {
-        dontAdd.isHidden = true
+//        dontAdd.isHidden = true
         let animationView = AnimationView(name: "animation-w64-h64 (1)")
         animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         //animationView.contentMode = .scaleAspectFill
        // animationView.loopMode = .loop
        // animationView.realtimeAnimationProgress
-        self.dontAddCartAnimation.addSubview(animationView)
-        animationView.play()
+        //self.dontAddCartAnimation.addSubview(animationView)
+        //animationView.play()
         print("dont add me pressed")
     }
     
     @IBAction func addToCartButton(_ sender: Any) {
-        addButton.isHidden = true
+//        addButton.isHidden = true
          let animationView = AnimationView(name: "animation-w800-h600")
     animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
             animationView.contentMode = .scaleAspectFill
 //        animationView.loopMode = .loop
 //        animationView.realtimeAnimationProgress
- self.addToCartAnimation.addSubview(animationView)
-        animationView.play()
+ //self.addToCartAnimation.addSubview(animationView)
+        //animationView.play()
+        //animationView.backgroundBehavior = .pauseAndRestore
         print("add me pressed")
+        
     }
 
 }
