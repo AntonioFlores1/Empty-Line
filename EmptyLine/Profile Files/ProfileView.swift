@@ -13,12 +13,11 @@ import PureLayout
 class ProfileView: UIView {
     lazy var profileImageView: UIImageView = {
         var imageView = UIImageView()
-        imageView.backgroundColor = .black
-        imageView.image = UIImage(named: "placeImage")
+        imageView.image =  UIImage(named: "zipLineLogo")
         imageView.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
         imageView.layer.borderWidth = 1.0
         imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.cornerRadius = 48.0
+        imageView.layer.cornerRadius = 50.0
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -33,7 +32,6 @@ class ProfileView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "User Name"
-        label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
@@ -65,37 +63,24 @@ class ProfileView: UIView {
         return segControl
     }()
 
-
-    
-    lazy var editButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Edit", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.layer.cornerRadius = 4.0
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.borderWidth = 1.0
-        button.tintColor = .gray
-        button.backgroundColor = .clear
-        button.autoSetDimension(.width, toSize: 96.0)
-        button.autoSetDimension(.height, toSize: 32.0)
-        return button
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        
-        addSubview(profileImageView)
-        addSubview(usernameLabel)
-        bringSubviewToFront(profileImageView)
-        addSubview(segmentedControl)
-        addSubview(defaultCamera)
-        //backgroundColor = .white
-        setupConstraints()
-        setnameLabelConstraints()
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [UIColor.init(red: 28, green: 50, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor]
         self.layer.addSublayer(gradient)
+
+        bringSubviewToFront(profileImageView)
+
+
+        addSubview(profileImageView)
+        addSubview(usernameLabel)
+        addSubview(defaultCamera)
+        addSubview(segmentedControl)
+        setupConstraints()
+        setnameLabelConstraints()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -111,8 +96,9 @@ class ProfileView: UIView {
         segmentedControl.autoPinEdge(.top, to: .bottom, of: usernameLabel, withOffset: 16.0)
         
         defaultCamera.autoAlignAxis(toSuperviewAxis: .vertical)
-        defaultCamera.autoPinEdge(toSuperviewEdge: .top, withInset: 170.0)
+        defaultCamera.autoPinEdge(toSuperviewEdge: .top, withInset: 175.0)
     }
+    
     func setnameLabelConstraints() {
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         usernameLabel.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 25).isActive = true
