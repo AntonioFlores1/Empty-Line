@@ -38,8 +38,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var dragViewController:DragViewController!
     var blurView:UIVisualEffectView!
     
-    let dViewHeight:CGFloat = 500
-    let dViewHandleAreaHeight:CGFloat = 100
+    let dViewHeight:CGFloat = 700
+    let dViewHandleAreaHeight:CGFloat = 280
     
     var DViewVisible = false
     var nextState:DViewState {
@@ -55,12 +55,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         nav.backgroundColor = .blue
         startLiveVideo()
         addToShoppingCart()
+//        antonioAddToShoppingCart()
         dontAddToShoppingCart()
         byebyeWebSite()
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
         navigationController?.isNavigationBarHidden = true
-        setUpDragableView()
+//        setUpDragableView()
 
 
         
@@ -88,6 +89,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                                             height: dViewHeight)
         dragViewController.view.clipsToBounds = true
         
+        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        
+        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+
+        dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
+
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragableViewPanHandler(recognizer:)))
         dragViewController.dragArea.addGestureRecognizer(panGestureRecognizer)
     }
@@ -338,10 +345,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                 if let product = product {
                     self.products = product
                     dump(self.products)
-                    self.productDetailView.productName.text = product.name
-                    self.productDetailView.productDetails.text = product.description
-                    self.productDetailView.productPrice.text = "$" + String(product.price)
-                    self.productDetailView.productImage.kf.setImage(with: URL(string: product.image))
+                    self.dragViewController.itemName.text = product.name
+                    //self.dragViewController. .text = product.description
+                    self.dragViewController.itemPrice.text = "$" + String(product.price)
+                    self.dragViewController.itemImage.kf.setImage(with: URL(string: product.image))
                 }
             }
         }
@@ -350,6 +357,14 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     private func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
     }
+    
+    private func antonioAddToShoppingCart(){
+        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    }
+
+//    private func antonioDontAddToShoppingCart(){
+//        dragViewController.dontAdd .addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
+//    }
     
     private func dontAddToShoppingCart(){
         productDetailView.deleteButton.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
