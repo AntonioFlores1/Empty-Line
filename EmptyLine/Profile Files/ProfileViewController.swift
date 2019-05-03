@@ -10,6 +10,9 @@ import UIKit
 import PureLayout
 import Toucan
 import Kingfisher
+import Firebase
+
+
 
 enum ImageToEdit {
     case profileImage
@@ -47,7 +50,7 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-       // table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+//        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -55,8 +58,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(profileView)
         view.addSubview(tableView)
-      //  view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-       // profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+//        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+//        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -66,18 +69,23 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
-        fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .white
-   
+        profileView.usernameLabel.textColor = .black
+
 //        let gradient = CAGradientLayer()
 //        gradient.frame = self.view.bounds
 ////        gradient.startPoint = CGPoint(x: 0, y: 0)
 ////gradient.endPoint = CGPoint(x: 0, y: 44 )
 //        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
 //            self.tableView.layer.addSublayer(gradient)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchUser()
+        fetchItemsByDate()
     }
     
     private func fetchItemsByDate(){
@@ -96,30 +104,24 @@ class ProfileViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        fetchUser()
-        fetchItemsByDate()
-    }
-    
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
     
-    func fetchUser() {
-        guard let user = authservice.getCurrentUser() else {
+    private func fetchUser() {
+        guard let user = authservice.getCurrentUser()else {
             print("no logged user")
             return
         }
-        DBService.fetchUser(userId: user.uid) {[weak self] (error, ccuser) in
+        DBService.fetchUser(userId: user.uid) { [weak self] (error, ccuser) in
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
                 self?.profileView.usernameLabel.text = "@" + user.displayName!
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
-                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
+                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl), placeholder: #imageLiteral(resourceName: "zipLineLogo.png"))
             }
         }
     }
@@ -134,7 +136,7 @@ class ProfileViewController: UIViewController {
                 print(error.localizedDescription)
             } else if let imageUrl = url {
                 let request = userAuth.createProfileChangeRequest()
-                request.photoURL = URL(string: imageUrl.absoluteString)
+                request.photoURL = imageUrl
                 request.commitChanges(completion: { (error) in
                     if let error = error {
                         self?.showAlert(title: "Error Saving Account Info", message: error.localizedDescription)
@@ -192,9 +194,7 @@ class ProfileViewController: UIViewController {
     }
 
     func tableViewconstriant() {
-        
         self.view.addSubview(tableView)
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
@@ -207,6 +207,8 @@ class ProfileViewController: UIViewController {
     @objc func changeNameButton() {
         print(">>>//????")
     }
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -256,6 +258,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
+
             cell.contentView.backgroundColor = UIColor.clear
             cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
             cell.layer.masksToBounds = false
@@ -264,7 +267,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.5
 
             if profileView.segmentedControl.selectedSegmentIndex == 1 {
-   let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
+
+            let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
+
                 cell.historyLabel.text = day.name
             } else {
                 cell.historyImage.isHidden = true
@@ -274,13 +279,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-//            infocell.contentView.backgroundColor = UIColor.clear
-//            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
-//            infocell.layer.masksToBounds = false
-//            infocell.layer.cornerRadius = 1.0
-//            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
-//            infocell.layer.shadowOpacity = 0.5
-
             
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
@@ -368,13 +366,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             }
             if indexPath.section == 1 {
                 if indexPath.row == 1 {
-                 let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
+                 let alertController = UIAlertController(title: "SignOut", message: "Proceed to sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
                         self.navigationController?.pushViewController(LoginViewController(), animated: true)
                         self.dismiss(animated: true, completion: nil)
                 }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in
+                    }
                 alertController.addAction(ok)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
