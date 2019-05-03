@@ -28,6 +28,7 @@
 		555AB911227C03B7003007AA /* animation-w800-h600.json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB910227C03B7003007AA /* animation-w800-h600.json */; };
 		555AB913227C03BE003007AA /* animation-w1080-h1920.json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB912227C03BE003007AA /* animation-w1080-h1920.json */; };
 		555AB915227C13DB003007AA /* animation-w64-h64 (1).json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB914227C13DB003007AA /* animation-w64-h64 (1).json */; };
+		555AB917227C1DE0003007AA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AB916227C1DE0003007AA /* SplashViewController.swift */; };
 		559EA9FC2270F62800027D1D /* StartMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EA9FB2270F62800027D1D /* StartMenuViewController.swift */; };
 		55CE1E6122677E0500D3ECFA /* QRCodeWebSiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */; };
 		55CE1E6322677E7500D3ECFA /* WebSitewebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE1E6222677E7500D3ECFA /* WebSitewebView.swift */; };
@@ -114,6 +115,7 @@
 		555AB910227C03B7003007AA /* animation-w800-h600.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w800-h600.json"; sourceTree = "<group>"; };
 		555AB912227C03BE003007AA /* animation-w1080-h1920.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w1080-h1920.json"; sourceTree = "<group>"; };
 		555AB914227C13DB003007AA /* animation-w64-h64 (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w64-h64 (1).json"; sourceTree = "<group>"; };
+		555AB916227C1DE0003007AA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		559EA9FB2270F62800027D1D /* StartMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuViewController.swift; sourceTree = "<group>"; };
 		55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWebSiteViewController.swift; sourceTree = "<group>"; };
 		55CE1E6222677E7500D3ECFA /* WebSitewebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSitewebView.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				55EB5E7C22553D3F003FA4F8 /* Assets.xcassets */,
 				04D5F8A2225D4BDA00007BCB /* productFile.json */,
 				55EB5E7E22553D3F003FA4F8 /* LaunchScreen.storyboard */,
+				555AB916227C1DE0003007AA /* SplashViewController.swift */,
 			);
 			name = SupportingFiles;
 			path = EmptyLine;
@@ -661,6 +664,7 @@
 				55EB5E9422569CEC003FA4F8 /* ShoppingListViewController.swift in Sources */,
 				67F5554C225E94D500F67C94 /* SetRoundButton.swift in Sources */,
 				671C17C122774D6300A8CD17 /* NumberOfItem.swift in Sources */,
+				555AB917227C1DE0003007AA /* SplashViewController.swift in Sources */,
 				75B0DB6D225D1A4A00F075DD /* Item.swift in Sources */,
 				55EB5E7622553D3A003FA4F8 /* AppDelegate.swift in Sources */,
 				671C17C322774FB300A8CD17 /* ItemCollectionKeys.swift in Sources */,
