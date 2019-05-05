@@ -93,7 +93,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
         dragViewController.view.clipsToBounds = true
         
-        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
 //        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
 
@@ -367,7 +367,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc private func antonioAddToShoppingCart(){
-        dragViewController.addButton.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
+        dragViewController.addButtonToCart.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
     }
 
 //    private func antonioDontAddToShoppingCart(){
