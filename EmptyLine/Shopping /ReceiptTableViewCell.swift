@@ -43,7 +43,7 @@ class ReceiptTableViewCell: UITableViewCell {
         addSubview(itemNameLabel)
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         itemNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        itemNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        itemNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
         itemNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         itemNameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
@@ -52,7 +52,7 @@ class ReceiptTableViewCell: UITableViewCell {
         addSubview(itemPrice)
         itemPrice.translatesAutoresizingMaskIntoConstraints = false
         itemPrice.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor).isActive = true
-           itemPrice.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+           itemPrice.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
            itemPrice.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
            itemPrice.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }

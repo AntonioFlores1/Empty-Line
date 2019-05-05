@@ -89,6 +89,11 @@ class ShoppingListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.reloadData()
+        shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
+                self?.shoppingView.payButton.transform = .identity
+            }, completion: nil)
+        
     }
 
     @objc private func fetchShoppingCartItems(){
@@ -112,15 +117,14 @@ class ShoppingListViewController: UIViewController {
     
     private func createShoppingHistory(){
       //  Dictionary.init(grouping: <#T##Sequence#>, by: <#T##(Sequence.Element) throws -> _#>)
-        //for item in shoppingCart {
-           // let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-           // savedDate.add(newDate: shoppedItem)
-            //ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-          //  ShoppingHistoryItemsDataManager.addToShoppingCart(item: shoppingCart, savedDate: "\(createdDate).plist")
+        for item in shoppingCart {
+            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+            savedDate.add(newDate: shoppedItem)
+            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+            //ShoppingHistoryItemsDataManager.addToShoppingCart(item: shoppingCart, savedDate: "\(createdDate).plist")
             
-            ShoppingHistoryItemsDataManager.saveShoppingCart(shoppedDate: "\(createdDate).plist", allItems: shoppingCart)
-        
-
+            //ShoppingHistoryItemsDataManager.saveShoppingCart(shoppedDate: "\(createdDate).plist", allItems: shoppingCart)
+    }
     }
     
     
@@ -174,6 +178,7 @@ extension ShoppingListViewController{
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            //shoppingView.shoppingListTableView.reloadData()
             totalItems += 1
             stepper.value = 0
         } else if stepper.value == -1.0{
