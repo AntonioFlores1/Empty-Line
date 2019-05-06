@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
     private var allItemsBoughtInDay: [[String: Item]] = [] {
         didSet {
             tableView.reloadData()
+          
         }
     }
 
@@ -50,7 +51,6 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-//        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
@@ -59,8 +59,6 @@ class ProfileViewController: UIViewController {
 
         view.addSubview(profileView)
         view.addSubview(tableView)
-//        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-//        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -73,22 +71,18 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
-        //profileView.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0.1331038177, alpha: 1)
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .black
+        //fetchAllItems()
 
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.view.bounds
-////        gradient.startPoint = CGPoint(x: 0, y: 0)
-////gradient.endPoint = CGPoint(x: 0, y: 44 )
-//        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
-//            self.tableView.layer.addSublayer(gradient)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-        fetchItemsByDate()
+     fetchItemsByDate()
+       // fetchAllItems()
     }
     
     private func fetchItemsByDate(){
@@ -108,6 +102,23 @@ class ProfileViewController: UIViewController {
 
     }
 
+    
+    //private var allcheckedOutItems = [[Item]]()
+    
+//    private func fetchAllItems(){
+//        let allItems = shoppedItemsHistoryDataManager.fetchHistory()
+//        let currentDate = allItems.first?.createdAt
+//        var checkOutItems = [Item]()
+//        for item in allItems {
+//            if currentDate == item.createdAt {
+//                checkOutItems.append(item)
+//                allcheckedOutItems.append(checkOutItems)
+//            } else {
+//
+//            }
+//        }
+//    }
+    
     
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
@@ -222,6 +233,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         guard !allItemsBoughtInDay.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
+            //return allItemsBoughtInDay[section].first?.value.createdAt
             return allItemsBoughtInDay[section].first?.value.createdAt
         case 1:
             return account[section]
@@ -275,9 +287,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
 
-            let day = allItemsBoughtInDay[indexPath.section].first?.value
-
-                cell.historyLabel.text = day?.name
+                if allItemsBoughtInDay.count > 0 {
+                    let day = allItemsBoughtInDay[indexPath.section].first?.value
+                    cell.historyLabel.text = day?.name
+                    
+                } else {
+                    cell.historyLabel.text = "No history of items bought"
+                  //  print("There are \(allcheckedOutItems.count) number of items")
+                }
             } else {
                 cell.historyImage.isHidden = true
                 cell.historyLabel.isHidden = true

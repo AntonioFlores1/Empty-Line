@@ -33,12 +33,12 @@ private static var filename = "item.plist"
 
     static public func addToShoppingCart(item: Item, savedDate: String) {
         shoppedItems.removeAll()
-        //shoppedItems = fetchShoppingCartBYDay(CreatedDate: savedDate)
+        shoppedItems = fetchShoppingCartBYDay(CreatedDate: savedDate)
         shoppedItems.append(item)
-        //saveDate(createdAt: savedDate)
-       // shoppedItems.removeAll()
-        //shoppedItems = fetchShoppingCart()
-       // shoppedItems.append(item)
+        saveDate(createdAt: savedDate)
+       shoppedItems.removeAll()
+        shoppedItems = fetchShoppingCart()
+       shoppedItems.append(item)
         saveItem()
         
     }
@@ -141,7 +141,7 @@ private static var filename = "item.plist"
     
 
     static func fetchShoppingCartBYDay(CreatedDate: String) -> [Item] {
-        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename:filename).path
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename:"\(CreatedDate).plist").path
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path){
                 do {

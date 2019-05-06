@@ -115,15 +115,15 @@ class ShoppingListViewController: UIViewController {
         ])
     }
     
+
+    
+    
     private func createShoppingHistory(){
-      //  Dictionary.init(grouping: <#T##Sequence#>, by: <#T##(Sequence.Element) throws -> _#>)
         for item in shoppingCart {
             let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
             savedDate.add(newDate: shoppedItem)
             ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-            //ShoppingHistoryItemsDataManager.addToShoppingCart(item: shoppingCart, savedDate: "\(createdDate).plist")
-            
-            //ShoppingHistoryItemsDataManager.saveShoppingCart(shoppedDate: "\(createdDate).plist", allItems: shoppingCart)
+            //shoppedItemsHistoryDataManager.addToCarts(items: shoppingCart)
     }
     }
     
