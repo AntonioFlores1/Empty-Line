@@ -49,12 +49,16 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcH-fY-iYv">
                             <rect key="frame" x="0.0" y="0.0" width="83" height="71.5"/>
-                            <color key="backgroundColor" red="0.0" green="1" blue="0.39994838669999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" red="0.50505873189999995" green="0.42610739330000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.08629759042" green="0.1444436516" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </state>
                             <connections>
                                 <action selector="addToCartButton:" destination="-1" eventType="touchUpInside" id="84h-Sn-qXt"/>
                             </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.98530993339999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstItem="AcH-fY-iYv" firstAttribute="top" secondItem="5ZB-Yh-Bua" secondAttribute="top" id="9cV-Fc-dEJ"/>
                         <constraint firstAttribute="bottom" secondItem="AcH-fY-iYv" secondAttribute="bottom" id="Ud1-su-1EH"/>
