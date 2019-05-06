@@ -30,14 +30,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fiji-Water-15" translatesAutoresizingMaskIntoConstraints="NO" id="ZRx-gS-8XR">
-                    <rect key="frame" x="6" y="123" width="124.5" height="134.5"/>
+                    <rect key="frame" x="20" y="97" width="124.5" height="134.5"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiji Water place holder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2J-Ka-189">
-                    <rect key="frame" x="10.5" y="59" width="248.5" height="45"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$19.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmA-aK-k4Q">
                     <rect key="frame" x="165.5" y="113.5" width="83" height="45"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -92,11 +86,17 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiji Water place holder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2J-Ka-189">
+                    <rect key="frame" x="20" y="44" width="248.5" height="45"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.42" id="1lP-df-9Le"/>
-                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.33" id="6FP-gj-gp3"/>
+                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.42" constant="-26.009999999999991" id="1lP-df-9Le"/>
+                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.33" constant="13.939999999999998" id="6FP-gj-gp3"/>
                 <constraint firstItem="VVr-Af-zgP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="8nL-al-q2f"/>
                 <constraint firstItem="M2J-Ka-189" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="9Oe-vo-lWO"/>
                 <constraint firstItem="VVr-Af-zgP" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="D0C-Hu-R38"/>
@@ -112,14 +112,14 @@
                 <constraint firstItem="S0P-nH-eM2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="SHa-Qx-zs8"/>
                 <constraint firstItem="jHT-OC-G9q" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="1.2" id="Y1i-9v-eDJ"/>
                 <constraint firstItem="S0P-nH-eM2" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ZLJ-eU-uvi"/>
-                <constraint firstItem="M2J-Ka-189" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.18" id="Zgd-hG-WO7"/>
+                <constraint firstItem="M2J-Ka-189" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.18" constant="-15.039999999999992" id="Zgd-hG-WO7"/>
                 <constraint firstItem="cmA-aK-k4Q" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.3" id="dgF-Eh-QCF"/>
                 <constraint firstItem="5ZB-Yh-Bua" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.45" id="edj-X8-aFT"/>
                 <constraint firstItem="M2J-Ka-189" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="jye-uE-ozz"/>
                 <constraint firstItem="S0P-nH-eM2" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.72" id="m4W-xN-4dg"/>
                 <constraint firstItem="cmA-aK-k4Q" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.2" id="p9a-3g-fxY"/>
                 <constraint firstItem="cmA-aK-k4Q" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="qqT-05-N5l"/>
-                <constraint firstItem="M2J-Ka-189" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.65" id="uUc-HG-e9V"/>
+                <constraint firstItem="M2J-Ka-189" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.65" constant="9.6999999999999886" id="uUc-HG-e9V"/>
                 <constraint firstItem="ZRx-gS-8XR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.15" id="vhT-dH-g9G"/>
                 <constraint firstItem="cmA-aK-k4Q" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wKb-q4-PCN"/>
                 <constraint firstItem="jHT-OC-G9q" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="zNO-zw-V36"/>
