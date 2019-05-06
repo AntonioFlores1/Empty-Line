@@ -49,13 +49,13 @@ class DragViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// Set an animation on the button.
-        constraints()
-        twitterButton.backgroundColor = .red
-        twitterButton.animation = Animation.named("animation-w800-h600")
+//        constraints()
+//        twitterButton.backgroundColor = .red
+//        twitterButton.animation = Animation.named("animation-w800-h600")
         /// Turn off clips to bounds, as the animation goes outside of the bounds.
         //twitterButton.clipsToBounds = false
         /// Set animation play ranges for touch states
-        twitterButton.addTarget(self, action: #selector(thingido), for: .touchUpInside)
+       // twitterButton.addTarget(self, action: #selector(thingido), for: .touchUpInside)
 //        twitterButton.setPlayRange(fromMarker: "touchDownStart", toMarker: "touchDownEnd", event: .touchDown)
 //        twitterButton.setPlayRange(fromMarker: "touchDownEnd", toMarker: "touchUpCancel", event: .touchUpOutside)
 //        twitterButton.setPlayRange(fromMarker: "touchDownEnd", toMarker: "touchUpEnd", event: .touchUpInside)
@@ -69,7 +69,7 @@ class DragViewController: UIViewController {
         //things
        // things.setPlayRange(fromMarker: "touchDownStart", toMarker: "touchUpEnd", event: .touchUpInside)
        // view.addSubview(things)
-        self.addToCartAnimation.addSubview(animationView)
+      //  self.addToCartAnimation.addSubview(animationView)
 
     }
     @objc func thingstodo(){
@@ -97,13 +97,13 @@ class DragViewController: UIViewController {
     }
     
     @IBAction func addToCartButton(_ sender: Any) {
-        addButtonToCart.isHidden = true
+       // addButtonToCart.isHidden = true
         //      animationView.contentMode = .scaleAspectFill
         //        animationView.loopMode = .loop
         //       animationView.realtimeAnimationProgress
        // animationView.forceDisplayUpdate()
-        animationView.stop()
-        animationView.play()
+        //animationView.stop()
+        //animationView.play()
         //animationView.backgroundBehavior = .pauseAndRestore
         print("add me pressed")
         

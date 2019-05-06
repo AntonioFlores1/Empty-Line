@@ -98,7 +98,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
         dragViewController.view.clipsToBounds = true
         
-       // dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
 //        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
 
