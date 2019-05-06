@@ -7,24 +7,32 @@
 //
 
 import UIKit
+import Lottie
 
 class SplashViewController: UIViewController {
 
+    @IBOutlet weak var SplashScreen: LottieView!
+    
+    let animationView = AnimationView(name: "animation-w1080-h1080 (1)")
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    SplashScreen.addSubview(animationView)
+        animationView.frame = CGRect(x: -190, y: 100, width: 800, height: 800)
+        //animationView.loopMode = .loop
+        animationView.play { (succes:Bool) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.afterSplashScreenAnimation()
+            print("thing")
+        }
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        //animationView.play()
     }
-    */
 
+    
 }

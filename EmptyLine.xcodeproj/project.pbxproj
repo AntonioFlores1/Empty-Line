@@ -28,8 +28,8 @@
 		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
 		04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8A2225D4BDA00007BCB /* productFile.json */; };
 		04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */; };
+		5548F384227FD762009A98C2 /* animation-w1080-h1080 (1).json in Resources */ = {isa = PBXBuildFile; fileRef = 5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */; };
 		555AB911227C03B7003007AA /* animation-w800-h600.json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB910227C03B7003007AA /* animation-w800-h600.json */; };
-		555AB913227C03BE003007AA /* animation-w1080-h1920.json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB912227C03BE003007AA /* animation-w1080-h1920.json */; };
 		555AB915227C13DB003007AA /* animation-w64-h64 (1).json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB914227C13DB003007AA /* animation-w64-h64 (1).json */; };
 		555AB917227C1DE0003007AA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AB916227C1DE0003007AA /* SplashViewController.swift */; };
 		559EA9FC2270F62800027D1D /* StartMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EA9FB2270F62800027D1D /* StartMenuViewController.swift */; };
@@ -118,8 +118,8 @@
 		04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		0B5EFF0F95C77403AFCA7F87 /* Pods-EmptyLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.release.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.release.xcconfig"; sourceTree = "<group>"; };
 		20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmptyLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w1080-h1080 (1).json"; sourceTree = "<group>"; };
 		555AB910227C03B7003007AA /* animation-w800-h600.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w800-h600.json"; sourceTree = "<group>"; };
-		555AB912227C03BE003007AA /* animation-w1080-h1920.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w1080-h1920.json"; sourceTree = "<group>"; };
 		555AB914227C13DB003007AA /* animation-w64-h64 (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w64-h64 (1).json"; sourceTree = "<group>"; };
 		555AB916227C1DE0003007AA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		559EA9FB2270F62800027D1D /* StartMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuViewController.swift; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 			children = (
 				555AB910227C03B7003007AA /* animation-w800-h600.json */,
 				555AB914227C13DB003007AA /* animation-w64-h64 (1).json */,
-				555AB912227C03BE003007AA /* animation-w1080-h1920.json */,
+				5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */,
 				55EB5E8C22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift */,
 				75A841AF22723E9300C37292 /* DragViewController.swift */,
 				75A841B022723E9300C37292 /* DragViewController.xib */,
@@ -515,12 +515,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EB5E8022553D3F003FA4F8 /* LaunchScreen.storyboard in Resources */,
+				5548F384227FD762009A98C2 /* animation-w1080-h1080 (1).json in Resources */,
 				04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */,
 				671C17C9227B480500A8CD17 /* GoogleService-Info.plist in Resources */,
 				55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */,
 				55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */,
 				75A841B222723E9300C37292 /* DragViewController.xib in Resources */,
-				555AB913227C03BE003007AA /* animation-w1080-h1920.json in Resources */,
 				555AB915227C13DB003007AA /* animation-w64-h64 (1).json in Resources */,
 				55EB5E8A22569C2D003FA4F8 /* login.storyboard in Resources */,
 				555AB911227C03B7003007AA /* animation-w800-h600.json in Resources */,
