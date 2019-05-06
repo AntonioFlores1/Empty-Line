@@ -50,6 +50,7 @@ class ShoppingListViewController: UIViewController {
         return refC
     }()
     
+    
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
@@ -131,11 +132,25 @@ class ShoppingListViewController: UIViewController {
     
     
     private func createShoppingHistory(){
+        
         for item in shoppingCart {
             let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
             savedDate.add(newDate: shoppedItem)
             ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-            //shoppedItemsHistoryDataManager.addToCarts(items: shoppingCart)
+            
+          //let shoppedItem = shoppedItem
+
+//            guard let loggedInUser = authservice.getCurrentUser() else {
+//
+//                showAlert(title: "Error", message: "No user currently logged in")
+//                return
+//            }
+//
+//            DBService.createCheckoutHistory(userID: loggedInUser.uid, shopper: item) { (error) in
+//                if let error = error {
+//                    self.showAlert(title: "Error", message: "Error: \(error) creating user shopping history")
+//                }
+//            }
     }
     }
     
