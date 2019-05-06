@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DragViewController" customModule="EmptyLine" customModuleProvider="target">
             <connections>
-                <outlet property="addButton" destination="AcH-fY-iYv" id="c8s-on-Zp5"/>
+                <outlet property="addButtonToCart" destination="AcH-fY-iYv" id="Vk9-8x-FUI"/>
                 <outlet property="addToCartAnimation" destination="5ZB-Yh-Bua" id="C4i-1z-8wv"/>
                 <outlet property="dontAdd" destination="vLq-hD-Hjp" id="Kek-za-UKk"/>
                 <outlet property="dontAddCartAnimation" destination="VVr-Af-zgP" id="MVc-TH-2iG"/>
@@ -43,12 +43,16 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcH-fY-iYv">
                             <rect key="frame" x="0.0" y="0.0" width="83" height="71.5"/>
-                            <state key="normal" image="add"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="add">
+                                <color key="titleColor" red="0.08629759042" green="0.1444436516" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </state>
                             <connections>
-                                <action selector="addToCartButton:" destination="-1" eventType="touchUpInside" id="4e1-F2-Lw6"/>
+                                <action selector="addToCartButton:" destination="-1" eventType="touchUpInside" id="84h-Sn-qXt"/>
                             </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.98530993339999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstItem="AcH-fY-iYv" firstAttribute="top" secondItem="5ZB-Yh-Bua" secondAttribute="top" id="9cV-Fc-dEJ"/>
                         <constraint firstAttribute="bottom" secondItem="AcH-fY-iYv" secondAttribute="bottom" id="Ud1-su-1EH"/>
@@ -74,10 +78,10 @@
                         <constraint firstItem="vLq-hD-Hjp" firstAttribute="top" secondItem="VVr-Af-zgP" secondAttribute="top" id="RoT-8z-Cop"/>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jHT-OC-G9q">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jHT-OC-G9q">
                     <rect key="frame" x="0.0" y="364.5" width="414" height="358.5"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0P-nH-eM2">

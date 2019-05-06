@@ -50,6 +50,7 @@ class ShoppingListViewController: UIViewController {
         return refC
     }()
     
+    
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
@@ -61,12 +62,21 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
         self.view.layer.addSublayer(gradient)
+        
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+//        self.view.layer.addSublayer(gradient)
         view.addSubview(shoppingView)
+        shoppingView.shoppingListTableView.backgroundColor? = .clear
+        shoppingView.backgroundColor = .clear
         setupViews()
         navigationItem.title = "Checkout List"
         fetchShoppingCartItems()
@@ -78,7 +88,10 @@ class ShoppingListViewController: UIViewController {
         activityView = UIActivityIndicatorView(style: .gray)
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
         activityView.center = shoppingView.payButton.center
+        //self.activityView.layer.addSublayer(gradient)
         view.addSubview(activityView)
+
+        
     }
  
     @objc func payButtonPressed() {
@@ -89,6 +102,11 @@ class ShoppingListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.reloadData()
+        shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
+                self?.shoppingView.payButton.transform = .identity
+            }, completion: nil)
+        
     }
 
     @objc private func fetchShoppingCartItems(){
@@ -110,17 +128,30 @@ class ShoppingListViewController: UIViewController {
         ])
     }
     
-    private func createShoppingHistory(){
-      //  Dictionary.init(grouping: <#T##Sequence#>, by: <#T##(Sequence.Element) throws -> _#>)
-        //for item in shoppingCart {
-           // let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-           // savedDate.add(newDate: shoppedItem)
-            //ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-          //  ShoppingHistoryItemsDataManager.addToShoppingCart(item: shoppingCart, savedDate: "\(createdDate).plist")
-            
-            ShoppingHistoryItemsDataManager.saveShoppingCart(shoppedDate: "\(createdDate).plist", allItems: shoppingCart)
-        
 
+    
+    
+    private func createShoppingHistory(){
+        
+        for item in shoppingCart {
+            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+            savedDate.add(newDate: shoppedItem)
+            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+            
+          //let shoppedItem = shoppedItem
+
+//            guard let loggedInUser = authservice.getCurrentUser() else {
+//
+//                showAlert(title: "Error", message: "No user currently logged in")
+//                return
+//            }
+//
+//            DBService.createCheckoutHistory(userID: loggedInUser.uid, shopper: item) { (error) in
+//                if let error = error {
+//                    self.showAlert(title: "Error", message: "Error: \(error) creating user shopping history")
+//                }
+//            }
+    }
     }
     
     
@@ -160,7 +191,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
-
+        cell.backgroundColor = .clear
         return cell
     }
 }
@@ -174,6 +205,7 @@ extension ShoppingListViewController{
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            //shoppingView.shoppingListTableView.reloadData()
             totalItems += 1
             stepper.value = 0
         } else if stepper.value == -1.0{

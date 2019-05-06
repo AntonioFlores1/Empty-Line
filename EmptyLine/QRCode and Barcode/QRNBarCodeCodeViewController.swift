@@ -49,20 +49,35 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrapted:CGFloat = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nav = UINavigationBar.appearance()
         nav.backgroundColor = .blue
         startLiveVideo()
         addToShoppingCart()
-//        antonioAddToShoppingCart()
+//      antonioAddToShoppingCart()
         dontAddToShoppingCart()
         byebyeWebSite()
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
+        
+        
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.isTranslucent = true
         navigationController?.isNavigationBarHidden = true
-//        setUpDragableView()
-
+//      setUpDragableView()
+        
+        blurView = UIVisualEffectView()
+        blurView.frame = self.view.frame
+        self.view.addSubview(blurView)
+        dragViewController = DragViewController(nibName:"DragViewController", bundle:nil)
+        self.addChild(dragViewController)
+        self.view.addSubview(dragViewController.view)
+        dragViewController.view.frame = CGRect(x: 0,
+                                               y: 900,
+                                               width: self.view.bounds.width,
+                                               height: dViewHeight)
 
         
         tap = UITapGestureRecognizer(target: self, action: #selector(tapView))
@@ -75,23 +90,17 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     func setUpDragableView() {
-        blurView = UIVisualEffectView()
-        blurView.frame = self.view.frame
-        self.view.addSubview(blurView)
-        
-        dragViewController = DragViewController(nibName:"DragViewController", bundle:nil)
-        self.addChild(dragViewController)
-        self.view.addSubview(dragViewController.view)
         
         dragViewController.view.frame = CGRect(x: 0,
-                                            y: self.view.frame.height - dViewHandleAreaHeight,
-                                            width: self.view.bounds.width,
-                                            height: dViewHeight)
+                                               y: self.view.frame.height - dViewHandleAreaHeight,
+                                               width: self.view.bounds.width,
+                                               height: dViewHeight)
+        
         dragViewController.view.clipsToBounds = true
         
-        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
-        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+//        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
 
         dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
 
@@ -127,6 +136,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     
                 case .expanded:
                     self.dragViewController.view.frame.origin.y = self.view.frame.height - self.dViewHeight
+                    
+                    
                 case .collapsed:
                     self.dragViewController.view.frame.origin.y = self.view.frame.height - self.dViewHandleAreaHeight
                 }
@@ -165,8 +176,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     
                 case .expanded:
                     self.blurView.effect = UIBlurEffect(style: .dark)
+                    self.stopRecording()
                 case .collapsed:
                     self.blurView.effect = nil
+                    self.session.startRunning()
                 }
             }
             
@@ -358,8 +371,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
     }
     
-    private func antonioAddToShoppingCart(){
-        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    @objc private func antonioAddToShoppingCart(){
+        dragViewController.addButtonToCart.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
     }
 
 //    private func antonioDontAddToShoppingCart(){
@@ -371,14 +384,68 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc func dontAddMe(){
-        handleDismiss()
+    dragViewController.view.frame = CGRect(x: 0,
+                                               y: 900,
+                                               width: self.view.bounds.width,
+                                               height: dViewHeight)
     }
+
+                        //Antonio Code Dont Touch//
+//////////////////////////////////////////////////////////////////////////////////
+    @objc private func antonioAddButtonPressed(){
+//        dragViewController.view.frame = CGRect(x: 0,
+//                                               y: 900,
+//                                               width: self.view.bounds.width,
+//                                               height: dViewHeight)
+        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
+        savedDate.add(newDate: itemSavedDate)
+        
+        if let item = products {
+            ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            showAlert(title: "Success", message: "Item added to shopping cart")
+            //            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
+            //
+            //            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
+            //                self.dismiss(animated: true, completion: nil)
+            //            })
+            //
+            //            let checkOut = UIAlertAction(title: "Check Out", style: .default, handler: { (alert) in
+            //                self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
+            //            })
+            //
+            //            alertController.addAction(checkOut)
+            //            alertController.addAction(continueShopping)
+            //            self.present(alertController, animated: true)
+            self.handleDismiss()
+            print("Item added")
+        }
+    }
+    
+//////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     @objc private func addButtonPressed(){
+        dragViewController.view.frame = CGRect(x: 0,
+                                               y: 900,
+                                               width: self.view.bounds.width,
+                                               height: dViewHeight)
+        continueInteractiveTransition()
+       self.blurView.effect = nil
+        self.session.startRunning()
         let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
         savedDate.add(newDate: itemSavedDate)
-
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             showAlert(title: "Success", message: "Item added to shopping cart")

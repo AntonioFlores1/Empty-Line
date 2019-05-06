@@ -10,6 +10,9 @@ import UIKit
 import PureLayout
 import Toucan
 import Kingfisher
+import Firebase
+
+
 
 enum ImageToEdit {
     case profileImage
@@ -22,11 +25,17 @@ class ProfileViewController: UIViewController {
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
 
-    private var allItemsBoughtInDay: [[Item]] = [] {
+    private var allItemsBoughtInDay: [[String: Item]] = [] {
         didSet {
             tableView.reloadData()
+          
         }
     }
+    
+    private var allUserCheckOutItems = [[Item]]()
+    private var allDates = [String]()
+    private var allItems = [Item]()
+    
 
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
@@ -43,20 +52,22 @@ class ProfileViewController: UIViewController {
     }()
     
     
+    
+    
+    
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-       // table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = .clear
+
         view.addSubview(profileView)
         view.addSubview(tableView)
-      //  view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-       // profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -70,56 +81,112 @@ class ProfileViewController: UIViewController {
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .white
-   
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.view.bounds
-////        gradient.startPoint = CGPoint(x: 0, y: 0)
-////gradient.endPoint = CGPoint(x: 0, y: 44 )
-//        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
-//            self.tableView.layer.addSublayer(gradient)
-    }
-    
-    private func fetchItemsByDate(){
-        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart()
-        let currentDate = allItems.first?.createdAt
-        var dateItems = [Item]()
-        for item in allItems {
-            if currentDate == item.createdAt {
-                dateItems.append(item)
-            } else {
-               // allItemsBoughtInDay.append(dateItems)
-                dateItems = [item]
-            }
-        }
-        allItemsBoughtInDay.append(dateItems)
-        
+        profileView.usernameLabel.textColor = .black
+        //fetchAllItems()
+
+        //fetchUserShoppedHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-        fetchItemsByDate()
+         fetchItemsByDate()
+       // fetchAllItems()
+       // fetchUserShoppedHistory()
     }
+    
+    private func fetchItemsByDate(){
+        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart().sorted {$0.createdAt > $1.createdAt}
+
+        let currentDate = allItems.first?.createdAt
+        var dateItems = [String:Item]()
+        for item in allItems {
+            if currentDate == item.createdAt {
+                dateItems[currentDate!] = item
+            } else {
+                allItemsBoughtInDay.append(dateItems)
+                dateItems[item.createdAt] = item
+            }
+        }
+        allItemsBoughtInDay.append(dateItems)
+
+    }
+
+    
+    private var allcheckedOutItems = [[Item]]()
+    
+    private func fetchAllItems(){
+        let allItems = shoppedItemsHistoryDataManager.fetchHistory()
+        let currentDate = allItems.first?.createdAt
+        var checkOutItems = [Item]()
+        for item in allItems {
+            if currentDate == item.createdAt {
+                checkOutItems.append(item)
+                allcheckedOutItems.append(checkOutItems)
+            } else {
+
+            }
+        }
+    }
+    
+    
+//    private func fetchUserShoppedHistory(){
+//        guard authservice.getCurrentUser() != nil else {
+//            showAlert(title: "Error", message: "No logged in user")
+//            return
+//        }
+//
+//        DBService.fetchShoppedHistory { (error, items, dates) in
+//            if let error = error {
+//                self.showAlert(title: "Error", message: "Error  \(error.localizedDescription) fetching user shopping history")
+//            }
+//            if let items = items {
+//                self.allItems = items
+//            }
+//            if let dates = dates {
+//                self.allDates = dates
+//            }
+//        }
+//
+//        for date in allDates {
+//            var itemsOnDay = [Item]()
+//            for item in allItems {
+//                if date == item.createdAt {
+//                    itemsOnDay.append(item)
+//                }
+//
+//                allUserCheckOutItems.append(itemsOnDay)
+//            }
+//
+//            allUserCheckOutItems.append(itemsOnDay)
+//
+//            print(allUserCheckOutItems.count)
+//            tableView.reloadData()
+//        }
+//
+//    }
+    
+    
     
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
     }
     
-    func fetchUser() {
-        guard let user = authservice.getCurrentUser() else {
+    private func fetchUser() {
+        guard let user = authservice.getCurrentUser()else {
             print("no logged user")
             return
         }
-        DBService.fetchUser(userId: user.uid) {[weak self] (error, ccuser) in
+        DBService.fetchUser(userId: user.uid) { [weak self] (error, ccuser) in
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
                 self?.profileView.usernameLabel.text = "@" + user.displayName!
+                print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
-                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl))
+                self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl), placeholder: #imageLiteral(resourceName: "zipLineLogo.png"))
             }
         }
     }
@@ -134,7 +201,7 @@ class ProfileViewController: UIViewController {
                 print(error.localizedDescription)
             } else if let imageUrl = url {
                 let request = userAuth.createProfileChangeRequest()
-                request.photoURL = URL(string: imageUrl.absoluteString)
+                request.photoURL = imageUrl
                 request.commitChanges(completion: { (error) in
                     if let error = error {
                         self?.showAlert(title: "Error Saving Account Info", message: error.localizedDescription)
@@ -192,9 +259,7 @@ class ProfileViewController: UIViewController {
     }
 
     func tableViewconstriant() {
-        
         self.view.addSubview(tableView)
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
@@ -207,14 +272,19 @@ class ProfileViewController: UIViewController {
     @objc func changeNameButton() {
         print(">>>//????")
     }
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard !allItemsBoughtInDay.isEmpty else { return "" }
+        guard !allUserCheckOutItems.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return allItemsBoughtInDay[section].first?.createdAt
+            //return allItemsBoughtInDay[section].first?.value.createdAt
+            return allItemsBoughtInDay[section].first?.value.createdAt
+            
+            
         case 1:
             return account[section]
         default:
@@ -222,6 +292,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return ""
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
          switch profileView.segmentedControl.selectedSegmentIndex {
          case 0:
@@ -256,6 +327,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
+
             cell.contentView.backgroundColor = UIColor.clear
             cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
             cell.layer.masksToBounds = false
@@ -263,9 +335,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
 
-            if profileView.segmentedControl.selectedSegmentIndex == 1 {
-   let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
-                cell.historyLabel.text = day.name
+            if profileView.segmentedControl.selectedSegmentIndex == 0 {
+
+                if allItemsBoughtInDay.count > 0 {
+                    let day = allItemsBoughtInDay[indexPath.section].first?.value
+                    cell.historyLabel.text = day?.name
+                    
+                } else {
+                    cell.historyLabel.text = "No history of items bought"
+                  //  print("There are \(allcheckedOutItems.count) number of items")
+                }
             } else {
                 cell.historyImage.isHidden = true
                 cell.historyLabel.isHidden = true
@@ -274,13 +353,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-//            infocell.contentView.backgroundColor = UIColor.clear
-//            infocell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
-//            infocell.layer.masksToBounds = false
-//            infocell.layer.cornerRadius = 1.0
-//            infocell.layer.shadowOffset = CGSize(width: -1, height: 1)
-//            infocell.layer.shadowOpacity = 0.5
-
             
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
@@ -368,13 +440,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             }
             if indexPath.section == 1 {
                 if indexPath.row == 1 {
-                 let alertController = UIAlertController(title: "SignOut", message: "Proceed sign out", preferredStyle: .actionSheet)
+
+                 let alertController = UIAlertController(title: "SignOut", message: "Proceed to sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
                         self.navigationController?.pushViewController(LoginViewController(), animated: true)
                         self.dismiss(animated: true, completion: nil)
                 }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in
+                    }
                 alertController.addAction(ok)
                 alertController.addAction(cancel)
                 present(alertController, animated: true, completion: nil)
