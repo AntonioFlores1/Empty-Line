@@ -56,10 +56,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
         view.addSubview(profileView)
         view.addSubview(tableView)
-//        view.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
-//        profileView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
+        //self.profileView.layer.addSublayer(gradient)
+        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -74,11 +77,7 @@ class ProfileViewController: UIViewController {
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .black
 
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.view.bounds
-////        gradient.startPoint = CGPoint(x: 0, y: 0)
-////gradient.endPoint = CGPoint(x: 0, y: 44 )
-//        gradient.colors =  [UIColor.init(red: 28, green: 50, blue: 218, alpha: 0).cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.green.cgColor]
+       
 //            self.tableView.layer.addSublayer(gradient)
     }
     
