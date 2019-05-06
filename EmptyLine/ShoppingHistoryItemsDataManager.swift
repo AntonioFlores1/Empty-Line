@@ -28,31 +28,39 @@ private static var filename = "item.plist"
             print("property list encoding error: \(error)")
         }
     }
+    
+    
 
     static public func addToShoppingCart(item: Item, savedDate: String) {
         shoppedItems.removeAll()
         shoppedItems = fetchShoppingCartBYDay(CreatedDate: savedDate)
         shoppedItems.append(item)
         saveDate(createdAt: savedDate)
-        shoppedItems.removeAll()
+       shoppedItems.removeAll()
         shoppedItems = fetchShoppingCart()
-        shoppedItems.append(item)
+       shoppedItems.append(item)
         saveItem()
         
     }
+    
+    static public func addItemToShoppingHistory(item: Item) {
+        shoppedItems.append(item)
+        shoppedItems = fetchHistory()
+    }
+    
     static public func saveDate(createdAt: String) {
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: createdAt)
         do {
             let data = try PropertyListEncoder().encode(shoppedItems)
             try data.write(to: path, options: Data.WritingOptions.atomic)
-            
+
         } catch {
             print("property list encoding error: \(error)")
         }
     }
     
     static public func saveShoppingCart(shoppedDate: String, allItems: [Item]){
-        
+
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: "\(shoppedDate).plist")
         do {
             let data = try PropertyListEncoder().encode(shoppedItems)
@@ -70,6 +78,28 @@ private static var filename = "item.plist"
     static func totalAmount() -> Double {
         return total
     }
+    
+    static public func fetchHistory() -> [Item] {
+        
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename).path
+        if FileManager.default.fileExists(atPath: path) {
+            if let data = FileManager.default.contents(atPath: path) {
+                do {
+                    shoppedItems = try PropertyListDecoder().decode([Item].self, from: data)
+                } catch {
+                    print("Error: decoding error \(error.localizedDescription)")
+                }
+            } else {
+                print("There is no data on this file \(filename) path")
+            }
+        } else {
+            print("File path \(filename) does not exist")
+        }
+        
+        return shoppedItems
+    }
+
+    
     
     static func fetchShoppingCart() -> [Item] {
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename).path
@@ -90,8 +120,8 @@ private static var filename = "item.plist"
     }
     
     static func fetShoppingHistory(date: String) -> [Item] {
-        
-        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: date).path
+
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename).path
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path){
                 do {
@@ -106,12 +136,12 @@ private static var filename = "item.plist"
             print("Error: Filepath does not exist")
         }
         return shoppedItems
-        
+
     }
     
 
     static func fetchShoppingCartBYDay(CreatedDate: String) -> [Item] {
-        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: "\(CreatedDate).plist").path
+        let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename:"\(CreatedDate).plist").path
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path){
                 do {
