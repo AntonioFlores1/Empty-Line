@@ -17,24 +17,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static var authservice = AuthService()
     
+    func afterSplashScreenAnimation(){
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
+                    window?.rootViewController = mainPageTabBarController
+                    window?.makeKeyAndVisible()
+                }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//       if let _ = AppDelegate.authservice.getCurrentUser() {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "startMenu") as! StartMenuViewController
-//            window?.rootViewController = mainPageTabBarController
-//
-//        window?.makeKeyAndVisible()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let _ = AppDelegate.authservice.getCurrentUser() {
+       if let _ = AppDelegate.authservice.getCurrentUser() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
+            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "splashScreen") as! SplashViewController
             window?.rootViewController = mainPageTabBarController
-            
-            window?.makeKeyAndVisible()
+
+        window?.makeKeyAndVisible()
+        
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        if let _ = AppDelegate.authservice.getCurrentUser() {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainPageTabBarController = storyboard.instantiateViewController(withIdentifier: "MainPageTabBarController") as! UITabBarController
+//            window?.rootViewController = mainPageTabBarController
+//
+//            window?.makeKeyAndVisible()
         
         } else {
             let storyboard = UIStoryboard(name: "login", bundle: nil)

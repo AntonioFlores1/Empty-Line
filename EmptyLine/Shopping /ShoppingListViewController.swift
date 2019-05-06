@@ -61,12 +61,21 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
         self.view.layer.addSublayer(gradient)
+        
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+//        self.view.layer.addSublayer(gradient)
         view.addSubview(shoppingView)
+        shoppingView.shoppingListTableView.backgroundColor? = .clear
+        shoppingView.backgroundColor = .clear
         setupViews()
         navigationItem.title = "Checkout List"
         fetchShoppingCartItems()
@@ -78,7 +87,10 @@ class ShoppingListViewController: UIViewController {
         activityView = UIActivityIndicatorView(style: .gray)
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
         activityView.center = shoppingView.payButton.center
+        //self.activityView.layer.addSublayer(gradient)
         view.addSubview(activityView)
+
+        
     }
  
     @objc func payButtonPressed() {
@@ -164,7 +176,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
-
+        cell.backgroundColor = .clear
         return cell
     }
 }

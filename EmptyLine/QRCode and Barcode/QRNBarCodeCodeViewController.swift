@@ -49,6 +49,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrapted:CGFloat = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nav = UINavigationBar.appearance()
@@ -60,6 +61,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         byebyeWebSite()
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
+        
+        
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.isTranslucent = true
         navigationController?.isNavigationBarHidden = true
 //      setUpDragableView()
         
@@ -93,7 +98,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
         dragViewController.view.clipsToBounds = true
         
-        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
 //        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
 
@@ -367,7 +372,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc private func antonioAddToShoppingCart(){
-        dragViewController.addButton.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
+        dragViewController.addButtonToCart.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
     }
 
 //    private func antonioDontAddToShoppingCart(){
