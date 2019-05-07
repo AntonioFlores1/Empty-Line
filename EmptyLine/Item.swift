@@ -53,5 +53,6 @@ struct Item: Codable {
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
         self.date = dict[ItemCollectionKeys.createdAt] as? Date ?? Date()
     }
+
     
 }
