@@ -62,11 +62,18 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gradient = CAGradientLayer()
-        gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
-        self.view.layer.addSublayer(gradient)
         
+        let gradient = CAGradientLayer()
+//        gradient.locations = [0.0 , 1.0]
+//        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+//        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradient.frame = self.view.bounds
+        let color0 = UIColor(red:255/255, green:208/255, blue:185/255, alpha:0.5).cgColor
+        let color1 = UIColor(red:68/255, green:78/255, blue:227/255, alpha:0.5).cgColor
+        gradient.colors =     [UIColor.blue.cgColor,UIColor.red.cgColor,UIColor.orange.cgColor]
+
+        self.view.layer.addSublayer(gradient)
+///         [UIColor.blue.cgColor,UIColor.red.cgColor,UIColor.orange.cgColor]
 //        let gradient = CAGradientLayer()
 //        gradient.frame = self.view.bounds
 //        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
@@ -211,6 +218,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.shoppingLabelDetail.text = itemInCart.name
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
+        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
         cell.addItemStepper.tag = indexPath.row

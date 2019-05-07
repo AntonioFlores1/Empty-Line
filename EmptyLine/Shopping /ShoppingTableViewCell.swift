@@ -21,17 +21,17 @@ class ShoppingTableViewCell: UITableViewCell {
     
     lazy var shoppingLabelDetail: UILabel = {
         let shoppingLabel = UILabel()
-        shoppingLabel.textColor = .black
+        shoppingLabel.textColor = .white
         shoppingLabel.font = UIFont.systemFont(ofSize: 15)
-        shoppingLabel.backgroundColor = .white
+        //shoppingLabel.backgroundColor = .white
         return shoppingLabel
     }()
     
     lazy var priceLabel: UILabel = {
         let price = UILabel()
-        price.textColor = .black
+        price.textColor = .white
         price.font = UIFont.systemFont(ofSize: 15)
-        price.backgroundColor = .white
+        //price.backgroundColor = .white
         return price
     }()
     
@@ -45,6 +45,7 @@ class ShoppingTableViewCell: UITableViewCell {
     lazy var labelUpdate: UILabel = {
         let update = UILabel()
         update.text = "1"
+        update.textColor = .white
         return update
     }()
     @objc func addItemTo(_ sender: UIStepper) {
