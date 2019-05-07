@@ -129,29 +129,49 @@ class ShoppingListViewController: UIViewController {
     }
     
 
-    
+    // recursive function
     
     private func createShoppingHistory(){
         
-        for item in shoppingCart {
-            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-            savedDate.add(newDate: shoppedItem)
-            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-            
-          //let shoppedItem = shoppedItem
+        //            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+        //            savedDate.add(newDate: shoppedItem)
+        //            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+        //
+        //let shoppedItem = shoppedItem
 
-//            guard let loggedInUser = authservice.getCurrentUser() else {
-//
-//                showAlert(title: "Error", message: "No user currently logged in")
-//                return
-//            }
-//
-//            DBService.createCheckoutHistory(userID: loggedInUser.uid, shopper: item) { (error) in
+        
+        guard let loggedInUser = authservice.getCurrentUser() else {
+            
+            showAlert(title: "Error", message: "No user currently logged in")
+            return
+        }
+        
+        for item in shoppingCart {
+            
+            
+            DBService.createZipLineUserCheckoutHistory(zipLineUserID: loggedInUser.uid, zipLineUserCheckedOutItem: item) { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "Error \(error.localizedDescription) encountered while creating \(String(describing: loggedInUser.displayName)) history")
+                } else {
+                    print("Success")
+                }
+            }
+
+//            DBService.createUserCheckoutHistory(userID: loggedInUser.uid, shopper: item) { (error) in
 //                if let error = error {
 //                    self.showAlert(title: "Error", message: "Error: \(error) creating user shopping history")
+//                } else {
+//                    print("Success")
+//                }
+//            }
+            
+//            DBService.createCheckoutHistory(userID: loggedInUser.uid, checkedOutItem: item) { (error) in
+//                if let error = error {
+//                    self.showAlert(title: "Error", message: "Error: \(error.localizedDescription) encountered while fetching data")
 //                }
 //            }
     }
+        
     }
     
     

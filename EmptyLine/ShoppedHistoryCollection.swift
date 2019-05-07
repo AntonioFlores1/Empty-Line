@@ -10,54 +10,80 @@ import Foundation
 
 struct shoppedItemsCollectionKey {
     static let shoppingHistoryCollectionKey = "CheckoutItems"
+    static let allCheckedOutItemsCollectionKey = "allUserCheckedOutItems"
    static let shopperID = "shopperID"
    static let itemID = "itemID"
-   static let name = "itemName"
-   static let barcode = "itemBarcode"
-   static let description = "itemDescription"
-   static let ingredients = "itemIngredients"
-  static let image = "itemImage"
-   static let price = "itemPrice"
-   static let isCoupon = "itemHasCoupon"
-   static let coupon = "couponAmount"
-   static let date = "createdDate"
+   static let name = "name"
+   static let barcode = "barcode"
+   static let description = "description"
+   static let ingredients = "ingredients"
+  static let image = "image"
+   static let price = "price"
+   static let isCoupon = "isCoupon"
+   static let coupon = "coupon"
+   static let date = "date"
 }
 
 extension DBService {
-    static public func createCheckoutHistory(userID: String,shopper:Item, completion: @escaping(Error?) -> Void){
-        firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(userID).setData([shoppedItemsCollectionKey.shopperID : userID, shoppedItemsCollectionKey.itemID : shopper.itemID, shoppedItemsCollectionKey.name : shopper.name, shoppedItemsCollectionKey.barcode : shopper.barcode, shoppedItemsCollectionKey.description : shopper.description, shoppedItemsCollectionKey.ingredients : shopper.ingredients, shoppedItemsCollectionKey.image : shopper.image, shoppedItemsCollectionKey.price : shopper.price, shoppedItemsCollectionKey.isCoupon : shopper.isCoupon, shoppedItemsCollectionKey.coupon : shopper.coupon, shoppedItemsCollectionKey.date : shopper.date,
-        ]) {(error) in
+    
+    static public func createZipLineUserCheckoutHistory(zipLineUserID: String, zipLineUserCheckedOutItem: Item, completionHandler: @escaping(Error?) -> Void){
+        firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(zipLineUserID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).addDocument(data: [shoppedItemsCollectionKey.shopperID : zipLineUserID, shoppedItemsCollectionKey.itemID : zipLineUserCheckedOutItem.itemID, shoppedItemsCollectionKey.barcode : zipLineUserCheckedOutItem.barcode, shoppedItemsCollectionKey.description : zipLineUserCheckedOutItem.description, shoppedItemsCollectionKey.ingredients : zipLineUserCheckedOutItem.ingredients, shoppedItemsCollectionKey.image : zipLineUserCheckedOutItem.image, shoppedItemsCollectionKey.isCoupon : zipLineUserCheckedOutItem.isCoupon, shoppedItemsCollectionKey.coupon : zipLineUserCheckedOutItem.coupon, shoppedItemsCollectionKey.name : zipLineUserCheckedOutItem.name]) { (error) in
             if let error = error {
-                completion(error)
+                completionHandler(error)
             } else {
-                completion(nil)
-            }
-        }
-    }
-
-    static public func fetchShoppedHistory(completion: @escaping(Error?, [Item]?, [String]? ) -> Void){
-        DBService.firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).getDocuments { (snapShot, error) in
-            if let error = error {
-                completion(error, nil, nil)
-            }
-            if let snapshot = snapShot {
-                var allCheckOutItems = [Item]()
-                for document in snapshot.documents {
-                    let checkOutItem = Item.init(dict: document.data())
-                    allCheckOutItems.append(checkOutItem)
-                }
-                
-                var dates = [String]()
-                for checkoutdate in allCheckOutItems {
-                    if !dates.contains(checkoutdate.createdAt){
-                        dates.append(checkoutdate.createdAt)
-                    }
-                }
-                completion(nil, allCheckOutItems, dates)
+                completionHandler(nil)
             }
         }
         
     }
+    
+    static public func fetchzipLineUserCheckoutHistory(userID: String, completionHandler: @escaping (Error?, [Item]?, [String]?) -> Void){
+//        DBService.firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(userID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).getDocuments { (querySnapShot, error) in
+//            if let error = error {
+//                completionHandler(error, nil, nil)
+//            } else {
+//                if let querySnapShot = querySnapShot {
+//                    var allZiplineUserCheckedOutItems = [Item]()
+//                    for document in querySnapShot.documents {
+//                        let checkedOutItem = Item.init(dict: document.data())
+//                        allZiplineUserCheckedOutItems.append(checkedOutItem)
+//                    }
+//
+//                    var checkedOutDates = [String]()
+//                    for checkedOutItem in allZiplineUserCheckedOutItems {
+//                        if !checkedOutDates.contains(checkedOutItem.createdAt) {
+//                            checkedOutDates.append(checkedOutItem.createdAt)
+//                        }
+//                    }
+//                    completionHandler(nil, allZiplineUserCheckedOutItems, checkedOutDates)
+//                }
+//            }
+//        }
+        
+        DBService.firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(userID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).addSnapshotListener(includeMetadataChanges: false) { (querySnapshot, error) in
+            if let error = error {
+                completionHandler(error, nil, nil)
+            } else {
+                if let querySnapShot = querySnapshot {
+                    var allZiplineUserCheckedOutItems = [Item]()
+                    for document in querySnapShot.documents {
+                        let checkedOutItem = Item.init(dict: document.data())
+                        allZiplineUserCheckedOutItems.append(checkedOutItem)
+                    }
+
+                    var checkedOutDates = [String]()
+                    for checkedOutItem in allZiplineUserCheckedOutItems {
+                        if !checkedOutDates.contains(checkedOutItem.createdAt) {
+                            checkedOutDates.append(checkedOutItem.createdAt)
+                        }
+                    }
+                    completionHandler(nil, allZiplineUserCheckedOutItems, checkedOutDates)
+                }
+            }
+        }
+        
+    }
+    
 
 }
 
