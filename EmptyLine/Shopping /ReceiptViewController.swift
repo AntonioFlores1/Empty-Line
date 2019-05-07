@@ -22,7 +22,6 @@ class ReceiptViewController: UIViewController {
     }
     
     private var barButton = UIBarButtonItem()
-    
     private var totalCost = 0.0
 
     override func viewDidLoad() {
@@ -33,6 +32,8 @@ class ReceiptViewController: UIViewController {
         receiptView.itemsTableView.dataSource = self
         fetchCheckOutItemsForReceipt()
         //setupBarButtonItem()
+        receiptView.storeName.text = "SERVED BY:   Whole Foods Market"
+        receiptView.itemsTableView.separatorStyle = .none
     }
     
     private func fetchCheckOutItemsForReceipt(){
@@ -93,6 +94,9 @@ class ReceiptViewController: UIViewController {
 }
 
 extension ReceiptViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return checkedOutItems.count
     }
@@ -104,7 +108,9 @@ extension ReceiptViewController: UITableViewDelegate, UITableViewDataSource {
         cell.itemPrice.text = "$" + "\(checkOutItem.price)"
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
+    }
     
 }
 
