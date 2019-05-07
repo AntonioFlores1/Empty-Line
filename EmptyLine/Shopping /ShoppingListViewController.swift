@@ -98,21 +98,27 @@ class ShoppingListViewController: UIViewController {
             shoppingView.payButton.isEnabled = true
         }
     }
- 
-    @objc func payButtonPressed() {
-        print("pressed")
-        payButtonPresse()
-    }
-   
+    
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
         controlPayButton()
         shoppingView.shoppingListTableView.reloadData()
+        shoppingCar()
         shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
                 self?.shoppingView.payButton.transform = .identity
             }, completion: nil)
-        
+    }
+    private func shoppingCar() {
+        if shoppingCart.isEmpty {
+            shoppingView.payButton.isEnabled = false
+        } else {
+            shoppingView.payButton.isEnabled = true
+        }
+    }
+    @objc func payButtonPressed() {
+        print("pressed")
+        payButtonPresse()
     }
 
     @objc private func fetchShoppingCartItems(){
