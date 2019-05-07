@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DragViewController" customModule="EmptyLine" customModuleProvider="target">
             <connections>
-                <outlet property="addButton" destination="AcH-fY-iYv" id="c8s-on-Zp5"/>
+                <outlet property="addButtonToCart" destination="AcH-fY-iYv" id="Vk9-8x-FUI"/>
                 <outlet property="addToCartAnimation" destination="5ZB-Yh-Bua" id="C4i-1z-8wv"/>
                 <outlet property="dontAdd" destination="vLq-hD-Hjp" id="Kek-za-UKk"/>
                 <outlet property="dontAddCartAnimation" destination="VVr-Af-zgP" id="MVc-TH-2iG"/>
@@ -26,32 +26,28 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="873"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fiji-Water-15" translatesAutoresizingMaskIntoConstraints="NO" id="ZRx-gS-8XR">
-                    <rect key="frame" x="6" y="123" width="124.5" height="134.5"/>
+                    <rect key="frame" x="10" y="10" width="103.5" height="157"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiji Water place holder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2J-Ka-189">
-                    <rect key="frame" x="10.5" y="59" width="248.5" height="45"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$19.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmA-aK-k4Q">
-                    <rect key="frame" x="165.5" y="113.5" width="83" height="45"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <rect key="frame" x="122" y="77" width="83" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZB-Yh-Bua" customClass="LottieView" customModule="Lottie">
-                    <rect key="frame" x="269" y="168" width="83" height="71.5"/>
+                    <rect key="frame" x="316.5" y="77" width="83" height="70"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcH-fY-iYv">
-                            <rect key="frame" x="0.0" y="0.0" width="83" height="71.5"/>
-                            <state key="normal" image="add"/>
+                            <rect key="frame" x="0.0" y="0.0" width="83" height="70"/>
+                            <state key="normal" image="add">
+                                <color key="titleColor" red="0.08629759042" green="0.1444436516" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </state>
                             <connections>
-                                <action selector="addToCartButton:" destination="-1" eventType="touchUpInside" id="4e1-F2-Lw6"/>
+                                <action selector="addToCartButton:" destination="-1" eventType="touchUpInside" id="84h-Sn-qXt"/>
                             </connections>
                         </button>
                     </subviews>
@@ -63,10 +59,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-Af-zgP" customClass="LottieView" customModule="Lottie">
-                    <rect key="frame" x="165.5" y="168" width="83" height="71.5"/>
+                    <rect key="frame" x="196.5" y="77" width="83" height="70"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLq-hD-Hjp">
-                            <rect key="frame" x="0.0" y="0.0" width="83" height="71.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="83" height="70"/>
                             <state key="normal" image="delete"/>
                             <connections>
                                 <action selector="dontAddButton:" destination="-1" eventType="touchUpInside" id="5fV-On-SpL"/>
@@ -81,51 +77,59 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jHT-OC-G9q">
-                    <rect key="frame" x="0.0" y="364.5" width="414" height="358.5"/>
+                    <rect key="frame" x="0.0" y="399.5" width="414" height="349"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0P-nH-eM2">
-                    <rect key="frame" x="0.0" y="304" width="414" height="44.5"/>
+                    <rect key="frame" x="0.0" y="313.5" width="414" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiji Water place holder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2J-Ka-189">
+                    <rect key="frame" x="119.5" y="12" width="248.5" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.42" id="1lP-df-9Le"/>
-                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.33" id="6FP-gj-gp3"/>
-                <constraint firstItem="VVr-Af-zgP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="8nL-al-q2f"/>
-                <constraint firstItem="M2J-Ka-189" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="9Oe-vo-lWO"/>
+                <constraint firstItem="M2J-Ka-189" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="0lh-Si-y63"/>
+                <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.23" constant="13.939999999999998" id="6FP-gj-gp3"/>
+                <constraint firstItem="VVr-Af-zgP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="1.15" id="8nL-al-q2f"/>
+                <constraint firstItem="VVr-Af-zgP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="33" id="9HY-tR-fSa"/>
+                <constraint firstItem="M2J-Ka-189" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.029" id="9Oe-vo-lWO"/>
                 <constraint firstItem="VVr-Af-zgP" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="D0C-Hu-R38"/>
                 <constraint firstItem="jHT-OC-G9q" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="D62-jX-L8Y"/>
                 <constraint firstItem="S0P-nH-eM2" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="DMx-Se-qQi"/>
                 <constraint firstItem="5ZB-Yh-Bua" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="EVW-Qu-3bs"/>
                 <constraint firstItem="5ZB-Yh-Bua" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.2" id="FFH-pG-GWN"/>
-                <constraint firstItem="5ZB-Yh-Bua" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="1.5" id="FU0-po-65c"/>
+                <constraint firstItem="5ZB-Yh-Bua" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="1.73" id="FU0-po-65c"/>
                 <constraint firstItem="VVr-Af-zgP" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.2" id="HP2-3u-k5V"/>
-                <constraint firstItem="ZRx-gS-8XR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="NBy-1L-0yt"/>
-                <constraint firstItem="VVr-Af-zgP" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.45" id="OXL-uZ-tRP"/>
+                <constraint firstItem="ZRx-gS-8XR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.25" id="NBy-1L-0yt"/>
                 <constraint firstItem="jHT-OC-G9q" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.4" id="Qam-D8-q54"/>
+                <constraint firstItem="5ZB-Yh-Bua" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="33" id="S1v-Z5-Lfg"/>
                 <constraint firstItem="S0P-nH-eM2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="SHa-Qx-zs8"/>
-                <constraint firstItem="jHT-OC-G9q" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="1.2" id="Y1i-9v-eDJ"/>
+                <constraint firstItem="cmA-aK-k4Q" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="33" id="USl-4m-BGH"/>
+                <constraint firstItem="jHT-OC-G9q" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="1.3" id="Y1i-9v-eDJ"/>
                 <constraint firstItem="S0P-nH-eM2" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ZLJ-eU-uvi"/>
-                <constraint firstItem="M2J-Ka-189" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.18" id="Zgd-hG-WO7"/>
-                <constraint firstItem="cmA-aK-k4Q" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.3" id="dgF-Eh-QCF"/>
-                <constraint firstItem="5ZB-Yh-Bua" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.45" id="edj-X8-aFT"/>
+                <constraint firstItem="ZRx-gS-8XR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="fWM-zI-UKP"/>
                 <constraint firstItem="M2J-Ka-189" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="jye-uE-ozz"/>
-                <constraint firstItem="S0P-nH-eM2" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.72" id="m4W-xN-4dg"/>
+                <constraint firstItem="S0P-nH-eM2" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.76" id="m4W-xN-4dg"/>
                 <constraint firstItem="cmA-aK-k4Q" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.2" id="p9a-3g-fxY"/>
-                <constraint firstItem="cmA-aK-k4Q" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="qqT-05-N5l"/>
-                <constraint firstItem="M2J-Ka-189" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.65" id="uUc-HG-e9V"/>
-                <constraint firstItem="ZRx-gS-8XR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.15" id="vhT-dH-g9G"/>
-                <constraint firstItem="cmA-aK-k4Q" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wKb-q4-PCN"/>
+                <constraint firstItem="cmA-aK-k4Q" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.04" id="qqT-05-N5l"/>
+                <constraint firstItem="M2J-Ka-189" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="1.13" constant="9.6999999999999886" id="uUc-HG-e9V"/>
+                <constraint firstItem="ZRx-gS-8XR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.18" id="vhT-dH-g9G"/>
+                <constraint firstItem="cmA-aK-k4Q" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.79" id="wKb-q4-PCN"/>
                 <constraint firstItem="jHT-OC-G9q" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="zNO-zw-V36"/>
             </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="-294.20289855072468" y="-365.625"/>
+            <point key="canvasLocation" x="-550.72463768115949" y="-294.30803571428572"/>
         </view>
     </objects>
     <resources>

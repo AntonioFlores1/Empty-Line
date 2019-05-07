@@ -50,6 +50,7 @@ class ShoppingListViewController: UIViewController {
         return refC
     }()
     
+    
     private var shoppingCart = [Item](){
         didSet {
             DispatchQueue.main.async {
@@ -61,12 +62,21 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
         self.view.layer.addSublayer(gradient)
+        
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
+//        self.view.layer.addSublayer(gradient)
         view.addSubview(shoppingView)
+        shoppingView.shoppingListTableView.backgroundColor? = .clear
+        shoppingView.backgroundColor = .clear
         setupViews()
         navigationItem.title = "Checkout List"
         fetchShoppingCartItems()
@@ -78,11 +88,20 @@ class ShoppingListViewController: UIViewController {
         activityView = UIActivityIndicatorView(style: .gray)
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
         activityView.center = shoppingView.payButton.center
+        //self.activityView.layer.addSublayer(gradient)
         view.addSubview(activityView)
+    }
+    private func controlPayButton() {
+        if shoppingCart.isEmpty == true {
+            shoppingView.payButton.isEnabled = false
+        } else if shoppingCart.isEmpty != true {
+            shoppingView.payButton.isEnabled = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
+        controlPayButton()
         shoppingView.shoppingListTableView.reloadData()
         shoppingCar()
         shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -121,17 +140,30 @@ class ShoppingListViewController: UIViewController {
         ])
     }
     
-    private func createShoppingHistory(){
-      //  Dictionary.init(grouping: <#T##Sequence#>, by: <#T##(Sequence.Element) throws -> _#>)
-        //for item in shoppingCart {
-           // let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-           // savedDate.add(newDate: shoppedItem)
-            //ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-          //  ShoppingHistoryItemsDataManager.addToShoppingCart(item: shoppingCart, savedDate: "\(createdDate).plist")
-            
-            ShoppingHistoryItemsDataManager.saveShoppingCart(shoppedDate: "\(createdDate).plist", allItems: shoppingCart)
-        
 
+    
+    
+    private func createShoppingHistory(){
+        
+        for item in shoppingCart {
+            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
+            savedDate.add(newDate: shoppedItem)
+            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
+            
+          //let shoppedItem = shoppedItem
+
+//            guard let loggedInUser = authservice.getCurrentUser() else {
+//
+//                showAlert(title: "Error", message: "No user currently logged in")
+//                return
+//            }
+//
+//            DBService.createCheckoutHistory(userID: loggedInUser.uid, shopper: item) { (error) in
+//                if let error = error {
+//                    self.showAlert(title: "Error", message: "Error: \(error) creating user shopping history")
+//                }
+//            }
+    }
     }
     
     
@@ -171,7 +203,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.layer.cornerRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
-
+        cell.backgroundColor = .clear
         return cell
     }
 }
@@ -185,6 +217,7 @@ extension ShoppingListViewController{
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+            //shoppingView.shoppingListTableView.reloadData()
             totalItems += 1
             stepper.value = 0
         } else if stepper.value == -1.0{
@@ -242,6 +275,7 @@ extension ShoppingListViewController{
         if editingStyle == .delete {
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
+            self.shoppingView.payButton.isEnabled = false
             self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
             self.itemsPriceTotal = ShoppingCartDataManager.totalAmount()
@@ -263,13 +297,15 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
+            self.shoppingCart.removeAll()
+            self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
             self.createShoppingHistory()
             ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
            
             ShoppingCartDataManager.deleteAllItems()
-            self.shoppingCart.removeAll()
-            self.refresh.endRefreshing()
+//            self.shoppingCart.removeAll()
+//            self.refresh.endRefreshing()
    
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
 

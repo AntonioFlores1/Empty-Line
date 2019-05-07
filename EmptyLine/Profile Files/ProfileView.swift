@@ -66,10 +66,12 @@ class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
+        
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
-        gradient.colors = [UIColor.init(red: 28, green: 50, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor]
+        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
         self.layer.addSublayer(gradient)
+
 
         bringSubviewToFront(profileImageView)
 

@@ -19,11 +19,10 @@ class ReceiptTableViewCell: UITableViewCell {
         let itemPrice = UILabel()
         return itemPrice
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInt()
-        
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,19 +41,18 @@ class ReceiptTableViewCell: UITableViewCell {
     private func setItemNameLabelConstrains(){
         addSubview(itemNameLabel)
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        itemNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        itemNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        itemNameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        itemNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
+        itemNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        itemNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -60).isActive = true
+        itemNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     private func setItemPrice(){
         addSubview(itemPrice)
         itemPrice.translatesAutoresizingMaskIntoConstraints = false
-        itemPrice.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor).isActive = true
-           itemPrice.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-           itemPrice.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-           itemPrice.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        itemPrice.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
+        itemPrice.leadingAnchor.constraint(equalTo: itemNameLabel.trailingAnchor, constant: -20).isActive = true
+        itemPrice.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+        itemPrice.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
-
 }

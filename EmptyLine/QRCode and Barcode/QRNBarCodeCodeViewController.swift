@@ -38,8 +38,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var dragViewController:DragViewController!
     var blurView:UIVisualEffectView!
     
-    let dViewHeight:CGFloat = 700
-    let dViewHandleAreaHeight:CGFloat = 280
+    let dViewHeight:CGFloat = 500
+    let dViewHandleAreaHeight:CGFloat = 190
     
     var DViewVisible = false
     var nextState:DViewState {
@@ -48,6 +48,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrapted:CGFloat = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         byebyeWebSite()
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
+        
+        
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.isTranslucent = true
         navigationController?.isNavigationBarHidden = true
 //      setUpDragableView()
         
@@ -82,6 +87,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
         self.view.isUserInteractionEnabled = true
         productDetailView.addGestureRecognizer(tap)
+        self.dragViewController.view.layer.cornerRadius = 20
     }
     
     func setUpDragableView() {
@@ -93,10 +99,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
         dragViewController.view.clipsToBounds = true
         
-        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
-//        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-
         dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragableViewPanHandler(recognizer:)))
@@ -156,9 +160,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                 switch state {
                     
                 case .expanded:
-                    self.dragViewController.view.layer.cornerRadius = 16
+                    self.dragViewController.view.layer.cornerRadius = 26
                 case .collapsed:
-                    self.dragViewController.view.layer.cornerRadius = 8
+                    self.dragViewController.view.layer.cornerRadius = 20
                 }
             }
             
@@ -174,7 +178,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     self.stopRecording()
                 case .collapsed:
                     self.blurView.effect = nil
+                    self.runningAnimations.removeAll()
                     self.session.startRunning()
+                    
                 }
             }
             
@@ -219,16 +225,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         stopRecording()
     }
     
-    
-    
-//    func urllink(url:String){
-//       idk.webView = WKWebView()
-//        idk.webView.navigationDelegate = self
-//        //let link = "http://l.ead.me/bb7Wej"
-//        let request = URLRequest(url: URL(string: url)!)
-//        idk.webView.load(request)
-//        idk.webView.allowsBackForwardNavigationGestures = true
-//    }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
@@ -367,7 +363,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc private func antonioAddToShoppingCart(){
-        dragViewController.addButton.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
+        dragViewController.addButtonToCart.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
     }
 
 //    private func antonioDontAddToShoppingCart(){
@@ -379,6 +375,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc func dontAddMe(){
+        continueInteractiveTransition()
+        self.blurView.effect = nil
+        self.session.startRunning()
     dragViewController.view.frame = CGRect(x: 0,
                                                y: 900,
                                                width: self.view.bounds.width,
