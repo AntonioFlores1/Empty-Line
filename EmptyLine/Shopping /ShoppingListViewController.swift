@@ -297,15 +297,13 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
-            self.shoppingCart.removeAll()
-            self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
             self.createShoppingHistory()
             ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
            
             ShoppingCartDataManager.deleteAllItems()
-//            self.shoppingCart.removeAll()
-//            self.refresh.endRefreshing()
+            self.shoppingCart.removeAll()
+            self.refresh.endRefreshing()
    
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
 
