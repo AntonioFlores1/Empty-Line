@@ -63,10 +63,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         tableView.backgroundColor = .clear
 
         view.addSubview(profileView)
         view.addSubview(tableView)
+
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -300,6 +303,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                     let day = allUserCheckOutItems[indexPath.section][indexPath.row]
                     print(day)
                     cell.historyLabel.text = day.name
+                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
                     
                     cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
                 } else {
