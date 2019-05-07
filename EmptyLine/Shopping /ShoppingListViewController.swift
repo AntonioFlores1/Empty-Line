@@ -90,23 +90,35 @@ class ShoppingListViewController: UIViewController {
         activityView.center = shoppingView.payButton.center
         //self.activityView.layer.addSublayer(gradient)
         view.addSubview(activityView)
-
-        
     }
- 
-    @objc func payButtonPressed() {
-        print("pressed")
-        payButtonPresse()
+    private func controlPayButton() {
+        if shoppingCart.isEmpty == true {
+            shoppingView.payButton.isEnabled = false
+        } else if shoppingCart.isEmpty != true {
+            shoppingView.payButton.isEnabled = true
+        }
     }
-   
+    
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
+        controlPayButton()
         shoppingView.shoppingListTableView.reloadData()
+        shoppingCar()
         shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
                 self?.shoppingView.payButton.transform = .identity
             }, completion: nil)
-        
+    }
+    private func shoppingCar() {
+        if shoppingCart.isEmpty {
+            shoppingView.payButton.isEnabled = false
+        } else {
+            shoppingView.payButton.isEnabled = true
+        }
+    }
+    @objc func payButtonPressed() {
+        print("pressed")
+        payButtonPresse()
     }
 
     @objc private func fetchShoppingCartItems(){
@@ -283,6 +295,7 @@ extension ShoppingListViewController{
         if editingStyle == .delete {
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
+            self.shoppingView.payButton.isEnabled = false
             self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
             self.itemsPriceTotal = ShoppingCartDataManager.totalAmount()
@@ -304,13 +317,15 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
+            self.shoppingCart.removeAll()
+            self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
             self.createShoppingHistory()
             ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
            
             ShoppingCartDataManager.deleteAllItems()
-            self.shoppingCart.removeAll()
-            self.refresh.endRefreshing()
+//            self.shoppingCart.removeAll()
+//            self.refresh.endRefreshing()
    
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
 

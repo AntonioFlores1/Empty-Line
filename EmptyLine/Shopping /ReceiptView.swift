@@ -22,7 +22,7 @@ class ReceiptView: UIView {
     
     public lazy var zipLineLogo: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage.init(named: "zipLineLogo")
+        imageView.image = UIImage.init(named: "logo")
         return imageView
     }()
     
@@ -33,15 +33,28 @@ class ReceiptView: UIView {
     
     public lazy var totalCostLabel: UILabel = {
         let totalCostLabel = UILabel()
-        totalCostLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        totalCostLabel.font = UIFont.boldSystemFont(ofSize: 17)
         return totalCostLabel
     }()
     
     public lazy var paymentStatus: UILabel = {
         let paymentStatus = UILabel()
-        paymentStatus.font = UIFont.boldSystemFont(ofSize: 20)
+        paymentStatus.font = UIFont.boldSystemFont(ofSize: 17)
         paymentStatus.text = "Payment Status: Paid"
         return paymentStatus
+    }()
+    
+    public lazy var storeName: UILabel = {
+        let storeNameLabel = UILabel()
+        storeNameLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        return storeNameLabel
+    }()
+    
+    public lazy var dayLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.text = "------------ May 8, 2019 ------------"
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -63,6 +76,8 @@ class ReceiptView: UIView {
     private func setupConstrains(){
         setupScrollViewConstrains()
         setupImageViewConstrains()
+        setStoreNameLabel()
+        setDayLabel()
         setupTableViewConstrains()
         setupTotalLabelConstrains()
         statusLabelConstrains()
@@ -81,15 +96,15 @@ class ReceiptView: UIView {
         receiptScrollView.addSubview(zipLineLogo)
         zipLineLogo.translatesAutoresizingMaskIntoConstraints = false
         zipLineLogo.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        zipLineLogo.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        zipLineLogo.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-        zipLineLogo.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        zipLineLogo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 80).isActive = true
+        zipLineLogo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80).isActive = true
+        zipLineLogo.heightAnchor.constraint(equalToConstant: 140).isActive = true
     }
     
     private func setupTableViewConstrains(){
         receiptScrollView.addSubview(itemsTableView)
         itemsTableView.translatesAutoresizingMaskIntoConstraints = false
-        itemsTableView.topAnchor.constraint(equalTo: zipLineLogo.bottomAnchor).isActive = true
+        itemsTableView.topAnchor.constraint(equalTo: zipLineLogo.bottomAnchor, constant: 60).isActive = true
         itemsTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         itemsTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         itemsTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -80).isActive = true
@@ -97,7 +112,7 @@ class ReceiptView: UIView {
     
     private func setupTotalLabelConstrains(){
         receiptScrollView.addSubview(totalCostLabel)
-    totalCostLabel.translatesAutoresizingMaskIntoConstraints = false
+        totalCostLabel.translatesAutoresizingMaskIntoConstraints = false
         totalCostLabel.topAnchor.constraint(equalTo: itemsTableView.bottomAnchor).isActive = true
         totalCostLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 100).isActive = true
         totalCostLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
@@ -106,14 +121,27 @@ class ReceiptView: UIView {
     
     private func statusLabelConstrains(){
         receiptScrollView.addSubview(paymentStatus)
- paymentStatus.translatesAutoresizingMaskIntoConstraints = false
+        paymentStatus.translatesAutoresizingMaskIntoConstraints = false
         paymentStatus.topAnchor.constraint(equalTo: totalCostLabel.bottomAnchor).isActive = true
         paymentStatus.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 100).isActive = true
         totalCostLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
         paymentStatus.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
     }
     
+    private func setStoreNameLabel() {
+        receiptScrollView.addSubview(storeName)
+        storeName.translatesAutoresizingMaskIntoConstraints = false
+        storeName.topAnchor.constraint(equalTo: zipLineLogo.bottomAnchor, constant: 5).isActive = true
+        storeName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        storeName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+    }
     
-    
-    
+    private func setDayLabel() {
+        receiptScrollView.addSubview(dayLabel)
+        dayLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayLabel.topAnchor.constraint(equalTo: storeName.bottomAnchor, constant: 5).isActive = true
+        dayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
+        dayLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
+        dayLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    }
 }
