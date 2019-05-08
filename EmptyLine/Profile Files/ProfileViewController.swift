@@ -39,6 +39,7 @@ class ProfileViewController: UIViewController {
     private var selectedImage: UIImage?
     public var profileImage: UIImage!
     public var userSetting: CCUser!
+    
     lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
@@ -51,6 +52,7 @@ class ProfileViewController: UIViewController {
         table.rowHeight = UITableView.automaticDimension
         return table
     }()
+    
     lazy var buttonView: UIView = {
         let buttonBar = UIView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
@@ -63,11 +65,10 @@ class ProfileViewController: UIViewController {
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
         view.addSubview(buttonView)
-        // -- new
         buttonView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor).isActive = true
         buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
         buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
-        buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true
+        buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true // 1
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -83,6 +84,9 @@ class ProfileViewController: UIViewController {
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .black
         fetchLoggedInUserShoppingHistory()
+        UIView.animate(withDuration: 0.3) {
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +95,6 @@ class ProfileViewController: UIViewController {
     }
     
     private func fetchLoggedInUserShoppingHistory(){
-       
         guard let loggedInZiplineUser = authservice.getCurrentUser() else {
             showAlert(title: "Error", message: "No logged in user. Please login or create a zipline account")
             return
@@ -197,17 +200,17 @@ class ProfileViewController: UIViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
         })
-        
         alertController.addAction(camera)
         alertController.addAction(cancel)
         alertController.addAction(photoLibrary)
         present(alertController, animated: true, completion: nil)
-        
     }
     
-
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
+        UIView.animate(withDuration: 0.3) {
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+        }
     }
     
     private func showImagePickerController() {
@@ -217,7 +220,7 @@ class ProfileViewController: UIViewController {
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 20).isActive = true
+        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -228,8 +231,6 @@ class ProfileViewController: UIViewController {
     @objc func changeNameButton() {
         print(">>>//????")
     }
-    
-    
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -238,8 +239,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             return allUserCheckOutItems[section].first?.createdAt
-            
-            
         case 1:
             return account[section]
         default:
@@ -277,18 +276,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
-
             cell.contentView.backgroundColor = UIColor.clear
             cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
-
+            
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
 
                 if allUserCheckOutItems.count > 0 {
