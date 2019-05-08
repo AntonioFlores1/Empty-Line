@@ -13,7 +13,7 @@ import Stripe
 
 
 class ShoppingListViewController: UIViewController {
-    
+
     var total = 0.0
     var totalItems = 1
     var itemsPriceTotal: Double = 0.0 {
@@ -21,6 +21,7 @@ class ShoppingListViewController: UIViewController {
             shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
         }
     }
+    
     
     var date = Date()
     var createdDate: String {  let formatter = DateFormatter()
@@ -30,7 +31,7 @@ class ShoppingListViewController: UIViewController {
         
     }
     
-
+    
     private var list: ListenerRegistration?
     private var activityView: UIActivityIndicatorView!
     var productDetailView = ProductDetailsView()
@@ -96,11 +97,18 @@ class ShoppingListViewController: UIViewController {
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
         activityView.center = shoppingView.payButton.center
         //self.activityView.layer.addSublayer(gradient)
+        // new
         view.addSubview(activityView)
     }
     private func controlPayButton() {
         if shoppingCart.isEmpty == true {
             shoppingView.payButton.isEnabled = false
+            let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
+            alerController.addAction(ok)
+            alerController.addAction(cancel)
+            present(alerController, animated: true, completion: nil)
         } else if shoppingCart.isEmpty != true {
             shoppingView.payButton.isEnabled = true
         }

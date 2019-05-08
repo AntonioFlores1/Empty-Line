@@ -12,14 +12,11 @@ import Toucan
 import Kingfisher
 import Firebase
 
-
-
 enum ImageToEdit {
     case profileImage
 }
 
 class ProfileViewController: UIViewController {
-
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
@@ -34,8 +31,6 @@ class ProfileViewController: UIViewController {
     }
     private var allDates = [String]()
     private var allItems = [Item]()
-    
-
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -50,26 +45,30 @@ class ProfileViewController: UIViewController {
         return imagePicker
     }()
     
-    
-    
-    
-    
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
         return table
     }()
+    lazy var buttonView: UIView = {
+        let buttonBar = UIView()
+        buttonBar.translatesAutoresizingMaskIntoConstraints = false
+        buttonBar.backgroundColor = UIColor.orange
+        return buttonBar
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         tableView.backgroundColor = .clear
-
         view.addSubview(profileView)
+        view.addSubview(buttonView)
+        // -- new
+        buttonView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor).isActive = true
+        buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
+        buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true
         view.addSubview(tableView)
-
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -107,30 +106,23 @@ class ProfileViewController: UIViewController {
                 self?.allItems = allCheckedOutItems
                 
                          }
-            
             if let allCheckedoutDates = allCheckedoutDates {
                                self?.allDates = allCheckedoutDates
                               dump(allCheckedoutDates)
                       }
-            
             for date in self!.allDates {
                              var itemsOnDay = [Item]()
                      for item in self!.allItems {
                                     if date == item.createdAt {
                                         itemsOnDay.append(item)
-                                    }
-
-
-                                }
+                    }
+                }
                 self?.allUserCheckOutItems.removeAll()
                    self?.allUserCheckOutItems.append(itemsOnDay)
                                 self!.tableView.reloadData()
-                            }
+            }
         }
-        
     }
-    
-    
     
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
@@ -146,7 +138,7 @@ class ProfileViewController: UIViewController {
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
-                self?.profileView.usernameLabel.text = "@" + user.displayName!
+                self?.profileView.usernameLabel.text = user.displayName!
                 print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
@@ -225,7 +217,7 @@ class ProfileViewController: UIViewController {
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
+        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
