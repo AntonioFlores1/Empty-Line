@@ -33,6 +33,8 @@ class ProfileView: UIView {
         label.textAlignment = .center
         label.text = "User Name"
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        
+    
         return label
     }()
     
@@ -66,12 +68,15 @@ class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        
         let gradient = CAGradientLayer()
+        //        gradient.locations = [0.0 , 1.0]
+        //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         gradient.frame = self.bounds
-        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
-        self.layer.addSublayer(gradient)
-
+        let color0 = UIColor(red:255/255, green:208/255, blue:185/255, alpha:0.5).cgColor
+        let color1 = UIColor(red:68/255, green:78/255, blue:227/255, alpha:0.5).cgColor
+        gradient.colors =     [UIColor.blue.cgColor,UIColor.red.cgColor,UIColor.orange.cgColor]
+self.layer.addSublayer(gradient)
 
         bringSubviewToFront(profileImageView)
 
