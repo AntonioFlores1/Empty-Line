@@ -20,6 +20,7 @@ struct ItemCollectionKeys {
     static let ItemIDKey = "itemID"
     static let createdAt = "createdAtKey"
     static let date = Date()
+    static let taxKey = "tax"
 }
 
 
@@ -35,7 +36,8 @@ extension DBService {
                        ItemCollectionKeys.PriceKey       : item.price,
                        ItemCollectionKeys.IsCouponKey    : item.isCoupon,
                        ItemCollectionKeys.ItemIDKey      : item.itemID,
-                       ItemCollectionKeys.createdAt : item.createdAt
+                       ItemCollectionKeys.createdAt      : item.createdAt,
+                       ItemCollectionKeys.taxKey         : item.tax
                 
             ]) { (error) in
                 if let error = error {
