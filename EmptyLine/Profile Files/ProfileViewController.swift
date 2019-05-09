@@ -102,27 +102,27 @@ class ProfileViewController: UIViewController {
             if let error =  error {
                 self?.showAlert(title: "Error", message: "Error \(error) encountered while fetching \(String(describing: loggedInZiplineUser.displayName)) checkout history")
             }
-            if let allCheckedOutItems = allCheckedOutItems {
-                
-                self?.allItems = allCheckedOutItems
-                
-                         }
             
-            if let allCheckedoutDates = allCheckedoutDates {
-                               self?.allDates = allCheckedoutDates
-                              dump(allCheckedoutDates)
-                      }
+
+             if let allCheckedOutItems = allCheckedOutItems {
+
+                self?.allItems = allCheckedOutItems
+                if let allCheckedoutDates = allCheckedoutDates {
+                    dump(allCheckedoutDates)
+                    self?.allDates = allCheckedoutDates
+                //dump(self?.allDates)
+                }
+                         }
             
             for date in self!.allDates {
                              var itemsOnDay = [Item]()
                      for item in self!.allItems {
-                                    if date == item.createdAt {
+                                    if date == item.boughtDate {
                                         itemsOnDay.append(item)
                                     }
-
-
                                 }
-                self?.allUserCheckOutItems.removeAll()
+                
+            self?.allUserCheckOutItems.removeAll()
                    self?.allUserCheckOutItems.append(itemsOnDay)
                                 self!.tableView.reloadData()
                             }
@@ -242,10 +242,9 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard !allUserCheckOutItems.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return allUserCheckOutItems[section].first?.createdAt
+            return ""
             
             
         case 1:
@@ -259,7 +258,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
          switch profileView.segmentedControl.selectedSegmentIndex {
          case 0:
-            return allUserCheckOutItems.count
+            return 1
          case 1:
             return account.count
          default:
@@ -272,8 +271,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         guard !allUserCheckOutItems.isEmpty else { return 0 }
         switch profileView.segmentedControl.selectedSegmentIndex {
             case 0:
-                return allUserCheckOutItems[section].count
-            
+                return allDates.count
             case 1:
                 if (section == 0) {
                     return 3 }; if section == 1 { return 2 }; if section == 2 { return 5 }
@@ -300,18 +298,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
 
                 if allUserCheckOutItems.count > 0 {
-                    let day = allUserCheckOutItems[indexPath.section][indexPath.row]
-                    print(day)
-                    cell.historyLabel.text = day.name
+                    let day = allDates[indexPath.row]
+                    cell.shoppingDateLabel.text = day
                     cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
-                    
-                    cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
                 } else {
-                    cell.historyLabel.text = "No history of items bought"
+                    cell.shoppingDateLabel.text = "No history of items bought"
                 }
             } else {
-                cell.historyImage.isHidden = true
-                cell.historyLabel.isHidden = true
+                cell.shoppingDateLabel.isHidden = true
             }
             return cell
             
@@ -353,15 +347,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 80
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            if indexPath.section == indexPath.row {
-          
-            }
-            
+                let shoppedDate = allDates[indexPath.row]
+                let shoppedItems = allItems.filter {$0.boughtDate == shoppedDate}
+                let receiptTableView = ReceiptHistoryViewController(allItemsCheckedOutByDay: shoppedItems)
+                self.navigationController?.pushViewController(receiptTableView, animated: true)
+         
         case 1:
             if indexPath.section == 0 {
                 if indexPath.row == 0 {
