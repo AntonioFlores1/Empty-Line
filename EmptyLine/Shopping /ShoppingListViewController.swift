@@ -62,7 +62,6 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let gradient = CAGradientLayer()
 //        gradient.locations = [0.0 , 1.0]
 //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
@@ -107,6 +106,7 @@ class ShoppingListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarItem.badgeValue = "\(shoppingCart.count)"
         fetchShoppingCartItems()
         controlPayButton()
         shoppingView.shoppingListTableView.reloadData()
