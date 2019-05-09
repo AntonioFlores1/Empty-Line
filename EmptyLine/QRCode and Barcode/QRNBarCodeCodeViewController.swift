@@ -25,11 +25,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-
+    
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
     
+    var shoplist = ShoppingListViewController()
     enum DViewState {
         case expanded
         case collapsed
@@ -99,7 +100,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
         dragViewController.view.clipsToBounds = true
         
-    dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+    dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
         dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
 
@@ -363,7 +364,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc private func antonioAddToShoppingCart(){
-        dragViewController.addButtonToCart.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
+        dragViewController.addButton.addTarget(self, action: #selector(antonioAddButtonPressed), for: .touchUpInside)
     }
 
 //    private func antonioDontAddToShoppingCart(){
@@ -417,24 +418,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
 //////////////////////////////////////////////////////////////////////////////////
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @objc private func addButtonPressed(){
-        dragViewController.view.frame = CGRect(x: 0,
-                                               y: 900,
-                                               width: self.view.bounds.width,
-                                               height: dViewHeight)
         continueInteractiveTransition()
        self.blurView.effect = nil
         self.session.startRunning()
@@ -458,6 +442,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 //            self.present(alertController, animated: true)
             self.handleDismiss()
             print("Item added")
+//            shoplist.tabBarItem.badgeValue = "\(shoplist.shoppingCart.count)"
+
         }
     }
     
