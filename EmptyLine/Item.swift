@@ -17,18 +17,9 @@ struct Item: Codable {
     let price: Double
     let isCoupon: Bool
     let coupon: Double
-    let date:Date
-    // quantity
+    let boughtDate: String
     
-    var createdAt: String {
-       let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE d, MMMM yyyy"
-        let createdDate = formatter.string(from: date)
-        
-        return createdDate
-    }
-    
-    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, date: Date) {
+    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, boughtDate: String) {
         self.itemID = itemID
         self.name = name
         self.barcode = barcode
@@ -38,7 +29,7 @@ struct Item: Codable {
         self.price = price
         self.isCoupon = isCoupon
         self.coupon = coupon
-        self.date = date
+        self.boughtDate = boughtDate
     }
     
     init(dict: [String: Any]) {
@@ -51,7 +42,7 @@ struct Item: Codable {
         self.isCoupon = dict[ItemCollectionKeys.IsCouponKey] as? Bool ?? false
         self.coupon = dict[ItemCollectionKeys.CouponKey] as? Double ?? 0.0
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
-        self.date = dict[ItemCollectionKeys.createdAt] as? Date ?? Date()
+        self.boughtDate = dict[ItemCollectionKeys.boughtDate] as? String ?? "no purchase date"
     }
 
     
