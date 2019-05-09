@@ -10,12 +10,13 @@ import UIKit
 
 class ConfirmPaymentViewController: UIViewController {
     
+    private var shoppingView = ShoppingView()
     private var confirmView = ConfirmPaymentView()
     private var showReceiptView = ShowReceiptView()
     private var activityView:UIActivityIndicatorView!
     private var setButton: SetRoundedButton!
     var sections = ["Card"]
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

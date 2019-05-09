@@ -62,14 +62,11 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Profile"
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
-        view.addSubview(buttonView)
-        buttonView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor).isActive = true
-        buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
-        buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true // 1
         view.addSubview(tableView)
+        setSegmentCButtonView()
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -79,14 +76,18 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
+        profileView.usernameLabel.textColor = .black
         fetchUser()
         tableView.tableFooterView = UIView()
-        navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .black
         fetchLoggedInUserShoppingHistory()
-        UIView.animate(withDuration: 0.3) {
-            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
-        }
+    }
+    
+    private func setSegmentCButtonView() {
+        view.addSubview(buttonView)
+        buttonView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor).isActive = true
+        buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
+        buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1.08 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true // 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -207,9 +208,12 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
-        self.tableView.reloadData()
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+            self.tableView.reloadData()
+        }) { (done) in
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+            self.tableView.reloadData()
         }
     }
     
@@ -220,7 +224,7 @@ class ProfileViewController: UIViewController {
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 10).isActive = true
+        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 7).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -306,7 +310,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
-            
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
                     if indexPath.row == 0 {
@@ -334,7 +337,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 infocell.emailLabel.isHidden = true
             }
             return infocell
-            
+
         default:
             return UITableViewCell()
         }
@@ -342,8 +345,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
-        }
+      return 70
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
@@ -383,7 +386,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 if indexPath.row == 0 {
                 let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
                 let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
-                    self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
+                    self.navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
                     self.dismiss(animated: true)
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }

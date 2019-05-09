@@ -63,7 +63,6 @@ class ShoppingListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let gradient = CAGradientLayer()
 //        gradient.locations = [0.0 , 1.0]
 //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
