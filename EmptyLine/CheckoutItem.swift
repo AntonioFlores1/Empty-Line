@@ -1,13 +1,13 @@
 //
-//  Item.swift
+//  CheckoutItem.swift
 //  EmptyLine
 //
-//  Created by Alfredo Barragan on 4/9/19.
+//  Created by Alfredo Barragan on 5/7/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
 
 import Foundation
-struct Item: Codable {
+struct CheckoutItem: Codable {
     let itemID: String
     let name: String
     let barcode: String
@@ -17,19 +17,9 @@ struct Item: Codable {
     let price: Double
     let isCoupon: Bool
     let coupon: Double
-    let date: Date
-    let tax: Double
-    // quantity
-    
-    var createdAt: String {
-       let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE d, MMMM yyyy"
-        let createdDate = formatter.string(from: date)
-        
-        return createdDate
-    }
-    
-    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, date: Date, tax: Double) {
+    let date:Date
+
+    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, date: Date) {
         self.itemID = itemID
         self.name = name
         self.barcode = barcode
@@ -40,7 +30,6 @@ struct Item: Codable {
         self.isCoupon = isCoupon
         self.coupon = coupon
         self.date = date
-        self.tax = tax
     }
     
     init(dict: [String: Any]) {
@@ -54,8 +43,6 @@ struct Item: Codable {
         self.coupon = dict[ItemCollectionKeys.CouponKey] as? Double ?? 0.0
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
         self.date = dict[ItemCollectionKeys.createdAt] as? Date ?? Date()
-        self.tax = dict[ItemCollectionKeys.taxKey] as? Double ?? 0.0
     }
 
-    
 }
