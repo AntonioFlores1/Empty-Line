@@ -80,6 +80,7 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         fetchLoggedInUserShoppingHistory()
+
     }
     
     private func setSegmentCButtonView() {
@@ -216,7 +217,7 @@ class ProfileViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
+        
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
     }
