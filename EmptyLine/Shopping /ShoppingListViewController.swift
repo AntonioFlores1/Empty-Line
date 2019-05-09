@@ -131,6 +131,7 @@ class ShoppingListViewController: UIViewController {
             shoppingView.payButton.isEnabled = true
         }
     }
+
     @objc func payButtonPressed() {
         print("pressed")
         payButtonPresse()
@@ -311,6 +312,14 @@ extension ShoppingListViewController{
         if editingStyle == .delete {
             print("Deleted")
             self.shoppingCart.remove(at: indexPath.row)
+            if shoppingCart.isEmpty == true {
+                let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
+                alerController.addAction(ok)
+                alerController.addAction(cancel)
+                present(alerController, animated: true, completion: nil)
+            }
             self.shoppingView.payButton.isEnabled = false
             self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
