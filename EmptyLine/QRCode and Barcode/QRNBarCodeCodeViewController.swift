@@ -26,6 +26,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
     
+    
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
@@ -88,7 +89,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
         self.view.isUserInteractionEnabled = true
         productDetailView.addGestureRecognizer(tap)
-        self.dragViewController.view.layer.cornerRadius = 20
+        self.dragViewController.view.layer.cornerRadius = 20        
     }
     
     func setUpDragableView() {
@@ -100,7 +101,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
         dragViewController.view.clipsToBounds = true
         
-    dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
         dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
 
@@ -112,6 +113,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         switch recognizer.state {
             
         case .began:
+            
             startInteractiveTransition(state: nextState, duration: 0.9)
         case .changed:
             
@@ -127,6 +129,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         }
     }
     
+
+    
     func animateTransitionIfNeeded(state:DViewState, duration:TimeInterval) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) { [weak self] in
@@ -136,10 +140,14 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     
                 case .expanded:
                     self.dragViewController.view.frame.origin.y = self.view.frame.height - self.dViewHeight
-                    
-                    
+                    if self.dViewHandleAreaHeight == 190 {
+                        self.dragViewController.arrowImage.image = UIImage(named: "down-arrow")
+                    }
                 case .collapsed:
                     self.dragViewController.view.frame.origin.y = self.view.frame.height - self.dViewHandleAreaHeight
+                    if self.dViewHandleAreaHeight == 190 {
+                        self.dragViewController.arrowImage.image = UIImage(named: "arrow-up")
+                    }
                 }
             }
             
@@ -155,15 +163,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             runningAnimations.append(frameAnimator)
             
             let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) { [weak self] in
-                
                 guard let self = self else { return }
-                
                 switch state {
-                    
                 case .expanded:
                     self.dragViewController.view.layer.cornerRadius = 26
                 case .collapsed:
                     self.dragViewController.view.layer.cornerRadius = 20
+
                 }
             }
             
@@ -181,13 +187,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     self.blurView.effect = nil
                     self.runningAnimations.removeAll()
                     self.session.startRunning()
-                    
                 }
             }
             
             blurAnimator.startAnimation()
             runningAnimations.append(blurAnimator)
-            
         }
     }
     
@@ -220,12 +224,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         session.startRunning()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         stopRecording()
     }
-    
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
@@ -420,7 +424,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     @objc private func addButtonPressed(){
         continueInteractiveTransition()
-       self.blurView.effect = nil
+        self.blurView.effect = nil
         self.session.startRunning()
         let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
         savedDate.add(newDate: itemSavedDate)
