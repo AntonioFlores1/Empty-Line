@@ -64,7 +64,7 @@ class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        backgroundColor = UIColor(hue: 196/360, saturation: 4/100, brightness: 96/100, alpha: 1.0)
+        backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1.0)
 //        let gradient = CAGradientLayer()
         //        gradient.locations = [0.0 , 1.0]
         //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
