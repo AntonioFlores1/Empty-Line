@@ -24,6 +24,7 @@ class ProfileView: UIView {
     lazy var defaultCamera: UIImageView = {
         let placeCamera = UIImageView()
         placeCamera.image = UIImage(named: "camera")
+        placeCamera.backgroundColor = .black
         return placeCamera
     }()
 
@@ -31,7 +32,7 @@ class ProfileView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "User Name"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         return label
     }()
     
@@ -57,25 +58,14 @@ class ProfileView: UIView {
         
         segControl.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
-            NSAttributedString.Key.foregroundColor: UIColor.orange
+            NSAttributedString.Key.foregroundColor: UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
+                //UIColor.orange
             ], for: .selected)
         return segControl
     }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1.0)
-//        let gradient = CAGradientLayer()
-        //        gradient.locations = [0.0 , 1.0]
-        //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
-//        gradient.frame = self.bounds
-//        let color0 = UIColor(red:104/255, green:217/255, blue:237/25, alpha:1).cgColor
-//        let color1 = UIColor(red:104/255, green:217/255, blue:237/25, alpha:1).cgColor
-//        gradient.colors =     [UIColor.blue.cgColor,UIColor.red.cgColor,UIColor.orange.cgColor]
-//        self.layer.addSublayer(gradient)
-//
         
         bringSubviewToFront(profileImageView)
         addSubview(profileImageView)
@@ -99,7 +89,7 @@ class ProfileView: UIView {
         segmentedControl.autoPinEdge(.top, to: .bottom, of: usernameLabel, withOffset: 16.0)
         
         defaultCamera.autoAlignAxis(toSuperviewAxis: .vertical)
-        defaultCamera.autoPinEdge(toSuperviewEdge: .top, withInset: 175.0)
+        defaultCamera.autoPinEdge(toSuperviewEdge: .top, withInset: 185.0)//175
     }
     
     func setnameLabelConstraints() {

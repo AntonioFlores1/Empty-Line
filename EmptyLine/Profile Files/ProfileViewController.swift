@@ -19,8 +19,8 @@ enum ImageToEdit {
 class ProfileViewController: UIViewController {
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
-    let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
-    let card = [UIImage(named: "addcard")]
+    let profileIcon = [ UIImage(named: "user-icon"), UIImage(named: "secured-letter-32"), UIImage(named: "lock-filled-32")]
+    let card = [UIImage(named: "debit-card-32")]
     
     private var allUserCheckOutItems = [[Item]]() {
         didSet {
@@ -56,12 +56,14 @@ class ProfileViewController: UIViewController {
     lazy var buttonView: UIView = {
         let buttonBar = UIView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
-        buttonBar.backgroundColor = UIColor.orange
+        buttonBar.backgroundColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
+            //UIColor.orange
         return buttonBar
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationController?.navigationBar.backgroundColor = UIColor(red:0.33, green:0.60, blue:0.27, alpha:1.0)
         navigationItem.title = "Profile"
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
@@ -79,8 +81,9 @@ class ProfileViewController: UIViewController {
         profileView.usernameLabel.textColor = .black
         fetchUser()
         tableView.tableFooterView = UIView()
-        fetchLoggedInUserShoppingHistory()
-
+        fetchLoggedInUserShoppingHistory()    //  UIColor(red:0.22, green:0.60, blue:0.45, alpha:1.0)
+        navigationController?.navigationBar.barTintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     private func setSegmentCButtonView() {
@@ -191,12 +194,12 @@ class ProfileViewController: UIViewController {
         let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
             self.imagePicker.sourceType = .camera
             self.showImagePickerController()
-            self.profileView.defaultCamera.isHidden = true
+//            self.profileView.defaultCamera.isHidden = true
         }
         let photoLibrary = UIAlertAction(title: "PhotoLibrary", style: .default) { (action) in
             self.imagePicker.sourceType = .photoLibrary
             self.showImagePickerController()
-            self.profileView.defaultCamera.isHidden = true
+//            self.profileView.defaultCamera.isHidden = true
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
@@ -297,7 +300,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                     let day = allUserCheckOutItems[indexPath.section][indexPath.row]
                     print(day)
                     cell.historyLabel.text = day.name
-                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
+//                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
                     
                     cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
                 } else {
@@ -332,6 +335,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                         infocell.cardImage.image = card[indexPath.row]
                     } else {
                         infocell.signOut.text = " SignOut"
+                        infocell.signOut.textColor = .red
                     }
                 }
             } else {

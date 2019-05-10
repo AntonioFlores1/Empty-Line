@@ -134,7 +134,7 @@ class SettingTableViewCell: UITableViewCell {
     }
     func setCardImage() {
         cardImage.translatesAutoresizingMaskIntoConstraints = false
-        cardImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        cardImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         cardImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         cardImage.trailingAnchor.constraint(equalTo: namelLabel.leadingAnchor, constant: -11).isActive = true
     }

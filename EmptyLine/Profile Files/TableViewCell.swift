@@ -12,7 +12,7 @@ class TableViewCell: UITableViewCell {
 
     lazy var  historyLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .black
         return label
     }()
     
