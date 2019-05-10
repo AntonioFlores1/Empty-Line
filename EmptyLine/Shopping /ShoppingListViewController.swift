@@ -22,6 +22,11 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
+    var taxPriceTotal: Double = 0.0 {
+        didSet {
+            shoppingView.taxLabel.text = "Tax : \(Float(taxPriceTotal))"
+        }
+    }
     
     var date = Date()
     var createdDate: String {  let formatter = DateFormatter()
@@ -229,6 +234,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
+        taxPriceTotal = itemInCart.tax
+        taxPriceTotal = ShoppingCartDataManager.taxTotal
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
@@ -252,6 +259,7 @@ extension ShoppingListViewController{
         if stepper.value == 1.0 || stepper.value == 0.0 {
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
+            taxPriceTotal = taxPriceTotal + item.tax
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             //shoppingView.shoppingListTableView.reloadData()
             totalItems += 1
@@ -259,9 +267,11 @@ extension ShoppingListViewController{
         } else if stepper.value == -1.0{
             if totalItems <= 1 {
                itemsPriceTotal = itemsPriceTotal - item.price
+               taxPriceTotal = taxPriceTotal - item.tax
                totalItems = 1
             } else {
                 itemsPriceTotal = itemsPriceTotal - item.price
+                taxPriceTotal = taxPriceTotal - item.tax
                 totalItems -= 1
                 ShoppingCartDataManager.deleteItemFromShoppingCart(index: stepper.tag)
                 stepper.value = 0
