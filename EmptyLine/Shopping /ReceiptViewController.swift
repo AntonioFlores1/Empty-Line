@@ -47,6 +47,7 @@ class ReceiptViewController: UIViewController {
         
         receiptView.totalCostLabel.text = "Total: $\(Float(totalCost))"
         receiptView.taxLabel.text = "Tax: $\(Float(totalTax))"
+        
     }
     
     private func setupBarButtonItem(){

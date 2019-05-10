@@ -59,7 +59,7 @@ class ReceiptView: UIView {
     
     public lazy var taxLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         return label
     }()
     override init(frame: CGRect) {
@@ -153,9 +153,11 @@ class ReceiptView: UIView {
     private func setTaxLabel() {
         receiptScrollView.addSubview(taxLabel)
         taxLabel.translatesAutoresizingMaskIntoConstraints = false
-        taxLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: 110).isActive = true
-        taxLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 110).isActive = true
-        taxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 110).isActive = true
+        taxLabel.bottomAnchor.constraint(equalTo: paymentStatus.topAnchor, constant: -45).isActive = true
+        taxLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -45).isActive = true
+
+        //taxLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true
+        //taxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 50).isActive = true
 //        taxLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 30).isActive = true
     }
 }
