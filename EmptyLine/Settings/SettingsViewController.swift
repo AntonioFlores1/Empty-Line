@@ -1,11 +1,11 @@
+////
+////  SettingsViewController.swift
+////  EmptyLine
+////
+////  Created by Pursuit on 4/4/19.
+////  Copyright © 2019 Pursuit. All rights reserved.
+////
 //
-//  SettingsViewController.swift
-//  EmptyLine
-//
-//  Created by Pursuit on 4/4/19.
-//  Copyright © 2019 Pursuit. All rights reserved.
-//
-
 //import UIKit
 //import PureLayout
 //
@@ -30,7 +30,7 @@
 //        tableView.dataSource = self
 ////        tableView.delegate = self
 //        tableViewconstriant()
-//        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: "Cell")
+//        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "Cell")
 //        settingView.segmentedControl.addTarget(self, action: #selector(segmentedControlPress(_:)), for: .valueChanged)
 //    }
 //    func tableViewconstriant() {
@@ -54,7 +54,7 @@
 //    }
 //    
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? SettingsTableViewCell else { return UITableViewCell()}
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell() }
 //        cell.namelLabel.text = tesla[indexPath.row]
 //        return cell
 //    }

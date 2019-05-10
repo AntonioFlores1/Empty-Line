@@ -13,12 +13,18 @@ import Stripe
 
 
 class ShoppingListViewController: UIViewController {
-    
+
     var total = 0.0
     var totalItems = 1
     var itemsPriceTotal: Double = 0.0 {
         didSet {
             shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
+        }
+    }
+    
+    var taxPriceTotal: Double = 0.0 {
+        didSet {
+            shoppingView.taxLabel.text = "Tax : \(Float(taxPriceTotal))"
         }
     }
     
@@ -30,7 +36,7 @@ class ShoppingListViewController: UIViewController {
         
     }
     
-
+    
     private var list: ListenerRegistration?
     private var activityView: UIActivityIndicatorView!
     var productDetailView = ProductDetailsView()
@@ -95,11 +101,18 @@ class ShoppingListViewController: UIViewController {
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
         activityView.center = shoppingView.payButton.center
         //self.activityView.layer.addSublayer(gradient)
+        // new
         view.addSubview(activityView)
     }
     private func controlPayButton() {
         if shoppingCart.isEmpty == true {
             shoppingView.payButton.isEnabled = false
+            let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
+            alerController.addAction(ok)
+            alerController.addAction(cancel)
+            present(alerController, animated: true, completion: nil)
         } else if shoppingCart.isEmpty != true {
             shoppingView.payButton.isEnabled = true
         }
@@ -221,6 +234,8 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
         itemsPriceTotal = itemInCart.price // new
         itemsPriceTotal = ShoppingCartDataManager.total
+        taxPriceTotal = itemInCart.tax
+        taxPriceTotal = ShoppingCartDataManager.taxTotal
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
@@ -244,6 +259,7 @@ extension ShoppingListViewController{
         if stepper.value == 1.0 || stepper.value == 0.0 {
             print(stepper.value)
             itemsPriceTotal = itemsPriceTotal + item.price
+            taxPriceTotal = taxPriceTotal + item.tax
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             //shoppingView.shoppingListTableView.reloadData()
             totalItems += 1
@@ -251,9 +267,11 @@ extension ShoppingListViewController{
         } else if stepper.value == -1.0{
             if totalItems <= 1 {
                itemsPriceTotal = itemsPriceTotal - item.price
+               taxPriceTotal = taxPriceTotal - item.tax
                totalItems = 1
             } else {
                 itemsPriceTotal = itemsPriceTotal - item.price
+                taxPriceTotal = taxPriceTotal - item.tax
                 totalItems -= 1
                 ShoppingCartDataManager.deleteItemFromShoppingCart(index: stepper.tag)
                 stepper.value = 0
@@ -325,6 +343,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
+
             //self.shoppingCart.removeAll()
            // self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
@@ -332,8 +351,9 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
            
             ShoppingCartDataManager.deleteAllItems()
-         self.shoppingCart.removeAll()
-         self.refresh.endRefreshing()
+
+            self.shoppingCart.removeAll()
+            self.refresh.endRefreshing()
    
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
 

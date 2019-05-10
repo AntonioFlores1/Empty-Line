@@ -17,7 +17,7 @@
                     <view key="view" contentMode="scaleToFill" id="vfd-Cm-tcj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="Pnt-GO-zav"/>
                     </view>
                     <navigationItem key="navigationItem" id="LMI-46-j6m"/>
