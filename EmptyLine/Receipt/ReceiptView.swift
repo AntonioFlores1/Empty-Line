@@ -53,7 +53,6 @@ class ReceiptView: UIView {
     public lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.text = "------------ May 8, 2019 ------------"
         return label
     }()
     

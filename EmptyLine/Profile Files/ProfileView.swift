@@ -32,6 +32,9 @@ class ProfileView: UIView {
         label.textAlignment = .center
         label.text = "User Name"
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        
+    
         return label
     }()
     

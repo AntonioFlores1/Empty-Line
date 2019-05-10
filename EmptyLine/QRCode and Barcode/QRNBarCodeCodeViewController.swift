@@ -392,7 +392,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 //                                               y: 900,
 //                                               width: self.view.bounds.width,
 //                                               height: dViewHeight)
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
+        let itemSavedDate = ItemSavedDate.init(createdDate: products?.boughtDate ?? "")
         savedDate.add(newDate: itemSavedDate)
         
         if let item = products {
@@ -422,7 +422,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         continueInteractiveTransition()
        self.blurView.effect = nil
         self.session.startRunning()
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
+        let itemSavedDate = ItemSavedDate.init(createdDate: products?.boughtDate ?? "")
         savedDate.add(newDate: itemSavedDate)
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)

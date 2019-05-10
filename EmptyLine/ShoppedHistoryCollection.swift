@@ -22,12 +22,13 @@ struct shoppedItemsCollectionKey {
    static let isCoupon = "isCoupon"
    static let coupon = "coupon"
    static let date = "date"
+  static let boughtDate = "boughtDate"
 }
 
 extension DBService {
     
     static public func createZipLineUserCheckoutHistory(zipLineUserID: String, zipLineUserCheckedOutItem: Item, completionHandler: @escaping(Error?) -> Void){
-        firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(zipLineUserID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).addDocument(data: [shoppedItemsCollectionKey.shopperID : zipLineUserID, shoppedItemsCollectionKey.itemID : zipLineUserCheckedOutItem.itemID, shoppedItemsCollectionKey.barcode : zipLineUserCheckedOutItem.barcode, shoppedItemsCollectionKey.description : zipLineUserCheckedOutItem.description, shoppedItemsCollectionKey.ingredients : zipLineUserCheckedOutItem.ingredients, shoppedItemsCollectionKey.image : zipLineUserCheckedOutItem.image, shoppedItemsCollectionKey.isCoupon : zipLineUserCheckedOutItem.isCoupon, shoppedItemsCollectionKey.coupon : zipLineUserCheckedOutItem.coupon, shoppedItemsCollectionKey.name : zipLineUserCheckedOutItem.name]) { (error) in
+        firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(zipLineUserID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).addDocument(data: [shoppedItemsCollectionKey.shopperID : zipLineUserID, shoppedItemsCollectionKey.itemID : zipLineUserCheckedOutItem.itemID, shoppedItemsCollectionKey.barcode : zipLineUserCheckedOutItem.barcode, shoppedItemsCollectionKey.description : zipLineUserCheckedOutItem.description, shoppedItemsCollectionKey.ingredients : zipLineUserCheckedOutItem.ingredients, shoppedItemsCollectionKey.image : zipLineUserCheckedOutItem.image, shoppedItemsCollectionKey.isCoupon : zipLineUserCheckedOutItem.isCoupon, shoppedItemsCollectionKey.coupon : zipLineUserCheckedOutItem.coupon, shoppedItemsCollectionKey.name : zipLineUserCheckedOutItem.name, shoppedItemsCollectionKey.boughtDate : Date.getISOTimestamp(), shoppedItemsCollectionKey.price : zipLineUserCheckedOutItem.price]) { (error) in
             if let error = error {
                 completionHandler(error)
             } else {
@@ -38,28 +39,6 @@ extension DBService {
     }
     
     static public func fetchzipLineUserCheckoutHistory(userID: String, completionHandler: @escaping (Error?, [Item]?, [String]?) -> Void){
-//        DBService.firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(userID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).getDocuments { (querySnapShot, error) in
-//            if let error = error {
-//                completionHandler(error, nil, nil)
-//            } else {
-//                if let querySnapShot = querySnapShot {
-//                    var allZiplineUserCheckedOutItems = [Item]()
-//                    for document in querySnapShot.documents {
-//                        let checkedOutItem = Item.init(dict: document.data())
-//                        allZiplineUserCheckedOutItems.append(checkedOutItem)
-//                    }
-//
-//                    var checkedOutDates = [String]()
-//                    for checkedOutItem in allZiplineUserCheckedOutItems {
-//                        if !checkedOutDates.contains(checkedOutItem.createdAt) {
-//                            checkedOutDates.append(checkedOutItem.createdAt)
-//                        }
-//                    }
-//                    completionHandler(nil, allZiplineUserCheckedOutItems, checkedOutDates)
-//                }
-//            }
-//        }
-        
         DBService.firestoreDB.collection(shoppedItemsCollectionKey.shoppingHistoryCollectionKey).document(userID).collection(shoppedItemsCollectionKey.allCheckedOutItemsCollectionKey).addSnapshotListener(includeMetadataChanges: false) { (querySnapshot, error) in
             if let error = error {
                 completionHandler(error, nil, nil)
@@ -73,9 +52,9 @@ extension DBService {
 
                     var checkedOutDates = [String]()
                     for checkedOutItem in allZiplineUserCheckedOutItems {
-                        if !checkedOutDates.contains(checkedOutItem.createdAt) {
-                            checkedOutDates.append(checkedOutItem.createdAt)
-                        }
+                    if !checkedOutDates.contains(checkedOutItem.boughtDate) {
+                            checkedOutDates.append(checkedOutItem.boughtDate)
+                   
                     }
                     completionHandler(nil, allZiplineUserCheckedOutItems, checkedOutDates)
                 }
@@ -89,3 +68,4 @@ extension DBService {
 
 
 
+}
