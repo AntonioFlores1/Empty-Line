@@ -17,9 +17,9 @@
                     <view key="view" contentMode="scaleToFill" id="vfd-Cm-tcj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="Pnt-GO-zav"/>
+
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+   <viewLayoutGuide key="safeArea" id="Pnt-GO-zav"/>
                     </view>
                     <navigationItem key="navigationItem" id="LMI-46-j6m"/>
                 </viewController>

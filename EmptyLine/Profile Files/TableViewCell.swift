@@ -9,7 +9,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
+    
     public lazy var  shoppingDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -25,9 +25,9 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-  
     
-
+    
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -44,10 +44,10 @@ class TableViewCell: UITableViewCell {
     private func setUpViewConstraints() {
         historyLabelConstraints()
         setShopNameLabel()
-      
+        
     }
     
-   private func historyLabelConstraints() {
+    private func historyLabelConstraints() {
         addSubview(shoppingDateLabel)
         shoppingDateLabel.translatesAutoresizingMaskIntoConstraints = false
         shoppingDateLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
@@ -65,5 +65,5 @@ class TableViewCell: UITableViewCell {
         shopNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 11).isActive = true
         shopNameLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
     }
-
+    
 }

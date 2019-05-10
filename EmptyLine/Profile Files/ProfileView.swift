@@ -9,7 +9,6 @@
 import UIKit
 import PureLayout
 
-
 class ProfileView: UIView {
     lazy var profileImageView: UIImageView = {
         var imageView = UIImageView()
@@ -41,16 +40,16 @@ class ProfileView: UIView {
     
     lazy var segmentedControl: UISegmentedControl = {
         let segControl = UISegmentedControl()
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
-         view.backgroundColor = .white
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
+        containerView.backgroundColor  = .white
         segControl.autoSetDimension(.height, toSize: 32.0)
         segControl.insertSegment(withTitle: "History", at: 0, animated: true)
         segControl.insertSegment(withTitle: "Setting", at: 1, animated: true)
         segControl.selectedSegmentIndex = 0
-        view.addSubview(segControl)
         segControl.translatesAutoresizingMaskIntoConstraints = false
-        segControl.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        segControl.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        containerView.addSubview(segControl)
+        segControl.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        segControl.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         segControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
         segControl.backgroundColor = .clear
         segControl.tintColor = .clear
@@ -65,10 +64,15 @@ class ProfileView: UIView {
             ], for: .selected)
         return segControl
     }()
-
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
+        backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1.0)
+//        let gradient = CAGradientLayer()
+        //        gradient.locations = [0.0 , 1.0]
+        //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+
 //let backcolor = UIColor.init(displayP3Red: 255, green: 238, blue: 219, alpha: 1)
         
          //self.backgroundColor = UIColor(hexString: "3DDC97")
@@ -78,7 +82,7 @@ class ProfileView: UIView {
          //self.backgroundColor = UIColor(hexString: "9DC4B5")
           //self.backgroundColor = UIColor(hexString: "566E3D")
     //self.backgroundColor = UIColor(hexString: "566E3D")
-     self.backgroundColor = UIColor(hexString: "0C4767")
+     //self.backgroundColor = UIColor(hexString: "0C4767")
         //let gradient = CAGradientLayer()
 //        self.backgroundColor = UIColor.init(displayP3Red: 34, green: 53, blue: 42, alpha: 1)
         //        gradient.locations = [0.0 , 1.0]
@@ -91,15 +95,12 @@ class ProfileView: UIView {
 //self.layer.addSublayer(gradient)
 
         bringSubviewToFront(profileImageView)
-
-
         addSubview(profileImageView)
         addSubview(usernameLabel)
         addSubview(defaultCamera)
         addSubview(segmentedControl)
         setupConstraints()
         setnameLabelConstraints()
-
     }
     
     required init?(coder aDecoder: NSCoder) {
