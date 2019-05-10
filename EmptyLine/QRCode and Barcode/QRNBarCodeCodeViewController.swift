@@ -12,6 +12,8 @@ import Firebase
 import WebKit
 import ZKCarousel
 
+
+
 class QRNBarCodeCodeViewController:
 UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDelegate {
     
@@ -25,7 +27,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-    
+
     
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
@@ -36,6 +38,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         case expanded
         case collapsed
     }
+    
     
     var dragViewController:DragViewController!
     var blurView:UIVisualEffectView!
@@ -51,9 +54,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrapted:CGFloat = 0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let nav = UINavigationBar.appearance()
         nav.backgroundColor = .blue
         startLiveVideo()
@@ -89,7 +92,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
         self.view.isUserInteractionEnabled = true
         productDetailView.addGestureRecognizer(tap)
-        self.dragViewController.view.layer.cornerRadius = 20        
+        self.dragViewController.view.layer.cornerRadius = 20
+        let navVc = self.navigationController?.tabBarController?.viewControllers![1] as! UINavigationController
+        let shoppingListVC = navVc.viewControllers[0] as! ShoppingListViewController
+       ShoppingCartDataManager.delegate = self 
     }
     
     func setUpDragableView() {
@@ -224,12 +230,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         session.startRunning()
-        
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         stopRecording()
     }
+
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
@@ -358,6 +365,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     self.dragViewController.itemDescription.text = product.description
                     self.dragViewController.itemPrice.text = "$" + String(product.price)
                     self.dragViewController.itemImage.kf.setImage(with: URL(string: product.image))
+                    
                 }
             }
         }
@@ -431,6 +439,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             showAlert(title: "Success", message: "Item added to shopping cart")
+//            self.navigationController?.tabBarItem.badgeValue = "1"
 //            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
 //
 //            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
@@ -467,6 +476,13 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
+    
 }
 
+
+extension QRNBarCodeCodeViewController: UptadeNumberOfItemsDelegate {
+    func updateNumOfItem(items: [Item]) {
+         self.navigationController?.tabBarController?.viewControllers![1].tabBarItem.badgeValue = items.count.description
+    }
+}
 

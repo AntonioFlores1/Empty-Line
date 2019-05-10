@@ -12,8 +12,9 @@ import Firebase
 import Stripe
 
 
-class ShoppingListViewController: UIViewController {
 
+class ShoppingListViewController: UIViewController {
+    
     var total = 0.0
     var totalItems = 1
     var itemsPriceTotal: Double = 0.0 {
@@ -30,7 +31,6 @@ class ShoppingListViewController: UIViewController {
         return createdDate
         
     }
-    
     
     private var list: ListenerRegistration?
     private var activityView: UIActivityIndicatorView!
@@ -83,7 +83,9 @@ class ShoppingListViewController: UIViewController {
         //self.activityView.layer.addSublayer(gradient)
         // new
         view.addSubview(activityView)
+        
     }
+    
     private func controlPayButton() {
         if shoppingCart.isEmpty == true {
             shoppingView.payButton.isEnabled = false
@@ -98,8 +100,8 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarItem.badgeValue = "\(shoppingCart.count)"
         fetchShoppingCartItems()
         controlPayButton()
         shoppingView.shoppingListTableView.reloadData()
@@ -107,8 +109,10 @@ class ShoppingListViewController: UIViewController {
         shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
                 self?.shoppingView.payButton.transform = .identity
-            }, completion: nil)
+            })
+//            self.navigationController?.tabBarItem.badgeValue = "\(shoppingCart.count)"
     }
+    
     private func shoppingCar() {
         if shoppingCart.isEmpty {
             shoppingView.payButton.isEnabled = false
@@ -140,19 +144,15 @@ class ShoppingListViewController: UIViewController {
             shoppingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
 
     // recursive function
-    
     private func createShoppingHistory(){
-        
         //            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
         //            savedDate.add(newDate: shoppedItem)
         //            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
         //
         //let shoppedItem = shoppedItem
 
-        
         guard let loggedInUser = authservice.getCurrentUser() else {
             
             showAlert(title: "Error", message: "No user currently logged in")
@@ -183,8 +183,7 @@ class ShoppingListViewController: UIViewController {
 //                    self.showAlert(title: "Error", message: "Error: \(error.localizedDescription) encountered while fetching data")
 //                }
 //            }
-    }
-        
+        }
     }
     
     
@@ -327,21 +326,15 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
-
             //self.shoppingCart.removeAll()
            // self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
             self.createShoppingHistory()
             ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
-           
             ShoppingCartDataManager.deleteAllItems()
-
             self.shoppingCart.removeAll()
             self.refresh.endRefreshing()
-   
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
-
-
         }
     }
     

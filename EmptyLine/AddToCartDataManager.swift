@@ -10,7 +10,7 @@ import Foundation
 
 final class ShoppingCartDataManager {
     private init() {}
-    
+   static weak var delegate: UptadeNumberOfItemsDelegate?
     private static var filename = "shoppingCart.plist"
     
     
@@ -22,6 +22,7 @@ final class ShoppingCartDataManager {
             for item in self.shoppingCartItems {
                 self.total += item.price
             }
+            delegate?.updateNumOfItem(items: shoppingCartItems)
         }
     }
     

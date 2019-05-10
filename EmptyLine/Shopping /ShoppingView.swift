@@ -49,7 +49,6 @@ class ShoppingView: UIView {
     lazy var payButton: UIButton = {
         var payButton = UIButton()
         payButton.backgroundColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
-            //UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 0.7)
         payButton.setTitle("pay", for: .normal)
         payButton.layer.cornerRadius = payButton.frame.size.width / 2
         payButton.layer.borderColor = UIColor.darkGray.cgColor
@@ -61,12 +60,6 @@ class ShoppingView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150))
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.bounds
-//        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
-//        self.layer.addSublayer(gradient)
-//        super.init(frame: .zero)
-        //backgroundColor = .white
         commonInit()
     }
     

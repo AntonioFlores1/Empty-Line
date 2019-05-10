@@ -52,12 +52,12 @@ class ProfileView: UIView {
         segControl.backgroundColor = .clear
         segControl.tintColor = .clear
         segControl.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
+            NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 20) ?? 0,
             NSAttributedString.Key.foregroundColor: UIColor.lightGray
             ], for: .normal)
         
-        segControl.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 25) ?? 0,
+        segControl.setTitleTextAttributes([ // 25 DINCondensed-Bold
+            NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 20) ?? 0,
             NSAttributedString.Key.foregroundColor: UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
                 //UIColor.orange
             ], for: .selected)

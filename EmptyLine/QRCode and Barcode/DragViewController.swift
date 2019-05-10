@@ -32,6 +32,7 @@ class DragViewController: UIViewController {
     
     let animationView = AnimationView(name: "addToCartAni")
     var qrcode = QRNBarCodeCodeViewController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
