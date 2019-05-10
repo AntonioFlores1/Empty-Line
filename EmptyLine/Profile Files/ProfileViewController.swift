@@ -64,12 +64,10 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+
         tableView.backgroundColor = .clear
-        
         view.addSubview(profileView)
         view.addSubview(tableView)
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -82,7 +80,7 @@ class ProfileViewController: UIViewController {
         fetchUser()
         tableView.tableFooterView = UIView()
         navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .black
+        profileView.usernameLabel.textColor = .white
         fetchLoggedInUserShoppingHistory()
     }
     
@@ -108,7 +106,7 @@ class ProfileViewController: UIViewController {
                 
                 self?.allItems = allCheckedOutItems
                 if let allCheckedoutDates = allCheckedoutDates {
-                    dump(allCheckedoutDates)
+                    //dump(allCheckedoutDates)
                     self?.allDates = allCheckedoutDates
                     //dump(self?.allDates)
                 }

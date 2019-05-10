@@ -30,7 +30,7 @@ class QRView: UIView {
         override init(frame: CGRect) {
             super.init(frame: UIScreen.main.bounds)
             imageConstraints()
-            backgroundColor = .purple
+            //backgroundColor = .purple
         }
         
         required init?(coder aDecoder: NSCoder) {

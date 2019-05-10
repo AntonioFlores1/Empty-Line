@@ -72,14 +72,28 @@ class ProfileView: UIView {
         //        gradient.locations = [0.0 , 1.0]
         //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
         //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+
+//let backcolor = UIColor.init(displayP3Red: 255, green: 238, blue: 219, alpha: 1)
         
+         //self.backgroundColor = UIColor(hexString: "3DDC97")
+        //self.backgroundColor = UIColor(hexString: "EEEEEE")
+        //self.backgroundColor = UIColor(hexString: "8CD867")
+         //self.backgroundColor = UIColor(hexString: "546A7B")
+         //self.backgroundColor = UIColor(hexString: "9DC4B5")
+          //self.backgroundColor = UIColor(hexString: "566E3D")
+    //self.backgroundColor = UIColor(hexString: "566E3D")
+     //self.backgroundColor = UIColor(hexString: "0C4767")
+        //let gradient = CAGradientLayer()
+//        self.backgroundColor = UIColor.init(displayP3Red: 34, green: 53, blue: 42, alpha: 1)
+        //        gradient.locations = [0.0 , 1.0]
+        //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
 //        gradient.frame = self.bounds
-//        let color0 = UIColor(red:104/255, green:217/255, blue:237/25, alpha:1).cgColor
-//        let color1 = UIColor(red:104/255, green:217/255, blue:237/25, alpha:1).cgColor
+//        let color0 = UIColor(red:255/255, green:208/255, blue:185/255, alpha:0.5).cgColor
+//        let color1 = UIColor(red:68/255, green:78/255, blue:227/255, alpha:0.5).cgColor
 //        gradient.colors =     [UIColor.blue.cgColor,UIColor.red.cgColor,UIColor.orange.cgColor]
-//        self.layer.addSublayer(gradient)
-//
-        
+//self.layer.addSublayer(gradient)
+
         bringSubviewToFront(profileImageView)
         addSubview(profileImageView)
         addSubview(usernameLabel)

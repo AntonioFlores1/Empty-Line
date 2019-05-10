@@ -37,7 +37,7 @@ class DragViewController: UIViewController {
         addCartAni.addSubview(animationView)
         animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         animationView.stop()
-        
+        view.backgroundColor = UIColor(hexString: "BCBDC0")
     }
     @objc func thingstodo(){
         print("i is pressed")
