@@ -37,8 +37,10 @@ class ShoppingTableViewCell: UITableViewCell {
     
     lazy var addItemStepper: UIStepper = {
         var customStepper = UIStepper.init(frame: CGRect(x: 150,y: 150,width: 100,height: 100))
-        customStepper.minimumValue = -1
-        customStepper.maximumValue = 1
+        customStepper.value = 1
+        customStepper.minimumValue = 0
+        customStepper.maximumValue = 10
+        customStepper.stepValue = 1 
         return customStepper
     }()
     
@@ -50,14 +52,16 @@ class ShoppingTableViewCell: UITableViewCell {
     }()
     @objc func addItemTo(_ sender: UIStepper) {
         var total = 0
-        if addItemStepper.value == 2.0{
+        var stepperNewValue = addItemStepper.value
+        if addItemStepper.value < stepperNewValue {
             total += 1
+            addItemStepper.value = Double(total)
         } else if addItemStepper.value == 0 {
             total -= 1
         }
 
         addItemStepper.value = 0
-        labelUpdate.text = total.description
+        labelUpdate.text = "#\(total.description)"
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

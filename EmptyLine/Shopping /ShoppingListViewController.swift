@@ -30,7 +30,9 @@ class ShoppingListViewController: UIViewController {
         
     }
     
+    var previousValue = 1
 
+    
     private var list: ListenerRegistration?
     private var activityView: UIActivityIndicatorView!
     var productDetailView = ProductDetailsView()
@@ -224,6 +226,10 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
+       // var newStepperValue = cell.addItemStepper.value
+        
+       
+        
         refresh.endRefreshing()
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
@@ -237,12 +243,25 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension ShoppingListViewController{
+    
+   
    
     @objc private func changeStepperValue(_ stepper: UIStepper) {
         
+        print("true value\(stepper.value)")
+        
+        
+
+    
+        
+        
+        
+        
         let item = shoppingCart[stepper.tag]
+        
+       // if shoppingCartItems
         if stepper.value == 1.0 || stepper.value == 0.0 {
-            print(stepper.value)
+            print("i am going upppppp \(stepper.value)")
             itemsPriceTotal = itemsPriceTotal + item.price
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             //shoppingView.shoppingListTableView.reloadData()
@@ -252,48 +271,77 @@ extension ShoppingListViewController{
             if totalItems <= 1 {
                itemsPriceTotal = itemsPriceTotal - item.price
                totalItems = 1
+                print("i am going down ? \(stepper.value)")
             } else {
                 itemsPriceTotal = itemsPriceTotal - item.price
                 totalItems -= 1
                 ShoppingCartDataManager.deleteItemFromShoppingCart(index: stepper.tag)
                 stepper.value = 0
+                print("i am going dowwwwnnnn \(stepper.value)")
             }
         }
+        
+     
+        
         let indexPath = IndexPath(row: stepper.tag, section: 0  )
         guard let cell = shoppingView.shoppingListTableView.cellForRow(at: indexPath) as? ShoppingTableViewCell else { return}
-        cell.labelUpdate.text = totalItems.description
-        print(item.price)
-        print(itemsPriceTotal)
+       // cell.labelUpdate.text = "!\(totalItems.description)"
+        cell.labelUpdate.text = "\(stepper.value)"
+       // print(stepper.tag)
+        let steppertag = stepper.tag
+       // ShoppingCartDataManager.stepperTagReference = steppertag
+        //ShoppingCartDataManager.steppervalue = Int(stepper.value)
         
-        switch cell {
-        case cell:
-            if indexPath.row == 0 {
-                if stepper.value == 1.0{
-                    totalItems += 1
-                    stepper.value = 0
-                } else {
-                    totalItems -= 1
-                }
-            }
-        case cell:
-            if indexPath.row == 1{
-                if stepper.value == 1.0{
-                    totalItems += 1
-                } else {
-                    totalItems -= 1
-                }
-            }
-        case cell:
-            if indexPath.row == 2{
-                if stepper.value == 1.0{
-                    totalItems = +1
-                } else {
-                    totalItems -= 1
-                }
-            }        
-        default:
-            break
-        }
+        ShoppingCartDataManager.stepperFrequency(indexOfStepper: steppertag, stepperValue: Int(stepper.value))
+        
+        //ShoppingCartDataManager.stepperValue = Int(stepper.value)
+        
+//        if Int(stepper.value) > previousValue {
+//            print("i inc")
+//            itemsPriceTotal = itemsPriceTotal + item.price
+//            //ShoppingCartDataManager.addItemToCart(shoppingItem: item)
+//            //shoppingView.shoppingListTableView.reloadData()
+//            totalItems += 1
+//        } else {
+//            itemsPriceTotal = itemsPriceTotal - item.price
+//            totalItems -= 1
+//            print("i dec")
+//        }
+      //  previousValue = Int(stepper.value)
+        //if ShoppingCartDataManager.
+    
+        print("it's me hahahaha \(item.price)")
+        print("total \(itemsPriceTotal)")
+//
+//        switch cell {
+//        case cell:
+//            if indexPath.row == 0 {
+//                if stepper.value == 1.0{
+//                    totalItems += 1
+//                    stepper.value = 0
+//                } else {
+//                    totalItems -= 1
+//                }
+//            }
+//        case cell:
+//            if indexPath.row == 1{
+//                if stepper.value == 1.0{
+//                    totalItems += 1
+//                } else {
+//                    totalItems -= 1
+//                }
+//            }
+//        case cell:
+//            if indexPath.row == 2{
+//                if stepper.value == 1.0{
+//                    totalItems = +1
+//                } else {
+//                    totalItems -= 1
+//                }
+//            }
+//        default:
+//            break
+//        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

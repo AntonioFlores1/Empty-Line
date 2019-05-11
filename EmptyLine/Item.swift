@@ -7,7 +7,11 @@
 //
 
 import Foundation
-struct Item: Codable {
+struct Item: Codable,Hashable,Comparable {
+    static func < (lhs: Item, rhs: Item) -> Bool {
+        return lhs.self == rhs.self
+    }
+    
     let itemID: String
     let name: String
     let barcode: String
