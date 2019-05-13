@@ -32,7 +32,14 @@ class ProfileView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "User Name"
+<<<<<<< HEAD
         label.font = UIFont.boldSystemFont(ofSize: 17)
+=======
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        
+    
+>>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
         return label
     }()
     
@@ -66,7 +73,37 @@ class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
+<<<<<<< HEAD
         
+=======
+        backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1.0)
+//        let gradient = CAGradientLayer()
+        //        gradient.locations = [0.0 , 1.0]
+        //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+
+//let backcolor = UIColor.init(displayP3Red: 255, green: 238, blue: 219, alpha: 1)
+        
+         //self.backgroundColor = UIColor(hexString: "3DDC97")
+        //self.backgroundColor = UIColor(hexString: "EEEEEE")
+        //self.backgroundColor = UIColor(hexString: "8CD867")
+         //self.backgroundColor = UIColor(hexString: "546A7B")
+         //self.backgroundColor = UIColor(hexString: "9DC4B5")
+          //self.backgroundColor = UIColor(hexString: "566E3D")
+    //self.backgroundColor = UIColor(hexString: "566E3D")
+     //self.backgroundColor = UIColor(hexString: "0C4767")
+        //let gradient = CAGradientLayer()
+//        self.backgroundColor = UIColor.init(displayP3Red: 34, green: 53, blue: 42, alpha: 1)
+        //        gradient.locations = [0.0 , 1.0]
+        //        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        //        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+//        gradient.frame = self.bounds
+//        let color0 = UIColor(red:255/255, green:208/255, blue:185/255, alpha:0.5).cgColor
+//        let color1 = UIColor(red:68/255, green:78/255, blue:227/255, alpha:0.5).cgColor
+//        gradient.colors =     [UIColor.blue.cgColor,UIColor.red.cgColor,UIColor.orange.cgColor]
+//self.layer.addSublayer(gradient)
+
+>>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
         bringSubviewToFront(profileImageView)
         addSubview(profileImageView)
         addSubview(usernameLabel)

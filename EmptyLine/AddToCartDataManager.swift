@@ -15,6 +15,7 @@ final class ShoppingCartDataManager {
     
     
     static var total = 0.0
+    static var taxTotal = 0.0
     
     static private var shoppingCartItems = [Item]() {
         didSet {
@@ -25,7 +26,14 @@ final class ShoppingCartDataManager {
             delegate?.updateNumOfItem(items: shoppingCartItems)
         }
     }
-    
+    static private var taxCartItems = [Item]() {
+        didSet {
+            taxTotal = 0.0
+            for item in self.shoppingCartItems {
+                self.taxTotal += item.tax
+            }
+        }
+    }
     static func totalAmount() -> Double {
         return total
     }

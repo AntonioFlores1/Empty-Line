@@ -12,11 +12,14 @@ import Toucan
 import Kingfisher
 import Firebase
 
+
+
 enum ImageToEdit {
     case profileImage
 }
 
 class ProfileViewController: UIViewController {
+    
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "user-icon"), UIImage(named: "secured-letter-32"), UIImage(named: "lock-filled-32")]
@@ -31,6 +34,8 @@ class ProfileViewController: UIViewController {
     }
     private var allDates = [String]()
     private var allItems = [Item]()
+    
+    
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -39,12 +44,15 @@ class ProfileViewController: UIViewController {
     private var selectedImage: UIImage?
     public var profileImage: UIImage!
     public var userSetting: CCUser!
-    
     lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         return imagePicker
     }()
+    
+    
+    
+    
     
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -53,6 +61,7 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
+<<<<<<< HEAD
     lazy var buttonView: UIView = {
         let buttonBar = UIView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
@@ -60,13 +69,15 @@ class ProfileViewController: UIViewController {
         return buttonBar
     }()
     
+=======
+>>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Profile"
+        
+
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
         view.addSubview(tableView)
-        setSegmentCButtonView()
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -76,10 +87,12 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
-        profileView.usernameLabel.textColor = .black
         fetchUser()
         tableView.tableFooterView = UIView()
+        navigationItem.title = "Profile"
+        profileView.usernameLabel.textColor = .white
         fetchLoggedInUserShoppingHistory()
+<<<<<<< HEAD
         navigationController?.navigationBar.barTintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
@@ -90,6 +103,8 @@ class ProfileViewController: UIViewController {
         buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
         buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
         buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1.08 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true // 1
+=======
+>>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +113,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func fetchLoggedInUserShoppingHistory(){
+        
         guard let loggedInZiplineUser = authservice.getCurrentUser() else {
             showAlert(title: "Error", message: "No logged in user. Please login or create a zipline account")
             return
@@ -107,28 +123,35 @@ class ProfileViewController: UIViewController {
             if let error =  error {
                 self?.showAlert(title: "Error", message: "Error \(error) encountered while fetching \(String(describing: loggedInZiplineUser.displayName)) checkout history")
             }
+            
+            
             if let allCheckedOutItems = allCheckedOutItems {
                 
                 self?.allItems = allCheckedOutItems
-                
-                         }
-            if let allCheckedoutDates = allCheckedoutDates {
-                               self?.allDates = allCheckedoutDates
-                              dump(allCheckedoutDates)
-                      }
+                if let allCheckedoutDates = allCheckedoutDates {
+                    //dump(allCheckedoutDates)
+                    self?.allDates = allCheckedoutDates
+                    //dump(self?.allDates)
+                }
+            }
+            
             for date in self!.allDates {
-                             var itemsOnDay = [Item]()
-                     for item in self!.allItems {
-                                    if date == item.createdAt {
-                                        itemsOnDay.append(item)
+                var itemsOnDay = [Item]()
+                for item in self!.allItems {
+                    if date == item.boughtDate {
+                        itemsOnDay.append(item)
                     }
                 }
+                
                 self?.allUserCheckOutItems.removeAll()
-                   self?.allUserCheckOutItems.append(itemsOnDay)
-                                self!.tableView.reloadData()
+                self?.allUserCheckOutItems.append(itemsOnDay)
+                self!.tableView.reloadData()
             }
         }
+        
     }
+    
+    
     
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
@@ -144,7 +167,7 @@ class ProfileViewController: UIViewController {
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
-                self?.profileView.usernameLabel.text = user.displayName!
+                self?.profileView.usernameLabel.text = "@" + user.displayName!
                 print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
@@ -181,7 +204,9 @@ class ProfileViewController: UIViewController {
         }
     }
     
-     @objc private func handleTap(gestureRecognizer: UITapGestureRecognizer) {
+    
+    
+    @objc private func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         self.fetchUser()
         print("Tap")
         settingImage = .profileImage
@@ -198,30 +223,27 @@ class ProfileViewController: UIViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
         })
+        
         alertController.addAction(camera)
         alertController.addAction(cancel)
         alertController.addAction(photoLibrary)
         present(alertController, animated: true, completion: nil)
+        
     }
     
+    
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
-            self.tableView.reloadData()
-        }) { (done) in
-            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
-        
+    
     private func showImagePickerController() {
         present(imagePicker,animated: true,completion:  nil)
     }
-
+    
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 7).isActive = true
+        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -232,14 +254,17 @@ class ProfileViewController: UIViewController {
     @objc func changeNameButton() {
         print(">>>//????")
     }
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard !allUserCheckOutItems.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return allUserCheckOutItems[section].first?.createdAt
+            return ""
+            
+            
         case 1:
             return account[section]
         default:
@@ -249,37 +274,38 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-         switch profileView.segmentedControl.selectedSegmentIndex {
-         case 0:
-            return allUserCheckOutItems.count
-         case 1:
+        switch profileView.segmentedControl.selectedSegmentIndex {
+        case 0:
+            return 1
+        case 1:
             return account.count
-         default:
+        default:
             break
         }
         return 0
     }
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard !allUserCheckOutItems.isEmpty else { return 0 }
         switch profileView.segmentedControl.selectedSegmentIndex {
-            case 0:
-                return allUserCheckOutItems[section].count
-            
-            case 1:
-                if (section == 0) {
-                    return 3 }; if section == 1 { return 2 }; if section == 2 { return 5 }
-            default:
-                break
-            }
+        case 0:
+            return allDates.count
+        case 1:
+            if (section == 0) {
+                return 3 }; if section == 1 { return 2 }; if section == 2 { return 5 }
+        default:
+            break
+        }
         return 1
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch   profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
+            
             cell.contentView.backgroundColor = UIColor.clear
             cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
             cell.layer.masksToBounds = false
@@ -287,32 +313,38 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
-
+                
                 if allUserCheckOutItems.count > 0 {
+<<<<<<< HEAD
                     let day = allUserCheckOutItems[indexPath.section][indexPath.row]
                     print(day)
                     cell.historyLabel.text = day.name
                     cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
+=======
+                    let day = allDates[indexPath.row]
+                    cell.shoppingDateLabel.text = day
+                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
+>>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
                 } else {
-                    cell.historyLabel.text = "No history of items bought"
+                    cell.shoppingDateLabel.text = "No history of items bought"
                 }
             } else {
-                cell.historyImage.isHidden = true
-                cell.historyLabel.isHidden = true
+                cell.shoppingDateLabel.isHidden = true
             }
             return cell
             
         case 1:
             guard let infocell = tableView.dequeueReusableCell(withIdentifier: "settinCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell()}
+            
             if let user = authservice.getCurrentUser(){
                 if indexPath.section == 0 {
                     if indexPath.row == 0 {
                         infocell.namelLabel.text = user.displayName!;
-                     
+                        
                         infocell.proImage.image = profileIcon[indexPath.row]
                     } else if indexPath.row == 1 {
                         infocell.emailLabel.text = user.email!
-                      
+                        
                         infocell.proImage.image = profileIcon[indexPath.row]
                     } else {
                         infocell.passwordLabel.text = "............."
@@ -332,83 +364,92 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 infocell.emailLabel.isHidden = true
             }
             return infocell
-
+            
         default:
             return UITableViewCell()
         }
         return UITableViewCell()
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return 70
+        return 80
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
+<<<<<<< HEAD
             if indexPath.section == indexPath.row {
             }
+=======
+            let shoppedDate = allDates[indexPath.row]
+            let shoppedItems = allItems.filter {$0.boughtDate == shoppedDate}
+            let receiptTableView = ReceiptHistoryViewController(allItemsCheckedOutByDay: shoppedItems)
+            self.navigationController?.pushViewController(receiptTableView, animated: true)
+            
+>>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
         case 1:
             if indexPath.section == 0 {
                 if indexPath.row == 0 {
-                let alertController = UIAlertController(title: "Make changes", message: "Want to change your name?", preferredStyle: .actionSheet)
-                let continueOk = UIAlertAction(title: "Continue", style: .default) { (action) in
-                    let changeName = UIAlertController(title: "Changing name", message: nil, preferredStyle: .alert)
-                    let change = UIAlertAction(title: "Change", style: .default, handler: { (action) in
-                        let textField = changeName.textFields?[0]
-                        self.profileView.usernameLabel.text = textField?.text!
-                        if let path = tableView.indexPathForSelectedRow {
-                        let cell = tableView.cellForRow(at: path) as! SettingTableViewCell
-                            cell.namelLabel.text = textField?.text!
-                        }
-                    })
-                    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in })
-                    changeName.addAction(change)
-                    changeName.addAction(cancel)
-                    changeName.addTextField { (textFiel: UITextField) in
-                        textFiel.placeholder = "change your name" }
-                    self.present(changeName, animated: true, completion: nil)
-                }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-                }
-                alertController.addAction(continueOk)
-                alertController.addAction(cancel)
-                present(alertController, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Make changes", message: "Want to change your name?", preferredStyle: .actionSheet)
+                    let continueOk = UIAlertAction(title: "Continue", style: .default) { (action) in
+                        let changeName = UIAlertController(title: "Changing name", message: nil, preferredStyle: .alert)
+                        let change = UIAlertAction(title: "Change", style: .default, handler: { (action) in
+                            let textField = changeName.textFields?[0]
+                            self.profileView.usernameLabel.text = textField?.text!
+                            if let path = tableView.indexPathForSelectedRow {
+                                let cell = tableView.cellForRow(at: path) as! SettingTableViewCell
+                                cell.namelLabel.text = textField?.text!
+                            }
+                        })
+                        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in })
+                        changeName.addAction(change)
+                        changeName.addAction(cancel)
+                        changeName.addTextField { (textFiel: UITextField) in
+                            textFiel.placeholder = "change your name" }
+                        self.present(changeName, animated: true, completion: nil)
+                    }
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                    }
+                    alertController.addAction(continueOk)
+                    alertController.addAction(cancel)
+                    present(alertController, animated: true, completion: nil)
                 }
             }
             if indexPath.section == 1 {
                 if indexPath.row == 0 {
-                let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
-                let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
-                    self.navigationController?.pushViewController(ConfirmPaymentViewController(), animated: true)
-                    self.dismiss(animated: true)
-                }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
-                alertController.addAction(continueToP)
-                alertController.addAction(cancel)
-                present(alertController, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Payment", message: "Continue to Payment", preferredStyle: .actionSheet)
+                    let continueToP = UIAlertAction(title: "Continue", style: .default) { (action) in
+                        self.navigationController?.pushViewController(CreditCardInfoSetupViewController(), animated: true)
+                        self.dismiss(animated: true)
+                    }
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in }
+                    alertController.addAction(continueToP)
+                    alertController.addAction(cancel)
+                    present(alertController, animated: true, completion: nil)
                 }
             }
             if indexPath.section == 1 {
                 if indexPath.row == 1 {
-
-                 let alertController = UIAlertController(title: "SignOut", message: "Proceed to sign out", preferredStyle: .actionSheet)
+                    
+                    let alertController = UIAlertController(title: "SignOut", message: "Proceed to sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()
                         self.navigationController?.pushViewController(LoginViewController(), animated: true)
                         self.dismiss(animated: true, completion: nil)
-                }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in
                     }
-                alertController.addAction(ok)
-                alertController.addAction(cancel)
-                present(alertController, animated: true, completion: nil)
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (cation) in
+                    }
+                    alertController.addAction(ok)
+                    alertController.addAction(cancel)
+                    present(alertController, animated: true, completion: nil)
                 }
-              }
-            default:
-                break
             }
+        default:
+            break
         }
     }
+    
+}
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -433,5 +474,4 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         dismiss(animated: true, completion: nil)
     }
-}
-
+} 

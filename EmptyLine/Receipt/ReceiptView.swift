@@ -53,10 +53,14 @@ class ReceiptView: UIView {
     public lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.text = "------------ May 8, 2019 ------------"
         return label
     }()
     
+    public lazy var taxLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        return label
+    }()
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -66,6 +70,7 @@ class ReceiptView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+       
     }
     
     private func commonInit(){
@@ -80,6 +85,7 @@ class ReceiptView: UIView {
         setupTableViewConstrains()
         setupTotalLabelConstrains()
         statusLabelConstrains()
+        setTaxLabel()
     }
     
     private func setupScrollViewConstrains(){
@@ -142,5 +148,15 @@ class ReceiptView: UIView {
         dayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
         dayLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
         dayLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    }
+    private func setTaxLabel() {
+        receiptScrollView.addSubview(taxLabel)
+        taxLabel.translatesAutoresizingMaskIntoConstraints = false
+        taxLabel.bottomAnchor.constraint(equalTo: paymentStatus.topAnchor, constant: -45).isActive = true
+        taxLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -45).isActive = true
+
+        //taxLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true
+        //taxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 50).isActive = true
+//        taxLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 30).isActive = true
     }
 }

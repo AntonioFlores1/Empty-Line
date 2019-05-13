@@ -15,6 +15,11 @@
 		040D11A9227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11A8227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift */; };
 		040D11AB22807F2F000A891E /* ShoppedHistoryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11AA22807F2F000A891E /* ShoppedHistoryCollection.swift */; };
 		040D11AD2280804C000A891E /* ShoppedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11AC2280804C000A891E /* ShoppedItem.swift */; };
+		040D11AF22848B43000A891E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11AE22848B43000A891E /* Date+Extension.swift */; };
+		040D11B32284A234000A891E /* ReceiptHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11B22284A234000A891E /* ReceiptHistoryView.swift */; };
+		040D11B52284A248000A891E /* ReceiptHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11B42284A248000A891E /* ReceiptHistoryViewController.swift */; };
+		040D11B72284A266000A891E /* ReceiptHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11B62284A266000A891E /* ReceiptHistoryTableViewCell.swift */; };
+		040D11D92284F005000A891E /* BackgroundColors+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11D82284F005000A891E /* BackgroundColors+Extension.swift */; };
 		0410266A225858D10076A454 /* ScanCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102669225858D10076A454 /* ScanCardViewController.swift */; };
 		04102692225BAF540076A454 /* CardTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102691225BAF540076A454 /* CardTypeTableViewCell.swift */; };
 		04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */; };
@@ -106,6 +111,11 @@
 		040D11A8227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppedItemsHistoryDatamanager.swift; sourceTree = "<group>"; };
 		040D11AA22807F2F000A891E /* ShoppedHistoryCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppedHistoryCollection.swift; sourceTree = "<group>"; };
 		040D11AC2280804C000A891E /* ShoppedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppedItem.swift; sourceTree = "<group>"; };
+		040D11AE22848B43000A891E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		040D11B22284A234000A891E /* ReceiptHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptHistoryView.swift; sourceTree = "<group>"; };
+		040D11B42284A248000A891E /* ReceiptHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptHistoryViewController.swift; sourceTree = "<group>"; };
+		040D11B62284A266000A891E /* ReceiptHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		040D11D82284F005000A891E /* BackgroundColors+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundColors+Extension.swift"; sourceTree = "<group>"; };
 		04102669225858D10076A454 /* ScanCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCardViewController.swift; sourceTree = "<group>"; };
 		04102691225BAF540076A454 /* CardTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeTableViewCell.swift; sourceTree = "<group>"; };
 		04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingNameTableViewCell.swift; sourceTree = "<group>"; };
@@ -204,6 +214,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040D11B12284A1D0000A891E /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				0404FE482273696600C70083 /* ReceiptTableViewCell.swift */,
+				040D11B22284A234000A891E /* ReceiptHistoryView.swift */,
+				040D11B42284A248000A891E /* ReceiptHistoryViewController.swift */,
+				040D11B62284A266000A891E /* ReceiptHistoryTableViewCell.swift */,
+				0404FE442273678C00C70083 /* ReceiptViewController.swift */,
+				0404FE46227367A900C70083 /* ReceiptView.swift */,
+			);
+			path = Receipt;
+			sourceTree = "<group>";
+		};
 		04D5F8C4225FC42900007BCB /* Product */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +280,7 @@
 		55EB5E8B22569C61003FA4F8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				040D11B12284A1D0000A891E /* Receipt */,
 				55EB5EC62257B7C7003FA4F8 /* Login */,
 				55EB5EAD2257B58C003FA4F8 /* QRCode and Barcode */,
 				55EB5EB02257B5DF003FA4F8 /* Profile Files */,
@@ -304,6 +328,7 @@
 				67C2CC75225D2BAE0091FB37 /* Constants.swift */,
 				75B0DB6C225D1A4A00F075DD /* Item.swift */,
 				751FEAD022820CC0007CC1E2 /* CheckoutItem.swift */,
+				040D11AE22848B43000A891E /* Date+Extension.swift */,
 				671C17C022774D6300A8CD17 /* NumberOfItem.swift */,
 				671C17C222774FB300A8CD17 /* ItemCollectionKeys.swift */,
 				043D4C242264DC2500488C31 /* ShoppingHistoryItemsDataManager.swift */,
@@ -345,6 +370,7 @@
 				04141A1A226D27DC004B5C9A /* CreatedDateModel.swift */,
 				04141A1C226D2838004B5C9A /* CreatedDateManager.swift */,
 				55EB5EB12257B622003FA4F8 /* ProfileView.swift */,
+				040D11D82284F005000A891E /* BackgroundColors+Extension.swift */,
 				6706786722597FFF005D33FE /* TableViewCell.swift */,
 				67C2CC6F225C21FC0091FB37 /* SettingTableViewCell.swift */,
 				679FD43E22654CE50075D505 /* HistoryDetailViewController.swift */,
@@ -366,9 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				55EB5E9322569CEC003FA4F8 /* ShoppingListViewController.swift */,
-				0404FE482273696600C70083 /* ReceiptTableViewCell.swift */,
-				0404FE442273678C00C70083 /* ReceiptViewController.swift */,
-				0404FE46227367A900C70083 /* ReceiptView.swift */,
 				0404FE4A22774A6100C70083 /* ReceiptView+Extension.swift */,
 				55EB5EB92257B6E0003FA4F8 /* ShoppingTableViewCell.swift */,
 				55EB5EBB2257B6FF003FA4F8 /* ShoppingView.swift */,
@@ -634,6 +657,8 @@
 				6764235022692A5100C30EA5 /* DetailOfItemViewController.swift in Sources */,
 				67F5554A225E87EA00F67C94 /* ConfirmPaymentView.swift in Sources */,
 				67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */,
+				040D11B32284A234000A891E /* ReceiptHistoryView.swift in Sources */,
+				040D11D92284F005000A891E /* BackgroundColors+Extension.swift in Sources */,
 				040D11AB22807F2F000A891E /* ShoppedHistoryCollection.swift in Sources */,
 				55EB5EC02257B770003FA4F8 /* PaymentView.swift in Sources */,
 				04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */,
@@ -672,11 +697,13 @@
 				67F55548225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift in Sources */,
 				55EB5E9622569D0B003FA4F8 /* CreditCardInfoSetupViewController.swift in Sources */,
 				04102698225C3B930076A454 /* BillingAddressInfoTableViewCell.swift in Sources */,
-				67F214652285EBE300652F56 /* Protocols.swift in Sources */,
+
+				040D11B72284A266000A891E /* ReceiptHistoryTableViewCell.swift in Sources */,
 				55CE1E832269065900D3ECFA /* websiteView.swift in Sources */,
 				55EB5EB22257B622003FA4F8 /* ProfileView.swift in Sources */,
 				55EB5E8D22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift in Sources */,
 				55EB5EC22257B78C003FA4F8 /* PaymentTableViewCell.swift in Sources */,
+				040D11AF22848B43000A891E /* Date+Extension.swift in Sources */,
 				679FD43F22654CE50075D505 /* HistoryDetailViewController.swift in Sources */,
 				679FD44122654D9D0075D505 /* HistoryDetailTableViewCell.swift in Sources */,
 				04141A1B226D27DC004B5C9A /* CreatedDateModel.swift in Sources */,
@@ -686,6 +713,7 @@
 				55EB5EA82256A161003FA4F8 /* UserCollection.swift in Sources */,
 				55EB5E9422569CEC003FA4F8 /* ShoppingListViewController.swift in Sources */,
 				67F5554C225E94D500F67C94 /* SetRoundButton.swift in Sources */,
+				040D11B52284A248000A891E /* ReceiptHistoryViewController.swift in Sources */,
 				671C17C122774D6300A8CD17 /* NumberOfItem.swift in Sources */,
 				555AB917227C1DE0003007AA /* SplashViewController.swift in Sources */,
 				75B0DB6D225D1A4A00F075DD /* Item.swift in Sources */,
