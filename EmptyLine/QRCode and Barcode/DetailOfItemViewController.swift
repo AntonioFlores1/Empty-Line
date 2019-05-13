@@ -9,8 +9,6 @@
 import UIKit
 
 class DetailOfItemViewController: UIViewController {
-
-    
     private var ditailistTableView: UITableView = {
         let tv = UITableView()
         return tv

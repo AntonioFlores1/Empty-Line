@@ -10,10 +10,7 @@ import UIKit
 import WebKit
 
 class QRCodeWebSiteViewController: UIViewController,WKNavigationDelegate {
-
-    
     var url = URL.init(string: "")
-    
     var webView: WKWebView!
     
     override func loadView() {

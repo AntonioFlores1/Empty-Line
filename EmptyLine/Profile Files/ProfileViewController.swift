@@ -22,8 +22,8 @@ class ProfileViewController: UIViewController {
     
     var sections = ["Name", "Email", "Password","Payment", "SingOut"]
     var account = ["Account", "Payment"]
-    let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
-    let card = [UIImage(named: "addcard")]
+    let profileIcon = [ UIImage(named: "user-icon"), UIImage(named: "secured-letter-32"), UIImage(named: "lock-filled-32")]
+    let card = [UIImage(named: "debit-card-32")]
     
     private var allUserCheckOutItems = [[Item]]() {
         didSet {
@@ -61,12 +61,19 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
+    lazy var buttonView: UIView = {
+        let buttonBar = UIView()
+        buttonBar.translatesAutoresizingMaskIntoConstraints = false
+        buttonBar.backgroundColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
+        return buttonBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+        navigationItem.title = "Profile"
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
+        setSegmentCButtonView()
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -77,11 +84,21 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
+        profileView.usernameLabel.textColor = .black
         fetchUser()
         tableView.tableFooterView = UIView()
-        navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .white
         fetchLoggedInUserShoppingHistory()
+        navigationController?.navigationBar.barTintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    }
+    
+    private func setSegmentCButtonView() {
+        view.addSubview(buttonView)
+        buttonView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor).isActive = true
+        buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
+        buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1.08 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true // 1
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,7 +161,7 @@ class ProfileViewController: UIViewController {
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
-                self?.profileView.usernameLabel.text = "@" + user.displayName!
+                self?.profileView.usernameLabel.text = user.displayName!
                 print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
@@ -157,7 +174,6 @@ class ProfileViewController: UIViewController {
         guard let imageData = selectedImage.jpegData(compressionQuality: 1.0),
             let userAuth = authservice.getCurrentUser(),
             let _ = profileView.profileImageView.image else { return }
-        
         StorageService.postImage(imageData: imageData, imageName: Constants.ProfileImagePath + userAuth.uid) { [weak self](error, url) in
             if let error = error {
                 print(error.localizedDescription)
@@ -192,12 +208,10 @@ class ProfileViewController: UIViewController {
         let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
             self.imagePicker.sourceType = .camera
             self.showImagePickerController()
-            self.profileView.defaultCamera.isHidden = true
         }
         let photoLibrary = UIAlertAction(title: "PhotoLibrary", style: .default) { (action) in
             self.imagePicker.sourceType = .photoLibrary
             self.showImagePickerController()
-            self.profileView.defaultCamera.isHidden = true
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
@@ -213,7 +227,14 @@ class ProfileViewController: UIViewController {
     
     
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
-        self.tableView.reloadData()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+            self.tableView.reloadData()
+        }) { (done) in
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+            self.tableView.reloadData()
+        }
+
     }
     
     private func showImagePickerController() {
@@ -223,7 +244,7 @@ class ProfileViewController: UIViewController {
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
+        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 7).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -292,11 +313,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
-            
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 
                 if allUserCheckOutItems.count > 0 {
-                    let day = allDates[indexPath.row]
+          let day = allDates[indexPath.row]
                     cell.shoppingDateLabel.text = day
                     cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
                 } else {
@@ -331,6 +351,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                         infocell.cardImage.image = card[indexPath.row]
                     } else {
                         infocell.signOut.text = " SignOut"
+                        infocell.signOut.textColor = .red
                     }
                 }
             } else {
@@ -350,6 +371,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
+
             let shoppedDate = allDates[indexPath.row]
             let shoppedItems = allItems.filter {$0.boughtDate == shoppedDate}
             let receiptTableView = ReceiptHistoryViewController(allItemsCheckedOutByDay: shoppedItems)
