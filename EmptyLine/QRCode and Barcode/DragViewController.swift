@@ -11,25 +11,15 @@ import Lottie
 
 class DragViewController: UIViewController {
     @IBOutlet weak var arrowImage: UIImageView!
-    
     @IBOutlet weak var dragArea: UIView!
-    
     @IBOutlet weak var itemImage: UIImageView!
-    
     @IBOutlet weak var itemName: UILabel!
-    
     @IBOutlet weak var itemPrice: UILabel!
-    
     @IBOutlet weak var dontAddCartAnimation: LottieView!
-    
     @IBOutlet weak var addCartAni: LottieView!
-    
     @IBOutlet weak var dontAdd: UIButton!
-    
     @IBOutlet weak var addButton: UIButton!
-    
     @IBOutlet weak var itemDescription: UITextView!
-    
     let animationView = AnimationView(name: "addToCartAni")
     var qrcode = QRNBarCodeCodeViewController()
 
@@ -105,8 +95,6 @@ class DragViewController: UIViewController {
     @objc func thingido(){
         print("i fucking work")
     }
-
-    
     @IBAction func dontAddButton(_ sender: Any) {
 //        dontAdd.isHidden = true
 //        let animationView = AnimationView(name: "animation-w64-h64 (1)")

@@ -57,13 +57,11 @@ class ProfileViewController: UIViewController {
         let buttonBar = UIView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
         buttonBar.backgroundColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
-            //UIColor.orange
         return buttonBar
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.backgroundColor = UIColor(red:0.33, green:0.60, blue:0.27, alpha:1.0)
         navigationItem.title = "Profile"
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
@@ -81,7 +79,7 @@ class ProfileViewController: UIViewController {
         profileView.usernameLabel.textColor = .black
         fetchUser()
         tableView.tableFooterView = UIView()
-        fetchLoggedInUserShoppingHistory()    //  UIColor(red:0.22, green:0.60, blue:0.45, alpha:1.0)
+        fetchLoggedInUserShoppingHistory()
         navigationController?.navigationBar.barTintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
@@ -159,7 +157,6 @@ class ProfileViewController: UIViewController {
         guard let imageData = selectedImage.jpegData(compressionQuality: 1.0),
             let userAuth = authservice.getCurrentUser(),
             let _ = profileView.profileImageView.image else { return }
-        
         StorageService.postImage(imageData: imageData, imageName: Constants.ProfileImagePath + userAuth.uid) { [weak self](error, url) in
             if let error = error {
                 print(error.localizedDescription)
@@ -183,8 +180,6 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-
-
     
      @objc private func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         self.fetchUser()
@@ -194,12 +189,10 @@ class ProfileViewController: UIViewController {
         let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
             self.imagePicker.sourceType = .camera
             self.showImagePickerController()
-//            self.profileView.defaultCamera.isHidden = true
         }
         let photoLibrary = UIAlertAction(title: "PhotoLibrary", style: .default) { (action) in
             self.imagePicker.sourceType = .photoLibrary
             self.showImagePickerController()
-//            self.profileView.defaultCamera.isHidden = true
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
@@ -293,15 +286,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
-            
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
 
                 if allUserCheckOutItems.count > 0 {
                     let day = allUserCheckOutItems[indexPath.section][indexPath.row]
                     print(day)
                     cell.historyLabel.text = day.name
-//                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
-                    
                     cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
                 } else {
                     cell.historyLabel.text = "No history of items bought"
@@ -356,9 +346,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             if indexPath.section == indexPath.row {
-          
             }
-            
         case 1:
             if indexPath.section == 0 {
                 if indexPath.row == 0 {
@@ -420,7 +408,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
         }
-
     }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

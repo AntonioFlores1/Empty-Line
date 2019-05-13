@@ -9,9 +9,6 @@
 import UIKit
 
 class ScanItemView: UIView {
-
-    
-    
 }
 
 

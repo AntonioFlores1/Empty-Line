@@ -64,7 +64,6 @@ class SettingTableViewCell: UITableViewCell {
         return image
     }()
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

@@ -23,13 +23,11 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
-    
     var date = Date()
     var createdDate: String {  let formatter = DateFormatter()
         formatter.dateFormat = "EEEE d, MMMM yyyy"
         let createdDate = formatter.string(from: date)
         return createdDate
-        
     }
     
     private var list: ListenerRegistration?
@@ -50,7 +48,6 @@ class ShoppingListViewController: UIViewController {
         refC.addTarget(self, action: #selector(fetchShoppingCartItems), for: .valueChanged)
         return refC
     }()
-    
     
     private var shoppingCart = [Item](){
         didSet {
@@ -83,7 +80,6 @@ class ShoppingListViewController: UIViewController {
         //self.activityView.layer.addSublayer(gradient)
         // new
         view.addSubview(activityView)
-        
     }
     
     private func controlPayButton() {
@@ -100,7 +96,6 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         fetchShoppingCartItems()
         controlPayButton()
@@ -110,7 +105,6 @@ class ShoppingListViewController: UIViewController {
         UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
                 self?.shoppingView.payButton.transform = .identity
             })
-//            self.navigationController?.tabBarItem.badgeValue = "\(shoppingCart.count)"
     }
     
     private func shoppingCar() {
@@ -154,14 +148,11 @@ class ShoppingListViewController: UIViewController {
         //let shoppedItem = shoppedItem
 
         guard let loggedInUser = authservice.getCurrentUser() else {
-            
             showAlert(title: "Error", message: "No user currently logged in")
             return
         }
         
         for item in shoppingCart {
-            
-            
             DBService.createZipLineUserCheckoutHistory(zipLineUserID: loggedInUser.uid, zipLineUserCheckedOutItem: item) { (error) in
                 if let error = error {
                     self.showAlert(title: "Error", message: "Error \(error.localizedDescription) encountered while creating \(String(describing: loggedInUser.displayName)) history")
@@ -186,7 +177,6 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
-    
     @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
@@ -203,7 +193,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shoppingCart.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = shoppingView.shoppingListTableView.dequeueReusableCell(withIdentifier: shoppingView.cell, for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell()}
@@ -230,9 +219,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension ShoppingListViewController{
-   
     @objc private func changeStepperValue(_ stepper: UIStepper) {
-        
         let item = shoppingCart[stepper.tag]
         if stepper.value == 1.0 || stepper.value == 0.0 {
             print(stepper.value)
@@ -308,7 +295,6 @@ extension ShoppingListViewController{
             self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
             self.itemsPriceTotal = ShoppingCartDataManager.totalAmount()
-          
         }
     }
     
@@ -321,7 +307,6 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
         dismiss(animated: true, completion: nil)
     }
-    
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
@@ -337,5 +322,4 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
         }
     }
-    
 }

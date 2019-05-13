@@ -20,7 +20,6 @@ class ReceiptViewController: UIViewController {
             }
         }
     }
-    
     private var barButton = UIBarButtonItem()
     private var totalCost = 0.0
 
@@ -80,7 +79,6 @@ class ReceiptViewController: UIViewController {
                    // CGContext.translateBy(context, CGSize(width: -offsetHorizontal, height: -offsetVertical))
                     
                     receiptView.receiptScrollView.layer.render(in: context)
-                  
                 }
             }
         }

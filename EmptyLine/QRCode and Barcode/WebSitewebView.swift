@@ -9,8 +9,6 @@
 import UIKit
 
 class WebSitewebView: UIWebView {
-
-    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         webConstraints()
@@ -19,9 +17,6 @@ class WebSitewebView: UIWebView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     func webConstraints(){
-          
     }
-    
 }

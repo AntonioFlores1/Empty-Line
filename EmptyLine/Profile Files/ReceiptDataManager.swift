@@ -10,11 +10,8 @@ import Foundation
 
 final class ReceiptDataManager {
     private init() {}
-    
     private static var filename = "receipt.plist"
-    
     static private var checkedOutItems = [Item]()
-    
     static func saveItems(){
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename)
         do {
@@ -47,6 +44,4 @@ final class ReceiptDataManager {
         }
        return checkedOutItems
     }
-    
-    
 }

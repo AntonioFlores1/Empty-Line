@@ -12,7 +12,6 @@ class QRView: UIView {
         
         lazy var profileImageView: UIImageView = {
             var imageView = UIImageView()
-            //imageView = UIImageView()
             imageView.backgroundColor = .black
             imageView.image = UIImage(named: "placeholder")
             return imageView
