@@ -25,10 +25,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-    
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
+    var bgImage: UIImageView?
     
     var shoplist = ShoppingListViewController()
     enum DViewState {
@@ -62,8 +62,12 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         byebyeWebSite()
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
-        
-        
+        let image: UIImage = UIImage(named: "BarcodeIndicator")!
+        bgImage = UIImageView(image: image)
+        bgImage!.frame = CGRect(x: 0, y: 0, width: 220, height: 180)
+        bgImage?.center = self.view.center
+        view.addSubview(bgImage!)
+        self.view.addSubview(bgImage!)
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.isTranslucent = true
         navigationController?.isNavigationBarHidden = true
