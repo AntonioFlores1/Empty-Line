@@ -121,7 +121,7 @@ class ReceiptView: UIView {
         totalCostLabel.topAnchor.constraint(equalTo: itemsTableView.bottomAnchor).isActive = true
         totalCostLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 100).isActive = true
         totalCostLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
-        totalCostLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        totalCostLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
     }
     
     private func statusLabelConstrains(){
@@ -152,7 +152,7 @@ class ReceiptView: UIView {
     private func setTaxLabel() {
         receiptScrollView.addSubview(taxLabel)
         taxLabel.translatesAutoresizingMaskIntoConstraints = false
-        taxLabel.bottomAnchor.constraint(equalTo: paymentStatus.topAnchor, constant: -45).isActive = true
+        taxLabel.bottomAnchor.constraint(equalTo: paymentStatus.topAnchor, constant: -40).isActive = true
         taxLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -45).isActive = true
 
         //taxLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true
