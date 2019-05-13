@@ -10,9 +10,7 @@ import UIKit
 import ZKCarousel
 
 class StartMenuViewController: UIViewController {
-    
     @IBOutlet weak var displayView: ZKCarousel! = ZKCarousel()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCarousel()

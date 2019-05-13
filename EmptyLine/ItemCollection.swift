@@ -22,7 +22,6 @@ struct ItemCollectionKeys {
     static let boughtDate = "boughtDate"
 }
 
-
 extension DBService {
     static public func createNDItem(item: Item, completion: @escaping (Error?) -> Void) {
         firestoreDB.collection(ItemCollectionKeys.CollectionKey)
@@ -42,9 +41,7 @@ extension DBService {
                     completion(error)
                 } else {
                     completion(nil)
-                }
+            }
         }
     }
-    
-   
 }

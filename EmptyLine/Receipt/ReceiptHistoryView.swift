@@ -64,7 +64,6 @@ class ReceiptHistoryView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-        
     }
     
     private func commonInit(){

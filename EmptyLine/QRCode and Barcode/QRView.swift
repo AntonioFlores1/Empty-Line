@@ -12,7 +12,6 @@ class QRView: UIView {
         
         lazy var profileImageView: UIImageView = {
             var imageView = UIImageView()
-            //imageView = UIImageView()
             imageView.backgroundColor = .black
             imageView.image = UIImage(named: "placeholder")
             return imageView
@@ -30,7 +29,7 @@ class QRView: UIView {
         override init(frame: CGRect) {
             super.init(frame: UIScreen.main.bounds)
             imageConstraints()
-            backgroundColor = .purple
+            //backgroundColor = .purple
         }
         
         required init?(coder aDecoder: NSCoder) {
