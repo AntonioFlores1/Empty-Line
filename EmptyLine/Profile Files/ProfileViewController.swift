@@ -61,7 +61,6 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
-<<<<<<< HEAD
     lazy var buttonView: UIView = {
         let buttonBar = UIView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
@@ -69,14 +68,12 @@ class ProfileViewController: UIViewController {
         return buttonBar
     }()
     
-=======
->>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+        navigationItem.title = "Profile"
         tableView.backgroundColor = .clear
         view.addSubview(profileView)
+        setSegmentCButtonView()
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -87,12 +84,10 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
+        profileView.usernameLabel.textColor = .black
         fetchUser()
         tableView.tableFooterView = UIView()
-        navigationItem.title = "Profile"
-        profileView.usernameLabel.textColor = .white
         fetchLoggedInUserShoppingHistory()
-<<<<<<< HEAD
         navigationController?.navigationBar.barTintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
@@ -103,8 +98,7 @@ class ProfileViewController: UIViewController {
         buttonView.heightAnchor.constraint(equalToConstant: 5).isActive = true
         buttonView.leftAnchor.constraint(equalTo: profileView.segmentedControl.leftAnchor).isActive = true
         buttonView.widthAnchor.constraint(equalTo: profileView.segmentedControl.widthAnchor, multiplier: 1.08 / CGFloat(profileView.segmentedControl.numberOfSegments)).isActive = true // 1
-=======
->>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,7 +161,7 @@ class ProfileViewController: UIViewController {
             if let error = error {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
-                self?.profileView.usernameLabel.text = "@" + user.displayName!
+                self?.profileView.usernameLabel.text = user.displayName!
                 print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
@@ -233,7 +227,14 @@ class ProfileViewController: UIViewController {
     
     
     @objc func segmentedControlPress(_ sender: UISegmentedControl) {
-        self.tableView.reloadData()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+            self.tableView.reloadData()
+        }) { (done) in
+            self.buttonView.frame.origin.x = (self.profileView.segmentedControl.frame.width / CGFloat(self.profileView.segmentedControl.numberOfSegments)) * CGFloat(self.profileView.segmentedControl.selectedSegmentIndex)
+            self.tableView.reloadData()
+        }
+
     }
     
     private func showImagePickerController() {
@@ -243,7 +244,7 @@ class ProfileViewController: UIViewController {
     func tableViewconstriant() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 1).isActive = true
+        tableView.topAnchor.constraint(equalTo: profileView.segmentedControl.bottomAnchor, constant: 7).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -315,16 +316,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 
                 if allUserCheckOutItems.count > 0 {
-<<<<<<< HEAD
-                    let day = allUserCheckOutItems[indexPath.section][indexPath.row]
-                    print(day)
-                    cell.historyLabel.text = day.name
-                    cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
-=======
-                    let day = allDates[indexPath.row]
+          let day = allDates[indexPath.row]
                     cell.shoppingDateLabel.text = day
                     cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
->>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
                 } else {
                     cell.shoppingDateLabel.text = "No history of items bought"
                 }
@@ -377,16 +371,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-<<<<<<< HEAD
-            if indexPath.section == indexPath.row {
-            }
-=======
+
             let shoppedDate = allDates[indexPath.row]
             let shoppedItems = allItems.filter {$0.boughtDate == shoppedDate}
             let receiptTableView = ReceiptHistoryViewController(allItemsCheckedOutByDay: shoppedItems)
             self.navigationController?.pushViewController(receiptTableView, animated: true)
             
->>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
         case 1:
             if indexPath.section == 0 {
                 if indexPath.row == 0 {

@@ -64,10 +64,6 @@ class ReceiptHistoryView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-<<<<<<< HEAD:EmptyLine/Shopping /ReceiptView.swift
-=======
-        
->>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34:EmptyLine/Receipt/ReceiptHistoryView.swift
     }
     
     private func commonInit(){

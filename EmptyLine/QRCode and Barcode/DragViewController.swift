@@ -29,7 +29,6 @@ class DragViewController: UIViewController {
         addCartAni.addSubview(animationView)
         animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         animationView.stop()
-<<<<<<< HEAD
         
         UIView.animate(withDuration: 0.3, animations: {
             self.arrowImage.frame.origin.y -= 10
@@ -39,6 +38,7 @@ class DragViewController: UIViewController {
             })
         }
         settin()
+        view.backgroundColor = UIColor(hexString: "BCBDC0")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,9 +49,6 @@ class DragViewController: UIViewController {
         if qrcode.dViewHeight == 500 {
 //            self.arrowImage.isHidden = true
         }
-=======
-        view.backgroundColor = UIColor(hexString: "BCBDC0")
->>>>>>> 731885882ba7788d6ea2173b80a7307b0f0e2e34
     }
     // new
 //    override func viewWillAppear(_ animated: Bool) {

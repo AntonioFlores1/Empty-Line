@@ -10,7 +10,7 @@ import Foundation
 
 final class ShoppingCartDataManager {
     private init() {}
-   static weak var delegate: UptadeNumberOfItemsDelegate?
+    static weak var delegate: UptadeNumberOfItemsDelegate?
     private static var filename = "shoppingCart.plist"
     
     
