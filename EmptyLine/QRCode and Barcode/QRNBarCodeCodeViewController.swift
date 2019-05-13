@@ -314,7 +314,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             } else {
                 if let product = product {
                     self.products = product
-                    dump(self.products)
                     self.dragViewController.itemName.text = product.name
                     self.dragViewController.itemDescription.text = product.description
                     self.dragViewController.itemPrice.text = "$" + String(product.price)
@@ -389,20 +388,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             showAlert(title: "Success", message: "Item added to shopping cart")
-//            self.navigationController?.tabBarItem.badgeValue = "1"
-//            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
-//
-//            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
-//                self.dismiss(animated: true, completion: nil)
-//            })
-//
-//            let checkOut = UIAlertAction(title: "Check Out", style: .default, handler: { (alert) in
-//                self.navigationController?.pushViewController(ShoppingListViewController(), animated: true)
-//            })
-//
-//            alertController.addAction(checkOut)
-//            alertController.addAction(continueShopping)
-//            self.present(alertController, animated: true)
+
             self.handleDismiss()
             print("Item added")
 //            shoplist.tabBarItem.badgeValue = "\(shoplist.shoppingCart.count)"

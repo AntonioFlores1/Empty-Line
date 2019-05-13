@@ -148,14 +148,7 @@ class ShoppingListViewController: UIViewController {
         ])
     }
 
-    // recursive function
     private func createShoppingHistory(){
-        //            let shoppedItem = ItemSavedDate.init(createdDate: item.createdAt)
-        //            savedDate.add(newDate: shoppedItem)
-        //            ShoppingHistoryItemsDataManager.addToShoppingCart(item: item, savedDate: "\(shoppedItem.createdDate).plist")
-        //
-        //let shoppedItem = shoppedItem
-
         guard let loggedInUser = authservice.getCurrentUser() else {
             showAlert(title: "Error", message: "No user currently logged in")
             return
@@ -170,20 +163,16 @@ class ShoppingListViewController: UIViewController {
                 }
             }
 
-//            DBService.createUserCheckoutHistory(userID: loggedInUser.uid, shopper: item) { (error) in
-//                if let error = error {
-//                    self.showAlert(title: "Error", message: "Error: \(error) creating user shopping history")
-//                } else {
-//                    print("Success")
-//                }
-//            }
-            
-//            DBService.createCheckoutHistory(userID: loggedInUser.uid, checkedOutItem: item) { (error) in
-//                if let error = error {
-//                    self.showAlert(title: "Error", message: "Error: \(error.localizedDescription) encountered while fetching data")
-//                }
-//            }
         }
+    }
+    
+    private func createReceipt(checkedOutItems: [Item]){
+        
+        for item in checkedOutItems {
+            let checkedOutItem = Item.init(name: item.name, barcode: item.barcode, description: item.description, ingredients: item.ingredients, image: item.image, price: item.price, isCoupon: item.isCoupon, coupon: item.coupon, itemID: item.itemID, date: Date(), tax: item.tax, boughtDate: Date.getISOTimestamp())
+            ReceiptDataManager.addToCheckoutItems(items: checkedOutItem)
+        }
+        
     }
     
     @objc func payButtonPresse() {
@@ -325,11 +314,9 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(Float(itemsPriceTotal)) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.itemsPriceTotal = 0.0
-            //self.shoppingCart.removeAll()
-           // self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
             self.createShoppingHistory()
-            ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
+            self.createReceipt(checkedOutItems: self.shoppingCart)
             ShoppingCartDataManager.deleteAllItems()
             self.shoppingCart.removeAll()
             self.refresh.endRefreshing()

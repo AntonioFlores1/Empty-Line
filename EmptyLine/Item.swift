@@ -49,7 +49,7 @@ struct Item: Codable {
         self.coupon = dict[ItemCollectionKeys.CouponKey] as? Double ?? 0.0
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
         self.tax = dict[ItemCollectionKeys.taxKey] as? Double ?? 0.0
-        self.boughtDate = dict[ItemCollectionKeys.boughtDate] as? String ?? "no purchase date"
+        self.boughtDate = dict[ItemCollectionKeys.boughtDate] as? String ?? "No purchase date"
     }
 
     
