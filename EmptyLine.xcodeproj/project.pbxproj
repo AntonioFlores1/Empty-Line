@@ -89,6 +89,7 @@
 		67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC71225D1B900091FB37 /* StorageInfo.swift */; };
 		67C2CC74225D1DF90091FB37 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC73225D1DF90091FB37 /* Storage.swift */; };
 		67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC75225D2BAE0091FB37 /* Constants.swift */; };
+		67F17F482289BFBF002A02F4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F214642285EBE300652F56 /* Protocols.swift */; };
 		67F55545225E81D700F67C94 /* ConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55544225E81D700F67C94 /* ConfirmPaymentViewController.swift */; };
 		67F55548225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55547225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift */; };
 		67F5554A225E87EA00F67C94 /* ConfirmPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55549225E87EA00F67C94 /* ConfirmPaymentView.swift */; };
@@ -188,6 +189,7 @@
 		67C2CC71225D1B900091FB37 /* StorageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfo.swift; sourceTree = "<group>"; };
 		67C2CC73225D1DF90091FB37 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		67C2CC75225D2BAE0091FB37 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		67F214642285EBE300652F56 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		67F55544225E81D700F67C94 /* ConfirmPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		67F55547225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentTableViewCell.swift; sourceTree = "<group>"; };
 		67F55549225E87EA00F67C94 /* ConfirmPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentView.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				0404FE4A22774A6100C70083 /* ReceiptView+Extension.swift */,
 				55EB5EB92257B6E0003FA4F8 /* ShoppingTableViewCell.swift */,
 				55EB5EBB2257B6FF003FA4F8 /* ShoppingView.swift */,
+				67F214642285EBE300652F56 /* Protocols.swift */,
 			);
 			path = "Shopping ";
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67F17F482289BFBF002A02F4 /* Protocols.swift in Sources */,
 				55EB5E9822569D1B003FA4F8 /* PaymentViewController.swift in Sources */,
 				043D4C252264DC2500488C31 /* ShoppingHistoryItemsDataManager.swift in Sources */,
 				559EA9FC2270F62800027D1D /* StartMenuViewController.swift in Sources */,

@@ -22,7 +22,6 @@ class MyWebby: UIView, WKNavigationDelegate {
         return button
         }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         backgroundColor = .yellow
@@ -35,7 +34,6 @@ class MyWebby: UIView, WKNavigationDelegate {
         webView.allowsBackForwardNavigationGestures = true
         con()
     }
-    
 //    func urllink(url:String){
 //        webView = WKWebView()
 //        webView.navigationDelegate = self
@@ -49,10 +47,7 @@ class MyWebby: UIView, WKNavigationDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
-    
-    
     
     func con(){
         addSubview(exit)
@@ -68,6 +63,5 @@ class MyWebby: UIView, WKNavigationDelegate {
         exit.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         exit.bottomAnchor.constraint(equalTo: webView.topAnchor, constant: 0).isActive = true
         
-        }
-    
+    }
 }

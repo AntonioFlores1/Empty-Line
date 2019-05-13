@@ -10,8 +10,7 @@ import UIKit
 import PureLayout
 
 class ProductDetailsView: UIView {
-    
-    public lazy var productName: UILabel = {
+        public lazy var productName: UILabel = {
         
         let productName = UILabel()
         productName.textColor = .white

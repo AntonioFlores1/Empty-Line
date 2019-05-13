@@ -11,7 +11,6 @@ import UIKit
 import WebKit
 
 class websiteView: WKWebView{
-
     //let url = URL.init(string: "")
     
     //var webView: WKWebView!

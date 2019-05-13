@@ -22,8 +22,7 @@ final class shoppedItemsHistoryDataManager {
             print("Error: \(error.localizedDescription) encountered while encoding data in file path")
         }
     }
-    
-    
+
     static private var allCheckedOutItems = [Item](){
         didSet {
             
@@ -53,6 +52,4 @@ final class shoppedItemsHistoryDataManager {
         }
         return allCheckedOutItems
     }
-    
-    
 }

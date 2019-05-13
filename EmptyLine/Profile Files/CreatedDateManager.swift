@@ -41,13 +41,10 @@ final class savedDate {
         }catch {
             print("property encoding error: \(error.localizedDescription)")
         }
-        
     }
     
     static public func add(newDate: ItemSavedDate) {
             dates.append(newDate)
             save()
     }
-    
-    
 }
