@@ -32,12 +32,23 @@ class ShoppingView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         return titleLabel
-        
+    }()
+    
+    lazy var taxLabel: UILabel = {
+        let tax = UILabel(frame: CGRect(x:10,y: 5 ,width:self.frame.width,height: 150))
+        tax.numberOfLines = 0;
+        tax.text = "Tax: "
+        tax.lineBreakMode = .byWordWrapping
+        tax.backgroundColor = UIColor.clear
+        tax.font = UIFont.systemFont(ofSize: 20)
+        tax.translatesAutoresizingMaskIntoConstraints = false
+        return tax
+
     }()
    
     lazy var payButton: UIButton = {
         var payButton = UIButton()
-        payButton.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 0.7)
+        payButton.backgroundColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
         payButton.setTitle("pay", for: .normal)
         payButton.layer.cornerRadius = payButton.frame.size.width / 2
         payButton.layer.borderColor = UIColor.darkGray.cgColor
@@ -49,12 +60,6 @@ class ShoppingView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150))
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.bounds
-//        gradient.colors = [UIColor.blue,UIColor.init(red: 41, green: 28, blue: 218, alpha: 1).cgColor,UIColor.purple.cgColor,]
-//        self.layer.addSublayer(gradient)
-//        super.init(frame: .zero)
-        //backgroundColor = .white
         commonInit()
     }
     
@@ -70,6 +75,7 @@ class ShoppingView: UIView {
     private func setupConstraints() {
         setupTableView()
         setupFooter()
+        taxLabelConstraint()
         setupTitleLabel()
         setupPayButton()
     }
@@ -79,7 +85,7 @@ class ShoppingView: UIView {
             shoppingListTableView.topAnchor.constraint(equalTo: topAnchor),
             shoppingListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             shoppingListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85) // 0.8
+            shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8) // 0.8  0.85
         ])
     }
     
@@ -90,14 +96,22 @@ class ShoppingView: UIView {
             countainerFooter.leadingAnchor.constraint(equalTo: leadingAnchor),
             countainerFooter.trailingAnchor.constraint(equalTo: trailingAnchor),
             countainerFooter.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            countainerFooter.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15) // 0.2
+            countainerFooter.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.18) // 0.2
         ])
+    }
+    
+    private func taxLabelConstraint() {
+        countainerFooter.addSubview(taxLabel)
+        NSLayoutConstraint.activate([
+            taxLabel.topAnchor.constraint(equalTo: countainerFooter.topAnchor, constant: 1),
+            taxLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 12)
+            ])
     }
     
     private func setupTitleLabel() {
         countainerFooter.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: countainerFooter.topAnchor, constant: 12), // 12
+            titleLabel.topAnchor.constraint(equalTo: taxLabel.bottomAnchor, constant: 5), // 12
             titleLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 12)
         ])
     }
@@ -105,7 +119,7 @@ class ShoppingView: UIView {
     private func setupPayButton(){
         countainerFooter.addSubview(payButton)
         NSLayoutConstraint.activate([
-            payButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            payButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             payButton.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 100),
             payButton.trailingAnchor.constraint(equalTo: countainerFooter.trailingAnchor, constant: -100)
         ])

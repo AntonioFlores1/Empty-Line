@@ -20,9 +20,9 @@ class ReceiptViewController: UIViewController {
             }
         }
     }
-    
     private var barButton = UIBarButtonItem()
     private var totalCost = 0.0
+    private var totalTax = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,18 +31,20 @@ class ReceiptViewController: UIViewController {
         receiptView.itemsTableView.delegate = self
         receiptView.itemsTableView.dataSource = self
         fetchCheckOutItemsForReceipt()
-        //setupBarButtonItem()
         receiptView.storeName.text = "SERVED BY:   Whole Foods Market"
         receiptView.itemsTableView.separatorStyle = .none
     }
     
     private func fetchCheckOutItemsForReceipt(){
-      // checkedOutItems = ShoppingCartDataManager.fetchShoppingCart()
         checkedOutItems = ReceiptDataManager.fetchCheckedOutItems()
         for item in checkedOutItems {
             totalCost += item.price
+            totalTax += item.tax
         }
+        
         receiptView.totalCostLabel.text = "Total: $\(Float(totalCost))"
+        receiptView.taxLabel.text = "Tax: $\(Float(totalTax))"
+        
     }
     
     private func setupBarButtonItem(){
@@ -80,7 +82,6 @@ class ReceiptViewController: UIViewController {
                    // CGContext.translateBy(context, CGSize(width: -offsetHorizontal, height: -offsetVertical))
                     
                     receiptView.receiptScrollView.layer.render(in: context)
-                  
                 }
             }
         }
@@ -106,6 +107,8 @@ extension ReceiptViewController: UITableViewDelegate, UITableViewDataSource {
         let checkOutItem = checkedOutItems[indexPath.row]
         cell.itemNameLabel.text = checkOutItem.name
         cell.itemPrice.text = "$" + "\(checkOutItem.price)"
+        
+        receiptView.dayLabel.text = "------------ \(checkOutItem.boughtDate) ------------"
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -9,10 +9,35 @@
 import Foundation
 
 final class ShoppingCartDataManager {
+//<<<<<<< prod
+    private init() {}
+    static weak var delegate: UptadeNumberOfItemsDelegate?
+//=======
+//>>>>>>> dev-antonio
     private static var filename = "shoppingCart.plist"
     
     static var shoppingCartItemCounts = [Item:Int]()
     
+// <<<<<<< prod
+//     static var total = 0.0
+//     static var taxTotal = 0.0
+    
+//     static private var shoppingCartItems = [Item]() {
+//         didSet {
+//             total = 0.0
+//             for item in self.shoppingCartItems {
+//                 self.total += item.price
+//             }
+//             delegate?.updateNumOfItem(items: shoppingCartItems)
+//         }
+//     }
+//     static private var taxCartItems = [Item]() {
+//         didSet {
+//             taxTotal = 0.0
+//             for item in self.shoppingCartItems {
+//                 self.taxTotal += item.tax
+//             }
+// =======
     static func cartTotal() -> Double {
         var total: Double = 0
         for item in shoppingCartItemCounts.keys {
@@ -24,9 +49,14 @@ final class ShoppingCartDataManager {
     static func itemTotal(item: Item) -> Double {
         if let count = shoppingCartItemCounts[item] {
             return Double(count) * item.price
+//>>>>>>> dev-antonio
         }
         return 0
     }
+// <<<<<<< prod
+//     static func totalAmount() -> Double {
+//         return total
+// =======
     
     static func countOfItem(item: Item) -> Int {
         if let count = shoppingCartItemCounts[item] {
@@ -40,6 +70,7 @@ final class ShoppingCartDataManager {
         if let count = shoppingCartItemCounts[item] {
             shoppingCartItemCounts[item] = count + increment
         }
+//>>>>>>> dev-antonio
     }
     
     static func decrementCountOfItem(item: Item, decrement: Int) {

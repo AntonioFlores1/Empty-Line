@@ -10,11 +10,8 @@ import Foundation
 
 final class ReceiptDataManager {
     private init() {}
-    
     private static var filename = "receipt.plist"
-    
     static private var checkedOutItems = [Item]()
-    
     static func saveItems(){
         let path = DataPersistenceManager.filepathToDcoumentsDirectory(filename: filename)
         do {
@@ -41,12 +38,12 @@ final class ReceiptDataManager {
                     
                     print("Error decoding \(error.localizedDescription)")
                 }
+            } else {
                 print("content on file path is empty")
             }
+        } else {
             print("File path does not exist")
         }
        return checkedOutItems
     }
-    
-    
 }

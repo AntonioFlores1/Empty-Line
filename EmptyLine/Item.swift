@@ -7,11 +7,16 @@
 //
 
 import Foundation
+// <<<<<<< prod
+
+// struct Item: Codable {
+// =======
 struct Item: Codable,Hashable,Comparable {
     static func < (lhs: Item, rhs: Item) -> Bool {
         return lhs.self == rhs.self
     }
     
+//>>>>>>> dev-antonio
     let itemID: String
     let name: String
     let barcode: String
@@ -21,18 +26,13 @@ struct Item: Codable,Hashable,Comparable {
     let price: Double
     let isCoupon: Bool
     let coupon: Double
-    let date:Date
-    // quantity
+    let boughtDate: String
+    let tax: Double
+
+ 
     
-    var createdAt: String {
-       let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE d, MMMM yyyy"
-        let createdDate = formatter.string(from: date)
-        
-        return createdDate
-    }
-    
-    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, date: Date) {
+    init(name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool , coupon: Double, itemID: String, date: Date, tax: Double, boughtDate: String) {
+      
         self.itemID = itemID
         self.name = name
         self.barcode = barcode
@@ -42,7 +42,8 @@ struct Item: Codable,Hashable,Comparable {
         self.price = price
         self.isCoupon = isCoupon
         self.coupon = coupon
-        self.date = date
+        self.tax = tax
+        self.boughtDate = boughtDate
     }
     
     init(dict: [String: Any]) {
@@ -55,7 +56,8 @@ struct Item: Codable,Hashable,Comparable {
         self.isCoupon = dict[ItemCollectionKeys.IsCouponKey] as? Bool ?? false
         self.coupon = dict[ItemCollectionKeys.CouponKey] as? Double ?? 0.0
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
-        self.date = dict[ItemCollectionKeys.createdAt] as? Date ?? Date()
+        self.tax = dict[ItemCollectionKeys.taxKey] as? Double ?? 0.0
+        self.boughtDate = dict[ItemCollectionKeys.boughtDate] as? String ?? "no purchase date"
     }
 
     

@@ -25,10 +25,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     let session = AVCaptureSession()
     lazy var vision = Vision.vision()
     var barcodeDetector :VisionBarcodeDetector?
-    
+
     var idk = MyWebby()
     var productDetailView = ProductDetailsView()
     private var products:Item?
+    var bgImage: UIImageView?
     
     var shoplist = ShoppingListViewController()
     enum DViewState {
@@ -38,10 +39,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     var dragViewController:DragViewController!
     var blurView:UIVisualEffectView!
-    
     let dViewHeight:CGFloat = 500
     let dViewHandleAreaHeight:CGFloat = 190
-    
     var DViewVisible = false
     var nextState:DViewState {
         return DViewVisible ? .collapsed : .expanded
@@ -50,9 +49,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrapted:CGFloat = 0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let nav = UINavigationBar.appearance()
         nav.backgroundColor = .blue
         startLiveVideo()
@@ -62,13 +61,18 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         byebyeWebSite()
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
-        
-        
+
+        let image: UIImage = UIImage(named: "BarcodeIndicator")!
+        bgImage = UIImageView(image: image)
+        bgImage!.frame = CGRect(x: 0, y: 0, width: 220, height: 180)
+        bgImage?.center = self.view.center
+        view.addSubview(bgImage!)
+        self.view.addSubview(bgImage!)
+
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.isTranslucent = true
         navigationController?.isNavigationBarHidden = true
 //      setUpDragableView()
-        
         blurView = UIVisualEffectView()
         blurView.frame = self.view.frame
         self.view.addSubview(blurView)
@@ -79,8 +83,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                                                y: 900,
                                                width: self.view.bounds.width,
                                                height: dViewHeight)
-
-        
         tap = UITapGestureRecognizer(target: self, action: #selector(tapView))
         productDetailView.isUserInteractionEnabled = true
         self.view.isUserInteractionEnabled = true
@@ -89,91 +91,81 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         self.view.isUserInteractionEnabled = true
         productDetailView.addGestureRecognizer(tap)
         self.dragViewController.view.layer.cornerRadius = 20
+        let navVc = self.navigationController?.tabBarController?.viewControllers![1] as! UINavigationController
+        let shoppingListVC = navVc.viewControllers[0] as! ShoppingListViewController
+       ShoppingCartDataManager.delegate = self 
     }
-    
+
     func setUpDragableView() {
-        
         dragViewController.view.frame = CGRect(x: 0,
                                                y: self.view.frame.height - dViewHandleAreaHeight,
                                                width: self.view.bounds.width,
                                                height: dViewHeight)
-        
         dragViewController.view.clipsToBounds = true
-        
-    dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        
+        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
-
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragableViewPanHandler(recognizer:)))
         dragViewController.dragArea.addGestureRecognizer(panGestureRecognizer)
     }
     
     @objc func dragableViewPanHandler(recognizer:UIPanGestureRecognizer) {
         switch recognizer.state {
-            
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
         case .changed:
-            
             let translation = recognizer.translation(in: self.dragViewController.dragArea)
             var fractionComplete = translation.y / dViewHeight
             fractionComplete = DViewVisible ? fractionComplete : -fractionComplete
             updateInteractiveTransition(fractionCompleted: fractionComplete )
-            
         case .ended:
             continueInteractiveTransition()
         default:
             break
         }
     }
-    
+
     func animateTransitionIfNeeded(state:DViewState, duration:TimeInterval) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) { [weak self] in
-                
                 guard let self = self else { return }
                 switch state {
-                    
                 case .expanded:
                     self.dragViewController.view.frame.origin.y = self.view.frame.height - self.dViewHeight
-                    
-                    
+                    if self.dViewHandleAreaHeight == 190 {
+                        self.dragViewController.arrowImage.image = UIImage(named: "down-arrow")
+                    }
                 case .collapsed:
                     self.dragViewController.view.frame.origin.y = self.view.frame.height - self.dViewHandleAreaHeight
+                    if self.dViewHandleAreaHeight == 190 {
+                        self.dragViewController.arrowImage.image = UIImage(named: "arrow-up")
+                    }
                 }
             }
             
             frameAnimator.addCompletion { [weak self] _ in
-                
                 guard let self = self else { return }
-                
                 self.DViewVisible = !self.DViewVisible
                 self.runningAnimations.removeAll()
             }
             
             frameAnimator.startAnimation()
             runningAnimations.append(frameAnimator)
-            
             let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) { [weak self] in
-                
                 guard let self = self else { return }
-                
                 switch state {
-                    
                 case .expanded:
                     self.dragViewController.view.layer.cornerRadius = 26
                 case .collapsed:
                     self.dragViewController.view.layer.cornerRadius = 20
+
                 }
             }
             
             cornerRadiusAnimator.startAnimation()
             runningAnimations.append(cornerRadiusAnimator)
-            
             let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) { [weak self] in
                 guard let self = self else { return }
                 switch state {
-                    
                 case .expanded:
                     self.blurView.effect = UIBlurEffect(style: .dark)
                     self.stopRecording()
@@ -181,13 +173,11 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     self.blurView.effect = nil
                     self.runningAnimations.removeAll()
                     self.session.startRunning()
-                    
                 }
             }
             
             blurAnimator.startAnimation()
             runningAnimations.append(blurAnimator)
-            
         }
     }
     
@@ -195,7 +185,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         if runningAnimations.isEmpty {
             animateTransitionIfNeeded(state: state, duration: duration)
         }
-        
         for animator in runningAnimations {
             animator.pauseAnimation()
             animationProgressWhenInterrapted = animator.fractionComplete
@@ -221,11 +210,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     override func viewWillAppear(_ animated: Bool) {
         session.startRunning()
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         stopRecording()
     }
-    
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
@@ -261,10 +248,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         gradient.colors = [UIColor.magenta.cgColor,UIColor.red.cgColor,UIColor.purple.cgColor,UIColor.blue.cgColor]
         self.view.layer.addSublayer(gradient)
     }
-    
     public func QRCodeSetView(){
-
-
         if let window = UIApplication.shared.keyWindow {
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
@@ -281,7 +265,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             }, completion: nil)
         }
     }
-    
     
     private func byebyeWebSite(){
         idk.exit.addTarget(self, action: #selector(byebye), for: .touchUpInside)
@@ -300,7 +283,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             }
         }
     }
-    
 
     @objc func tapView() {
         productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
@@ -308,8 +290,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     @objc func tapViewDetail() {
         productDetailView.center = CGPoint(x: productDetailView.center.x, y: self.view.center.y + 140)
     }
-    
-
 
     public func setupView(){
         if let window = UIApplication.shared.keyWindow {
@@ -317,11 +297,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(productDetailView)
 //            let height: CGFloat = 150
-
             let height: CGFloat = 150
             
-
-
             let y = window.frame.height - height
             view.frame = window.frame
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:  .transitionFlipFromBottom, animations: {            self.view.alpha = 1
@@ -330,9 +307,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
 }
 
-
-    
-    
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
             self.view.alpha = 1
@@ -374,7 +348,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     private func dontAddToShoppingCart(){
         productDetailView.deleteButton.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
     }
-    
+
     @objc func dontAddMe(){
         continueInteractiveTransition()
         self.blurView.effect = nil
@@ -392,9 +366,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
 //                                               y: 900,
 //                                               width: self.view.bounds.width,
 //                                               height: dViewHeight)
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
+        let itemSavedDate = ItemSavedDate.init(createdDate: products?.boughtDate ?? "")
         savedDate.add(newDate: itemSavedDate)
-        
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             showAlert(title: "Success", message: "Item added to shopping cart")
@@ -415,18 +388,17 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             print("Item added")
         }
     }
-    
 //////////////////////////////////////////////////////////////////////////////////
-    
     @objc private func addButtonPressed(){
         continueInteractiveTransition()
-       self.blurView.effect = nil
+        self.blurView.effect = nil
         self.session.startRunning()
-        let itemSavedDate = ItemSavedDate.init(createdDate: products?.createdAt ?? "")
+        let itemSavedDate = ItemSavedDate.init(createdDate: products?.boughtDate ?? "")
         savedDate.add(newDate: itemSavedDate)
         if let item = products {
             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
             showAlert(title: "Success", message: "Item added to shopping cart")
+//            self.navigationController?.tabBarItem.badgeValue = "1"
 //            let alertController = UIAlertController(title: "Success", message: "Successfully added item to shopping cart", preferredStyle: .alert)
 //
 //            let continueShopping = UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (alert) in
@@ -443,10 +415,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             self.handleDismiss()
             print("Item added")
 //            shoplist.tabBarItem.badgeValue = "\(shoplist.shoppingCart.count)"
-
         }
     }
-    
 
      func startLiveVideo() {
         session.sessionPreset = AVCaptureSession.Preset.photo
@@ -465,4 +435,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
 }
 
+extension QRNBarCodeCodeViewController: UptadeNumberOfItemsDelegate {
+    func updateNumOfItem(items: [Item]) {
+         self.navigationController?.tabBarController?.viewControllers![1].tabBarItem.badgeValue = items.count.description
+    }
+}
 

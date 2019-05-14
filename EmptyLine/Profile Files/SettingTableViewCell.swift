@@ -14,7 +14,7 @@ class SettingTableViewCell: UITableViewCell {
         let name = UILabel()
         name.textColor = .black
         name.font = UIFont.systemFont(ofSize: 15)
-        name.backgroundColor = .white
+        //name.backgroundColor = .white
         return name
     }()
     
@@ -22,14 +22,14 @@ class SettingTableViewCell: UITableViewCell {
         let email = UILabel()
         email.textColor = .black
         email.font = UIFont.systemFont(ofSize: 15)
-        email.backgroundColor = .white
+        //email.backgroundColor = .white
         return email
     }()
     
     lazy var  passwordLabel: UILabel = {
         let pass = UILabel()
         pass.font = UIFont.systemFont(ofSize: 25)
-        pass.backgroundColor = .white
+        //pass.backgroundColor = .white
         pass.textColor = .black
         return pass
     }()
@@ -37,7 +37,7 @@ class SettingTableViewCell: UITableViewCell {
     lazy var addCaed: UILabel = {
         let card = UILabel()
         card.textColor = .black
-        card.backgroundColor = .white
+        //card.backgroundColor = .white
         card.font = UIFont.systemFont(ofSize: 15)
         return card
     }()
@@ -46,7 +46,7 @@ class SettingTableViewCell: UITableViewCell {
         let out = UILabel()
         out.textColor = .black
         out.textAlignment = .center
-        out.backgroundColor = .white
+        //out.backgroundColor = .white
         out.font = UIFont.systemFont(ofSize: 15)
         out.alpha = 0.5
         return out
@@ -64,7 +64,6 @@ class SettingTableViewCell: UITableViewCell {
         return image
     }()
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -73,6 +72,7 @@ class SettingTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
         setUpViewConstraints()
+        self.backgroundColor = .clear
     }
     
     private func commonInit() {
@@ -134,7 +134,7 @@ class SettingTableViewCell: UITableViewCell {
     }
     func setCardImage() {
         cardImage.translatesAutoresizingMaskIntoConstraints = false
-        cardImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        cardImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         cardImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         cardImage.trailingAnchor.constraint(equalTo: namelLabel.leadingAnchor, constant: -11).isActive = true
     }

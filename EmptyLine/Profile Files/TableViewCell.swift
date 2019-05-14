@@ -9,21 +9,21 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
-    lazy var  historyLabel: UILabel = {
+    
+    public lazy var  shoppingDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
     
-    lazy var historyImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "placeholder")
-        image.layer.cornerRadius = image.frame.width/2
-        image.clipsToBounds = true
-        return image
+    public lazy var shopNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "WHOLE FOODS SUPERMARKET"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        return label
     }()
-    
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,34 +32,33 @@ class TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
-        setUpViewConstraints()
     }
     
     private func commonInit() {
         setUpViewConstraints()
     }
     
-    func setUpViewConstraints() {
-        addSubview(historyLabel)
-        addSubview(historyImage)
+    private func setUpViewConstraints() {
         historyLabelConstraints()
-        historyImageConstraints()
+        setShopNameLabel()
+        
     }
     
-    func historyLabelConstraints() {
-        historyLabel.translatesAutoresizingMaskIntoConstraints = false
-        historyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        historyLabel.leadingAnchor.constraint(equalTo: historyImage.trailingAnchor, constant: 10).isActive = true
-        historyLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        historyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+    private func historyLabelConstraints() {
+        addSubview(shoppingDateLabel)
+        shoppingDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        shoppingDateLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: 10).isActive = true
+        shoppingDateLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
+        shoppingDateLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 11).isActive = true        
     }
-    func historyImageConstraints() {
-        historyImage.translatesAutoresizingMaskIntoConstraints = false
-        historyImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        historyImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        historyImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -300).isActive = true
-        historyImage.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        historyImage.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        historyImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    
+    private func setShopNameLabel(){
+        addSubview(shopNameLabel)
+        shopNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        shopNameLabel.topAnchor.constraint(equalTo: shoppingDateLabel.bottomAnchor, constant: 0).isActive = true
+        shopNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
+        shopNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 11).isActive = true
+        shopNameLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
+    
 }

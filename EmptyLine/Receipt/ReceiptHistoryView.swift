@@ -1,15 +1,14 @@
 //
-//  ReceiptView.swift
+//  ReceiptHistory.swift
 //  EmptyLine
 //
-//  Created by Donkemezuo Raymond Tariladou on 4/26/19.
+//  Created by Donkemezuo Raymond Tariladou on 5/9/19.
 //  Copyright © 2019 Pursuit. All rights reserved.
 //
 
 import UIKit
 
-class ReceiptView: UIView {
-    
+class ReceiptHistoryView: UIView {
     
     public lazy var receiptScrollView: UIScrollView = {
         let screenSize: CGRect = UIScreen.main.bounds
@@ -53,20 +52,18 @@ class ReceiptView: UIView {
     public lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.text = "------------ May 8, 2019 ------------"
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
-         itemsTableView.register(ReceiptTableViewCell.self, forCellReuseIdentifier: "receiptCell")
+        itemsTableView.register(ReceiptHistoryTableViewCell.self, forCellReuseIdentifier: "receiptHistory")
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-       
     }
     
     private func commonInit(){
