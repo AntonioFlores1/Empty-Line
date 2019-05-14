@@ -107,7 +107,7 @@ extension ReceiptViewController: UITableViewDelegate, UITableViewDataSource {
         let checkOutItem = checkedOutItems[indexPath.row]
         cell.itemNameLabel.text = checkOutItem.name
         cell.itemPrice.text = "$" + "\(checkOutItem.price)"
-        
+        dump(checkedOutItems)
         receiptView.dayLabel.text = "------------ \(checkOutItem.boughtDate) ------------"
         return cell
     }

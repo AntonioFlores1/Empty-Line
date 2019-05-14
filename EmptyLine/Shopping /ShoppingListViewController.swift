@@ -171,7 +171,6 @@ class ShoppingListViewController: UIViewController {
         ])
     }
 
-    // recursive function
     private func createShoppingHistory(){
         guard let loggedInUser = authservice.getCurrentUser() else {
             showAlert(title: "Error", message: "No user currently logged in")
@@ -188,6 +187,15 @@ class ShoppingListViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func createReceipt(checkedOutItems: [Item]){
+        
+        for item in checkedOutItems {
+            let checkedOutItem = Item.init(name: item.name, barcode: item.barcode, description: item.description, ingredients: item.ingredients, image: item.image, price: item.price, isCoupon: item.isCoupon, coupon: item.coupon, itemID: item.itemID, date: Date(), tax: item.tax, boughtDate: Date.getISOTimestamp())
+            ReceiptDataManager.addToCheckoutItems(items: checkedOutItem)
+        }
+        
     }
     
     @objc func payButtonPresse() {
@@ -357,7 +365,6 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             
             }
             ReceiptDataManager.addToCheckoutItems(items: allItems)
-           
             ShoppingCartDataManager.deleteAllItems()
          ShoppingCartDataManager.deleteAllItems()
          self.refresh.endRefreshing()
