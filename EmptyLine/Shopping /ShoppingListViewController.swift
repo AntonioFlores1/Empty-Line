@@ -102,16 +102,16 @@ class ShoppingListViewController: UIViewController {
     }
     
     private func controlPayButton() {
-//<<<<<<< prod
-        if shoppingCart.isEmpty == true {
-            shoppingView.payButton.isEnabled = false
-            let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
-            alerController.addAction(ok)
-            alerController.addAction(cancel)
-            present(alerController, animated: true, completion: nil)
-        } else if shoppingCart.isEmpty != true {
+////<<<<<<< prod
+//        if shoppingCart.isEmpty == true {
+//            shoppingView.payButton.isEnabled = false
+//            let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
+//            let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
+//            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
+//            alerController.addAction(ok)
+//            alerController.addAction(cancel)
+//            present(alerController, animated: true, completion: nil)
+//        } else if shoppingCart.isEmpty != true {
 //=======
         if ShoppingCartDataManager.cartTotal() > 0 {
 //>>>>>>> dev-antonio
