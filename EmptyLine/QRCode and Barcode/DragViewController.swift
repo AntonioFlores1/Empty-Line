@@ -110,7 +110,9 @@ class DragViewController: UIViewController {
     }
     
     @IBAction func addToCartButton(_ sender: Any) {
-        animationView.play()
+        animationView.play{(success:Bool) in
+            
+        }
         //////FIX THIS LATER
 //        dragViewController.view.frame = CGRect(x: 0,
 //                                               y: 900,
