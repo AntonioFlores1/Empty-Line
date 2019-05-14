@@ -77,6 +77,7 @@ class ShoppingListViewController: UIViewController {
         shoppingView.shoppingListTableView.backgroundColor? = .clear
         setupViews()
         navigationItem.title = "Checkout List"
+        UINavigationBar.appearance().tintColor = .black
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self
         shoppingView.shoppingListTableView.delegate      =   self

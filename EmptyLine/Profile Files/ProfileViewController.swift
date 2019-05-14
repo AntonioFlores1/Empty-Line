@@ -313,12 +313,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
+            cell.selectionStyle = .none
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 
                 if allUserCheckOutItems.count > 0 {
           let day = allDates[indexPath.row]
                     cell.shoppingDateLabel.text = day
-                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
                 } else {
                     cell.shoppingDateLabel.text = "No history of items bought"
                 }
@@ -357,6 +357,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 infocell.emailLabel.isHidden = true
             }
+             infocell.selectionStyle = .none
             return infocell
             
         default:
