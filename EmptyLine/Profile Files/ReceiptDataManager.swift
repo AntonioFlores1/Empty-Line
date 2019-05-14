@@ -22,9 +22,9 @@ final class ReceiptDataManager {
         }
     }
     
-    static public func addToCheckoutItems(items: [Item]){
+    static public func addToCheckoutItems(items: Item){
         checkedOutItems.removeAll()
-        checkedOutItems = items
+        checkedOutItems.append(items)
         saveItems()
     }
     

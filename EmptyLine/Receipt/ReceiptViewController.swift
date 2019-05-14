@@ -108,7 +108,6 @@ extension ReceiptViewController: UITableViewDelegate, UITableViewDataSource {
         cell.itemNameLabel.text = checkOutItem.name
         cell.itemPrice.text = "$" + "\(checkOutItem.price)"
         cell.selectionStyle = .none
-        
         receiptView.dayLabel.text = "----------\(checkOutItem.boughtDate)----------"
         return cell
     }

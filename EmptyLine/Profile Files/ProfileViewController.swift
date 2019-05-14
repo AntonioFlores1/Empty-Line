@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController {
     private var allItems = [Item]()
     
     
+    
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -123,9 +124,8 @@ class ProfileViewController: UIViewController {
                 
                 self?.allItems = allCheckedOutItems
                 if let allCheckedoutDates = allCheckedoutDates {
-                    //dump(allCheckedoutDates)
                     self?.allDates = allCheckedoutDates
-                    //dump(self?.allDates)
+ 
                 }
             }
             
@@ -144,7 +144,6 @@ class ProfileViewController: UIViewController {
         }
         
     }
-    
     
     
     @objc private func segueToSetting(){
@@ -169,7 +168,7 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
+  
     func setUserProfileImage(selectedImage: UIImage) {
         guard let imageData = selectedImage.jpegData(compressionQuality: 1.0),
             let userAuth = authservice.getCurrentUser(),
