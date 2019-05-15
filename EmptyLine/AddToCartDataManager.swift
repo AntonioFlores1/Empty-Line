@@ -21,12 +21,11 @@ final class ShoppingCartDataManager {
 // <<<<<<< prod
 //     static var total = 0.0
 //     static var taxTotal = 0.0
-    
 //     static private var shoppingCartItems = [Item]() {
 //         didSet {
 //             total = 0.0
 //             for item in self.shoppingCartItems {
-//                 self.total += item.price
+//                self.total += item.price
 //             }
 //             delegate?.updateNumOfItem(items: shoppingCartItems)
 //         }
@@ -37,6 +36,7 @@ final class ShoppingCartDataManager {
 //             for item in self.shoppingCartItems {
 //                 self.taxTotal += item.tax
 //             }
+    
 // =======
     static func cartTotal() -> Double {
         var total: Double = 0
@@ -70,6 +70,7 @@ final class ShoppingCartDataManager {
         if let count = shoppingCartItemCounts[item] {
             shoppingCartItemCounts[item] = count + increment
         }
+    
 //>>>>>>> dev-antonio
     }
     
