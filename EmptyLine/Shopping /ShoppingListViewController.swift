@@ -145,6 +145,19 @@ class ShoppingListViewController: UIViewController {
             }
         }
     }
+// <<<<<<< prod
+// =======
+    
+    private func createReceipt(checkedOutItems: [Item]){
+        
+        for item in checkedOutItems {
+            let checkedOutItem = Item.init(name: item.name, barcode: item.barcode, description: item.description, ingredients: item.ingredients, image: item.image, price: item.price, isCoupon: item.isCoupon, coupon: item.coupon, itemID: item.itemID, date: Date(), tax: item.tax, boughtDate: Date.getISOTimestamp())
+            ReceiptDataManager.addToCheckoutItems(items: [checkedOutItem])
+        }
+        
+    }
+    
+// >>>>>>> dev-alfredo
     @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
