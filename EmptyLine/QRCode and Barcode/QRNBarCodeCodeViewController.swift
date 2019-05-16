@@ -425,5 +425,6 @@ extension QRNBarCodeCodeViewController: UptadeNumberOfItemsDelegate {
     func updateNumOfItem(items: [Item]) {
          self.navigationController?.tabBarController?.viewControllers![1].tabBarItem.badgeValue = items.count.description
     }
+
 }
 

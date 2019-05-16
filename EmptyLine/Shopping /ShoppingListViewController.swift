@@ -11,36 +11,11 @@ import Kingfisher
 import Firebase
 import Stripe
 
-
-
 class ShoppingListViewController: UIViewController {
-
     
     var total = 0.0
     var totalItems = 1
-    var itemsPriceTotal: Double = 0.0 {
-        didSet {
-            shoppingView.titleLabel.text  = "Total Amount : \(Float(itemsPriceTotal))"
-        }
-    }
     
-
-    var taxPriceTotal: Double = 0.0 {
-        didSet {
-            shoppingView.taxLabel.text = "Tax : \(Float(taxPriceTotal))"
-        }
-    }
-    
-
-
-    var date = Date()
-    var createdDate: String {  let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE d, MMMM yyyy"
-        let createdDate = formatter.string(from: date)
-        return createdDate
-    }
-    
-
     var previousValue = 1
 
     private var activityView: UIActivityIndicatorView!
@@ -59,20 +34,14 @@ class ShoppingListViewController: UIViewController {
         refC.addTarget(self, action: #selector(fetchShoppingCartItems), for: .valueChanged)
         return refC
     }()
-    
-// <<<<<<< prod
-//     private var shoppingCart = [Item](){
-//         didSet {
-//             DispatchQueue.main.async {
-//                 self.shoppingView.shoppingListTableView.reloadData()
-//                 self.shoppingView.titleLabel.resignFirstResponder()
-// =======
+
     private func updateViews () {
         DispatchQueue.main.async {
             self.shoppingView.shoppingListTableView.reloadData()
             self.shoppingView.titleLabel.text  = "Total Amount : $ \(ShoppingCartDataManager.cartTotal())"
+            self.shoppingView.taxLabel.text = "Tax: $ \(ShoppingCartDataManager.totalTax())"
+            print(ShoppingCartDataManager.totalTax())
             self.shoppingView.titleLabel.resignFirstResponder()
-// >>>>>>> dev-antonio
         }
     }
    
@@ -87,6 +56,7 @@ class ShoppingListViewController: UIViewController {
         shoppingView.shoppingListTableView.backgroundColor? = .clear
         setupViews()
         navigationItem.title = "Checkout List"
+        UINavigationBar.appearance().tintColor = .black
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self
         shoppingView.shoppingListTableView.delegate      =   self
@@ -96,28 +66,21 @@ class ShoppingListViewController: UIViewController {
         activityView = UIActivityIndicatorView(style: .gray)
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
         activityView.center = shoppingView.payButton.center
-        //self.activityView.layer.addSublayer(gradient)
-        // new
         view.addSubview(activityView)
     }
     
     private func controlPayButton() {
-////<<<<<<< prod
-//        if shoppingCart.isEmpty == true {
-//            shoppingView.payButton.isEnabled = false
-//            let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
-//            let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
-//            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
-//            alerController.addAction(ok)
-//            alerController.addAction(cancel)
-//            present(alerController, animated: true, completion: nil)
-//        } else if shoppingCart.isEmpty != true {
-//=======
         if ShoppingCartDataManager.cartTotal() > 0 {
-//>>>>>>> dev-antonio
             shoppingView.payButton.isEnabled = true
         } else {
             shoppingView.payButton.isEnabled = false
+            let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
+
+                        let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
+                        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
+                        alerController.addAction(ok)
+                        alerController.addAction(cancel)
+                        present(alerController, animated: true, completion: nil)
         }
     }
     
@@ -131,12 +94,8 @@ class ShoppingListViewController: UIViewController {
         shoppingView.payButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 2.0,delay: 0,usingSpringWithDamping: 0.2,initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
                 self?.shoppingView.payButton.transform = .identity
-// <<<<<<< prod
-//             })
-// =======
             }, completion: nil)
         updateViews()
-//>>>>>>> dev-antonio
     }
     
     private func shoppingCar() {
@@ -148,7 +107,6 @@ class ShoppingListViewController: UIViewController {
     }
 
     @objc func payButtonPressed() {
-        print("pressed")
         payButtonPresse()
     }
 
@@ -183,11 +141,11 @@ class ShoppingListViewController: UIViewController {
                 if let error = error {
                     self.showAlert(title: "Error", message: "Error \(error.localizedDescription) encountered while creating \(String(describing: loggedInUser.displayName)) history")
                 } else {
-                    print("Success")
                 }
             }
         }
     }
+<<<<<<< HEAD
     
     private func createReceipt(checkedOutItems: [Item]){
         
@@ -198,6 +156,8 @@ class ShoppingListViewController: UIViewController {
         
     }
     
+=======
+>>>>>>> e2e549e10953065f07be2e85dea06aed3f68dd76
     @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
@@ -226,13 +186,6 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.priceLabel.text = "$" + " \(itemInCart.price)"
         cell.shoppingListImage.kf.setImage(with: URL(string: itemInCart.image))
         cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
-// <<<<<<< prod
-//         itemsPriceTotal = itemInCart.price // new
-//         itemsPriceTotal = ShoppingCartDataManager.total
-//         taxPriceTotal = itemInCart.tax
-//         taxPriceTotal = ShoppingCartDataManager.taxTotal
-// =======
-// >>>>>>> dev-antonio
         cell.addItemStepper.tag = indexPath.row
         stepperTags.append(cell.addItemStepper.tag)
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
@@ -252,37 +205,11 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension ShoppingListViewController{
-// <<<<<<< prod
-//     @objc private func changeStepperValue(_ stepper: UIStepper) {
-//         let item = shoppingCart[stepper.tag]
-//         if stepper.value == 1.0 || stepper.value == 0.0 {
-//             print(stepper.value)
-//             itemsPriceTotal = itemsPriceTotal + item.price
-//             taxPriceTotal = taxPriceTotal + item.tax
-//             ShoppingCartDataManager.addItemToCart(shoppingItem: item)
-//             //shoppingView.shoppingListTableView.reloadData()
-//             totalItems += 1
-//             stepper.value = 0
-//         } else if stepper.value == -1.0{
-//             if totalItems <= 1 {
-//                itemsPriceTotal = itemsPriceTotal - item.price
-//                taxPriceTotal = taxPriceTotal - item.tax
-//                totalItems = 1
-//             } else {
-//                 itemsPriceTotal = itemsPriceTotal - item.price
-//                 taxPriceTotal = taxPriceTotal - item.tax
-//                 totalItems -= 1
-//                 ShoppingCartDataManager.deleteItemFromShoppingCart(index: stepper.tag)
-//                 stepper.value = 0
-//             }
-//         }
-// =======
     
     @objc private func changeStepperValue(_ stepper: UIStepper) {
         
         let items = Array(ShoppingCartDataManager.shoppingCartItemCounts.keys)
-        
-//>>>>>>> dev-antonio
+
         let indexPath = IndexPath(row: stepper.tag, section: 0  )
         
         let itemInCart = items[indexPath.row]
@@ -304,22 +231,6 @@ extension ShoppingListViewController{
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-// <<<<<<< prod
-//             print("Deleted")
-//             self.shoppingCart.remove(at: indexPath.row)
-//             if shoppingCart.isEmpty == true {
-//                 let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
-//                 let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
-//                 let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
-//                 alerController.addAction(ok)
-//                 alerController.addAction(cancel)
-//                 present(alerController, animated: true, completion: nil)
-//             }
-//             self.shoppingView.payButton.isEnabled = false
-//             self.shoppingView.shoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
-//             ShoppingCartDataManager.deleteItemFromShoppingCart(index: indexPath.row)
-//             self.itemsPriceTotal = ShoppingCartDataManager.totalAmount()
-// =======
             let items = Array(ShoppingCartDataManager.shoppingCartItemCounts.keys)
             
             let itemInCart = items[indexPath.row]
@@ -343,33 +254,27 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
         showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(ShoppingCartDataManager.cartTotal()) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
-//            self.itemsPriceTotal = 0.0
-            //self.shoppingCart.removeAll()
-           // self.refresh.endRefreshing()
             self.barButtonItem.isEnabled = false
-            self.createShoppingHistory()
-// <<<<<<< prod
-//             ReceiptDataManager.addToCheckoutItems(items: self.shoppingCart)
-//             ShoppingCartDataManager.deleteAllItems()
-//             self.shoppingCart.removeAll()
-//             self.refresh.endRefreshing()
-// =======
             
             var allItems = [Item]()
-          
-            for item in ShoppingCartDataManager.shoppingCartItemCounts.keys {
-                for _ in 0...ShoppingCartDataManager.countOfItem(item: item) {
-                        allItems.append(item)
-                    
+
+            for shoppedItem in ShoppingCartDataManager.shoppingCartItemCounts.keys {
+                
+                let checkedOutItem = Item.init(name: shoppedItem.name, barcode: shoppedItem.barcode, description: shoppedItem.description, ingredients: shoppedItem.ingredients, image: shoppedItem.image, price: shoppedItem.price, isCoupon: shoppedItem.isCoupon, coupon: shoppedItem.coupon, itemID: shoppedItem.itemID, date: Date(), tax: shoppedItem.tax, boughtDate: Date.getISOTimestamp())
+                for _ in 0...ShoppingCartDataManager.countOfItem(item: checkedOutItem) {
+                        allItems.append(checkedOutItem)
+                    print(allItems.count)
                 }
-            
             }
-            ReceiptDataManager.addToCheckoutItems(items: allItems)
-            ShoppingCartDataManager.deleteAllItems()
-         ShoppingCartDataManager.deleteAllItems()
+        ReceiptDataManager.addToCheckoutItems(items: allItems)
+        ShoppingCartDataManager.deleteAllItems()
+        ShoppingCartDataManager.deleteAllItems()
          self.refresh.endRefreshing()
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> e2e549e10953065f07be2e85dea06aed3f68dd76
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
         }
     }
