@@ -145,7 +145,7 @@ class ShoppingListViewController: UIViewController {
             }
         }
     }
-<<<<<<< HEAD
+
     
     private func createReceipt(checkedOutItems: [Item]){
         
@@ -155,9 +155,8 @@ class ShoppingListViewController: UIViewController {
         }
         
     }
-    
-=======
->>>>>>> e2e549e10953065f07be2e85dea06aed3f68dd76
+
+// >>>>>>> dev-alfredo
     @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
@@ -270,11 +269,6 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
         ShoppingCartDataManager.deleteAllItems()
         ShoppingCartDataManager.deleteAllItems()
          self.refresh.endRefreshing()
-<<<<<<< HEAD
-   
-
-=======
->>>>>>> e2e549e10953065f07be2e85dea06aed3f68dd76
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
         }
     }
