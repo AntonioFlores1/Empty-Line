@@ -41,7 +41,7 @@ final class ShoppingCartDataManager {
     static func cartTotal() -> Double {
         var total: Double = 0
         for item in shoppingCartItemCounts.keys {
-            total = total + itemTotal(item: item)
+            total = total + itemTotal(item: item) + totalTax()
         }
         return total
     }
@@ -49,14 +49,25 @@ final class ShoppingCartDataManager {
     static func itemTotal(item: Item) -> Double {
         if let count = shoppingCartItemCounts[item] {
             return Double(count) * item.price
-//>>>>>>> dev-antonio
         }
         return 0
     }
-// <<<<<<< prod
-//     static func totalAmount() -> Double {
-//         return total
-// =======
+    
+    static func totalTax() -> Double {
+        var totalItemTax = 0.0
+        for item in shoppingCartItemCounts.keys {
+            totalItemTax = totalItemTax + itemTax(item: item)
+        }
+        
+        return totalItemTax
+    }
+    
+    static func itemTax(item: Item) -> Double {
+        if let count = shoppingCartItemCounts[item] {
+            return Double(count) * item.tax
+        }
+        return 0
+    }
     
     static func countOfItem(item: Item) -> Int {
         if let count = shoppingCartItemCounts[item] {
