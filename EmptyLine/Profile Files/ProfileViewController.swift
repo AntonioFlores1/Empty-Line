@@ -312,6 +312,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
+            cell.selectionStyle = .none
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 
                 if allUserCheckOutItems.count > 0 {
@@ -355,6 +356,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 infocell.emailLabel.isHidden = true
             }
+             infocell.selectionStyle = .none
             return infocell
             
         default:
