@@ -56,6 +56,7 @@ class ShoppingListViewController: UIViewController {
         shoppingView.shoppingListTableView.backgroundColor? = .clear
         setupViews()
         navigationItem.title = "Checkout List"
+        UINavigationBar.appearance().tintColor = .black
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self
         shoppingView.shoppingListTableView.delegate      =   self
@@ -74,6 +75,7 @@ class ShoppingListViewController: UIViewController {
         } else {
             shoppingView.payButton.isEnabled = false
             let alerController = UIAlertController(title: "Your cart is empty." , message: "Please start scanning items in order to continue.", preferredStyle: .alert)
+
                         let ok = UIAlertAction(title: "OK", style: .default) { (action) in }
                         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in}
                         alerController.addAction(ok)
@@ -143,7 +145,6 @@ class ShoppingListViewController: UIViewController {
             }
         }
     }
-    
     @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
@@ -252,9 +253,9 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
                     print(allItems.count)
                 }
             }
-            ReceiptDataManager.addToCheckoutItems(items: allItems)
-            ShoppingCartDataManager.deleteAllItems()
-         ShoppingCartDataManager.deleteAllItems()
+        ReceiptDataManager.addToCheckoutItems(items: allItems)
+        ShoppingCartDataManager.deleteAllItems()
+        ShoppingCartDataManager.deleteAllItems()
          self.refresh.endRefreshing()
             self.navigationController!.pushViewController(ReceiptViewController(), animated: true)
         }
