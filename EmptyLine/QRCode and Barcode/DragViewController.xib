@@ -42,10 +42,19 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-Af-zgP" customClass="LottieView" customModule="Lottie">
                     <rect key="frame" x="196.5" y="77" width="83" height="70"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLq-hD-Hjp">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLq-hD-Hjp">
                             <rect key="frame" x="0.0" y="10" width="83" height="88"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="cancelButton"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Cancel">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="19" name="TimesNewRomanPS-BoldMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
                             <connections>
                                 <action selector="dontAddButton:" destination="-1" eventType="touchUpInside" id="5fV-On-SpL"/>
                             </connections>
@@ -79,8 +88,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7i-oS-XKA" customClass="LottieView" customModule="Lottie">
                     <rect key="frame" x="310.5" y="66.5" width="83" height="87.5"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLk-vC-c8r">
+
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dLk-vC-c8r">
                     <rect key="frame" x="300.5" y="66.5" width="83" height="87.5"/>
+                    <state key="normal">
+                        <attributedString key="attributedTitle"/>
+                    </state>
                     <connections>
                         <action selector="addToCartButton:" destination="-1" eventType="touchUpInside" id="3Gq-zc-OO9"/>
                         <action selector="dontAddButton:" destination="-1" eventType="touchUpInside" id="FxG-SB-LL7"/>
@@ -138,6 +151,5 @@
     <resources>
         <image name="Fiji-Water-15" width="500" height="500"/>
         <image name="arrow-up" width="50" height="50"/>
-        <image name="cancelButton" width="48" height="48"/>
     </resources>
 </document>
