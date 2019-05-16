@@ -108,7 +108,7 @@ extension ReceiptViewController: UITableViewDelegate, UITableViewDataSource {
         cell.itemNameLabel.text = checkOutItem.name
         cell.itemPrice.text = "$" + "\(checkOutItem.price)"
         dump(checkedOutItems)
-        receiptView.dayLabel.text = "------------ \(checkOutItem.boughtDate) ------------"
+        receiptView.dayLabel.text = "-------\(checkOutItem.boughtDate)-------"
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
