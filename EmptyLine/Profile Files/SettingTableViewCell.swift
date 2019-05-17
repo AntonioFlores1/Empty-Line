@@ -46,8 +46,7 @@ class SettingTableViewCell: UITableViewCell {
         let out = UILabel()
         out.textColor = .black
         out.textAlignment = .center
-        //out.backgroundColor = .white
-        out.font = UIFont.systemFont(ofSize: 15)
+        out.font = UIFont.systemFont(ofSize: 22)
         out.alpha = 0.5
         return out
     }()
