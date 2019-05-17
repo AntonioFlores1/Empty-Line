@@ -62,9 +62,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         fetchProduct(barCode: bar)
         self.barcodeDetector = vision.barcodeDetector()
 
-        let image: UIImage = UIImage(named: "BarcodeIndicator")!
+        let image: UIImage = UIImage(named: "3867c550-82e2-4b68-8e09-dd2710d88e57_200x200")!
         bgImage = UIImageView(image: image)
-        bgImage!.frame = CGRect(x: 0, y: 0, width: 220, height: 180)
+        bgImage!.frame = CGRect(x: 0, y: 0, width: 260, height: 220)
         bgImage?.center = self.view.center
         view.addSubview(bgImage!)
         self.view.addSubview(bgImage!)
@@ -333,7 +333,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         }
     }
     
-    private func addToShoppingCart(){
+     func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
     }
     
@@ -388,8 +388,19 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             print("Item added")
         }
     }
+    
+//    func dismissAnimation(){
+//        dragViewController.view.frame = CGRect(x: 0,
+//                                               y: 900,
+//                                               width: self.view.bounds.width,
+//                                               height: dViewHeight)
+//    }
 //////////////////////////////////////////////////////////////////////////////////
-    @objc private func addButtonPressed(){
+    @objc func addButtonPressed(){
+        dragViewController.view.frame = CGRect(x: 0,
+                                                                                              y: 900,
+                                                           width: self.view.bounds.width,
+                                                           height: dViewHeight)
         continueInteractiveTransition()
         self.blurView.effect = nil
         self.session.startRunning()

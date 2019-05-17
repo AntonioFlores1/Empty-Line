@@ -21,14 +21,20 @@ class DragViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var itemDescription: UITextView!
     let animationView = AnimationView(name: "addToCartAni")
+    let trashAnimation = AnimationView(name: "trashAnimation")
     var qrcode = QRNBarCodeCodeViewController()
-
+ //   var drag = DragViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addCartAni.addSubview(animationView)
         animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         animationView.stop()
+        
+        dontAddCartAnimation.addSubview(trashAnimation)
+        trashAnimation.frame = CGRect(x: -10, y: -20, width: 130, height: 130)
+//        trashAnimation.stop()
+        trashAnimation.stop()
         
         UIView.animate(withDuration: 0.3, animations: {
             self.arrowImage.frame.origin.y -= 10
@@ -98,11 +104,12 @@ class DragViewController: UIViewController {
     }
     @IBAction func dontAddButton(_ sender: Any) {
 //        dontAdd.isHidden = true
+        trashAnimation.play()
 //        let animationView = AnimationView(name: "animation-w64-h64 (1)")
 //        animationView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         //animationView.contentMode = .scaleAspectFill
        // animationView.loopMode = .loop
-        
+       // self.qrcode.dismissAnimation()
        // animationView.realtimeAnimationProgress
         //self.dontAddCartAnimation.addSubview(animationView)
         //animationView.play()
@@ -111,6 +118,14 @@ class DragViewController: UIViewController {
     
     @IBAction func addToCartButton(_ sender: Any) {
         animationView.play{(success:Bool) in
+            //self.qrcode.addButtonPressed()
+            
+           // self.drag.view.frame = CGRect(x: 0,
+//                                                   y: 900,
+//                                                   width: self.view.bounds.width,
+//                                                   height: 500)
+            self.animationView.forceDisplayUpdate()
+            self.animationView.stop()
             
         }
         //////FIX THIS LATER
@@ -121,8 +136,8 @@ class DragViewController: UIViewController {
         //      animationView.contentMode = .scaleAspectFill
         //        animationView.loopMode = .loop
         //       animationView.realtimeAnimationProgress
-       // animationView.forceDisplayUpdate()
-        //animationView.stop()
+        animationView.forceDisplayUpdate()
+       // animationView.stop()
         //animationView.play()
 //        //animationView.backgroundBehavior = .pauseAndRestore
         print("add me pressed")

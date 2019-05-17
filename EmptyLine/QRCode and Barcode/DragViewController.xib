@@ -45,7 +45,6 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLq-hD-Hjp">
                             <rect key="frame" x="0.0" y="10" width="83" height="88"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="cancelButton"/>
                             <connections>
                                 <action selector="dontAddButton:" destination="-1" eventType="touchUpInside" id="5fV-On-SpL"/>
                             </connections>
@@ -138,6 +137,5 @@
     <resources>
         <image name="Fiji-Water-15" width="500" height="500"/>
         <image name="arrow-up" width="50" height="50"/>
-        <image name="cancelButton" width="48" height="48"/>
     </resources>
 </document>
