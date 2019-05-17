@@ -162,7 +162,6 @@ class ProfileViewController: UIViewController {
             } else if let ccuser = ccuser {
                 self?.profileView.usernameLabel.text = user.displayName!
                 print(ccuser.fullName)
-                self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
                 self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl), placeholder: #imageLiteral(resourceName: "zipLineLogo.png"))
             }
@@ -349,7 +348,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                         infocell.addCaed.text = "Add Card"
                         infocell.cardImage.image = card[indexPath.row]
                     } else {
-                        infocell.signOut.text = " SignOut"
+                        infocell.signOut.text = " Sign Out"
                         infocell.signOut.textColor = .red
                     }
                 }

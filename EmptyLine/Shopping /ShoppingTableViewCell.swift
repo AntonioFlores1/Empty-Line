@@ -35,6 +35,7 @@ class ShoppingTableViewCell: UITableViewCell {
     
     lazy var addItemStepper: UIStepper = {
         var customStepper = UIStepper.init(frame: CGRect(x: 150,y: 150,width: 100,height: 100))
+        customStepper.tintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
         customStepper.value = 1
         customStepper.minimumValue = 0
         customStepper.maximumValue = 10

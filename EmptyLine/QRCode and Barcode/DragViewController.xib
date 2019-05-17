@@ -44,6 +44,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLq-hD-Hjp">
                             <rect key="frame" x="0.0" y="10" width="83" height="88"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal">
                                 <attributedString key="attributedTitle">
                                     <fragment content="Cancel">
@@ -88,7 +89,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7i-oS-XKA" customClass="LottieView" customModule="Lottie">
                     <rect key="frame" x="310.5" y="66.5" width="83" height="87.5"/>
                 </view>
-
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dLk-vC-c8r">
                     <rect key="frame" x="300.5" y="66.5" width="83" height="87.5"/>
                     <state key="normal">
@@ -103,7 +103,7 @@
                     <rect key="frame" x="389" y="22.5" width="21" height="87.5"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="M2J-Ka-189" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="0lh-Si-y63"/>
                 <constraint firstItem="ZRx-gS-8XR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" multiplier="0.23" constant="13.939999999999998" id="6FP-gj-gp3"/>

@@ -21,13 +21,6 @@ class ProfileView: UIView {
         return imageView
     }()
     
-    lazy var defaultCamera: UIImageView = {
-        let placeCamera = UIImageView()
-        placeCamera.image = UIImage(named: "camera")
-        placeCamera.backgroundColor = .black
-        return placeCamera
-    }()
-    
     lazy var usernameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -70,7 +63,6 @@ class ProfileView: UIView {
         bringSubviewToFront(profileImageView)
         addSubview(profileImageView)
         addSubview(usernameLabel)
-        addSubview(defaultCamera)
         addSubview(segmentedControl)
         setupConstraints()
         setnameLabelConstraints()
@@ -82,14 +74,11 @@ class ProfileView: UIView {
     
     func setupConstraints() {
         profileImageView.autoAlignAxis(toSuperviewAxis: .vertical)
-        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 60.0)
+        profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 25.0)
         
         segmentedControl.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         segmentedControl.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         segmentedControl.autoPinEdge(.top, to: .bottom, of: usernameLabel, withOffset: 16.0)
-        
-        defaultCamera.autoAlignAxis(toSuperviewAxis: .vertical)
-        defaultCamera.autoPinEdge(toSuperviewEdge: .top, withInset: 185.0)//175
     }
     
     func setnameLabelConstraints() {
