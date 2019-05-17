@@ -38,8 +38,8 @@ class ShoppingListViewController: UIViewController {
     private func updateViews () {
         DispatchQueue.main.async {
             self.shoppingView.shoppingListTableView.reloadData()
-            self.shoppingView.titleLabel.text  = "Total Amount : $ \(ShoppingCartDataManager.cartTotal())"
-            self.shoppingView.taxLabel.text = "Tax: $ \(ShoppingCartDataManager.totalTax())"
+            self.shoppingView.titleLabel.text = "Total : $ \(ShoppingCartDataManager.cartTotal())"
+            self.shoppingView.taxLabel.text = "Tax :   $ \(ShoppingCartDataManager.totalTax())"
             print(ShoppingCartDataManager.totalTax())
             self.shoppingView.titleLabel.resignFirstResponder()
         }
@@ -55,7 +55,6 @@ class ShoppingListViewController: UIViewController {
         view.addSubview(shoppingView)
         shoppingView.shoppingListTableView.backgroundColor? = .clear
         setupViews()
-        navigationItem.title = "Checkout List"
         UINavigationBar.appearance().tintColor = .black
         fetchShoppingCartItems()
         shoppingView.shoppingListTableView.dataSource    =   self

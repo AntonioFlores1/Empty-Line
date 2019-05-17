@@ -38,8 +38,8 @@ class DragViewController: UIViewController {
             })
         }
         settin()
-        view.backgroundColor = UIColor(hexString: "BCBDC0")
-        dontAdd.backgroundColor =  UIColor(hexString: "BCBDC0")
+        view.backgroundColor = .white
+        dontAdd.backgroundColor =  .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
