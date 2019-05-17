@@ -246,7 +246,6 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             var allItems = [Item]()
 
             for shoppedItem in ShoppingCartDataManager.shoppingCartItemCounts.keys {
-                
                 let checkedOutItem = Item.init(name: shoppedItem.name, barcode: shoppedItem.barcode, description: shoppedItem.description, ingredients: shoppedItem.ingredients, image: shoppedItem.image, price: shoppedItem.price, isCoupon: shoppedItem.isCoupon, coupon: shoppedItem.coupon, itemID: shoppedItem.itemID, date: Date(), tax: shoppedItem.tax, boughtDate: Date.getISOTimestamp())
                 for _ in 0...ShoppingCartDataManager.countOfItem(item: checkedOutItem) {
                         allItems.append(checkedOutItem)
@@ -254,6 +253,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
                 }
             }
         ReceiptDataManager.addToCheckoutItems(items: allItems)
+        self.createShoppingHistory()
         ShoppingCartDataManager.deleteAllItems()
         ShoppingCartDataManager.deleteAllItems()
          self.refresh.endRefreshing()
