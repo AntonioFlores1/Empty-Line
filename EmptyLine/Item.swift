@@ -7,16 +7,15 @@
 //
 
 import Foundation
-// <<<<<<< prod
 
-// struct Item: Codable {
-// =======
+
+
 struct Item: Codable,Hashable,Comparable {
     static func < (lhs: Item, rhs: Item) -> Bool {
         return lhs.self == rhs.self
     }
     
-//>>>>>>> dev-antonio
+
     let itemID: String
     let name: String
     let barcode: String

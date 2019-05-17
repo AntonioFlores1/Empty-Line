@@ -144,6 +144,19 @@ class ShoppingListViewController: UIViewController {
             }
         }
     }
+// <<<<<<< prod
+// =======
+    
+    private func createReceipt(checkedOutItems: [Item]){
+        
+        for item in checkedOutItems {
+            let checkedOutItem = Item.init(name: item.name, barcode: item.barcode, description: item.description, ingredients: item.ingredients, image: item.image, price: item.price, isCoupon: item.isCoupon, coupon: item.coupon, itemID: item.itemID, date: Date(), tax: item.tax, boughtDate: Date.getISOTimestamp())
+            ReceiptDataManager.addToCheckoutItems(items: [checkedOutItem])
+        }
+        
+    }
+    
+// >>>>>>> dev-alfredo
     @objc func payButtonPresse() {
         let addCardController = STPAddCardViewController()
         addCardController.delegate = self
@@ -245,7 +258,6 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
             var allItems = [Item]()
 
             for shoppedItem in ShoppingCartDataManager.shoppingCartItemCounts.keys {
-                
                 let checkedOutItem = Item.init(name: shoppedItem.name, barcode: shoppedItem.barcode, description: shoppedItem.description, ingredients: shoppedItem.ingredients, image: shoppedItem.image, price: shoppedItem.price, isCoupon: shoppedItem.isCoupon, coupon: shoppedItem.coupon, itemID: shoppedItem.itemID, date: Date(), tax: shoppedItem.tax, boughtDate: Date.getISOTimestamp())
                 for _ in 0...ShoppingCartDataManager.countOfItem(item: checkedOutItem) {
                         allItems.append(checkedOutItem)
@@ -253,6 +265,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
                 }
             }
         ReceiptDataManager.addToCheckoutItems(items: allItems)
+        self.createShoppingHistory()
         ShoppingCartDataManager.deleteAllItems()
         ShoppingCartDataManager.deleteAllItems()
          self.refresh.endRefreshing()
