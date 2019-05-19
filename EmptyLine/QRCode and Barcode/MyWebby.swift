@@ -28,7 +28,7 @@ class MyWebby: UIView, WKNavigationDelegate {
         webView = WKWebView()
         webView.navigationDelegate = self
         
-        let link = "http://l.ead.me/bb7Wej"
+        let link = "https://qrco.de/bb8tP8"
         let request = URLRequest(url: URL(string: link)!)
             webView.load(request)
         webView.allowsBackForwardNavigationGestures = true
@@ -50,8 +50,9 @@ class MyWebby: UIView, WKNavigationDelegate {
     }
     
     func con(){
-        addSubview(exit)
         addSubview(webView)
+        addSubview(exit)
+        
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -61,7 +62,7 @@ class MyWebby: UIView, WKNavigationDelegate {
         exit.translatesAutoresizingMaskIntoConstraints = false
         exit.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         exit.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        exit.bottomAnchor.constraint(equalTo: webView.topAnchor, constant: 0).isActive = true
+        exit.topAnchor.constraint(equalTo: webView.topAnchor, constant: 0).isActive = true
         
     }
 }

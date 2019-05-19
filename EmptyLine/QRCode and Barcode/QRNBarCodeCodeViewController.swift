@@ -51,7 +51,10 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        titleCon()
+        title()
+        
+        Title.isHidden = true
         let nav = UINavigationBar.appearance()
         nav.backgroundColor = .blue
         startLiveVideo()
@@ -68,7 +71,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         bgImage?.center = self.view.center
         view.addSubview(bgImage!)
         self.view.addSubview(bgImage!)
-
+        
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.isTranslucent = true
         navigationController?.isNavigationBarHidden = true
@@ -226,6 +229,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     if (barcodes?.first?.rawValue!.contains("https"))! || (barcodes?.first?.rawValue!.contains("http"))! {
                         self.website = (barcodes?.first?.rawValue)!
                         self.QRCodeSetView()
+                        self.Title.isHidden = false
+                        self.textTitle.isHidden = true
+
                         print("i is here \(self.website)")
                         
                         //self.urllink(url: self.website)
@@ -253,7 +259,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
             window.addSubview(idk)
-            let height: CGFloat = 400
+            let height: CGFloat = 860
             let y = window.frame.height - height
             view.frame = window.frame
 
@@ -332,7 +338,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         }
     }
     
-    private func addToShoppingCart(){
+     func addToShoppingCart(){
         productDetailView.addToCartButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
     }
     
@@ -352,10 +358,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         continueInteractiveTransition()
         self.blurView.effect = nil
         self.session.startRunning()
-    dragViewController.view.frame = CGRect(x: 0,
-                                               y: 900,
-                                               width: self.view.bounds.width,
-                                               height: dViewHeight)
     }
 
                         //Antonio Code Dont Touch//
@@ -387,8 +389,19 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             print("Item added")
         }
     }
+    
+//    func dismissAnimation(){
+//        dragViewController.view.frame = CGRect(x: 0,
+//                                               y: 900,
+//                                               width: self.view.bounds.width,
+//                                               height: dViewHeight)
+//    }
 //////////////////////////////////////////////////////////////////////////////////
-    @objc private func addButtonPressed(){
+    @objc func addButtonPressed(){
+//        dragViewController.view.frame = CGRect(x: 0,
+//                                                                                              y: 900,
+//                                                           width: self.view.bounds.width,
+//                                                           height: dViewHeight)
         continueInteractiveTransition()
         self.blurView.effect = nil
         self.session.startRunning()
@@ -419,6 +432,36 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         imageView.layer.addSublayer(imageLayer)
         session.startRunning()
     }
+    
+    lazy var textTitle: UILabel = {
+        let title = UILabel()
+        title.textColor = .white
+        title.text = "Scan QRCode To Begin Shopping"
+        return title
+    }()
+    
+    lazy var Title: UILabel = {
+        let title = UILabel()
+        title.textColor = .white
+        title.text = "Ready To Scan Items For Checkout"
+        return title
+    }()
+    
+    func titleCon(){
+        view.addSubview(textTitle)
+        textTitle.translatesAutoresizingMaskIntoConstraints = false
+        //textTitle.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: -0.2).isActive = true
+        textTitle.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        textTitle.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    func title(){
+        view.addSubview(Title)
+        Title.translatesAutoresizingMaskIntoConstraints = false
+        Title.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        Title.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
 }
 
 extension QRNBarCodeCodeViewController: UptadeNumberOfItemsDelegate {
@@ -427,4 +470,3 @@ extension QRNBarCodeCodeViewController: UptadeNumberOfItemsDelegate {
     }
 
 }
-

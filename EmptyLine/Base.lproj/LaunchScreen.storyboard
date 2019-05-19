@@ -18,20 +18,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="T7h-dc-Xxf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="T7h-dc-Xxf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="BcY-3l-jfe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="BMT-9h-rT3">
                                 <rect key="frame" x="53" y="278" width="308" height="298"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="308" id="BcY-3l-jfe"/>
-                                    <constraint firstAttribute="height" constant="298" id="QnX-f9-18C"/>
+                                    <constraint firstAttribute="width" constant="308" id="Ztq-Nd-I9u"/>
+                                    <constraint firstAttribute="height" constant="298" id="xiX-bD-HyD"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="T7h-dc-Xxf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="234" id="08J-Dq-TNi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T7h-dc-Xxf" secondAttribute="trailing" constant="53" id="QIR-78-GxU"/>
-                            <constraint firstItem="T7h-dc-Xxf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="XZ7-57-teV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T7h-dc-Xxf" secondAttribute="bottom" constant="286" id="kck-6q-qIP"/>
+                            <constraint firstItem="T7h-dc-Xxf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="AgY-ue-42P"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T7h-dc-Xxf" secondAttribute="trailing" id="QIR-78-GxU"/>
+                            <constraint firstItem="T7h-dc-Xxf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XZ7-57-teV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T7h-dc-Xxf" secondAttribute="bottom" constant="-38" id="kck-6q-qIP"/>
+                            <constraint firstItem="BMT-9h-rT3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uCP-qY-FY5"/>
+                            <constraint firstItem="BMT-9h-rT3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-26" id="wfs-Y0-coM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -43,5 +51,6 @@
     </scenes>
     <resources>
         <image name="logo" width="505" height="340"/>
+        <image name="splashScreen" width="1416" height="796"/>
     </resources>
 </document>

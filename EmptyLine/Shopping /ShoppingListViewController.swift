@@ -86,6 +86,7 @@ class ShoppingListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
 
         self.navigationController?.tabBarItem.badgeValue = "\(ShoppingCartDataManager.shoppingCartItemCounts.keys.count)"
+        
         fetchShoppingCartItems()
         controlPayButton()
         shoppingView.shoppingListTableView.reloadData()
