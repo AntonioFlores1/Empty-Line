@@ -52,8 +52,8 @@ class ShoppingView: UIView {
         payButton.setTitle("pay", for: .normal)
         payButton.layer.cornerRadius = payButton.frame.size.width / 2
         payButton.layer.borderColor = UIColor.darkGray.cgColor
-        payButton.layer.borderWidth = 1
-        payButton.layer.cornerRadius = 20
+        payButton.layer.borderWidth = 0
+        payButton.layer.cornerRadius = 15
         payButton.translatesAutoresizingMaskIntoConstraints = false
         return payButton
     }()
@@ -85,7 +85,7 @@ class ShoppingView: UIView {
             shoppingListTableView.topAnchor.constraint(equalTo: topAnchor),
             shoppingListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             shoppingListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8) // 0.8  0.85
+            shoppingListTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7) // 0.8  0.85
         ])
     }
     
@@ -104,7 +104,7 @@ class ShoppingView: UIView {
         countainerFooter.addSubview(taxLabel)
         NSLayoutConstraint.activate([
             taxLabel.topAnchor.constraint(equalTo: countainerFooter.topAnchor, constant: 1),
-            taxLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 12)
+            taxLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 20)
             ])
     }
     
@@ -112,16 +112,16 @@ class ShoppingView: UIView {
         countainerFooter.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: taxLabel.bottomAnchor, constant: 5), // 12
-            titleLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 12)
+            titleLabel.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 20)
         ])
     }
     
     private func setupPayButton(){
         countainerFooter.addSubview(payButton)
         NSLayoutConstraint.activate([
-            payButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            payButton.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 100),
-            payButton.trailingAnchor.constraint(equalTo: countainerFooter.trailingAnchor, constant: -100)
+            payButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            payButton.leadingAnchor.constraint(equalTo: countainerFooter.leadingAnchor, constant: 50),
+            payButton.trailingAnchor.constraint(equalTo: countainerFooter.trailingAnchor, constant: -50)
         ])
     }
 }

@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController {
     private var allItems = [Item]()
     
     
+    
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
     private var tapGRec = UITapGestureRecognizer()
@@ -123,9 +124,8 @@ class ProfileViewController: UIViewController {
                 
                 self?.allItems = allCheckedOutItems
                 if let allCheckedoutDates = allCheckedoutDates {
-                    //dump(allCheckedoutDates)
                     self?.allDates = allCheckedoutDates
-                    //dump(self?.allDates)
+ 
                 }
             }
             
@@ -146,7 +146,6 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
         navigationController?.pushViewController(cv, animated: true)
@@ -163,13 +162,12 @@ class ProfileViewController: UIViewController {
             } else if let ccuser = ccuser {
                 self?.profileView.usernameLabel.text = user.displayName!
                 print(ccuser.fullName)
-                self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
                 self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl), placeholder: #imageLiteral(resourceName: "zipLineLogo.png"))
             }
         }
     }
-    
+  
     func setUserProfileImage(selectedImage: UIImage) {
         guard let imageData = selectedImage.jpegData(compressionQuality: 1.0),
             let userAuth = authservice.getCurrentUser(),
@@ -313,12 +311,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.cornerRadius = 1.0
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
+            cell.selectionStyle = .none
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
                 
                 if allUserCheckOutItems.count > 0 {
           let day = allDates[indexPath.row]
                     cell.shoppingDateLabel.text = day
-                    cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
                 } else {
                     cell.shoppingDateLabel.text = "No history of items bought"
                 }
@@ -350,13 +348,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                         infocell.addCaed.text = "Add Card"
                         infocell.cardImage.image = card[indexPath.row]
                     } else {
-                        infocell.signOut.text = " SignOut"
+                        infocell.signOut.text = " Sign Out"
                         infocell.signOut.textColor = .red
                     }
                 }
             } else {
                 infocell.emailLabel.isHidden = true
             }
+             infocell.selectionStyle = .none
             return infocell
             
         default:

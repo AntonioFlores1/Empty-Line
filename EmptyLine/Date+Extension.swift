@@ -12,7 +12,7 @@ extension Date {
     
     static func getISOTimestamp() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE d, MMMM yyyy"
+        formatter.dateFormat = "E, d MMM yyyy HH:mm a"
         let createdDate = formatter.string(from: Date())
         return createdDate
     }

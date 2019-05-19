@@ -7,16 +7,15 @@
 //
 
 import Foundation
-// <<<<<<< prod
 
-// struct Item: Codable {
-// =======
+
+
 struct Item: Codable,Hashable,Comparable {
     static func < (lhs: Item, rhs: Item) -> Bool {
         return lhs.self == rhs.self
     }
     
-//>>>>>>> dev-antonio
+
     let itemID: String
     let name: String
     let barcode: String
@@ -57,7 +56,7 @@ struct Item: Codable,Hashable,Comparable {
         self.coupon = dict[ItemCollectionKeys.CouponKey] as? Double ?? 0.0
         self.itemID = dict[ItemCollectionKeys.ItemIDKey] as? String ?? ""
         self.tax = dict[ItemCollectionKeys.taxKey] as? Double ?? 0.0
-        self.boughtDate = dict[ItemCollectionKeys.boughtDate] as? String ?? "no purchase date"
+        self.boughtDate = dict[ItemCollectionKeys.boughtDate] as? String ?? "No purchase date"
     }
 
     

@@ -43,14 +43,9 @@ class ReceiptHistoryViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
    super.init(coder: aDecoder)
     }
-    
-    private func total(allItems: [Item]){
-        for item in allItems {
-            totalCost += item.price
-        }
     }
     
-}
+
 
 extension ReceiptHistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,11 +56,10 @@ extension ReceiptHistoryViewController: UITableViewDelegate, UITableViewDataSour
         guard let itemsCell = receiptHistoryView.itemsTableView.dequeueReusableCell(withIdentifier: "receiptHistory", for: indexPath) as? ReceiptHistoryTableViewCell else {return UITableViewCell()}
         
         let itemBoughtOnDay = allCheckedOutItems[indexPath.row]
-        total(allItems: allCheckedOutItems)
         receiptHistoryView.totalCostLabel.text = "Total: $\(totalCost)"
         itemsCell.itemNameLabel.text = itemBoughtOnDay.name
         itemsCell.itemPrice.text = "$" + "\(itemBoughtOnDay.price)"
-        receiptHistoryView.dayLabel.text = "------------ \(itemBoughtOnDay.boughtDate) ------------"
+        receiptHistoryView.dayLabel.text = "----\(itemBoughtOnDay.boughtDate) ----"
         return itemsCell
     }
     

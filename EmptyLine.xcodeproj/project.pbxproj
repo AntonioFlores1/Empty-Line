@@ -89,6 +89,7 @@
 		67C2CC72225D1B900091FB37 /* StorageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC71225D1B900091FB37 /* StorageInfo.swift */; };
 		67C2CC74225D1DF90091FB37 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC73225D1DF90091FB37 /* Storage.swift */; };
 		67C2CC76225D2BAE0091FB37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2CC75225D2BAE0091FB37 /* Constants.swift */; };
+		67D44960228B0841005B004D /* success-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 67D4495F228B0841005B004D /* success-animation.json */; };
 		67F17F482289BFBF002A02F4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F214642285EBE300652F56 /* Protocols.swift */; };
 		67F55545225E81D700F67C94 /* ConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55544225E81D700F67C94 /* ConfirmPaymentViewController.swift */; };
 		67F55548225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F55547225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift */; };
@@ -189,6 +190,7 @@
 		67C2CC71225D1B900091FB37 /* StorageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfo.swift; sourceTree = "<group>"; };
 		67C2CC73225D1DF90091FB37 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		67C2CC75225D2BAE0091FB37 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		67D4495F228B0841005B004D /* success-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-animation.json"; sourceTree = "<group>"; };
 		67F214642285EBE300652F56 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		67F55544225E81D700F67C94 /* ConfirmPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		67F55547225E85B200F67C94 /* ConfirmPaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentTableViewCell.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		55EB5EAD2257B58C003FA4F8 /* QRCode and Barcode */ = {
 			isa = PBXGroup;
 			children = (
+				67D4495F228B0841005B004D /* success-animation.json */,
 				555AB910227C03B7003007AA /* animation-w800-h600.json */,
 				555AB914227C13DB003007AA /* trashAnimation.json */,
 				5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */,
@@ -549,6 +552,7 @@
 				55EB5E8022553D3F003FA4F8 /* LaunchScreen.storyboard in Resources */,
 				5548F384227FD762009A98C2 /* animation-w1080-h1080 (1).json in Resources */,
 				04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */,
+				67D44960228B0841005B004D /* success-animation.json in Resources */,
 				671C17C9227B480500A8CD17 /* GoogleService-Info.plist in Resources */,
 				55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */,
 				55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */,

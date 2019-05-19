@@ -145,8 +145,8 @@ class ReceiptView: UIView {
         receiptScrollView.addSubview(dayLabel)
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.topAnchor.constraint(equalTo: storeName.bottomAnchor, constant: 5).isActive = true
-        dayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
-        dayLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
+        dayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40).isActive = true
+        dayLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40).isActive = true
         dayLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     private func setTaxLabel() {

@@ -17,9 +17,8 @@
                     <view key="view" contentMode="scaleToFill" id="vfd-Cm-tcj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-   <viewLayoutGuide key="safeArea" id="Pnt-GO-zav"/>
+                        <viewLayoutGuide key="safeArea" id="Pnt-GO-zav"/>
                     </view>
                     <navigationItem key="navigationItem" id="LMI-46-j6m"/>
                 </viewController>
@@ -345,11 +344,11 @@
             </objects>
             <point key="canvasLocation" x="5666.3999999999996" y="-731.78410794602701"/>
         </scene>
-        <!--Shopping Cart-->
+        <!--CheckOut-->
         <scene sceneID="mL2-RV-skA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mll-w7-R9n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Shopping Cart" image="icons8-shopping_cart" id="iCg-wD-UBm"/>
+                    <tabBarItem key="tabBarItem" title="CheckOut" image="icons8-shopping_cart" id="iCg-wD-UBm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HvG-0c-sh1">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
