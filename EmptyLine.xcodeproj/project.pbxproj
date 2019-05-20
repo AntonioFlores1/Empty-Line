@@ -33,10 +33,10 @@
 		04D5F8A0225D3FDC00007BCB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F89F225D3FDC00007BCB /* ProductModel.swift */; };
 		04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8A2225D4BDA00007BCB /* productFile.json */; };
 		04D5F8C7225FC46200007BCB /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */; };
+		552A64872291EB2E0036B13F /* animation-w1920-h1080 (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 552A64862291EB2E0036B13F /* animation-w1920-h1080 (2).json */; };
 		5548F384227FD762009A98C2 /* animation-w1080-h1080 (1).json in Resources */ = {isa = PBXBuildFile; fileRef = 5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */; };
-		5548F38622A2FA16009A98C2 /* addToCartAni.json in Resources */ = {isa = PBXBuildFile; fileRef = 5548F38522A2FA15009A98C2 /* addToCartAni.json */; };
 		555AB911227C03B7003007AA /* animation-w800-h600.json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB910227C03B7003007AA /* animation-w800-h600.json */; };
-		555AB915227C13DB003007AA /* animation-w64-h64 (1).json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB914227C13DB003007AA /* animation-w64-h64 (1).json */; };
+		555AB915227C13DB003007AA /* trashAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 555AB914227C13DB003007AA /* trashAnimation.json */; };
 		555AB917227C1DE0003007AA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AB916227C1DE0003007AA /* SplashViewController.swift */; };
 		559EA9FC2270F62800027D1D /* StartMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EA9FB2270F62800027D1D /* StartMenuViewController.swift */; };
 		55CE1E6122677E0500D3ECFA /* QRCodeWebSiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */; };
@@ -75,6 +75,7 @@
 		55EB5ECB2257BDD9003FA4F8 /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECA2257BDD9003FA4F8 /* CreateUserView.swift */; };
 		55EB5ECD2257BDF5003FA4F8 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */; };
 		55EB5ECF225B9A55003FA4F8 /* ShowAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */; };
+		55F3FE76228A64B300FC9544 /* addToCartAni.json in Resources */ = {isa = PBXBuildFile; fileRef = 55F3FE75228A64B300FC9544 /* addToCartAni.json */; };
 		6706786822597FFF005D33FE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706786722597FFF005D33FE /* TableViewCell.swift */; };
 		671C17C122774D6300A8CD17 /* NumberOfItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C17C022774D6300A8CD17 /* NumberOfItem.swift */; };
 		671C17C322774FB300A8CD17 /* ItemCollectionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C17C222774FB300A8CD17 /* ItemCollectionKeys.swift */; };
@@ -132,10 +133,10 @@
 		04D5F8C6225FC46200007BCB /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		0B5EFF0F95C77403AFCA7F87 /* Pods-EmptyLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmptyLine.release.xcconfig"; path = "Target Support Files/Pods-EmptyLine/Pods-EmptyLine.release.xcconfig"; sourceTree = "<group>"; };
 		20D90FD5D2DA2706485D734A /* Pods_EmptyLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmptyLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		552A64862291EB2E0036B13F /* animation-w1920-h1080 (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w1920-h1080 (2).json"; sourceTree = "<group>"; };
 		5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w1080-h1080 (1).json"; sourceTree = "<group>"; };
-		5548F38522A2FA15009A98C2 /* addToCartAni.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addToCartAni.json; sourceTree = "<group>"; };
 		555AB910227C03B7003007AA /* animation-w800-h600.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w800-h600.json"; sourceTree = "<group>"; };
-		555AB914227C13DB003007AA /* animation-w64-h64 (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w64-h64 (1).json"; sourceTree = "<group>"; };
+		555AB914227C13DB003007AA /* trashAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trashAnimation.json; sourceTree = "<group>"; };
 		555AB916227C1DE0003007AA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		559EA9FB2270F62800027D1D /* StartMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuViewController.swift; sourceTree = "<group>"; };
 		55CE1E6022677E0500D3ECFA /* QRCodeWebSiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWebSiteViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		55EB5ECA2257BDD9003FA4F8 /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
 		55EB5ECC2257BDF5003FA4F8 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		55EB5ECE225B9A55003FA4F8 /* ShowAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlerts.swift; sourceTree = "<group>"; };
+		55F3FE75228A64B300FC9544 /* addToCartAni.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addToCartAni.json; sourceTree = "<group>"; };
 		6706786722597FFF005D33FE /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		671C17C022774D6300A8CD17 /* NumberOfItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfItem.swift; sourceTree = "<group>"; };
 		671C17C222774FB300A8CD17 /* ItemCollectionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionKeys.swift; sourceTree = "<group>"; };
@@ -346,9 +348,10 @@
 			children = (
 				67D4495F228B0841005B004D /* success-animation.json */,
 				555AB910227C03B7003007AA /* animation-w800-h600.json */,
-				555AB914227C13DB003007AA /* animation-w64-h64 (1).json */,
+				555AB914227C13DB003007AA /* trashAnimation.json */,
 				5548F383227FD762009A98C2 /* animation-w1080-h1080 (1).json */,
-				5548F38522A2FA15009A98C2 /* addToCartAni.json */,
+				55F3FE75228A64B300FC9544 /* addToCartAni.json */,
+				552A64862291EB2E0036B13F /* animation-w1920-h1080 (2).json */,
 				55EB5E8C22569C9F003FA4F8 /* QRNBarCodeCodeViewController.swift */,
 				75A841AF22723E9300C37292 /* DragViewController.swift */,
 				75A841B022723E9300C37292 /* DragViewController.xib */,
@@ -551,14 +554,15 @@
 			files = (
 				55EB5E8022553D3F003FA4F8 /* LaunchScreen.storyboard in Resources */,
 				5548F384227FD762009A98C2 /* animation-w1080-h1080 (1).json in Resources */,
-				5548F38622A2FA16009A98C2 /* addToCartAni.json in Resources */,
 				04D5F8A3225D4BDA00007BCB /* productFile.json in Resources */,
 				67D44960228B0841005B004D /* success-animation.json in Resources */,
 				671C17C9227B480500A8CD17 /* GoogleService-Info.plist in Resources */,
 				55EB5E7D22553D3F003FA4F8 /* Assets.xcassets in Resources */,
 				55EB5E7B22553D3A003FA4F8 /* Main.storyboard in Resources */,
 				75A841B222723E9300C37292 /* DragViewController.xib in Resources */,
-				555AB915227C13DB003007AA /* animation-w64-h64 (1).json in Resources */,
+				555AB915227C13DB003007AA /* trashAnimation.json in Resources */,
+				552A64872291EB2E0036B13F /* animation-w1920-h1080 (2).json in Resources */,
+				55F3FE76228A64B300FC9544 /* addToCartAni.json in Resources */,
 				55EB5E8A22569C2D003FA4F8 /* login.storyboard in Resources */,
 				555AB911227C03B7003007AA /* animation-w800-h600.json in Resources */,
 			);
