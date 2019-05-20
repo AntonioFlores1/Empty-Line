@@ -51,7 +51,7 @@ class ShoppingListViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = UIColor(red:0.29, green:0.60, blue:0.58, alpha:1.0)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         view.backgroundColor = UIColor(red:0.83, green:0.83, blue:0.83, alpha:1.0)
-
+        navigationItem.title = "Checkout"
         view.addSubview(shoppingView)
         shoppingView.shoppingListTableView.backgroundColor? = .clear
         setupViews()
@@ -242,7 +242,7 @@ extension ShoppingListViewController{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 120
     }
 }
 
