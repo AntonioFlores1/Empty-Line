@@ -15,6 +15,7 @@ class ShoppingTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.image = UIImage(named: "placeholder")
         image.layer.cornerRadius = image.frame.width/2
+        image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         return image
     }()
