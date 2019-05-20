@@ -259,8 +259,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
             view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(byebye)))
             window.addSubview(idk)
-            let height: CGFloat = 860
-            let y = window.frame.height - height
+            //let height: CGFloat = 760
+            //let height: CGFloat =
+            let y: CGFloat = 20
             view.frame = window.frame
 
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
