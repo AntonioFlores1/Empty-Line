@@ -38,7 +38,7 @@ class ShoppingListViewController: UIViewController {
     private func updateViews () {
         DispatchQueue.main.async {
             self.shoppingView.shoppingListTableView.reloadData()
-            self.shoppingView.titleLabel.text = "Total : $ \(ShoppingCartDataManager.cartTotal())"
+            self.shoppingView.titleLabel.text = "Total : $" + String(format: "%.2f", ShoppingCartDataManager.cartTotal())
             self.shoppingView.taxLabel.text = "Tax :   $ \(ShoppingCartDataManager.totalTax())"
             print(ShoppingCartDataManager.totalTax())
             self.shoppingView.titleLabel.resignFirstResponder()
@@ -191,7 +191,7 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
         cell.addItemStepper.addTarget(self, action: #selector(changeStepperValue), for: .valueChanged)
         let value = Double(ShoppingCartDataManager.countOfItem(item: itemInCart))
         cell.addItemStepper.value = value
-        cell.labelUpdate.text = "\(value)"
+        cell.labelUpdate.text = String(format: "%.0f", value) //"\(value)"
         refresh.endRefreshing()
         cell.contentView.backgroundColor = UIColor.clear
         cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 1.0])
@@ -253,7 +253,7 @@ extension ShoppingListViewController: STPAddCardViewControllerDelegate {
     }
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
         dismiss(animated: true, completion: nil)
-        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $\(ShoppingCartDataManager.cartTotal()) will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
+        showAlert(title: "\(authservice.getCurrentUser()?.displayName ?? "") Your transaction was successful. \n $"  + String(format: "%.2f", ShoppingCartDataManager.cartTotal()) + " will be taken from your card", message: "Thank you for shopping with zipLine") { (alert) in
             self.barButtonItem.isEnabled = false
             
             var allItems = [Item]()
