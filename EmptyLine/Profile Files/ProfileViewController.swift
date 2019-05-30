@@ -25,9 +25,10 @@ class ProfileViewController: UIViewController {
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
 
-    private var allItemsBoughtInDay: [[Item]] = [] {
+    private var allItemsBoughtInDay: [[String: Item]] = [] {
         didSet {
             tableView.reloadData()
+          
         }
     }
 
@@ -50,19 +51,15 @@ class ProfileViewController: UIViewController {
         let table = UITableView()
         table.estimatedRowHeight = 50
         table.rowHeight = UITableView.automaticDimension
-//        table.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.4)
         return table
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.view.bounds
-//        gradient.colors = [UIColor.purple.cgColor,UIColor.blue.cgColor,UIColor.white.cgColor]
+        tableView.backgroundColor = .clear
+
         view.addSubview(profileView)
         view.addSubview(tableView)
-        //self.profileView.layer.addSublayer(gradient)
-        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
@@ -72,10 +69,13 @@ class ProfileViewController: UIViewController {
         tapGRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:)))
         profileView.profileImageView.addGestureRecognizer(tapGRec)
         profileView.profileImageView.isUserInteractionEnabled = true
+        fetchUser()
         tableView.tableFooterView = UIView()
         fetchItemsByDate()
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .black
+        //fetchAllItems()
+
 
        
 //            self.tableView.layer.addSublayer(gradient)
@@ -84,24 +84,44 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-        fetchItemsByDate()
+     fetchItemsByDate()
+       // fetchAllItems()
     }
     
     private func fetchItemsByDate(){
-        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart()
+        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart().sorted {$0.createdAt > $1.createdAt}
+        
         let currentDate = allItems.first?.createdAt
-        var dateItems = [Item]()
+        var dateItems = [String:Item]()
         for item in allItems {
             if currentDate == item.createdAt {
-                dateItems.append(item)
+                dateItems[currentDate!] = item
             } else {
-               // allItemsBoughtInDay.append(dateItems)
-                dateItems = [item]
+                allItemsBoughtInDay.append(dateItems)
+                dateItems[item.createdAt] = item
             }
         }
         allItemsBoughtInDay.append(dateItems)
-        
+
     }
+
+    
+    //private var allcheckedOutItems = [[Item]]()
+    
+//    private func fetchAllItems(){
+//        let allItems = shoppedItemsHistoryDataManager.fetchHistory()
+//        let currentDate = allItems.first?.createdAt
+//        var checkOutItems = [Item]()
+//        for item in allItems {
+//            if currentDate == item.createdAt {
+//                checkOutItems.append(item)
+//                allcheckedOutItems.append(checkOutItems)
+//            } else {
+//
+//            }
+//        }
+//    }
+    
     
     @objc private func segueToSetting(){
         let cv = CreditCardInfoSetupViewController()
@@ -118,6 +138,7 @@ class ProfileViewController: UIViewController {
                 self?.showAlert(title: "Error fetching user", message: error.localizedDescription)
             } else if let ccuser = ccuser {
                 self?.profileView.usernameLabel.text = "@" + user.displayName!
+                print(ccuser.fullName)
                 self?.profileView.defaultCamera.isHidden = true
                 guard let photoURl = ccuser.photoURL, !photoURl.isEmpty else {return}
                 self?.profileView.profileImageView.kf.setImage(with: URL(string: photoURl), placeholder: #imageLiteral(resourceName: "zipLineLogo.png"))
@@ -215,7 +236,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         guard !allItemsBoughtInDay.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            return allItemsBoughtInDay[section].first?.createdAt
+            //return allItemsBoughtInDay[section].first?.value.createdAt
+            return allItemsBoughtInDay[section].first?.value.createdAt
         case 1:
             return account[section]
         default:
@@ -223,6 +245,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return ""
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
          switch profileView.segmentedControl.selectedSegmentIndex {
          case 0:
@@ -265,11 +288,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOffset = CGSize(width: -1, height: 1)
             cell.layer.shadowOpacity = 0.5
 
-            if profileView.segmentedControl.selectedSegmentIndex == 1 {
+            if profileView.segmentedControl.selectedSegmentIndex == 0 {
 
-            let day = allItemsBoughtInDay[indexPath.section][indexPath.row]
-
-                cell.historyLabel.text = day.name
+                if allItemsBoughtInDay.count > 0 {
+                    let day = allItemsBoughtInDay[indexPath.section].first?.value
+                    cell.historyLabel.text = day?.name
+                    
+                } else {
+                    cell.historyLabel.text = "No history of items bought"
+                  //  print("There are \(allcheckedOutItems.count) number of items")
+                }
             } else {
                 cell.historyImage.isHidden = true
                 cell.historyLabel.isHidden = true
@@ -365,6 +393,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             }
             if indexPath.section == 1 {
                 if indexPath.row == 1 {
+
                  let alertController = UIAlertController(title: "SignOut", message: "Proceed to sign out", preferredStyle: .actionSheet)
                     let ok = UIAlertAction(title: "Continue", style: .default) { (action) in
                         self.authservice.signOutAccount()

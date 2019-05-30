@@ -12,6 +12,7 @@
 		0404FE492273696600C70083 /* ReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE482273696600C70083 /* ReceiptTableViewCell.swift */; };
 		0404FE4B22774A6100C70083 /* ReceiptView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE4A22774A6100C70083 /* ReceiptView+Extension.swift */; };
 		0404FE4D22778CEC00C70083 /* ReceiptDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404FE4C22778CEC00C70083 /* ReceiptDataManager.swift */; };
+		040D11A9227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D11A8227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift */; };
 		0410266A225858D10076A454 /* ScanCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102669225858D10076A454 /* ScanCardViewController.swift */; };
 		04102692225BAF540076A454 /* CardTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102691225BAF540076A454 /* CardTypeTableViewCell.swift */; };
 		04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */; };
@@ -97,6 +98,7 @@
 		0404FE482273696600C70083 /* ReceiptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptTableViewCell.swift; sourceTree = "<group>"; };
 		0404FE4A22774A6100C70083 /* ReceiptView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptView+Extension.swift"; sourceTree = "<group>"; };
 		0404FE4C22778CEC00C70083 /* ReceiptDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDataManager.swift; sourceTree = "<group>"; };
+		040D11A8227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppedItemsHistoryDatamanager.swift; sourceTree = "<group>"; };
 		04102669225858D10076A454 /* ScanCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCardViewController.swift; sourceTree = "<group>"; };
 		04102691225BAF540076A454 /* CardTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeTableViewCell.swift; sourceTree = "<group>"; };
 		04102693225C1E5A0076A454 /* BillingNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingNameTableViewCell.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				671C17C022774D6300A8CD17 /* NumberOfItem.swift */,
 				671C17C222774FB300A8CD17 /* ItemCollectionKeys.swift */,
 				043D4C242264DC2500488C31 /* ShoppingHistoryItemsDataManager.swift */,
+				040D11A8227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift */,
 				04141ABC226E51FA004B5C9A /* AddToCartDataManager.swift */,
 				75B0DB6E225D1DFD00F075DD /* ItemCollection.swift */,
 			);
@@ -673,6 +676,7 @@
 				04102694225C1E5A0076A454 /* BillingNameTableViewCell.swift in Sources */,
 				6764235422692C5200C30EA5 /* ScanItemView.swift in Sources */,
 				55EB5EBA2257B6E0003FA4F8 /* ShoppingTableViewCell.swift in Sources */,
+				040D11A9227F964B000A891E /* ShoppedItemsHistoryDatamanager.swift in Sources */,
 				55EB5EB52257B672003FA4F8 /* SettingsView.swift in Sources */,
 				043D4C272264DE3A00488C31 /* DataPersistenceManager.swift in Sources */,
 				04102696225C2FF90076A454 /* CardInfoTableViewCell.swift in Sources */,
