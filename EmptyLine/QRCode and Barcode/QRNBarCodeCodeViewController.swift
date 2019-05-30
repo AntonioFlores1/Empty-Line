@@ -179,7 +179,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                     self.stopRecording()
                 case .collapsed:
                     self.blurView.effect = nil
+                    self.runningAnimations.removeAll()
                     self.session.startRunning()
+                    
                 }
             }
             
@@ -384,6 +386,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     }
     
     @objc func dontAddMe(){
+        continueInteractiveTransition()
+        self.blurView.effect = nil
+        self.session.startRunning()
     dragViewController.view.frame = CGRect(x: 0,
                                                y: 900,
                                                width: self.view.bounds.width,
