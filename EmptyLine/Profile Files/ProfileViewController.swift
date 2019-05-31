@@ -64,10 +64,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         tableView.backgroundColor = .clear
 
         view.addSubview(profileView)
         view.addSubview(tableView)
+
         tableView.dataSource = self
         tableView.delegate = self
         tableViewconstriant()
