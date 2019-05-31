@@ -38,8 +38,8 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
     var dragViewController:DragViewController!
     var blurView:UIVisualEffectView!
     
-    let dViewHeight:CGFloat = 700
-    let dViewHandleAreaHeight:CGFloat = 280
+    let dViewHeight:CGFloat = 500
+    let dViewHandleAreaHeight:CGFloat = 190
     
     var DViewVisible = false
     var nextState:DViewState {
@@ -87,6 +87,7 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         tap = UITapGestureRecognizer(target: self, action: #selector(tapViewDetail))
         self.view.isUserInteractionEnabled = true
         productDetailView.addGestureRecognizer(tap)
+        self.dragViewController.view.layer.cornerRadius = 20
     }
     
     func setUpDragableView() {
@@ -159,9 +160,9 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
                 switch state {
                     
                 case .expanded:
-                    self.dragViewController.view.layer.cornerRadius = 16
+                    self.dragViewController.view.layer.cornerRadius = 26
                 case .collapsed:
-                    self.dragViewController.view.layer.cornerRadius = 8
+                    self.dragViewController.view.layer.cornerRadius = 20
                 }
             }
             
