@@ -19,7 +19,7 @@ struct shoppedItem {
     let price: Double
     let isCoupon: Bool
     let coupon: Double
-    let date:String
+    let date: String
     
     init(shopperID: String, itemID: String, name: String, barcode: String, description: String, ingredients: String, image: String, price: Double, isCoupon: Bool, coupon: Double, date: String){
 

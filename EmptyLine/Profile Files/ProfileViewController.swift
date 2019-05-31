@@ -24,15 +24,14 @@ class ProfileViewController: UIViewController {
     var account = ["Account", "Payment"]
     let profileIcon = [ UIImage(named: "profile"), UIImage(named: "email"), UIImage(named: "password")]
     let card = [UIImage(named: "addcard")]
-
-    private var allItemsBoughtInDay: [[String: Item]] = [] {
+    
+    private var allUserCheckOutItems = [[Item]]() {
         didSet {
-            tableView.reloadData()
-          
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
-    
-    private var allUserCheckOutItems = [[Item]]()
     private var allDates = [String]()
     private var allItems = [Item]()
     
@@ -82,92 +81,54 @@ class ProfileViewController: UIViewController {
         profileView.profileImageView.isUserInteractionEnabled = true
         fetchUser()
         tableView.tableFooterView = UIView()
-        fetchItemsByDate()
         navigationItem.title = "Profile"
         profileView.usernameLabel.textColor = .black
-        //fetchAllItems()
-
-        //fetchUserShoppedHistory()
+        fetchLoggedInUserShoppingHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-         fetchItemsByDate()
-       // fetchAllItems()
-       // fetchUserShoppedHistory()
     }
     
-    private func fetchItemsByDate(){
-        let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart().sorted {$0.createdAt > $1.createdAt}
-
-        let currentDate = allItems.first?.createdAt
-        var dateItems = [String:Item]()
-        for item in allItems {
-            if currentDate == item.createdAt {
-                dateItems[currentDate!] = item
-            } else {
-                allItemsBoughtInDay.append(dateItems)
-                dateItems[item.createdAt] = item
-            }
+    private func fetchLoggedInUserShoppingHistory(){
+       
+        guard let loggedInZiplineUser = authservice.getCurrentUser() else {
+            showAlert(title: "Error", message: "No logged in user. Please login or create a zipline account")
+            return
         }
-        allItemsBoughtInDay.append(dateItems)
-
-    }
-
-    
-    private var allcheckedOutItems = [[Item]]()
-    
-    private func fetchAllItems(){
-        let allItems = shoppedItemsHistoryDataManager.fetchHistory()
-        let currentDate = allItems.first?.createdAt
-        var checkOutItems = [Item]()
-        for item in allItems {
-            if currentDate == item.createdAt {
-                checkOutItems.append(item)
-                allcheckedOutItems.append(checkOutItems)
-            } else {
-
+        
+        DBService.fetchzipLineUserCheckoutHistory(userID: loggedInZiplineUser.uid) { [weak self] (error, allCheckedOutItems, allCheckedoutDates) in
+            if let error =  error {
+                self?.showAlert(title: "Error", message: "Error \(error) encountered while fetching \(String(describing: loggedInZiplineUser.displayName)) checkout history")
             }
+            if let allCheckedOutItems = allCheckedOutItems {
+                
+                self?.allItems = allCheckedOutItems
+                
+                         }
+            
+            if let allCheckedoutDates = allCheckedoutDates {
+                               self?.allDates = allCheckedoutDates
+                              dump(allCheckedoutDates)
+                      }
+            
+            for date in self!.allDates {
+                             var itemsOnDay = [Item]()
+                     for item in self!.allItems {
+                                    if date == item.createdAt {
+                                        itemsOnDay.append(item)
+                                    }
+
+
+                                }
+                self?.allUserCheckOutItems.removeAll()
+                   self?.allUserCheckOutItems.append(itemsOnDay)
+                                self!.tableView.reloadData()
+                            }
         }
+        
     }
-    
-    
-//    private func fetchUserShoppedHistory(){
-//        guard authservice.getCurrentUser() != nil else {
-//            showAlert(title: "Error", message: "No logged in user")
-//            return
-//        }
-//
-//        DBService.fetchShoppedHistory { (error, items, dates) in
-//            if let error = error {
-//                self.showAlert(title: "Error", message: "Error  \(error.localizedDescription) fetching user shopping history")
-//            }
-//            if let items = items {
-//                self.allItems = items
-//            }
-//            if let dates = dates {
-//                self.allDates = dates
-//            }
-//        }
-//
-//        for date in allDates {
-//            var itemsOnDay = [Item]()
-//            for item in allItems {
-//                if date == item.createdAt {
-//                    itemsOnDay.append(item)
-//                }
-//
-//                allUserCheckOutItems.append(itemsOnDay)
-//            }
-//
-//            allUserCheckOutItems.append(itemsOnDay)
-//
-//            print(allUserCheckOutItems.count)
-//            tableView.reloadData()
-//        }
-//
-//    }
     
     
     
@@ -284,8 +245,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         guard !allUserCheckOutItems.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
-            //return allItemsBoughtInDay[section].first?.value.createdAt
-            return allItemsBoughtInDay[section].first?.value.createdAt
+            return allUserCheckOutItems[section].first?.createdAt
             
             
         case 1:
@@ -299,7 +259,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
          switch profileView.segmentedControl.selectedSegmentIndex {
          case 0:
-            return allItemsBoughtInDay.count
+            return allUserCheckOutItems.count
          case 1:
             return account.count
          default:
@@ -309,15 +269,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard !allItemsBoughtInDay.isEmpty else { return 0 }
+        guard !allUserCheckOutItems.isEmpty else { return 0 }
         switch profileView.segmentedControl.selectedSegmentIndex {
             case 0:
-                if section == 0 {
-                return allItemsBoughtInDay[section].count
-            }
+                return allUserCheckOutItems[section].count
+            
             case 1:
                 if (section == 0) {
-                    return 3 }; if section == 1 { return 2 }; if section == 2 { return 5 }//; if section == 3 { return 1 }; if section == 3 { return 1 }
+                    return 3 }; if section == 1 { return 2 }; if section == 2 { return 5 }
             default:
                 break
             }
@@ -340,13 +299,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
             if profileView.segmentedControl.selectedSegmentIndex == 0 {
 
-                if allItemsBoughtInDay.count > 0 {
-                    let day = allItemsBoughtInDay[indexPath.section].first?.value
-                    cell.historyLabel.text = day?.name
+                if allUserCheckOutItems.count > 0 {
+                    let day = allUserCheckOutItems[indexPath.section][indexPath.row]
+                    print(day)
+                    cell.historyLabel.text = day.name
                     
+                    cell.historyImage.kf.setImage(with: URL(string: day.image), placeholder:#imageLiteral(resourceName: "zipLineLogo.png") )
                 } else {
                     cell.historyLabel.text = "No history of items bought"
-                  //  print("There are \(allcheckedOutItems.count) number of items")
                 }
             } else {
                 cell.historyImage.isHidden = true
@@ -361,9 +321,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 if indexPath.section == 0 {
                     if indexPath.row == 0 {
                         infocell.namelLabel.text = user.displayName!;
+                     
                         infocell.proImage.image = profileIcon[indexPath.row]
                     } else if indexPath.row == 1 {
                         infocell.emailLabel.text = user.email!
+                      
                         infocell.proImage.image = profileIcon[indexPath.row]
                     } else {
                         infocell.passwordLabel.text = "............."
@@ -390,13 +352,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
+        return 90
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             if indexPath.section == indexPath.row {
-            //navigationController?.pushViewController(HistoryDetailViewController(), animated: true)
+          
             }
             
         case 1:
@@ -412,7 +374,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                         let cell = tableView.cellForRow(at: path) as! SettingTableViewCell
                             cell.namelLabel.text = textField?.text!
                         }
-                        // need to reload tableView
                     })
                     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in })
                     changeName.addAction(change)
