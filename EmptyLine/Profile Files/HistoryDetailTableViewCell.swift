@@ -21,7 +21,7 @@ class HistoryDetailTableViewCell: UITableViewCell {
     
     lazy var historyLabelDetail: UILabel = {
         let shoppingLabel = UILabel()
-        shoppingLabel.textColor = .black
+        shoppingLabel.textColor = .white
         shoppingLabel.font = UIFont.systemFont(ofSize: 15)
         shoppingLabel.backgroundColor = .white
         return shoppingLabel
