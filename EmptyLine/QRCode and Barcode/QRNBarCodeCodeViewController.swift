@@ -100,8 +100,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         
     dragViewController.addButtonToCart.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
-//        dragViewController.addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-
         dragViewController.dontAdd.addTarget(self, action: #selector(dontAddMe), for: .touchUpInside)
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragableViewPanHandler(recognizer:)))
@@ -226,16 +224,6 @@ UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate, WKNavigationDeleg
         stopRecording()
     }
     
-    
-    
-//    func urllink(url:String){
-//       idk.webView = WKWebView()
-//        idk.webView.navigationDelegate = self
-//        //let link = "http://l.ead.me/bb7Wej"
-//        let request = URLRequest(url: URL(string: url)!)
-//        idk.webView.load(request)
-//        idk.webView.allowsBackForwardNavigationGestures = true
-//    }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let barcodeDetector = self.barcodeDetector {
