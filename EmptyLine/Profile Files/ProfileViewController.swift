@@ -31,6 +31,11 @@ class ProfileViewController: UIViewController {
           
         }
     }
+    
+    private var allUserCheckOutItems = [[Item]]()
+    private var allDates = [String]()
+    private var allItems = [Item]()
+    
 
     private var settinTableCell = SettingTableViewCell()
     private let authservice = AppDelegate.authservice
@@ -45,6 +50,9 @@ class ProfileViewController: UIViewController {
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         return imagePicker
     }()
+    
+    
+    
     
     
     lazy var tableView: UITableView = {
@@ -76,21 +84,20 @@ class ProfileViewController: UIViewController {
         profileView.usernameLabel.textColor = .black
         //fetchAllItems()
 
-
-       
-//            self.tableView.layer.addSublayer(gradient)
+        //fetchUserShoppedHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchUser()
-     fetchItemsByDate()
+         fetchItemsByDate()
        // fetchAllItems()
+       // fetchUserShoppedHistory()
     }
     
     private func fetchItemsByDate(){
         let allItems = ShoppingHistoryItemsDataManager.fetchShoppingCart().sorted {$0.createdAt > $1.createdAt}
-        
+
         let currentDate = allItems.first?.createdAt
         var dateItems = [String:Item]()
         for item in allItems {
@@ -106,21 +113,59 @@ class ProfileViewController: UIViewController {
     }
 
     
-    //private var allcheckedOutItems = [[Item]]()
+    private var allcheckedOutItems = [[Item]]()
     
-//    private func fetchAllItems(){
-//        let allItems = shoppedItemsHistoryDataManager.fetchHistory()
-//        let currentDate = allItems.first?.createdAt
-//        var checkOutItems = [Item]()
-//        for item in allItems {
-//            if currentDate == item.createdAt {
-//                checkOutItems.append(item)
-//                allcheckedOutItems.append(checkOutItems)
-//            } else {
+    private func fetchAllItems(){
+        let allItems = shoppedItemsHistoryDataManager.fetchHistory()
+        let currentDate = allItems.first?.createdAt
+        var checkOutItems = [Item]()
+        for item in allItems {
+            if currentDate == item.createdAt {
+                checkOutItems.append(item)
+                allcheckedOutItems.append(checkOutItems)
+            } else {
+
+            }
+        }
+    }
+    
+    
+//    private func fetchUserShoppedHistory(){
+//        guard authservice.getCurrentUser() != nil else {
+//            showAlert(title: "Error", message: "No logged in user")
+//            return
+//        }
 //
+//        DBService.fetchShoppedHistory { (error, items, dates) in
+//            if let error = error {
+//                self.showAlert(title: "Error", message: "Error  \(error.localizedDescription) fetching user shopping history")
+//            }
+//            if let items = items {
+//                self.allItems = items
+//            }
+//            if let dates = dates {
+//                self.allDates = dates
 //            }
 //        }
+//
+//        for date in allDates {
+//            var itemsOnDay = [Item]()
+//            for item in allItems {
+//                if date == item.createdAt {
+//                    itemsOnDay.append(item)
+//                }
+//
+//                allUserCheckOutItems.append(itemsOnDay)
+//            }
+//
+//            allUserCheckOutItems.append(itemsOnDay)
+//
+//            print(allUserCheckOutItems.count)
+//            tableView.reloadData()
+//        }
+//
 //    }
+    
     
     
     @objc private func segueToSetting(){
@@ -233,11 +278,13 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard !allItemsBoughtInDay.isEmpty else { return "" }
+        guard !allUserCheckOutItems.isEmpty else { return "" }
         switch profileView.segmentedControl.selectedSegmentIndex {
         case 0:
             //return allItemsBoughtInDay[section].first?.value.createdAt
             return allItemsBoughtInDay[section].first?.value.createdAt
+            
+            
         case 1:
             return account[section]
         default:
