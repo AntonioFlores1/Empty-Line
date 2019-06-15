@@ -1,6 +1,6 @@
 # Empty-Line
 
-<img width="432" alt="Screen Shot 2019-04-04 at 4 01 18 PM" src="https://user-images.githubusercontent.com/43770391/55638360-fba23a00-5794-11e9-886c-3d41f80cb089.png">
+![image](https://user-images.githubusercontent.com/43770391/59554443-e1dd5a00-8f70-11e9-985a-d0a807612f4e.png)
 
 Our goal with this app is to eliminate long queues at grocery stores and supermarkets and are give people the ability to skip the lines and pay for the items through their smartphone. 
 
