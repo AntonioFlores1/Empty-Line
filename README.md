@@ -16,4 +16,5 @@ Our goal with this app is to eliminate long queues at grocery stores and superma
 
 
 ### User is able to edit their profile and can see past receipts from previous purchases 
+![image](https://user-images.githubusercontent.com/43770391/59880887-29eaeb00-937c-11e9-866b-0115df75b6cb.png)
 
