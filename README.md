@@ -13,3 +13,7 @@ Our goal with this app is to eliminate long queues at grocery stores and superma
 * Style Guide: https://github.com/raywenderlich/swift-style-guide 
 * Logo :https://editor.freelogodesign.org/?lang=EN&companyname=Company&category=34
 * We are creating our own backend via FireBase
+
+
+### User is able to edit their profile and can see past receipts from previous purchases 
+
