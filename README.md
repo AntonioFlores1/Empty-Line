@@ -14,6 +14,8 @@ Our goal with this app is to eliminate long queues at grocery stores and superma
 * Logo :https://editor.freelogodesign.org/?lang=EN&companyname=Company&category=34
 * We are creating our own backend via FireBase
 
+### User is able to pay with their Credit/Debitcard and receive a receipt of their payment
+![pay and conformation](https://user-images.githubusercontent.com/43770391/60148339-a88dc100-979e-11e9-8bf5-96a35cdc551d.gif)
 
 ### User is able to edit their profile and can see past receipts from previous purchases 
 ![fixedSettingsTab](https://user-images.githubusercontent.com/43770391/59881888-b696a880-937e-11e9-8723-9e9ba50998c2.gif)
