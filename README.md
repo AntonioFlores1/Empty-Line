@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/43770391/59554443-e1dd5a00-8f70-11e9-985a-d0a807612f4e.png)
 
-Our goal with this app is to eliminate long queues at grocery stores and supermarkets and are give people the ability to skip the lines and pay for the items through their smartphone. 
+zip-Line is an easy to use grocery store self-checkout app. Our goal is to create a better shopping experience for customers by letting them zip through long lines at grocery stores. We want to save them time and give them a stress free shopping experience while also helping out businesses by eliminating long lines and increase in revenue. 
 
 ## APIs and Resources:
 ### Firebase: authentication, storing data
